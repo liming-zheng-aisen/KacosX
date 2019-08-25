@@ -26,8 +26,8 @@ public class HelloWorldController {
     }
 
     @DyPost("/helloP")
-    public Students helloP(){
-        return jiahua;
+    public Students helloP(@DyRequestBody Students students){
+        return students;
     }
     @DyPut
     public String put(){
