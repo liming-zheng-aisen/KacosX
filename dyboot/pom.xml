@@ -10,36 +10,26 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>dyboot</artifactId>
-    <properties>
-        <servlet-v>4.0.1</servlet-v>
-        <tomcat-v>8.5.11</tomcat-v>
-        <jsp-v>2.3.1</jsp-v>
-        <jstl-v>1.2</jstl-v>
-    </properties>
 <dependencies>
     <!-- servlet -->
     <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
-        <version>${servlet-v}</version>
     </dependency>
     <!-- tomcat -->
     <dependency>
         <groupId>org.apache.tomcat.embed</groupId>
         <artifactId>tomcat-embed-websocket</artifactId>
-        <version>${tomcat-v}</version>
     </dependency>
     <!-- jsp -->
     <dependency>
         <groupId>javax.servlet.jsp</groupId>
         <artifactId>javax.servlet.jsp-api</artifactId>
-        <version>${jsp-v}</version>
     </dependency>
     <!--jstl -->
     <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>jstl</artifactId>
-        <version>${jstl-v}</version>
     </dependency>
 
     <!-- duanya framework -->
