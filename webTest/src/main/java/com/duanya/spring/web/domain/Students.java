@@ -1,20 +1,13 @@
 package com.duanya.spring.web.domain;
 
-import com.duanya.spring.framework.core.annotation.DyComponent;
-import com.duanya.spring.framework.core.annotation.DyValue;
-
 /**
  * @author zheng.liming
  * @date 2019/8/24
  * @description
  */
-@DyComponent
 public class Students {
-    @DyValue("${dy.id}")
     private String id;
-    @DyValue("${dy.name}")
     private String name;
-    @DyValue("${dy.age}")
     private Integer age;
 
     public String getId() {

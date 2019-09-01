@@ -148,8 +148,9 @@ public class DyBeanFactory {
             }
         }
     }
-    private static void setField(Field field, Object bean,Object value) throws IllegalAccessException {
+    public static void setField(Field field, Object bean,Object value) throws IllegalAccessException {
         String fType=field.getType().toString();
+        field.setAccessible(true);
         if (fType.endsWith("String")){
             field.set(bean,(String)value);
         }else if (fType.endsWith("int") || fType.endsWith("Integer")){

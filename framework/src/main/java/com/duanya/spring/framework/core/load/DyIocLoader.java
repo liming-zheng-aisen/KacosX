@@ -17,11 +17,12 @@ import java.util.*;
  * @description
  */
 
-public class DyIocLoader {
+public class DyIocLoader implements DyBeanLoad{
 
     private static DySpringApplicationContent applicationContent;
 
-    public synchronized static void load() throws ClassNotFoundException, InstantiationException, DyContextException, IllegalAccessException, InvocationTargetException {
+    @Override
+    public void load(Class c) throws ClassNotFoundException, InstantiationException, DyContextException, IllegalAccessException, InvocationTargetException {
        if (null==applicationContent) {
            applicationContent = new DySpringApplicationContent();
        }

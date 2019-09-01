@@ -1,10 +1,17 @@
 package com.duanya.spring.framework.core.scanner.impl;
 
+import com.duanya.spring.commont.util.StringUtils;
 import com.duanya.spring.framework.core.scanner.api.IDyScanner;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.jar.JarEntry;
+import java.util.jar.JarInputStream;
 
 /**
  * @author zheng.liming
@@ -12,33 +19,131 @@ import java.util.List;
  * @description 扫描
  */
 public class DyScannerImpl implements IDyScanner {
+    private String basePackage;
+    private ClassLoader cl;
+    public String[] exludeKey;
+    public DyScannerImpl(String basePackage) {
+        this.basePackage = basePackage;
+        this.cl = getClass().getClassLoader();
 
-    private List<String> result;
-    private String classPath=this.getClass().getClassLoader().getResource("").getPath();
-
-    @Override
-    public synchronized List<String> doScanner(String scanPackage){
-        result = new ArrayList<String>();
-        findClass(scanPackage);
-        return result;
     }
 
-    private void findClass(String scanPackage) {
-        String url=classPath+scanPackage.replaceAll("\\.","/");
-        File classPath=new File(url);
-        for (File f:classPath.listFiles()){
-            if (f.isDirectory()){
-                findClass(scanPackage+"."+f.getName());
-            }else {
-                if (!f.getName().endsWith(".class")) {
-                    continue;
-                }
-                String className=scanPackage+"."+f.getName().replace(".class","").trim();
-                result.add(className);
+    //初始化類的包和根路徑
+    public DyScannerImpl(String basePackage, ClassLoader cl) {
+        this.basePackage = basePackage;
+        this.cl = cl;
+    }
+    /**
+     * 获取包下全部的类
+     * @return
+     * @throws IOException
+     */
+    @Override
+    public List<String> doScanner() throws IOException {
+        System.out.println("开始扫描包{}下的所有类"+basePackage);
+        List<String> dsList=doScan(basePackage, new ArrayList<String>());
+        dsList=dueResult(dsList);
+        return dsList;
+    }
+
+    public  List<String> dueResult(List<String> result){
+        List<String> ls=new ArrayList<>();
+        for (String str:result) {
+            if (str.indexOf("/")>0){
+                String clzz= str.substring(str.lastIndexOf(".")+1);
+                clzz=clzz.replace("/",".");
+                System.out.println(clzz);
+                ls.add(clzz);
+            }
+        }
+        if (ls.size()==0){
+            ls=result;
+        }
+
+        return ls;
+    }
+    /**
+     *
+     *掃描包
+     * @param basePackage
+     * @param nameList
+     * @return
+     * @throws IOException
+     */
+    private List<String> doScan(String basePackage, List<String> nameList) throws IOException {
+
+
+        String splashPath = StringUtils.dotToSplash(basePackage);
+
+
+        URL url = cl.getResource(splashPath);
+        String filePath = StringUtils.getRootPath(url);
+
+        List<String> names = null;
+        if (isJarFile(filePath)) {
+
+            names = readFromJarFile(filePath, splashPath);
+        } else {
+
+
+            names = readFromDirectory(filePath);
+        }
+
+        for (String name : names) {
+            if (isClassFile(name)) {
+
+                nameList.add(toFullyQualifiedName(name, basePackage));
+            } else {
+
+                doScan(basePackage + "." + name, nameList);
+            }
+        }
+
+        return nameList;
+    }
+
+
+    private String toFullyQualifiedName(String shortName, String basePackage) {
+        StringBuilder sb = new StringBuilder(basePackage);
+        sb.append('.');
+        sb.append(StringUtils.trimExtension(shortName));
+        return sb.toString();
+    }
+
+    private List<String> readFromJarFile(String jarPath, String splashedPackageName) throws IOException {
+
+        JarInputStream jarIn = new JarInputStream(new FileInputStream(jarPath));
+        JarEntry entry = jarIn.getNextJarEntry();
+
+        List<String> nameList = new ArrayList<String>();
+        while (null != entry) {
+            String name = entry.getName();
+            if (name.startsWith(splashedPackageName) && isClassFile(name)) {
+                nameList.add(name);
             }
 
+            entry = jarIn.getNextJarEntry();
         }
+        return nameList;
     }
 
+    private List<String> readFromDirectory(String path) {
+        File file = new File(path);
+        String[] names = file.list();
+
+        if (null == names) {
+            return null;
+        }
+
+        return Arrays.asList(names);
+    }
+
+    private boolean isClassFile(String name) {
+        return name.endsWith(".class");
+    }
+
+    private boolean isJarFile(String name) {
+        return name.endsWith(".jar");
+    }
 
 }

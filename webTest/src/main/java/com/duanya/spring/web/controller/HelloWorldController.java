@@ -22,7 +22,7 @@ public class HelloWorldController {
 
     @DyGet("/getStu")
     public Students getStu(){
-        return helloService.getStu();
+        return jiahua;
     }
 
     @DyPost("/helloP")

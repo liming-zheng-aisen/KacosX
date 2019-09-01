@@ -13,39 +13,27 @@ import java.util.Properties;
  * @date 2019/8/19
  * @description 加载propert配置文件
  */
-public final class DyConfigurationLoader {
+public class DyConfigurationLoader implements DyBeanLoad {
 
     /**
      * evn全局配置文件。
      */
     private static Properties evn=new Properties();
-    /**
-     * 是否加载过（保证安全，只能调用一次）
-     */
-    private static boolean isRun=false;
 
     /**
      * 默认的配置文件名
      */
     private final static String DEFAULT_PROPERTIES_NAME="dy-application.properties";
 
-    private DyConfigurationLoader(){
-
-    }
 
     /**
      * 开始加载配置
      * @param c
-     * @param propertiesName
      */
-    public synchronized static void load(Class c,String propertiesName) throws ClassNotFoundException, InvocationTargetException, InstantiationException, DyContextException, IllegalAccessException {
-        //加载过一次就不再加载
-        if (isRun==true){
-            return;
-        }
+    @Override
+    public void load(Class c) throws ClassNotFoundException, InvocationTargetException, InstantiationException, DyContextException, IllegalAccessException {
         //加载配置文件
-        loadProperties(c,propertiesName);
-        isRun=true;
+        loadProperties(c,null);
     }
 
     /**
@@ -53,7 +41,7 @@ public final class DyConfigurationLoader {
      * @param c
      * @param propertiesName
      */
-    private static void loadProperties(Class c,String propertiesName){
+    public static void loadProperties(Class c,String propertiesName){
 
         try {
             if(StringUtils.isEmptyPlus(propertiesName)){

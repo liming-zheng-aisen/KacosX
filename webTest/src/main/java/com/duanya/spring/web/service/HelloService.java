@@ -10,4 +10,5 @@ import com.duanya.spring.web.domain.Students;
 public interface HelloService {
     String getName();
     Students getStu();
+    Integer getTen();
 }

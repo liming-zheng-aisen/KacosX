@@ -21,6 +21,7 @@
         <jstl-v>1.2</jstl-v>
         <json-lib>2.4</json-lib>
         <jackson-v>2.8.11</jackson-v>
+        <mysql>8.0.12</mysql>
     </properties>
 
     <dependencyManagement>
@@ -36,6 +37,7 @@
                 <groupId>org.apache.tomcat.embed</groupId>
                 <artifactId>tomcat-embed-websocket</artifactId>
                 <version>${tomcat-v}</version>
+
             </dependency>
             <!-- jsp -->
             <dependency>
@@ -65,6 +67,11 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson-v}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -4,14 +4,11 @@ import java.lang.annotation.*;
 
 /**
  * @author zheng.liming
- * @date 2019/8/24
+ * @date 2019/8/26
  * @description
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@DyAutoConfiguration
-@DyScanner(packageNames = {})
-public @interface DyBootApplication {
-
+public @interface DyAutoConfiguration {
 }

@@ -16,4 +16,23 @@ public class WebConfigBean {
     public Students initStuBean(){
         return new Students("1344","java",100);
     }
+
+//    @DyBean
+//    public MapperScannerConfigurer inintMapper(){
+//        MapperScannerConfigurer mc=new MapperScannerConfigurer();
+//        mc.setBasePackage("com.duanya.spring.web.mapper");
+//        return mc;
+//
+//    }
+//
+//    @DyAutowired("dataSource")
+//    private DataSource dataSource;
+//
+//    @DyBean
+//    public MybatisSqlSessionFactoryBean initMSFB(){
+//        MybatisSqlSessionFactoryBean msfb=new MybatisSqlSessionFactoryBean();
+//        msfb.setDataSource(dataSource);
+//        return msfb;
+//    }
+
 }

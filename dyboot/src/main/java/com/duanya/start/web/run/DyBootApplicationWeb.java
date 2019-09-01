@@ -1,11 +1,13 @@
 package com.duanya.start.web.run;
 
 import com.duanya.spring.framework.context.exception.DyContextException;
+import com.duanya.spring.framework.core.annotation.DyAutoConfiguration;
 import com.duanya.spring.framework.core.annotation.DyBootApplication;
 import com.duanya.spring.framework.core.annotation.DyScanner;
 import com.duanya.spring.framework.core.load.DyClassLoader;
 import com.duanya.spring.framework.core.load.DyConfigurationLoader;
 import com.duanya.spring.framework.core.load.DyIocLoader;
+import com.duanya.spring.framework.jdbc.datasource.DyJdbcLoader;
 import com.duanya.start.web.times.Timer;
 import com.duanya.start.web.tomcat.InsideTomcat;
 import org.apache.catalina.LifecycleException;
@@ -13,7 +15,10 @@ import org.apache.catalina.LifecycleException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author zheng.liming
@@ -22,18 +27,17 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class DyBootApplicationWeb {
 
+    static Logger  logger=Logger.getLogger(DyBootApplicationWeb.class.getName());
 
     public static void run(Class main) {
         try {
-
-            authorization(main);
             //计时器
             Timer timer=new Timer();
             timer.doStart();
             //打印logo
             printLogo(main);
             //加载配置文件
-            DyConfigurationLoader.load(main,null);
+            new DyConfigurationLoader().load(main);
             //扫描加载类
             DyClassLoader classLoader=new DyClassLoader();
             if (main.isAnnotationPresent(DyScanner.class)){
@@ -44,13 +48,21 @@ public class DyBootApplicationWeb {
                     close();
                 }
                 for (String p:packageNames){
-                    classLoader.load(p);
+                    try {
+                        classLoader.load(p);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }else {
                 classLoader.load(main);
             }
+
             //spring上下文加载
-            DyIocLoader.load();
+            new DyIocLoader().load(main);
+
+            //加载jdbc驱动
+            DyJdbcLoader.load(DyConfigurationLoader.getEvn());
             //最后启动tomcat
             InsideTomcat.start(timer,main);
 
@@ -94,9 +106,12 @@ public class DyBootApplicationWeb {
             e.printStackTrace();
         }
     }
+
     private static void authorization(Class c){
-        if (!c.isAnnotationPresent(DyBootApplication.class)){
-            System.out.println("未找到加载类，请配置DyBootApplication！");
+        if (c.isAnnotationPresent(DyBootApplication.class)||(c.isAnnotationPresent(DyAutoConfiguration.class)&&c.isAnnotationPresent(DyScanner.class))){
+            logger.log(Level.INFO,"DY BOOT 认证通过，正在启动......");
+        }else {
+            logger.log(Level.WARNING,"未找到加载类，请配置DyBootApplication！");
             close();
         }
     }

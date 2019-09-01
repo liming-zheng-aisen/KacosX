@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface IDyScanner {
 
-    List<String> doScanner(String url);
+    public List<String> doScanner()throws Exception;
 
 }
