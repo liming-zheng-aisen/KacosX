@@ -77,10 +77,11 @@
  
  ## @DyPathVariable注解的作用
  只能作用于方法的参数上面，其作用为获取路径最后的"/"的值为参数值，例如：
-   @DyGet("/{str}")
-   public String getStr（@DyPathVariable String str){
-    return str;
-   }
+ 
+    @DyGet("/{str}")
+    public String getStr（@DyPathVariable String str){
+     return str;
+    }
   
   ## @DyRequestParameter注解的作用
   只能作用于方法的参数上面，其作用是获取请求路径的参数注入到方法的参数列表上面，参数列表如下:
