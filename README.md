@@ -4,7 +4,7 @@
 
   ### 1.下载源码
   
-    https://github.com/1308404897/DySpring
+    https://codeload.github.com/1308404897/DySpring/zip/master
     
   ### 2.使用maven打包安装到本地仓库
   
