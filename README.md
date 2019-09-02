@@ -93,7 +93,14 @@
   request | 是否必须的，默认为true
   doc | 参数说明
   
+ ## 配置文件加载问题
+ dyboot会默认从resource目录下加载dy-application.properties文件，如果需要倒入其他配置文件，则需要载dy-application.properties文件内配置其他配置文件的名字(dy.properties.loader.other)，如果有多个文件则用逗号“,”隔开，建议配置文件都放在同个目录下。例如需要加载mysql.properties、redis.properties文件
+ 则在dy-application.properties文件配置：
+ 
+    dy.properties.loader.other=mysql.properties,redis.properties
   
+  ## dyboot中的webTest
+  webTest是dyboot案例，之间启动它，快速体验一下吧！
   
   
   
