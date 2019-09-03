@@ -106,7 +106,7 @@
  
  ## dyboot中的webTest
  webTest是dyboot案例，启动它，快速体验一下吧！
- ![image](https://github.com/1308404897/DySpring/webTest/src/main/resources/static/images/testWeb.jpg)
+ ![image](https://github.com/1308404897/DySpring/blob/master/webTest/src/main/resources/static/images/testWeb.jpg?raw=true)
   
   
   
