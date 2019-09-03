@@ -1,0 +1,2069 @@
+/* ==========================================================
+   Common CSS Table Of Contents
+   ==========================================================
+   * 1.Common CSS
+   * 2.Overlay CSS
+   * 3.Button CSS
+   * 4.Section Padding CSS
+   * 5.Button Hover Effects
+   * 6.Button Animation
+   * 7.Sass Mixin
+============================================================== */
+/* ================================================================= */
+/* 1.Common CSS
+/* ================================================================= */
+body {
+  font-family: 'Poppins', sans-serif; }
+
+body,
+html {
+  height: 100%;
+  color: #666666;
+  font-size: 16px; }
+  body p,
+  html p {
+    line-height: 30px; }
+
+li,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+img {
+  max-width: 100%; }
+
+a,
+a:focus,
+a:hover {
+  text-decoration: none; }
+
+input {
+  outline: none !important; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 15px;
+  font-weight: 700;
+  color: #222222; }
+
+/* ================================================================= */
+/* 2.Overlay CSS
+/* ================================================================= */
+.overlay {
+  position: relative;
+  z-index: 1; }
+  .overlay:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    content: "";
+    background: #000000;
+    opacity: 0.65;
+    z-index: -1; }
+
+/* ================================================================= */
+/* 3.Button CSS
+/* ================================================================= */
+.b-btn {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff; }
+  .b-btn:hover {
+    color: #fff; }
+
+.read-more-btn {
+  background: #288feb;
+  border-radius: 5px;
+  line-height: inherit;
+  padding: 17px 40px 15px; }
+
+.cta-btn {
+  background: #fff;
+  border-radius: 5px;
+  color: #288feb;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 17px 50px;
+  position: relative;
+  top: 12px; }
+  @media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .cta-btn {
+      padding: 17px 47px; } }
+  .cta-btn:hover {
+    color: #288feb; }
+  .cta-btn i {
+    margin-left: 5px; }
+
+/* ================================================================= */
+/* 4.Section Padding CSS
+/* ================================================================= */
+.sp100 {
+  padding: 100px 0; }
+
+.spt100 {
+  padding: 100px 0 0; }
+
+.spb100 {
+  padding: 0 0 100px; }
+
+.pL-30 {
+  padding-left: 30px; }
+
+.pR-30 {
+  padding-right: 30px; }
+
+.section-title {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 75px; }
+  .section-title h2 {
+    font-size: 30px; }
+
+/* ================================================================= */
+/* 5.Button Hover Effects
+/* ================================================================= */
+.upx-btn-hover1 {
+  position: relative;
+  z-index: 1;
+  transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s; }
+  .upx-btn-hover1:after {
+    background: #288feb;
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    -moz-transition: visibility 0.5s ease-in-out 0s, opacity 0.5s ease-in-out 0s, transform 0.3s ease-in-out;
+    -webkit-transition: visibility 0.5s ease-in-out 0s, opacity 0.5s ease-in-out 0s, transform 0.3s ease-in-out;
+    transition: visibility 0.5s ease-in-out 0s, opacity 0.5s ease-in-out 0s, transform 0.3s ease-in-out;
+    width: 100%;
+    z-index: -1;
+    opacity: 0;
+    transform: scale(0.7); }
+  .upx-btn-hover1:hover:after {
+    transform: scale(1);
+    visibility: visible;
+    opacity: 1; }
+  .upx-btn-hover1:hover {
+    border-color: #288feb !important; }
+
+a.simple-hover1 i {
+  transition: 0.4s;
+  -moz-transition: 0.4s;
+  -o-transition: 0.4s; }
+
+/* =================================== */
+/* 6.Button Animation
+/* =================================== */
+@keyframes scrollDown {
+  0% {
+    transform: translateY(-15px);
+    opacity: 1; }
+  40% {
+    transform: translateY(-12px);
+    opacity: 0.3; }
+  60% {
+    transform: translateY(-8px);
+    opacity: 0.5; }
+  80% {
+    transform: translateY(-5px);
+    opacity: 0.7; }
+  100% {
+    transform: translateY(0px);
+    opacity: 0; } }
+.last {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important; }
+
+/* ==========================================================
+   CSS Table Of Contents
+/* ========================================================== */
+/*
+* 1. Header Area CSS
+* 2. MainMenu CSS
+* 3. Search Box CSS
+* 4. Page Title Area CSS
+* 5. Slider Area CSS
+* 6. Services Area CSS
+* 7. Image Holder Area CSS
+* 8. Projects Area CSS
+* 9. CTA Area CSS
+* 10. Team Section
+* 11. Latest News Section
+* 12. Footer Section
+* 13. Video Section
+* 14. Customer Statement
+* 15. Service Page CSS
+* 16. Service Details Page CSS
+* 17. Pricing Box CSS
+* 18. Projects Page CSS
+* 19. Latest News Page CSS
+* 20. Blog Post CSS
+* 21. Sidebar CSS
+* 22. Comments CSS
+* 23. Comments Form CSS
+* 24. Team member page CSS
+* 25. Testimonials page CSS
+* 26. FAQ page CSS
+* 27. Contact page CSS
+* 28. 404 page CSS
+* 29. Slider Particle CSS
+* 30. Color Picker CSS
+*
+*/
+/* ========================================================== */
+/* =================================== */
+/* 1. Header Area CSS
+/* =================================== */
+.header-area {
+  position: relative;
+  height: 300px;
+  z-index: 999;
+  background: url("../../images/uploads/page-title-bg.jpg") no-repeat scroll 0 0/cover;
+  /* =================================== */
+ /* 4. Page Title Area CSS
+/* =================================== */
+  /* =================================== */
+ /* 5. Slider Area CSS
+/* =================================== */ }
+  @media only screen and (min-width: 480px) and (max-width: 767px) {
+    .header-area {
+      height: 750px; } }
+  .header-area .main-menu-area {
+    position: relative;
+    top: 40px;
+    z-index: 9;
+    /* =================================== */
+        /* 2. MainMenu CSS
+/* =================================== */ }
+    .header-area .main-menu-area .menu-bg {
+      background: #ffffff;
+      position: relative;
+      z-index: 1; }
+      .header-area .main-menu-area .menu-bg:after {
+        border: 1px dashed #288feb;
+        content: "";
+        height: calc(100% - 16px);
+        left: 8px;
+        position: absolute;
+        top: 8px;
+        width: calc(100% - 16px);
+        z-index: -1; }
+    .header-area .main-menu-area .logo {
+      padding: 28px 30px; }
+    .header-area .main-menu-area .main-menu .nav.navbar-nav {
+      float: none;
+      text-align: right; }
+      .header-area .main-menu-area .main-menu .nav.navbar-nav li {
+        float: none;
+        display: inline-block; }
+        .header-area .main-menu-area .main-menu .nav.navbar-nav li a {
+          display: block; }
+    .header-area .main-menu-area .main-menu {
+      position: relative;
+      padding-right: 65px;
+      /* =================================== */
+      /* 3 Search Box CSS
+      /* =================================== */ }
+      @media only screen and (min-width: 0px) and (max-width: 767px) {
+        .header-area .main-menu-area .main-menu {
+          padding: 0; }
+          .header-area .main-menu-area .main-menu .navbar-header {
+            color: #222;
+            position: absolute;
+            right: 25px;
+            top: -55px; }
+            .header-area .main-menu-area .main-menu .navbar-header .navbar-toggle {
+              margin: 0;
+              padding: 0; } }
+      @media only screen and (min-width: 0px) and (max-width: 767px) {
+        .header-area .main-menu-area .main-menu .nav.navbar-nav {
+          text-align: left; } }
+      .header-area .main-menu-area .main-menu .nav.navbar-nav li {
+        position: relative; }
+        .header-area .main-menu-area .main-menu .nav.navbar-nav li .icofont.icofont-caret-down {
+          position: absolute;
+          right: 2px;
+          top: 42%;
+          font-size: 14px;
+          z-index: 99; }
+          @media only screen and (min-width: 0px) and (max-width: 767px), only screen and (min-width: 768px) and (max-width: 991px) {
+            .header-area .main-menu-area .main-menu .nav.navbar-nav li .icofont.icofont-caret-down {
+              right: -2px;
+              top: 38px;
+              font-size: 10px; } }
+          @media only screen and (min-width: 0px) and (max-width: 767px) {
+            .header-area .main-menu-area .main-menu .nav.navbar-nav li .icofont.icofont-caret-down {
+              right: 44px;
+              top: 15px; } }
+        .header-area .main-menu-area .main-menu .nav.navbar-nav li:nth-last-child(1) > ul, .header-area .main-menu-area .main-menu .nav.navbar-nav li:nth-last-child(2) > ul, .header-area .main-menu-area .main-menu .nav.navbar-nav li:nth-last-child(3) > ul {
+          left: auto;
+          right: 0;
+          top: 100%; }
+        @media only screen and (min-width: 0px) and (max-width: 767px) {
+          .header-area .main-menu-area .main-menu .nav.navbar-nav li ul {
+            padding-left: 10px; } }
+        .header-area .main-menu-area .main-menu .nav.navbar-nav li ul li {
+          border-bottom: 1px dashed #288feb; }
+        @media only screen and (min-width: 768px) {
+          .header-area .main-menu-area .main-menu .nav.navbar-nav li:hover > ul {
+            transform: translateY(0px);
+            visibility: visible;
+            opacity: 1; }
+          .header-area .main-menu-area .main-menu .nav.navbar-nav li ul {
+            position: absolute;
+            left: 0;
+            top: 100%;
+            width: 280px;
+            text-align: left;
+            background: #fff;
+            transform: translateY(10px);
+            -moz-transition: transform 0.3s ease-in-out;
+            -webkit-transition: transform 0.3s ease-in-out;
+            transition: all 0.5s ease-in-out;
+            visibility: hidden;
+            opacity: 0; } }
+  @media only screen and (min-width: 768px) and (min-width: 768px) and (max-width: 991px) {
+    .header-area .main-menu-area .main-menu .nav.navbar-nav li ul {
+      width: 230px; } }
+        @media only screen and (min-width: 768px) {
+            .header-area .main-menu-area .main-menu .nav.navbar-nav li ul li {
+              display: block; }
+              .header-area .main-menu-area .main-menu .nav.navbar-nav li ul li:last-child {
+                border-bottom: 0 solid; }
+              .header-area .main-menu-area .main-menu .nav.navbar-nav li ul li:hover > ul {
+                transform: translateY(0px);
+                visibility: visible;
+                opacity: 1; }
+              .header-area .main-menu-area .main-menu .nav.navbar-nav li ul li > ul {
+                right: auto;
+                left: 0px;
+                visibility: hidden;
+                opacity: 0;
+                z-index: 9999;
+                background: red; } }
+      @media only screen and (min-width: 768px) and (min-width: 0px) and (max-width: 767px) {
+        .header-area .main-menu-area .main-menu .nav.navbar-nav li ul li > ul {
+          visibility: visible;
+          opacity: 1;
+          position: relative; } }
+        @media only screen and (min-width: 768px) {
+              .header-area .main-menu-area .main-menu .nav.navbar-nav li ul li a {
+                padding: 12px 0 10px 18px;
+                transition: 0.4s;
+                -moz-transition: 0.4s;
+                -o-transition: 0.4s; }
+                .header-area .main-menu-area .main-menu .nav.navbar-nav li ul li a:hover {
+                  padding-left: 23px; } }
+        @media only screen and (min-width: 0px) and (max-width: 767px) {
+          .header-area .main-menu-area .main-menu .nav.navbar-nav li {
+            display: block; } }
+        .header-area .main-menu-area .main-menu .nav.navbar-nav li a {
+          color: #000000;
+          font-size: 16px;
+          font-weight: 500;
+          text-transform: lowercase;
+          padding: 33px 22px;
+          transition: 0.4s;
+          -moz-transition: 0.4s;
+          -o-transition: 0.4s; }
+          @media only screen and (min-width: 992px) and (max-width: 1199px) {
+            .header-area .main-menu-area .main-menu .nav.navbar-nav li a {
+              padding: 33px 21px; } }
+          @media only screen and (min-width: 768px) and (max-width: 991px) {
+            .header-area .main-menu-area .main-menu .nav.navbar-nav li a {
+              padding: 33px 10px;
+              font-size: 12px; } }
+          @media only screen and (min-width: 0px) and (max-width: 767px) {
+            .header-area .main-menu-area .main-menu .nav.navbar-nav li a {
+              padding: 10px 22px; } }
+          .header-area .main-menu-area .main-menu .nav.navbar-nav li a:hover {
+            color: #288feb;
+            text-decoration: line-through; }
+          .header-area .main-menu-area .main-menu .nav.navbar-nav li a:focus, .header-area .main-menu-area .main-menu .nav.navbar-nav li a:hover {
+            background: none; }
+      .header-area .main-menu-area .main-menu .search-box {
+        position: absolute;
+        right: 40px;
+        top: 35px;
+        cursor: pointer; }
+        @media only screen and (min-width: 768px) and (max-width: 991px) {
+          .header-area .main-menu-area .main-menu .search-box {
+            top: 32px; } }
+        @media only screen and (min-width: 0px) and (max-width: 767px) {
+          .header-area .main-menu-area .main-menu .search-box {
+            cursor: pointer;
+            font-size: 10px;
+            position: absolute;
+            right: 80px;
+            top: -48px; } }
+        .header-area .main-menu-area .main-menu .search-box .search-trigger {
+          position: relative; }
+          @media only screen and (min-width: 768px) and (max-width: 991px) {
+            .header-area .main-menu-area .main-menu .search-box .search-trigger {
+              font-size: 10px; } }
+        .header-area .main-menu-area .main-menu .search-box .search-form {
+          background: #fff;
+          padding: 10px 15px;
+          position: absolute;
+          right: 0;
+          top: 53px;
+          width: 280px;
+          visibility: hidden;
+          opacity: 0;
+          transform: translateY(100px) scale(1.2);
+          transition: 0.4s;
+          -moz-transition: 0.4s;
+          -o-transition: 0.4s; }
+          @media only screen and (min-width: 0px) and (max-width: 767px) {
+            .header-area .main-menu-area .main-menu .search-box .search-form {
+              right: -64px;
+              width: 240px; } }
+          .header-area .main-menu-area .main-menu .search-box .search-form.visible-search-form {
+            visibility: visible;
+            opacity: 1;
+            transform: scale(1);
+            transform: translateY(0) scale(1); }
+          .header-area .main-menu-area .main-menu .search-box .search-form input {
+            background: transparent none repeat scroll 0 0;
+            border: 1px solid #eee;
+            padding: 7px;
+            width: calc(100% - 35px); }
+          .header-area .main-menu-area .main-menu .search-box .search-form button {
+            background: none;
+            border: medium none;
+            padding: 0;
+            width: 30px; }
+            .header-area .main-menu-area .main-menu .search-box .search-form button i {
+              color: #288feb; }
+  .header-area .page-title {
+    height: 50%;
+    left: 0;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    padding: 40px 0; }
+    .header-area .page-title h2 {
+      font-size: 30px;
+      margin: 0;
+      color: #ffffff;
+      text-transform: uppercase; }
+      @media only screen and (min-width: 0px) and (max-width: 767px) {
+        .header-area .page-title h2 {
+          text-align: center; } }
+    .header-area .page-title .breadcrumbs {
+      text-align: right; }
+      @media only screen and (min-width: 0px) and (max-width: 767px) {
+        .header-area .page-title .breadcrumbs {
+          text-align: center; } }
+      .header-area .page-title .breadcrumbs li {
+        display: inline-block;
+        position: relative;
+        padding-right: 15px; }
+        .header-area .page-title .breadcrumbs li:after {
+          position: absolute;
+          right: 0;
+          top: 0;
+          content: "-";
+          color: #fff; }
+        .header-area .page-title .breadcrumbs li:last-child {
+          padding-right: 0; }
+          .header-area .page-title .breadcrumbs li:last-child:after {
+            display: none; }
+        .header-area .page-title .breadcrumbs li a {
+          color: #fff;
+          transition: 0.4s;
+          -moz-transition: 0.4s;
+          -o-transition: 0.4s; }
+          .header-area .page-title .breadcrumbs li a:hover {
+            color: #288feb; }
+  .header-area .slider-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    text-align: center; }
+    .header-area .slider-area .item,
+    .header-area .slider-area .owl-item,
+    .header-area .slider-area .owl-stage,
+    .header-area .slider-area .owl-stage-outer,
+    .header-area .slider-area .slider,
+    .header-area .slider-area .slider-wrapper {
+      height: 100%; }
+    .header-area .slider-area .item {
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      -webkit-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      position: relative; }
+      .header-area .slider-area .item .slide-content {
+        font-size: 16px;
+        color: #fff;
+        font-weight: 300;
+        padding-top: 80px; }
+        @media only screen and (min-width: 768px) and (max-width: 991px) {
+          .header-area .slider-area .item .slide-content {
+            font-size: 14px; } }
+        @media only screen and (min-width: 0px) and (max-width: 767px) {
+          .header-area .slider-area .item .slide-content {
+            padding: 80px 10px 0; } }
+        .header-area .slider-area .item .slide-content h1 {
+          color: #fff;
+          font-size: 50px;
+          font-weight: 700;
+          margin-bottom: 20px; }
+          @media only screen and (min-width: 768px) and (max-width: 991px) {
+            .header-area .slider-area .item .slide-content h1 {
+              font-size: 42px; } }
+          @media only screen and (min-width: 0px) and (max-width: 767px) {
+            .header-area .slider-area .item .slide-content h1 {
+              font-size: 25px; } }
+          .header-area .slider-area .item .slide-content h1 span {
+            color: #288feb; }
+        .header-area .slider-area .item .slide-content p {
+          margin-bottom: 35px; }
+        .header-area .slider-area .item .slide-content .b-btn {
+          border: 1px solid #fff;
+          border-radius: 3px;
+          padding: 15px 30px;
+          margin: 0 10px;
+          letter-spacing: 0.5px; }
+          .header-area .slider-area .item .slide-content .b-btn.btn-filled {
+            background: #288feb;
+            border-color: #288feb; }
+          .header-area .slider-area .item .slide-content .b-btn i {
+            margin-left: 5px; }
+        .header-area .slider-area .item .slide-content .b-btn {
+          display: inline-block;
+          overflow: hidden; }
+      .header-area .slider-area .item .slide-down-arrow {
+        position: absolute;
+        left: 50%;
+        bottom: 55px;
+        font-size: 35px;
+        margin-left: -16px;
+        color: #ffffff;
+        cursor: pointer;
+        animation: scrollDown 2s infinite; }
+
+/* =================================== */
+/* 6. Services Area CSS
+/* =================================== */
+@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 0px) and (max-width: 767px) {
+  .services-area.sp100 {
+    padding: 100px 0 80px; } }
+.sin-service {
+  text-align: center;
+  font-weight: 300;
+  padding: 10px 27px;
+  box-shadow: 0 -5px 16px 2px rgba(0, 0, 0, 0.04);
+  position: relative; }
+  @media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 0px) and (max-width: 767px) {
+    .sin-service {
+      margin-bottom: 50px; } }
+  .sin-service:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #288feb;
+    content: "";
+    height: 0;
+    width: 1px;
+    transition: 0.6s;
+    -moz-transition: 0.6s;
+    -o-transition: 0.6s; }
+  .sin-service:before {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #288feb;
+    content: "";
+    height: 0;
+    right: 0;
+    width: 1px;
+    transition: 0.6s;
+    -moz-transition: 0.6s;
+    -o-transition: 0.6s; }
+  .sin-service .service-hover-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    height: 100%;
+    width: 100%;
+    z-index: 9; }
+    .sin-service .service-hover-bar:before {
+      background: #288feb;
+      content: "";
+      height: 1px;
+      position: absolute;
+      top: 0;
+      right: 50%;
+      width: 0;
+      transition: 0.3s;
+      -moz-transition: 0.3s;
+      -o-transition: 0.3s; }
+    .sin-service .service-hover-bar:after {
+      background: #288feb;
+      content: "";
+      height: 1px;
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 0;
+      transition: 0.4s;
+      -moz-transition: 0.4s;
+      -o-transition: 0.4s; }
+  .sin-service .service-icon {
+    background: #fff;
+    border: 5px solid #deefff;
+    border-radius: 50%;
+    color: #288feb;
+    display: inline-block;
+    font-size: 35px;
+    height: 86px;
+    line-height: 86px;
+    margin-bottom: 25px;
+    margin-top: -43px;
+    text-align: center;
+    width: 86px;
+    position: relative;
+    z-index: 9; }
+    .sin-service .service-icon:after {
+      background: #288feb;
+      border-radius: 50%;
+      content: "";
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      transform: scale(1.2);
+      width: 100%;
+      z-index: -1;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.4s;
+      -moz-transition: 0.4s;
+      -o-transition: 0.4s; }
+  .sin-service h4 {
+    font-size: 20px;
+    color: #222222;
+    font-weight: 600;
+    font-weight: 600;
+    position: relative;
+    z-index: 9; }
+  .sin-service p {
+    position: relative;
+    z-index: 9; }
+
+.sin-service:hover .service-icon {
+  color: #fff; }
+  .sin-service:hover .service-icon:after {
+    transform: scale(1);
+    visibility: visible;
+    opacity: 1; }
+.sin-service:hover:before {
+  height: 98px; }
+.sin-service:hover:after {
+  height: 98px; }
+.sin-service:hover .service-hover-bar:before {
+  width: 50%; }
+.sin-service:hover .service-hover-bar:after {
+  width: 50%; }
+
+/* =================================== */
+/* 7. Text Holder Area CSS
+/* =================================== */
+.text-holder {
+  padding: 25.5px 0; }
+  .text-holder h2 {
+    font-size: 30px; }
+  .text-holder p a {
+    color: #288feb; }
+  .text-holder a {
+    margin-top: 10px; }
+
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+  .image-holder {
+    margin-bottom: 15px; } }
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .image-holder {
+    margin-bottom: 25px; } }
+/* =================================== */
+/* 8. Projects Area CSS
+/* =================================== */
+.sin-project {
+  width: 22%;
+  margin: 30px 15px 0; }
+  @media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .sin-project {
+      width: 30%; } }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .sin-project {
+      width: 45%; } }
+  @media only screen and (min-width: 0px) and (max-width: 767px) {
+    .sin-project {
+      width: 90%; } }
+  .sin-project:hover .project-hover {
+    visibility: visible;
+    opacity: 1;
+    bottom: 18px; }
+  .sin-project .project-hover {
+    background: #288feb;
+    border-radius: 3px;
+    bottom: 0;
+    display: inline-block;
+    left: 15px;
+    padding: 17px 20px 13px;
+    position: absolute;
+    width: calc(100% - 30px);
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.4s;
+    -moz-transition: 0.4s;
+    -o-transition: 0.4s; }
+    .sin-project .project-hover h4 {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 2px; }
+    .sin-project .project-hover span {
+      color: #fff;
+      font-size: 12px;
+      font-weight: 300; }
+    .sin-project .project-hover i {
+      color: #fff;
+      position: absolute;
+      right: 20px;
+      top: 39%; }
+  .sin-project img {
+    width: 100%; }
+
+/* =================================== */
+/* 9. CTA Area CSS
+/* =================================== */
+.cta-section {
+  padding: 50px 0; }
+  .cta-section.overlay:after {
+    background: #288feb;
+    opacity: 0.95; }
+  @media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 0px) and (max-width: 767px) {
+    .cta-section {
+      text-align: center; } }
+  .cta-section h4 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 300;
+    margin-bottom: 20px; }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+      .cta-section h4 {
+        margin-bottom: 15px; } }
+    @media only screen and (min-width: 0px) and (max-width: 767px) {
+      .cta-section h4 {
+        font-size: 15px;
+        margin-bottom: 12px; } }
+  .cta-section h2 {
+    color: #fff;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0; }
+    @media only screen and (min-width: 992px) and (max-width: 1199px) {
+      .cta-section h2 {
+        font-size: 29px; } }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+      .cta-section h2 {
+        font-size: 28px;
+        margin-bottom: 20px; } }
+    @media only screen and (min-width: 0px) and (max-width: 767px) {
+      .cta-section h2 {
+        font-size: 21px; } }
+
+/* =================================== */
+/* 10. Team Section
+/* =================================== */
+@media only screen and (min-width: 0px) and (max-width: 767px), only screen and (min-width: 768px) and (max-width: 991px) {
+  .our-team-section.spt100 {
+    overflow: hidden;
+    padding: 100px 0 0; } }
+
+.sin-team-member {
+  position: relative;
+  border: 4px solid transparent;
+  transition: 0.4s;
+  -moz-transition: 0.4s;
+  -o-transition: 0.4s; }
+  .sin-team-member:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    content: "";
+    border: 4px solid #288feb;
+    transform: scale(1.2);
+    transition: 0.4s;
+    -moz-transition: 0.4s;
+    -o-transition: 0.4s;
+    visibility: hidden;
+    opacity: 0; }
+  .sin-team-member:hover:after {
+    transform: scale(1);
+    visibility: visible;
+    opacity: 1; }
+  @media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 0px) and (max-width: 767px) {
+    .sin-team-member {
+      margin-bottom: 70px; }
+      .sin-team-member img {
+        width: 100%; } }
+  .sin-team-member .team-member-hover {
+    background: #288feb;
+    border-radius: 5px;
+    bottom: -39px;
+    left: 10px;
+    padding: 23px 30px 16px;
+    position: absolute;
+    text-align: center;
+    width: calc(100% - 20px);
+    z-index: 9; }
+    .sin-team-member .team-member-hover h4 {
+      color: #fff;
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 0; }
+      @media only screen and (min-width: 992px) and (max-width: 1199px) {
+        .sin-team-member .team-member-hover h4 {
+          font-size: 13px; } }
+    .sin-team-member .team-member-hover span {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 300; }
+      @media only screen and (min-width: 992px) and (max-width: 1199px) {
+        .sin-team-member .team-member-hover span {
+          font-size: 12px; } }
+
+/* =================================== */
+/* 11. Latest News Section
+/* =================================== */
+.latest-news-section.sp100 {
+  padding: 130px 0 100px; }
+
+.sin-latest-news {
+  overflow: hidden;
+  position: relative; }
+  .sin-latest-news .latest-news-thumb {
+    float: left; }
+    @media only screen and (min-width: 0px) and (max-width: 767px) {
+      .sin-latest-news .latest-news-thumb {
+        float: none; } }
+  @media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 0px) and (max-width: 767px) {
+    .sin-latest-news {
+      margin-bottom: 70px; } }
+  .sin-latest-news .latest-news-content {
+    border-left: 6px solid #288feb;
+    left: 0;
+    padding-left: 184px;
+    position: absolute;
+    top: 36%; }
+    @media only screen and (min-width: 0px) and (max-width: 767px) {
+      .sin-latest-news .latest-news-content {
+        padding: 0;
+        position: relative;
+        border: 0 solid; } }
+    @media only screen and (min-width: 992px) and (max-width: 1199px) {
+      .sin-latest-news .latest-news-content {
+        padding-left: 124px; } }
+    .sin-latest-news .latest-news-content .news-text {
+      background: #288feb;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: 300;
+      padding: 23px 10px 10px 23px; }
+      @media only screen and (min-width: 992px) and (max-width: 1199px) {
+        .sin-latest-news .latest-news-content .news-text {
+          font-size: 14px; } }
+      @media only screen and (min-width: 0px) and (max-width: 767px) {
+        .sin-latest-news .latest-news-content .news-text {
+          padding: 23px 0 23px 15px; } }
+      .sin-latest-news .latest-news-content .news-text h4 {
+        color: #fff;
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 5px; }
+        @media only screen and (min-width: 992px) and (max-width: 1199px) {
+          .sin-latest-news .latest-news-content .news-text h4 {
+            font-size: 15px; } }
+      .sin-latest-news .latest-news-content .news-text a {
+        color: #fff;
+        font-weight: 300;
+        font-size: 15px;
+        display: block;
+        margin-bottom: 10px; }
+        @media only screen and (min-width: 992px) and (max-width: 1199px) {
+          .sin-latest-news .latest-news-content .news-text a {
+            font-size: 13px; } }
+
+/* =================================== */
+/* 12. Footer Section
+/* =================================== */
+.footer-section {
+  background: #000;
+  overflow: hidden; }
+  .footer-section .widget {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 300; }
+    @media only screen and (min-width: 992px) and (max-width: 1199px) {
+      .footer-section .widget {
+        font-size: 13px; } }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+      .footer-section .widget {
+        margin-bottom: 50px; } }
+    .footer-section .widget .widget-title {
+      font-size: 15px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 50px; }
+      @media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 0px) and (max-width: 767px) {
+        .footer-section .widget .widget-title {
+          margin-bottom: 15px; } }
+    .footer-section .widget .footer-logo {
+      margin-bottom: 35px; }
+      @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .footer-section .widget .footer-logo {
+          margin-bottom: 15px; } }
+  .footer-section .news-posted-date {
+    color: #288feb;
+    font-size: 14px;
+    font-weight: 300; }
+  .footer-section .badges div {
+    border: 4px solid transparent;
+    float: left; }
+  .footer-section .badges {
+    overflow: hidden; }
+  .footer-section .sin-latest-news-widget {
+    margin-bottom: 30px;
+    overflow: hidden; }
+    .footer-section .sin-latest-news-widget .widget-news-thumb {
+      float: left;
+      margin-right: 15px; }
+    .footer-section .sin-latest-news-widget .widget-news-content {
+      padding-left: 90px; }
+    .footer-section .sin-latest-news-widget .widget-news-content p {
+      line-height: 22px; }
+
+/* =================================== */
+/* 13. Video Section
+/* =================================== */
+.video-holder {
+  position: relative; }
+  .video-holder .video-play-btn {
+    background: #fff none repeat scroll 0 0;
+    border-radius: 50%;
+    height: 80px;
+    left: 50%;
+    line-height: 80px;
+    margin-left: -40px;
+    margin-top: -40px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 80px;
+    z-index: 99; }
+  .video-holder .video-cover-img {
+    position: relative; }
+  .video-holder iframe {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%; }
+
+/* =================================== */
+/* 14. Customer Statement
+/* =================================== */
+.customer-stament-wrapper .owl-stage-outer {
+  padding: 0 0 42px !important; }
+.customer-stament-wrapper .owl-nav div {
+  background: #288feb;
+  color: #fff;
+  display: inline-block;
+  font-size: 18px;
+  height: 22px;
+  line-height: 24px;
+  position: absolute;
+  text-align: center;
+  width: 41px;
+  transition: 0.4s;
+  -moz-transition: 0.4s;
+  -o-transition: 0.4s; }
+  .customer-stament-wrapper .owl-nav div.owl-next {
+    left: auto;
+    right: 0; }
+  .customer-stament-wrapper .owl-nav div:hover {
+    background: #000000; }
+
+.sin-c-statement {
+  position: relative; }
+  .sin-c-statement .statement-content {
+    background: #f3f9fe;
+    border: 1px solid #a5d5ff;
+    padding: 40px 0;
+    text-align: center;
+    font-weight: 300;
+    position: relative; }
+    .sin-c-statement .statement-content p {
+      margin-bottom: 20px; }
+  .sin-c-statement .customer-meta {
+    background: #288feb;
+    bottom: -35px;
+    left: 50%;
+    margin-left: -110px;
+    position: absolute;
+    text-align: center;
+    border-radius: 3px;
+    box-sizing: border-box;
+    height: 70px;
+    padding: 14px 0;
+    width: 220px; }
+    .sin-c-statement .customer-meta h4 {
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 3px; }
+    .sin-c-statement .customer-meta p {
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 300; }
+
+/* =================================== */
+/* 15. Service Page CSS
+/* =================================== */
+.services-page .sin-service {
+  margin-bottom: 100px; }
+
+/* =================================== */
+/* 16. Service Details Page CSS
+/* =================================== */
+.services-details-page .service-details-gallery-wrap {
+  margin-bottom: 50px; }
+  .services-details-page .service-details-gallery-wrap .owl-nav div {
+    font-size: 18px;
+    height: 40px;
+    left: -61px;
+    line-height: 40px;
+    position: absolute;
+    text-align: center;
+    top: 40%;
+    background: #288feb;
+    color: #fff;
+    border-radius: 3px;
+    width: 40px;
+    transition: 0.4s;
+    -moz-transition: 0.4s;
+    -o-transition: 0.4s; }
+    @media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 0px) and (max-width: 767px) {
+      .services-details-page .service-details-gallery-wrap .owl-nav div {
+        display: none !important; } }
+    .services-details-page .service-details-gallery-wrap .owl-nav div:hover {
+      background: #000000; }
+    .services-details-page .service-details-gallery-wrap .owl-nav div.owl-next {
+      left: auto;
+      right: -61px; }
+.services-details-page .services-details-content {
+  font-weight: 300;
+  font-size: 16px; }
+  .services-details-page .services-details-content h2 {
+    font-size: 30px;
+    text-transform: capitalize; }
+
+/* =================================== */
+/* 17. Pricing Box CSS
+/* =================================== */
+.sin-pricing-box {
+  margin-bottom: 100px; }
+  @media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 0px) and (max-width: 767px) {
+    .sin-pricing-box {
+      margin-bottom: 50px; } }
+  .sin-pricing-box.special .pricing-head {
+    background: #000000; }
+  .sin-pricing-box.special .order-now-btn {
+    background: #000000; }
+  .sin-pricing-box .pricing-head {
+    background: #288feb;
+    padding: 30px 0; }
+    .sin-pricing-box .pricing-head .price {
+      font-size: 40px;
+      display: inline-block;
+      color: #fff;
+      font-weight: 700;
+      position: relative;
+      margin: 0 0 10px; }
+      .sin-pricing-box .pricing-head .price .dollar {
+        position: absolute;
+        left: -15px;
+        top: -10px;
+        font-size: 20px;
+        font-weight: 300; }
+      .sin-pricing-box .pricing-head .price .duration {
+        font-size: 16px;
+        font-weight: 300; }
+    .sin-pricing-box .pricing-head h5 {
+      font-size: 16px;
+      color: #fff;
+      font-weight: 500; }
+  .sin-pricing-box .pricing-body {
+    padding: 40px 0;
+    border: 1px solid #d0d0d0; }
+    .sin-pricing-box .pricing-body p {
+      font-weight: 300; }
+  .sin-pricing-box .order-now-btn {
+    margin-top: 20px;
+    border-radius: 3px;
+    color: #ffffff;
+    display: inline-block;
+    font-weight: 500;
+    padding: 15px 28px;
+    text-transform: capitalize;
+    background: #288feb;
+    transition: 0.4s;
+    -moz-transition: 0.4s;
+    -o-transition: 0.4s; }
+    .sin-pricing-box .order-now-btn:hover {
+      background: #000000; }
+
+/* =================================== */
+/* 18. Projects Page CSS
+/* =================================== */
+.our-project-section.projects-page .sin-project {
+  margin-top: 0;
+  margin-bottom: 30px; }
+
+/* =================================== */
+/* 19. Latest News Page CSS
+/* =================================== */
+.latest-news-page .sin-latest-news {
+  margin-bottom: 70px; }
+  @media only screen and (min-width: 0px) and (max-width: 767px) {
+    .latest-news-page .sin-latest-news {
+      margin-bottom: 50px; } }
+
+.btheme-breadcumbs li {
+  display: inline-block; }
+  .btheme-breadcumbs li.active a {
+    background: #288feb;
+    color: #fff;
+    border-color: #288feb; }
+  .btheme-breadcumbs li a {
+    display: block;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 40px;
+    border: 1px solid #d6d6d6;
+    border-radius: 3px;
+    font-weight: 600;
+    color: #000000;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    transition: 0.4s;
+    -moz-transition: 0.4s;
+    -o-transition: 0.4s; }
+    .btheme-breadcumbs li a:hover {
+      background: #000000;
+      color: #fff;
+      border-color: #000000; }
+
+/* =================================== */
+/* 20. Blog Post CSS
+/* =================================== */
+.blog-details-section .blog-post-thumb {
+  margin-bottom: 50px; }
+.blog-details-section .blog-post {
+  font-weight: 300; }
+  .blog-details-section .blog-post h2 {
+    font-weight: 600;
+    margin-bottom: 30px; }
+.blog-details-section .blog-posted-meta {
+  border-bottom: 1px solid #e3e3e3;
+  border-top: 1px solid #e3e3e3;
+  display: block;
+  padding: 15px 0;
+  text-align: center; }
+  .blog-details-section .blog-posted-meta .tags li {
+    color: #222;
+    display: inline-block;
+    font-weight: 500; }
+    .blog-details-section .blog-posted-meta .tags li a {
+      color: #666666;
+      font-weight: 300;
+      margin: 0 5px 0 0;
+      position: relative; }
+      .blog-details-section .blog-posted-meta .tags li a:hover {
+        color: #288feb; }
+      .blog-details-section .blog-posted-meta .tags li a:after {
+        bottom: 2px;
+        content: ",";
+        position: absolute;
+        right: -4px; }
+
+/* =================================== */
+/* 21. Sidebar CSS
+/* =================================== */
+.sidebar .widget {
+  margin-bottom: 70px; }
+  @media only screen and (min-width: 0px) and (max-width: 767px) {
+    .sidebar .widget {
+      margin-bottom: 50px; } }
+  .sidebar .widget.widget_search .widget-search {
+    border: 1px solid #d0d0d0;
+    padding: 10px; }
+    .sidebar .widget.widget_search .widget-search button,
+    .sidebar .widget.widget_search .widget-search input {
+      background: none;
+      border: none;
+      display: inline-block;
+      padding: 0 10px; }
+    .sidebar .widget.widget_search .widget-search input {
+      color: #666;
+      font-size: 16px;
+      font-weight: 300;
+      width: calc(100% - 45px); }
+    .sidebar .widget.widget_search .widget-search button {
+      width: 40px;
+      color: #288feb; }
+  .sidebar .widget ul li {
+    margin-bottom: 12px;
+    padding-left: 20px;
+    position: relative;
+    transition: 0.4s;
+    -moz-transition: 0.4s;
+    -o-transition: 0.4s; }
+    .sidebar .widget ul li:hover {
+      margin-left: 20px; }
+      .sidebar .widget ul li:hover:after {
+        color: #288feb; }
+    .sidebar .widget ul li:after {
+      font-family: icofont;
+      left: 0;
+      position: absolute;
+      top: 0;
+      content: "\eb27";
+      transition: 0.4s;
+      -moz-transition: 0.4s;
+      -o-transition: 0.4s; }
+    .sidebar .widget ul li a {
+      color: #666666;
+      font-size: 16px;
+      font-weight: 300;
+      transition: 0.4s;
+      -moz-transition: 0.4s;
+      -o-transition: 0.4s; }
+      .sidebar .widget ul li a:hover {
+        color: #288feb; }
+  .sidebar .widget .widget-title {
+    color: #000000;
+    font-size: 22px;
+    margin-bottom: 30px;
+    text-transform: uppercase; }
+    @media only screen and (min-width: 0px) and (max-width: 767px) {
+      .sidebar .widget .widget-title {
+        margin-bottom: 20px; } }
+  .sidebar .widget .recent-news-wrap .sin-r-news {
+    margin-bottom: 30px;
+    overflow: hidden; }
+    .sidebar .widget .recent-news-wrap .sin-r-news .r-news-thumb {
+      display: block;
+      float: left;
+      margin-right: 15px; }
+    .sidebar .widget .recent-news-wrap .sin-r-news .sin-r-news-content {
+      padding-left: 85px; }
+      .sidebar .widget .recent-news-wrap .sin-r-news .sin-r-news-content a {
+        color: #000000;
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 10px; }
+      .sidebar .widget .recent-news-wrap .sin-r-news .sin-r-news-content .date {
+        display: block;
+        font-size: 13px;
+        color: #288feb; }
+
+/* =================================== */
+/* 22. Comments CSS
+/* =================================== */
+.comment-section {
+  margin-top: 80px;
+  /* =================================== */
+  /* 23. Comments Form CSS
+  /* =================================== */ }
+  .comment-section .comment-sec-title {
+    color: #000000;
+    font-size: 22px;
+    margin-bottom: 60px;
+    text-transform: uppercase; }
+  .comment-section .comments li {
+    display: block;
+    margin-bottom: 50px; }
+    .comment-section .comments li .comment .v-card {
+      border: 3px solid #c0e1ff;
+      float: left;
+      margin-right: 25px; }
+      @media only screen and (min-width: 0px) and (max-width: 767px) {
+        .comment-section .comments li .comment .v-card {
+          float: none;
+          margin: 0 0 10px;
+          display: inline-block; } }
+    .comment-section .comments li .comment .comment-content {
+      font-size: 15px;
+      font-weight: 300;
+      padding-left: 131px; }
+      @media only screen and (min-width: 0px) and (max-width: 767px) {
+        .comment-section .comments li .comment .comment-content {
+          padding: 0; } }
+      .comment-section .comments li .comment .comment-content p {
+        margin-bottom: 18px; }
+      .comment-section .comments li .comment .comment-content h4 {
+        color: #000000;
+        font-weight: 500;
+        margin-bottom: 2px; }
+      .comment-section .comments li .comment .comment-content .comment-date {
+        display: block;
+        font-size: 15px;
+        font-weight: 300;
+        margin-bottom: 7px; }
+        .comment-section .comments li .comment .comment-content .comment-date:hover {
+          color: #288feb; }
+      .comment-section .comments li .comment .comment-content .replay-btn {
+        color: #000000;
+        font-size: 16px;
+        font-weight: 500; }
+        .comment-section .comments li .comment .comment-content .replay-btn i {
+          color: #288feb; }
+  .comment-section .comments-form h4 {
+    color: #000000;
+    font-size: 22px;
+    margin-bottom: 60px;
+    text-transform: uppercase; }
+  .comment-section .comments-form form input,
+  .comment-section .comments-form form textarea {
+    border: 1px solid #dbdbdb;
+    color: #666666;
+    display: block;
+    font-weight: 400;
+    margin-bottom: 30px;
+    padding: 13px 0 13px 16px;
+    resize: none;
+    width: 100%;
+    transition: 0.4s;
+    -moz-transition: 0.4s;
+    -o-transition: 0.4s; }
+    .comment-section .comments-form form input:focus,
+    .comment-section .comments-form form textarea:focus {
+      border-color: #66afe9;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6); }
+  .comment-section .comments-form form input[type="submit"] {
+    border-color: #288feb;
+    border-radius: 3px;
+    color: #ffffff;
+    font-weight: 500;
+    padding: 16px 30px;
+    text-transform: capitalize;
+    width: auto;
+    background: #288feb;
+    margin: 20px 0 0; }
+
+/* =================================== */
+/* 24. Team member page CSS
+/* =================================== */
+.team-members-page .sin-team-member {
+  margin-bottom: 112px; }
+
+/* =================================== */
+/* 25. Testimonials page CSS
+/* =================================== */
+.testimonials-page.spt100 {
+  padding: 100px 0 30px; }
+.testimonials-page .sin-c-statement {
+  margin-bottom: 90px; }
+
+/* =================================== */
+/* 26. FAQ page CSS
+/* =================================== */
+.faq-page-section .faq-page-title {
+  margin-bottom: 30px; }
+.faq-page-section dd,
+.faq-page-section dl,
+.faq-page-section dt {
+  margin: 0; }
+@media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 0px) and (max-width: 767px) {
+  .faq-page-section dl.accordion {
+    margin-bottom: 30px; } }
+.faq-page-section dl.accordion dt {
+  background: #288feb;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 18px 0 18px 25px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: 0.4s;
+  -moz-transition: 0.4s;
+  -o-transition: 0.4s;
+  position: relative; }
+  @media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .faq-page-section dl.accordion dt {
+      font-size: 16px; } }
+  @media only screen and (min-width: 0px) and (max-width: 767px) {
+    .faq-page-section dl.accordion dt {
+      font-size: 11px;
+      padding: 14px 0 14px 10px; } }
+  .faq-page-section dl.accordion dt:after {
+    background: #fff;
+    border-radius: 3px;
+    color: #288feb;
+    content: "\f0a5";
+    font-family: icofont;
+    font-size: 18px;
+    height: 52px;
+    line-height: 52px;
+    position: absolute;
+    right: 4px;
+    text-align: center;
+    top: 4px;
+    width: 52px; }
+    @media only screen and (min-width: 0px) and (max-width: 767px) {
+      .faq-page-section dl.accordion dt:after {
+        border-radius: 3px;
+        color: #288feb;
+        font-size: 12px;
+        height: 32px;
+        line-height: 32px;
+        right: 4px;
+        top: 6px;
+        width: 32px; } }
+  .faq-page-section dl.accordion dt.active:after {
+    content: "\f074"; }
+.faq-page-section dl.accordion dd {
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  color: #666666;
+  position: relative;
+  top: -10px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 30px;
+  margin-bottom: 10px;
+  padding: 24px 24px 27px; }
+  @media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 0px) and (max-width: 767px) {
+    .faq-page-section dl.accordion dd {
+      font-size: 14px;
+      padding: 10px 20px; } }
+.faq-page-section .faq-form-sec {
+  margin-top: 80px; }
+  .faq-page-section .faq-form-sec h2 {
+    color: #000;
+    margin-bottom: 50px; }
+  .faq-page-section .faq-form-sec .faq-form form p {
+    margin-bottom: 30px; }
+    .faq-page-section .faq-form-sec .faq-form form p input,
+    .faq-page-section .faq-form-sec .faq-form form p textarea {
+      border: 1px solid #dbdbdb;
+      color: #666;
+      display: block;
+      font-size: 15px;
+      font-weight: 300;
+      padding: 13px 0 11px 20px;
+      resize: none;
+      width: 100%;
+      transition: 0.4s;
+      -moz-transition: 0.4s;
+      -o-transition: 0.4s; }
+      .faq-page-section .faq-form-sec .faq-form form p input:focus,
+      .faq-page-section .faq-form-sec .faq-form form p textarea:focus {
+        border-color: #66afe9;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6); }
+  .faq-page-section .faq-form-sec .faq-form form input[type="submit"] {
+    border: medium none;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding: 19px 44px;
+    background: #288feb;
+    margin-top: 20px; }
+
+/* =================================== */
+/* 27. Contact page CSS
+/* =================================== */
+.contact-section {
+  position: relative;
+  overflow: hidden; }
+  .contact-section .contact-form {
+    background: #fff;
+    box-shadow: 0 0 12px 2px rgba(34, 34, 34, 0.3);
+    left: 50%;
+    margin: 145px 0;
+    padding: 50px 75px;
+    position: absolute;
+    top: 0;
+    width: 470px;
+    z-index: 1; }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+      .contact-section .contact-form {
+        left: 20%;
+        margin-top: 240px;
+        margin-bottom: 0; } }
+    @media only screen and (min-width: 0px) and (max-width: 767px) {
+      .contact-section .contact-form {
+        left: 0;
+        margin-top: 240px;
+        margin-bottom: 0;
+        width: 100%;
+        padding: 50px 20px;
+        position: relative; } }
+    .contact-section .contact-form .contact-infos {
+      color: #fff;
+      left: -320px;
+      padding: 22px 35px;
+      position: absolute;
+      top: 200px;
+      background: #288feb; }
+      @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .contact-section .contact-form .contact-infos {
+          left: 0;
+          top: -183px;
+          width: 100%; } }
+      @media only screen and (min-width: 0px) and (max-width: 767px) {
+        .contact-section .contact-form .contact-infos {
+          left: 0;
+          top: -206px;
+          width: 100%; } }
+      .contact-section .contact-form .contact-infos .sin-contact-info {
+        margin: 15px 0;
+        overflow: hidden; }
+        .contact-section .contact-form .contact-infos .sin-contact-info .left-c {
+          float: left;
+          margin-right: 15px; }
+        .contact-section .contact-form .contact-infos .sin-contact-info .right-c {
+          padding-left: 85px; }
+          .contact-section .contact-form .contact-infos .sin-contact-info .right-c a,
+          .contact-section .contact-form .contact-infos .sin-contact-info .right-c p {
+            color: #fff;
+            display: block;
+            font-size: 14px;
+            font-weight: 400; }
+          .contact-section .contact-form .contact-infos .sin-contact-info .right-c p {
+            line-height: 22px; }
+    .contact-section .contact-form form p {
+      margin-bottom: 15px; }
+      .contact-section .contact-form form p input,
+      .contact-section .contact-form form p textarea {
+        width: 100%;
+        border: 1px solid #dbdbdb;
+        padding: 7px 7px 7px 12px;
+        font-size: 15px;
+        color: #666666;
+        font-weight: 400;
+        transition: 0.4s;
+        -moz-transition: 0.4s;
+        -o-transition: 0.4s; }
+        .contact-section .contact-form form p input:focus,
+        .contact-section .contact-form form p textarea:focus {
+          border-color: #66afe9;
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6); }
+    .contact-section .contact-form form input[type="submit"] {
+      border: medium none;
+      border-radius: 3px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      margin-top: 15px;
+      padding: 15px 30px;
+      background: #288feb; }
+
+/* =================================== */
+/* 28. 404 page CSS
+/* =================================== */
+.err-content-section .err-content {
+  overflow: hidden;
+  padding: 20px; }
+  .err-content-section .err-content .err-img {
+    box-shadow: 0 0 11px 1px rgba(0, 0, 0, 0.27);
+    float: left;
+    display: inline-block;
+    padding: 7px; }
+    @media only screen and (min-width: 0px) and (max-width: 767px) {
+      .err-content-section .err-content .err-img {
+        float: none; } }
+  .err-content-section .err-content .err-message {
+    padding-left: 312px;
+    font-weight: 300; }
+    @media only screen and (min-width: 0px) and (max-width: 767px) {
+      .err-content-section .err-content .err-message {
+        padding-left: 0;
+        margin-top: 15px; } }
+    .err-content-section .err-content .err-message span {
+      color: #288feb;
+      font-weight: 500; }
+    .err-content-section .err-content .err-message a {
+      font-weight: normal;
+      color: #fff;
+      display: inline-block; }
+
+/* =================================== */
+/* 29. Slider Particle CSS
+/* =================================== */
+#particles-js {
+  left: 0;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%; }
+
+.header-area.static-header,
+.slider-area.static-slider {
+  height: 680px !important; }
+
+.header-area.static-header {
+  height: auto; }
+  .header-area.static-header .main-menu-area {
+    top: 0; }
+
+/* =================================== */
+/* 30. Color Picker CSS
+/* =================================== */
+body {
+  /*
+      ==============================
+      First Color
+      ==============================
+  */
+    /*
+		==============================
+		Second Color
+		==============================
+	*/
+    /*
+		==============================
+		Third Color
+		==============================
+	*/
+    /*
+			==============================
+			Fourth Color
+			==============================
+		*/
+  /* =================== Secondary Color CSS ======================= */
+  /* =================== Color Element CSS ======================= */
+  position: relative; }
+  body.red-color .comment-section .comments li .comment .comment-content .comment-date:hover,
+  body.red-color .comment-section .comments li .comment .comment-content .replay-btn i,
+  body.red-color .cta-btn,
+  body.red-color .err-content-section .err-content .err-message span,
+  body.red-color .faq-page-section dl.accordion dt:after,
+  body.red-color .footer-section .news-posted-date,
+  body.red-color .header-area .main-menu-area .main-menu .nav.navbar-nav li a:hover,
+  body.red-color .header-area .main-menu-area .main-menu .search-box .search-form button i,
+  body.red-color .header-area .page-title .breadcrumbs li a:hover,
+  body.red-color .header-area .slider-area .item .slide-content h1 span,
+  body.red-color .item .slide-content h1 span,
+  body.red-color .sidebar .widget .recent-news-wrap .sin-r-news .sin-r-news-content .date,
+  body.red-color .sidebar .widget ul li a:hover,
+  body.red-color .sidebar .widget ul li:after,
+  body.red-color .sidebar .widget.widget_search .widget-search button,
+  body.red-color .sin-service .service-icon,
+  body.red-color .text-holder p a {
+    color: #F22613; }
+  body.red-color .sin-service:hover .service-icon {
+    color: #fff; }
+  body.red-color .btheme-breadcumbs li a:hover,
+  body.red-color .btheme-breadcumbs li.active a,
+  body.red-color .comment-section .comments-form form input[type="submit"],
+  body.red-color .header-area .slider-area .item .slide-content .b-btn.btn-filled,
+  body.red-color .main-menu-area .menu-bg:after,
+  body.red-color .sin-latest-news .latest-news-content,
+  body.red-color .sin-team-member:after,
+  body.red-color .upx-btn-hover1:hover,
+  body.red-color .header-area .main-menu-area .main-menu .nav.navbar-nav li ul li {
+    border-color: #F22613 !important; }
+  body.red-color .btheme-breadcumbs li a:hover,
+  body.red-color .btheme-breadcumbs li.active a,
+  body.red-color .col-trigger,
+  body.red-color .comment-section .comments-form form input[type="submit"],
+  body.red-color .contact-section .contact-form .contact-infos,
+  body.red-color .contact-section .contact-form form input[type="submit"],
+  body.red-color .cta-section.overlay:after,
+  body.red-color .customer-stament-wrapper .owl-nav div,
+  body.red-color .faq-page-section .faq-form-sec .faq-form form input[type="submit"],
+  body.red-color .faq-page-section dl.accordion dt,
+  body.red-color .header-area .slider-area .item .slide-content .b-btn.btn-filled,
+  body.red-color .read-more-btn,
+  body.red-color .services-details-page .service-details-gallery-wrap .owl-nav div,
+  body.red-color .sin-c-statement .customer-meta,
+  body.red-color .sin-latest-news .latest-news-content .news-text,
+  body.red-color .sin-pricing-box .order-now-btn,
+  body.red-color .sin-pricing-box .pricing-head,
+  body.red-color .sin-project .project-hover,
+  body.red-color .sin-service .service-hover-bar:after,
+  body.red-color .sin-service .service-hover-bar:before,
+  body.red-color .sin-service .service-icon:after,
+  body.red-color .sin-service:after,
+  body.red-color .sin-service:before,
+  body.red-color .sin-team-member .team-member-hover,
+  body.red-color .upx-btn-hover1:after,
+  body.red-color .video-holder .video-play-btn {
+    background-color: #F22613; }
+  body.green-color .comment-section .comments li .comment .comment-content .comment-date:hover,
+  body.green-color .comment-section .comments li .comment .comment-content .replay-btn i,
+  body.green-color .cta-btn,
+  body.green-color .err-content-section .err-content .err-message span,
+  body.green-color .faq-page-section dl.accordion dt:after,
+  body.green-color .footer-section .news-posted-date,
+  body.green-color .header-area .main-menu-area .main-menu .nav.navbar-nav li a:hover,
+  body.green-color .header-area .main-menu-area .main-menu .search-box .search-form button i,
+  body.green-color .header-area .page-title .breadcrumbs li a:hover,
+  body.green-color .header-area .slider-area .item .slide-content h1 span,
+  body.green-color .item .slide-content h1 span,
+  body.green-color .sidebar .widget .recent-news-wrap .sin-r-news .sin-r-news-content .date,
+  body.green-color .sidebar .widget ul li a:hover,
+  body.green-color .sidebar .widget ul li:after,
+  body.green-color .sidebar .widget.widget_search .widget-search button,
+  body.green-color .sin-service .service-icon,
+  body.green-color .text-holder p a {
+    color: #1abc9c; }
+  body.green-color .sin-service:hover .service-icon {
+    color: #fff; }
+  body.green-color .btheme-breadcumbs li a:hover,
+  body.green-color .btheme-breadcumbs li.active a,
+  body.green-color .comment-section .comments-form form input[type="submit"],
+  body.green-color .header-area .main-menu-area .main-menu .nav.navbar-nav li ul li,
+  body.green-color .header-area .slider-area .item .slide-content .b-btn.btn-filled,
+  body.green-color .main-menu-area .menu-bg:after,
+  body.green-color .sin-latest-news .latest-news-content,
+  body.green-color .sin-team-member:after,
+  body.green-color .upx-btn-hover1:hover,
+  body.green-color .header-area .main-menu-area .main-menu .nav.navbar-nav li ul li {
+    border-color: #1abc9c !important; }
+  body.green-color .btheme-breadcumbs li a:hover,
+  body.green-color .btheme-breadcumbs li.active a,
+  body.green-color .col-trigger,
+  body.green-color .comment-section .comments-form form input[type="submit"],
+  body.green-color .contact-section .contact-form .contact-infos,
+  body.green-color .contact-section .contact-form form input[type="submit"],
+  body.green-color .cta-section.overlay:after,
+  body.green-color .customer-stament-wrapper .owl-nav div,
+  body.green-color .faq-page-section .faq-form-sec .faq-form form input[type="submit"],
+  body.green-color .faq-page-section dl.accordion dt,
+  body.green-color .header-area .slider-area .item .slide-content .b-btn.btn-filled,
+  body.green-color .read-more-btn,
+  body.green-color .services-details-page .service-details-gallery-wrap .owl-nav div,
+  body.green-color .sin-c-statement .customer-meta,
+  body.green-color .sin-latest-news .latest-news-content .news-text,
+  body.green-color .sin-pricing-box .order-now-btn,
+  body.green-color .sin-pricing-box .pricing-head,
+  body.green-color .sin-project .project-hover,
+  body.green-color .sin-service .service-hover-bar:after,
+  body.green-color .sin-service .service-hover-bar:before,
+  body.green-color .sin-service .service-icon:after,
+  body.green-color .sin-service:after,
+  body.green-color .sin-service:before,
+  body.green-color .sin-team-member .team-member-hover,
+  body.green-color .upx-btn-hover1:after,
+  body.green-color .video-holder .video-play-btn {
+    background-color: #1abc9c; }
+  body.blue-color .comment-section .comments li .comment .comment-content .comment-date:hover,
+  body.blue-color .comment-section .comments li .comment .comment-content .replay-btn i,
+  body.blue-color .cta-btn,
+  body.blue-color .err-content-section .err-content .err-message span,
+  body.blue-color .faq-page-section dl.accordion dt:after,
+  body.blue-color .footer-section .news-posted-date,
+  body.blue-color .header-area .main-menu-area .main-menu .nav.navbar-nav li a:hover,
+  body.blue-color .header-area .main-menu-area .main-menu .search-box .search-form button i,
+  body.blue-color .header-area .page-title .breadcrumbs li a:hover,
+  body.blue-color .header-area .slider-area .item .slide-content h1 span,
+  body.blue-color .item .slide-content h1 span,
+  body.blue-color .sidebar .widget .recent-news-wrap .sin-r-news .sin-r-news-content .date,
+  body.blue-color .sidebar .widget ul li a:hover,
+  body.blue-color .sidebar .widget ul li:after,
+  body.blue-color .sidebar .widget.widget_search .widget-search button,
+  body.blue-color .sin-service .service-icon,
+  body.blue-color .text-holder p a {
+    color: #1F3A93; }
+  body.blue-color .sin-service:hover .service-icon {
+    color: #fff; }
+  body.blue-color .btheme-breadcumbs li a:hover,
+  body.blue-color .btheme-breadcumbs li.active a,
+  body.blue-color .comment-section .comments-form form input[type="submit"],
+  body.blue-color .header-area .main-menu-area .main-menu .nav.navbar-nav li ul li,
+  body.blue-color .header-area .slider-area .item .slide-content .b-btn.btn-filled,
+  body.blue-color .main-menu-area .menu-bg:after,
+  body.blue-color .sin-latest-news .latest-news-content,
+  body.blue-color .sin-team-member:after,
+  body.blue-color .upx-btn-hover1:hover,
+  body.blue-color .header-area .main-menu-area .main-menu .nav.navbar-nav li ul li {
+    border-color: #1F3A93 !important; }
+  body.blue-color .btheme-breadcumbs li a:hover,
+  body.blue-color .btheme-breadcumbs li.active a,
+  body.blue-color .col-trigger,
+  body.blue-color .comment-section .comments-form form input[type="submit"],
+  body.blue-color .contact-section .contact-form .contact-infos,
+  body.blue-color .contact-section .contact-form form input[type="submit"],
+  body.blue-color .cta-section.overlay:after,
+  body.blue-color .customer-stament-wrapper .owl-nav div,
+  body.blue-color .faq-page-section .faq-form-sec .faq-form form input[type="submit"],
+  body.blue-color .faq-page-section dl.accordion dt,
+  body.blue-color .header-area .slider-area .item .slide-content .b-btn.btn-filled,
+  body.blue-color .read-more-btn,
+  body.blue-color .services-details-page .service-details-gallery-wrap .owl-nav div,
+  body.blue-color .sin-c-statement .customer-meta,
+  body.blue-color .sin-latest-news .latest-news-content .news-text,
+  body.blue-color .sin-pricing-box .order-now-btn,
+  body.blue-color .sin-pricing-box .pricing-head,
+  body.blue-color .sin-project .project-hover,
+  body.blue-color .sin-service .service-hover-bar:after,
+  body.blue-color .sin-service .service-hover-bar:before,
+  body.blue-color .sin-service .service-icon:after,
+  body.blue-color .sin-service:after,
+  body.blue-color .sin-service:before,
+  body.blue-color .sin-team-member .team-member-hover,
+  body.blue-color .upx-btn-hover1:after,
+  body.blue-color .video-holder .video-play-btn {
+    background-color: #1F3A93; }
+  body.yellow-color .comment-section .comments li .comment .comment-content .comment-date:hover,
+  body.yellow-color .comment-section .comments li .comment .comment-content .replay-btn i,
+  body.yellow-color .cta-btn,
+  body.yellow-color .err-content-section .err-content .err-message span,
+  body.yellow-color .faq-page-section dl.accordion dt:after,
+  body.yellow-color .footer-section .news-posted-date,
+  body.yellow-color .header-area .main-menu-area .main-menu .nav.navbar-nav li a:hover,
+  body.yellow-color .header-area .main-menu-area .main-menu .search-box .search-form button i,
+  body.yellow-color .header-area .page-title .breadcrumbs li a:hover,
+  body.yellow-color .header-area .slider-area .item .slide-content h1 span,
+  body.yellow-color .item .slide-content h1 span,
+  body.yellow-color .sidebar .widget .recent-news-wrap .sin-r-news .sin-r-news-content .date,
+  body.yellow-color .sidebar .widget ul li a:hover,
+  body.yellow-color .sidebar .widget ul li:after,
+  body.yellow-color .sidebar .widget.widget_search .widget-search button,
+  body.yellow-color .sin-service .service-icon,
+  body.yellow-color .text-holder p a {
+    color: #674172; }
+  body.yellow-color .sin-service:hover .service-icon {
+    color: #fff; }
+  body.yellow-color .btheme-breadcumbs li a:hover,
+  body.yellow-color .btheme-breadcumbs li.active a,
+  body.yellow-color .comment-section .comments-form form input[type="submit"],
+  body.yellow-color .header-area .main-menu-area .main-menu .nav.navbar-nav li ul li,
+  body.yellow-color .header-area .slider-area .item .slide-content .b-btn.btn-filled,
+  body.yellow-color .main-menu-area .menu-bg:after,
+  body.yellow-color .sin-latest-news .latest-news-content,
+  body.yellow-color .sin-team-member:after,
+  body.yellow-color .upx-btn-hover1:hover,
+  body.yellow-color .header-area .main-menu-area .main-menu .nav.navbar-nav li ul li {
+    border-color: #674172 !important; }
+  body.yellow-color .btheme-breadcumbs li a:hover,
+  body.yellow-color .btheme-breadcumbs li.active a,
+  body.yellow-color .col-trigger,
+  body.yellow-color .comment-section .comments-form form input[type="submit"],
+  body.yellow-color .contact-section .contact-form .contact-infos,
+  body.yellow-color .contact-section .contact-form form input[type="submit"],
+  body.yellow-color .cta-section.overlay:after,
+  body.yellow-color .customer-stament-wrapper .owl-nav div,
+  body.yellow-color .faq-page-section .faq-form-sec .faq-form form input[type="submit"],
+  body.yellow-color .faq-page-section dl.accordion dt,
+  body.yellow-color .header-area .slider-area .item .slide-content .b-btn.btn-filled,
+  body.yellow-color .read-more-btn,
+  body.yellow-color .services-details-page .service-details-gallery-wrap .owl-nav div,
+  body.yellow-color .sin-c-statement .customer-meta,
+  body.yellow-color .sin-latest-news .latest-news-content .news-text,
+  body.yellow-color .sin-pricing-box .order-now-btn,
+  body.yellow-color .sin-pricing-box .pricing-head,
+  body.yellow-color .sin-project .project-hover,
+  body.yellow-color .sin-service .service-hover-bar:after,
+  body.yellow-color .sin-service .service-hover-bar:before,
+  body.yellow-color .sin-service .service-icon:after,
+  body.yellow-color .sin-service:after,
+  body.yellow-color .sin-service:before,
+  body.yellow-color .sin-team-member .team-member-hover,
+  body.yellow-color .upx-btn-hover1:after,
+  body.yellow-color .video-holder .video-play-btn {
+    background-color: #674172; }
+  body.s-color-one .customer-stament-wrapper .owl-nav div:hover,
+  body.s-color-one .services-details-page .service-details-gallery-wrap .owl-nav div:hover,
+  body.s-color-one .sin-pricing-box.special .order-now-btn,
+  body.s-color-one .sin-pricing-box.special .pricing-head {
+    background-color: #34495e; }
+  body.s-color-two .customer-stament-wrapper .owl-nav div:hover,
+  body.s-color-two .services-details-page .service-details-gallery-wrap .owl-nav div:hover,
+  body.s-color-two .sin-pricing-box.special .order-now-btn,
+  body.s-color-two .sin-pricing-box.special .pricing-head {
+    background-color: #8e44ad; }
+  body .color-picker-wrap {
+    background: #ffffff;
+    border-radius: 0 5px 5px 0;
+    height: 400px;
+    padding: 20px 25px;
+    position: fixed;
+    top: 30%;
+    width: 270px;
+    left: -270px;
+    z-index: 99999999;
+    -moz-transition: all ease-in-out 0.3s;
+    -webkit-transition: all ease-in-out 0.3s;
+    transition: all ease-in-out 0.3s; }
+    body .color-picker-wrap.visible-color-wrap {
+      left: 0; }
+  body .col-trigger {
+    background: #288feb;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    position: absolute;
+    right: -40px;
+    text-align: center;
+    top: 14px;
+    width: 40px; }
+  body .sin-palate h4 {
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase; }
+  body .colors li {
+    cursor: pointer;
+    display: inline-block;
+    height: 33px;
+    margin: 0 5px;
+    width: 35px; }
+  body .colors {
+    text-align: center; }
+  body .col-picker-top {
+    margin: 30px 0;
+    text-align: center; }
+  body .sin-palate {
+    margin: 50px 0; }
+  body .primary-colors li {
+    position: relative; }
+    body .primary-colors li.red {
+      background: #F22613; }
+    body .primary-colors li.active:after {
+      position: absolute;
+      left: 0;
+      top: 0px;
+      height: 100%;
+      width: 100%;
+      content: "\ed27";
+      font-family: icofont;
+      line-height: 33px;
+      color: #fff;
+      font-size: 12px; }
+    body .primary-colors li.green {
+      background: #1abc9c; }
+    body .primary-colors li.blue {
+      background: #1F3A93; }
+    body .primary-colors li.yellow {
+      background: #674172; }
+  body .secondary-color li {
+    position: relative; }
+    body .secondary-color li.red {
+      background: #34495e; }
+    body .secondary-color li.green {
+      background: #8e44ad; }
+
+body.s-color-one .secondary-color li.red:after {
+  position: absolute;
+  left: 0;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  content: "\ed27";
+  font-family: icofont;
+  line-height: 33px;
+  color: #fff;
+  font-size: 12px; }
+
+body.s-color-two .secondary-color li.green:after {
+  position: absolute;
+  left: 0;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  content: "\ed27";
+  font-family: icofont;
+  line-height: 33px;
+  color: #fff;
+  font-size: 12px; }
+
+/* =================================== */
+/* Preloader CSS
+/* =================================== */
+.preloader-wrapper {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  z-index: 99999; }
+
+.preloader3 {
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  padding: 0;
+  border-radius: 100%;
+  border: 2px solid;
+  border-top-color: rgba(0, 0, 0, 0.65);
+  border-bottom-color: rgba(0, 0, 0, 0.65);
+  border-left-color: rgba(0, 0, 0, 0.15);
+  border-right-color: rgba(0, 0, 0, 0.15);
+  -webkit-animation: preloader3 0.8s ease-in-out infinite alternate;
+  animation: preloader3 0.8s ease-in-out infinite alternate;
+  margin: 0 auto; }
+
+@keyframes preloader3 {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+@-webkit-keyframes preloader3 {
+  from {
+    -webkit-transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg); } }
+
+/*# sourceMappingURL=style.css.map */
