@@ -1,3 +1,4 @@
+![image](https://github.com/1308404897/DySpring/blob/master/webTest/src/main/resources/static/images/testWeb.jpg?raw=true)
 # 什么是DySpring
    [DySpring](https://github.com/1308404897/DySpring)是基于 spring、spring mvc、 spring boot、spring cloud* 的原理而设置出来，与spring功能类似，符合restful规范，强调前后端分离，它将会更好的支持nacos注册中心，以及实现服务的伸缩特性 （动态增减服务器，减的规则：一段时间内流量远远没有达到预期；减的三大约束：1.不能再接受新的请求;2.未完成的事情必须做完；3.删除注册中心的服务信息。增的规则：服务压力达到闸值或智能地根据平时的流量情况预先增加服务）* ，为了更好的治理服务，我将打造出一套服务治理方案，统一管理起来，让DevOPS更为爽的架构，以后不需要整合第三方服务，例如jenkins、k8s等。我们的宗旨是： __不再为技术选型而感到困难，让每一位开发者更关注业务__
 # 如何快速使用DySpring
@@ -102,11 +103,11 @@
     dy.properties.loader.other=mysql.properties,redis.properties
  
  ## 静态资源问题
- dyboot虽然不提倡静态资源放在一起，但是还是提供了静态资源访问，默认情况下会在resource/static目录下访问静态资源，例如在resource/static/a.html,在游览器里面访问地址：http://127.0.0.1:8080/index.html. 默认情况下带点“.”的请求都被认为是静态资源请求！
+ dyboot虽然不提倡静态资源放在一起，但是还是提供了静态资源访问，默认情况下会在resource/static目录下访问静态资源，例如在resource/static/index.html,在游览器里面访问地址：http://127.0.0.1:8080/index.html. 默认情况下带点“.”的请求都被认为是静态资源请求！
  
  ## dyboot中的webTest
- webTest是dyboot案例，启动它，快速体验一下吧！
- ![image](http://)
+ webTest是dyboot案例，启动它，在地址栏输入：http://localhost:8080/index.html , 快速体验一下吧！【下方是webTest的运行界面哦】
+ ![image](https://github.com/1308404897/DySpring/blob/master/webTest/src/main/resources/static/images/testWeb.jpg?raw=true)
   
   
   
