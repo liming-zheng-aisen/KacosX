@@ -4,6 +4,8 @@ import com.duanya.spring.commont.util.StringUtils;
 import com.duanya.spring.framework.context.exception.DyContextException;
 import com.duanya.spring.framework.context.spring.DySpringApplicationContent;
 import com.duanya.spring.framework.core.bean.factory.DyBeanFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -17,8 +19,9 @@ import java.util.Properties;
  * @description 数据源加载
  */
 
-public class DyJdbcLoader {
+public class DyDataSourceFactory {
 
+    private static final Logger log = LoggerFactory.getLogger(DyDataSourceFactory.class);
     public static final String DATA_SOURCE_NAME="dataSource";
     private static DySpringApplicationContent dySpringApplicationContent=new DySpringApplicationContent();
     public static final String PREFIX="dy.datasource.";
@@ -36,7 +39,7 @@ public class DyJdbcLoader {
         }
         return null!=bean;
     }
-    public static void load(Properties env){
+    public static void createDataSource(Properties env){
         if (!exist()) {
             String type = env.getProperty(DATA_SOURCE_TYPE);
             if (StringUtils.isNotEmptyPlus(type)) {
@@ -52,18 +55,21 @@ public class DyJdbcLoader {
                         }
                     }
                     dySpringApplicationContent.setContextBean(DATA_SOURCE_NAME, dataSource);
+                    log.info("数据源加载成功！");
                 } catch (ClassNotFoundException e) {
                     //....
+                    log.error(e.getMessage());
                 } catch (IllegalAccessException e) {
-                    e.printStackTrace();
+                    log.error(e.getMessage());
                 } catch (InstantiationException e) {
-                    e.printStackTrace();
+                    log.error(e.getMessage());
                 } catch (DyContextException e) {
-                    e.printStackTrace();
+                    log.error(e.getMessage());
                 }
             }
         }
     }
+
     public static List<Field> getFields(Class c){
         List<Field> fields=new ArrayList<>();
         while (c!=null&&!c.getName().toLowerCase().equals("java.lang.object")){

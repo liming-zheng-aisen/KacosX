@@ -5,6 +5,8 @@ import com.duanya.spring.framework.context.spring.DySpringApplicationContent;
 import com.duanya.spring.framework.core.annotation.DyAutowired;
 import com.duanya.spring.framework.core.annotation.DyBean;
 import com.duanya.spring.framework.core.annotation.DyValue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -19,6 +21,8 @@ import java.util.Properties;
  * @description 对bean加工的工厂，主要功能：创建bean实例、为bean的字段赋值
  */
 public class DyBeanFactory {
+
+    private static final Logger log = LoggerFactory.getLogger(DyBeanFactory.class);
 
     /**
      * 根据类全路径，创建一个实例
@@ -77,6 +81,7 @@ public class DyBeanFactory {
                                 if (value.substring(fEndIdnex, fEndIdnex + 1).equals(":")) {
                                     fValue = value.substring(fEndIdnex + 2);
                                 } else {
+                                    log.error(value + "不符合规范【@DyValue(\"${key}:默认值\")】");
                                     throw new IllegalAccessException(value + "不符合规范【@DyValue(\"${key}:默认值\")】");
                                 }
                             }

@@ -2,6 +2,8 @@ package com.duanya.spring.framework.core.scanner.impl;
 
 import com.duanya.spring.commont.util.StringUtils;
 import com.duanya.spring.framework.core.scanner.api.IDyScanner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,9 +21,14 @@ import java.util.jar.JarInputStream;
  * @description 扫描
  */
 public class DyScannerImpl implements IDyScanner {
+
+    private static final Logger log = LoggerFactory.getLogger(DyScannerImpl.class);
+
     private String basePackage;
+
     private ClassLoader cl;
-    public String[] exludeKey;
+
+
     public DyScannerImpl(String basePackage) {
         this.basePackage = basePackage;
         this.cl = getClass().getClassLoader();
@@ -40,13 +47,17 @@ public class DyScannerImpl implements IDyScanner {
      */
     @Override
     public List<String> doScanner() throws IOException {
-        System.out.println("开始扫描包{}下的所有类"+basePackage);
+        log.info("DyScannerImpl开始扫描包{}下的所有类"+basePackage);
         List<String> dsList=doScan(basePackage, new ArrayList<String>());
-        dsList=dueResult(dsList);
-        return dsList;
+        return dueResult(dsList);
     }
 
-    public  List<String> dueResult(List<String> result){
+    /**
+     * 处理结果，在jar和开发时数据的格式有所不同
+     * @param result
+     * @return
+     */
+    private List<String> dueResult(List<String> result){
         List<String> ls=new ArrayList<>();
         for (String str:result) {
             if (str.indexOf("/")>0){

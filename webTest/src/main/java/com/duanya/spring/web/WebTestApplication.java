@@ -13,12 +13,4 @@ public class WebTestApplication {
     public static void main(String[] args) {
         DyBootApplicationWeb.run(WebTestApplication.class);
     }
-//    //測試
-//    public static void main(String[] args) throws Exception {
-//        DyScannerImpl scan = new DyScannerImpl("com.duanya.spring.framework");
-//        List<String> list= scan.doScanner();
-//        for (String string : list) {
-//            System.out.println(string);
-//        }
-//    }
 }

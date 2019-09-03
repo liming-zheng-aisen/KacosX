@@ -2,6 +2,8 @@ package com.duanya.spring.framework.context.spring;
 
 import com.duanya.spring.framework.context.base.DyApplicationContext;
 import com.duanya.spring.framework.context.exception.DyContextException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,7 +15,7 @@ import java.util.Map;
  * @description
  */
 public class DySpringApplicationContent extends DyApplicationContext {
-
+    private static final Logger log = LoggerFactory.getLogger(DySpringApplicationContent.class);
     public DySpringApplicationContent(){
         if (null==applicationContext) {
             applicationContext = new HashMap<String, Object>();
@@ -50,6 +52,7 @@ public class DySpringApplicationContent extends DyApplicationContext {
 
     public void hasKey(String key) throws DyContextException {
         if (applicationContext.containsKey(key)){
+            log.error(key+"名字重复出现，请重新检测！");
             throw new DyContextException(key+"名字重复出现，请重新检测！");
         }
     }

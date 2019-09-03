@@ -7,7 +7,7 @@ import com.duanya.spring.framework.core.annotation.DyScanner;
 import com.duanya.spring.framework.core.load.DyClassLoader;
 import com.duanya.spring.framework.core.load.DyConfigurationLoader;
 import com.duanya.spring.framework.core.load.DyIocLoader;
-import com.duanya.spring.framework.jdbc.datasource.DyJdbcLoader;
+import com.duanya.spring.framework.jdbc.datasource.DyDataSourceFactory;
 import com.duanya.start.web.times.Timer;
 import com.duanya.start.web.tomcat.InsideTomcat;
 import org.apache.catalina.LifecycleException;
@@ -62,7 +62,8 @@ public class DyBootApplicationWeb {
             new DyIocLoader().load(main);
 
             //加载jdbc驱动
-            DyJdbcLoader.load(DyConfigurationLoader.getEvn());
+            DyDataSourceFactory.createDataSource(DyConfigurationLoader.getEvn());
+
             //最后启动tomcat
             InsideTomcat.start(timer,main);
 

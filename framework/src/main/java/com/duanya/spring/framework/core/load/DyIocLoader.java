@@ -7,9 +7,14 @@ import com.duanya.spring.framework.core.annotation.DyComponent;
 import com.duanya.spring.framework.core.annotation.DyConfiguration;
 import com.duanya.spring.framework.core.annotation.DyService;
 import com.duanya.spring.framework.core.bean.factory.DyBeanFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author zheng.liming
@@ -18,6 +23,9 @@ import java.util.*;
  */
 
 public class DyIocLoader implements DyBeanLoad{
+
+
+    private static final Logger log = LoggerFactory.getLogger(DyIocLoader.class);
 
     private static DySpringApplicationContent applicationContent;
 
@@ -29,6 +37,7 @@ public class DyIocLoader implements DyBeanLoad{
         loadBean();
         initConfigurationBean();
         doAutowirteAll();
+        log.info("上下文容器初始化成功");
     }
 
     private static void loadBean() throws ClassNotFoundException, InstantiationException, IllegalAccessException, DyContextException {
@@ -60,6 +69,7 @@ public class DyIocLoader implements DyBeanLoad{
 
             }
         }
+        log.info("loadBean加载bean到DySpringApplicationContent上下文中");
     }
 
     private static void initConfigurationBean() throws ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, DyContextException {
@@ -76,6 +86,7 @@ public class DyIocLoader implements DyBeanLoad{
        for (Map<String,Object> itme:list){
            applicationContent.setBeanMap(itme);
        }
+        log.info("initConfigurationBean初始化配置类，并调用@DyBean的方法初始化一个bean注册到DySpringApplicationContent上下文中");
     }
 
     private static void doAutowirteAll() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
@@ -85,6 +96,7 @@ public class DyIocLoader implements DyBeanLoad{
             String key=(String)iterator.next();
             DyBeanFactory.doAutowired(context.get(key));
         }
+        log.info("doAutowirteAll，配置类自动装配完成！");
     }
 
     private static String getAnnotationValue(Class c){
