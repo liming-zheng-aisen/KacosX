@@ -106,7 +106,7 @@
  dyboot虽然不提倡静态资源放在一起，但是还是提供了静态资源访问，默认情况下会在resource/static目录下访问静态资源，例如在resource/static/index.html,在游览器里面访问地址：http://127.0.0.1:8080/index.html. 默认情况下带点“.”的请求都被认为是静态资源请求！
  
  ## dyboot中的webTest
- webTest是dyboot案例，启动它，快速体验一下吧！
+ webTest是dyboot案例，启动它，在地址栏输入：http://localhost:8080/index.html，快速体验一下吧！
  ![image](https://github.com/1308404897/DySpring/blob/master/webTest/src/main/resources/static/images/testWeb.jpg?raw=true)
   
   
