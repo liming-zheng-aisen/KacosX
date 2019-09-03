@@ -60,7 +60,7 @@ public class DyConfigurationLoader implements DyBeanLoad {
                     DyLoadPropeties.doLoadProperties(evn,n,c);
                 }
             }
-            log.info("配置{}文件加载成功",DEFAULT_PROPERTIES_NAME);
+            log.info("配置文件{}加载成功",DEFAULT_PROPERTIES_NAME);
         } catch (DyPropertiesException e) {
             log.warn("没有加载到配置文件{}",DEFAULT_PROPERTIES_NAME);
             e.printStackTrace();

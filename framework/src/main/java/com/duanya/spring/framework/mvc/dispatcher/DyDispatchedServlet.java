@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @author zheng.liming
@@ -98,10 +99,7 @@ public class DyDispatchedServlet extends HttpServlet {
 
     private void doDispatched(HttpServletRequest req, HttpServletResponse resp, DyMethod method) throws IOException {
 
-        req.setCharacterEncoding("UTF-8");
-        resp.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html;charset=UTF-8");
-        resp.setHeader("content-type", "text/html;charset=utf-8");
+        setDefaultEncoding(req,resp);
 
         if (req.getRequestURI().indexOf(".") > 0) {
             WebstaticResources webstaticResources=new WebstaticResources(DyConfigurationLoader.getEvn());
@@ -140,7 +138,13 @@ public class DyDispatchedServlet extends HttpServlet {
             out.close();
         }
     }
+    private  void  setDefaultEncoding(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html;charset=UTF-8");
+        resp.setHeader("content-type", "text/html;charset=utf-8");
 
+    }
     /**
      * 判断对象属性是否是基本数据类型,包括是否包括string
      *

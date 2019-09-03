@@ -23,6 +23,7 @@
         <jackson-v>2.8.11</jackson-v>
         <mysql>8.0.12</mysql>
         <slf4j>1.7.25</slf4j>
+        <druid>1.0.16</druid>
     </properties>
 
     <dependencyManagement>
@@ -73,6 +74,11 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid}</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
