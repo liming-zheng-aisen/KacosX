@@ -1,0 +1,88 @@
+[INFO ] 2019-09-03 10:48:52,839(0) --> [main] com.duanya.spring.framework.core.load.DyConfigurationLoader.loadProperties(DyConfigurationLoader.java:63): 配置dy-application.properties文件加载成功  
+[INFO ] 2019-09-03 10:48:52,848(9) --> [main] com.duanya.spring.framework.core.scanner.impl.DyScannerImpl.doScanner(DyScannerImpl.java:50): DyScannerImpl开始扫描包{}下的所有类com.duanya.spring.framework.jdbc  
+[INFO ] 2019-09-03 10:48:52,980(141) --> [main] com.duanya.spring.framework.core.load.DyClassLoader.load(DyClassLoader.java:58): DyClassLoader已经加载com.duanya.spring.framework.jdbc下面的类  
+[INFO ] 2019-09-03 10:48:52,994(155) --> [main] com.duanya.spring.framework.core.scanner.impl.DyScannerImpl.doScanner(DyScannerImpl.java:50): DyScannerImpl开始扫描包{}下的所有类com.duanya.spring.web  
+[INFO ] 2019-09-03 10:48:52,996(157) --> [main] com.duanya.spring.framework.core.load.DyClassLoader.load(DyClassLoader.java:51): DyClassLoader已经加载com.duanya.spring.web下面的类  
+[INFO ] 2019-09-03 10:48:53,005(166) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.loadBean(DyIocLoader.java:72): loadBean加载bean到DySpringApplicationContent上下文中  
+[INFO ] 2019-09-03 10:48:53,006(167) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.initConfigurationBean(DyIocLoader.java:89): initConfigurationBean初始化配置类，并调用@DyBean的方法初始化一个bean注册到DySpringApplicationContent上下文中  
+[INFO ] 2019-09-03 10:48:53,007(168) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.doAutowirteAll(DyIocLoader.java:99): doAutowirteAll，配置类自动装配完成！  
+[INFO ] 2019-09-03 10:48:53,007(168) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.load(DyIocLoader.java:40): 上下文容器初始化成功  
+[INFO ] 2019-09-03 10:48:53,041(202) --> [main] com.duanya.spring.framework.jdbc.datasource.DyDataSourceFactory.createDataSource(DyDataSourceFactory.java:58): 数据源加载成功！  
+[INFO ] 2019-09-03 10:48:54,841(2002) --> [main] com.duanya.start.web.tomcat.InsideTomcat.start(InsideTomcat.java:63): dy-boot 成功启动，花费时间为2447ms  
+[INFO ] 2019-09-03 10:49:15,971(0) --> [main] com.duanya.spring.framework.core.load.DyConfigurationLoader.loadProperties(DyConfigurationLoader.java:63): 配置dy-application.properties文件加载成功  
+[INFO ] 2019-09-03 10:49:15,980(9) --> [main] com.duanya.spring.framework.core.scanner.impl.DyScannerImpl.doScanner(DyScannerImpl.java:50): DyScannerImpl开始扫描包{}下的所有类com.duanya.spring.framework.jdbc  
+[INFO ] 2019-09-03 10:49:16,089(118) --> [main] com.duanya.spring.framework.core.load.DyClassLoader.load(DyClassLoader.java:58): DyClassLoader已经加载com.duanya.spring.framework.jdbc下面的类  
+[INFO ] 2019-09-03 10:49:16,105(134) --> [main] com.duanya.spring.framework.core.scanner.impl.DyScannerImpl.doScanner(DyScannerImpl.java:50): DyScannerImpl开始扫描包{}下的所有类com.duanya.spring.web  
+[INFO ] 2019-09-03 10:49:16,107(136) --> [main] com.duanya.spring.framework.core.load.DyClassLoader.load(DyClassLoader.java:51): DyClassLoader已经加载com.duanya.spring.web下面的类  
+[INFO ] 2019-09-03 10:49:16,119(148) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.loadBean(DyIocLoader.java:72): loadBean加载bean到DySpringApplicationContent上下文中  
+[INFO ] 2019-09-03 10:49:16,121(150) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.initConfigurationBean(DyIocLoader.java:89): initConfigurationBean初始化配置类，并调用@DyBean的方法初始化一个bean注册到DySpringApplicationContent上下文中  
+[INFO ] 2019-09-03 10:49:16,121(150) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.doAutowirteAll(DyIocLoader.java:99): doAutowirteAll，配置类自动装配完成！  
+[INFO ] 2019-09-03 10:49:16,121(150) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.load(DyIocLoader.java:40): 上下文容器初始化成功  
+[INFO ] 2019-09-03 10:49:16,157(186) --> [main] com.duanya.spring.framework.jdbc.datasource.DyDataSourceFactory.createDataSource(DyDataSourceFactory.java:58): 数据源加载成功！  
+[INFO ] 2019-09-03 10:49:17,728(1757) --> [main] com.duanya.start.web.tomcat.InsideTomcat.start(InsideTomcat.java:63): dy-boot 成功启动，花费时间为2063ms  
+[INFO ] 2019-09-03 10:49:34,353(0) --> [main] com.duanya.spring.framework.core.load.DyConfigurationLoader.loadProperties(DyConfigurationLoader.java:63): 配置dy-application.properties文件加载成功  
+[INFO ] 2019-09-03 10:49:34,363(10) --> [main] com.duanya.spring.framework.core.scanner.impl.DyScannerImpl.doScanner(DyScannerImpl.java:50): DyScannerImpl开始扫描包{}下的所有类com.duanya.spring.framework.jdbc  
+[INFO ] 2019-09-03 10:49:34,484(131) --> [main] com.duanya.spring.framework.core.load.DyClassLoader.load(DyClassLoader.java:58): DyClassLoader已经加载com.duanya.spring.framework.jdbc下面的类  
+[INFO ] 2019-09-03 10:49:34,505(152) --> [main] com.duanya.spring.framework.core.scanner.impl.DyScannerImpl.doScanner(DyScannerImpl.java:50): DyScannerImpl开始扫描包{}下的所有类com.duanya.spring.web  
+[INFO ] 2019-09-03 10:49:34,507(154) --> [main] com.duanya.spring.framework.core.load.DyClassLoader.load(DyClassLoader.java:51): DyClassLoader已经加载com.duanya.spring.web下面的类  
+[INFO ] 2019-09-03 10:49:34,516(163) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.loadBean(DyIocLoader.java:72): loadBean加载bean到DySpringApplicationContent上下文中  
+[INFO ] 2019-09-03 10:49:34,517(164) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.initConfigurationBean(DyIocLoader.java:89): initConfigurationBean初始化配置类，并调用@DyBean的方法初始化一个bean注册到DySpringApplicationContent上下文中  
+[INFO ] 2019-09-03 10:49:34,517(164) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.doAutowirteAll(DyIocLoader.java:99): doAutowirteAll，配置类自动装配完成！  
+[INFO ] 2019-09-03 10:49:34,518(165) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.load(DyIocLoader.java:40): 上下文容器初始化成功  
+[INFO ] 2019-09-03 10:49:34,552(199) --> [main] com.duanya.spring.framework.jdbc.datasource.DyDataSourceFactory.createDataSource(DyDataSourceFactory.java:58): 数据源加载成功！  
+[INFO ] 2019-09-03 10:49:35,962(1609) --> [main] com.duanya.start.web.tomcat.InsideTomcat.start(InsideTomcat.java:63): dy-boot 成功启动，花费时间为1923ms  
+[INFO ] 2019-09-03 11:33:24,439(0) --> [main] com.duanya.spring.framework.core.load.DyConfigurationLoader.loadProperties(DyConfigurationLoader.java:63): 配置dy-application.properties文件加载成功  
+[INFO ] 2019-09-03 11:33:24,466(27) --> [main] com.duanya.spring.framework.core.scanner.impl.DyScannerImpl.doScanner(DyScannerImpl.java:50): DyScannerImpl开始扫描包com.duanya.spring.framework.jdbc下的所有类  
+[INFO ] 2019-09-03 11:33:24,750(311) --> [main] com.duanya.spring.framework.core.load.DyClassLoader.load(DyClassLoader.java:58): DyClassLoader已经加载com.duanya.spring.framework.jdbc下面的类  
+[INFO ] 2019-09-03 11:33:24,800(361) --> [main] com.duanya.spring.framework.core.scanner.impl.DyScannerImpl.doScanner(DyScannerImpl.java:50): DyScannerImpl开始扫描包com.duanya.spring.web下的所有类  
+[INFO ] 2019-09-03 11:33:24,827(388) --> [main] com.duanya.spring.framework.core.load.DyClassLoader.load(DyClassLoader.java:51): DyClassLoader已经加载com.duanya.spring.web下面的类  
+[INFO ] 2019-09-03 11:33:24,846(407) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.loadBean(DyIocLoader.java:72): loadBean加载bean到DySpringApplicationContent上下文中  
+[INFO ] 2019-09-03 11:33:24,847(408) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.initConfigurationBean(DyIocLoader.java:89): initConfigurationBean初始化配置类，并调用@DyBean的方法初始化一个bean注册到DySpringApplicationContent上下文中  
+[INFO ] 2019-09-03 11:33:24,847(408) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.doAutowirteAll(DyIocLoader.java:99): doAutowirteAll，配置类自动装配完成！  
+[INFO ] 2019-09-03 11:33:24,848(409) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.load(DyIocLoader.java:40): 上下文容器初始化成功  
+[INFO ] 2019-09-03 11:33:24,946(507) --> [main] com.duanya.spring.framework.jdbc.datasource.DyDataSourceFactory.createDataSource(DyDataSourceFactory.java:58): 数据源加载成功！  
+[INFO ] 2019-09-03 11:33:27,828(3389) --> [main] com.duanya.start.web.tomcat.InsideTomcat.start(InsideTomcat.java:63): dy-boot 成功启动，花费时间为4097ms  
+[INFO ] 2019-09-03 11:49:34,814(0) --> [main] com.duanya.spring.framework.core.load.DyConfigurationLoader.loadProperties(DyConfigurationLoader.java:63): 配置文件dy-application.properties加载成功  
+[INFO ] 2019-09-03 11:49:34,824(10) --> [main] com.duanya.spring.framework.core.scanner.impl.DyScannerImpl.doScanner(DyScannerImpl.java:50): DyScannerImpl开始扫描包com.duanya.spring.framework.jdbc下的所有类  
+[INFO ] 2019-09-03 11:49:34,932(118) --> [main] com.duanya.spring.framework.core.load.DyClassLoader.load(DyClassLoader.java:58): DyClassLoader已经加载com.duanya.spring.framework.jdbc下面的类  
+[INFO ] 2019-09-03 11:49:34,951(137) --> [main] com.duanya.spring.framework.core.scanner.impl.DyScannerImpl.doScanner(DyScannerImpl.java:50): DyScannerImpl开始扫描包com.duanya.spring.web下的所有类  
+[INFO ] 2019-09-03 11:49:34,954(140) --> [main] com.duanya.spring.framework.core.load.DyClassLoader.load(DyClassLoader.java:51): DyClassLoader已经加载com.duanya.spring.web下面的类  
+[INFO ] 2019-09-03 11:49:34,968(154) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.loadBean(DyIocLoader.java:72): loadBean加载bean到DySpringApplicationContent上下文中  
+[INFO ] 2019-09-03 11:49:34,969(155) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.initConfigurationBean(DyIocLoader.java:89): initConfigurationBean初始化配置类，并调用@DyBean的方法初始化一个bean注册到DySpringApplicationContent上下文中  
+[INFO ] 2019-09-03 11:49:34,969(155) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.doAutowirteAll(DyIocLoader.java:99): doAutowirteAll，配置类自动装配完成！  
+[INFO ] 2019-09-03 11:49:34,969(155) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.load(DyIocLoader.java:40): 上下文容器初始化成功  
+[INFO ] 2019-09-03 11:49:35,020(206) --> [main] com.duanya.spring.framework.jdbc.datasource.DyDataSourceFactory.createDataSource(DyDataSourceFactory.java:58): 数据源加载成功！  
+[INFO ] 2019-09-03 11:49:36,468(1654) --> [main] com.duanya.start.web.tomcat.InsideTomcat.start(InsideTomcat.java:63): dy-boot 成功启动，花费时间为1941ms  
+[INFO ] 2019-09-03 13:17:18,290(0) --> [main] com.duanya.spring.framework.core.load.DyConfigurationLoader.loadProperties(DyConfigurationLoader.java:63): 配置文件dy-application.properties加载成功  
+[INFO ] 2019-09-03 13:17:18,306(16) --> [main] com.duanya.spring.framework.core.scanner.impl.DyScannerImpl.doScanner(DyScannerImpl.java:50): DyScannerImpl开始扫描包com.duanya.spring.framework.jdbc下的所有类  
+[INFO ] 2019-09-03 13:17:18,431(141) --> [main] com.duanya.spring.framework.core.load.DyClassLoader.load(DyClassLoader.java:58): DyClassLoader已经加载com.duanya.spring.framework.jdbc下面的类  
+[INFO ] 2019-09-03 13:17:18,444(154) --> [main] com.duanya.spring.framework.core.scanner.impl.DyScannerImpl.doScanner(DyScannerImpl.java:50): DyScannerImpl开始扫描包com.duanya.spring.web下的所有类  
+[INFO ] 2019-09-03 13:17:18,447(157) --> [main] com.duanya.spring.framework.core.load.DyClassLoader.load(DyClassLoader.java:51): DyClassLoader已经加载com.duanya.spring.web下面的类  
+[INFO ] 2019-09-03 13:17:18,455(165) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.loadBean(DyIocLoader.java:72): loadBean加载bean到DySpringApplicationContent上下文中  
+[INFO ] 2019-09-03 13:17:18,459(169) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.initConfigurationBean(DyIocLoader.java:89): initConfigurationBean初始化配置类，并调用@DyBean的方法初始化一个bean注册到DySpringApplicationContent上下文中  
+[INFO ] 2019-09-03 13:17:18,459(169) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.doAutowirteAll(DyIocLoader.java:99): doAutowirteAll，配置类自动装配完成！  
+[INFO ] 2019-09-03 13:17:18,459(169) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.load(DyIocLoader.java:40): 上下文容器初始化成功  
+[INFO ] 2019-09-03 13:17:18,495(205) --> [main] com.duanya.spring.framework.jdbc.datasource.DyDataSourceFactory.createDataSource(DyDataSourceFactory.java:58): 数据源加载成功！  
+[INFO ] 2019-09-03 13:17:19,668(1378) --> [main] com.duanya.start.web.tomcat.InsideTomcat.start(InsideTomcat.java:63): dy-boot 成功启动，花费时间为1714ms  
+[INFO ] 2019-09-03 13:17:30,080(1) --> [main] com.duanya.spring.framework.core.load.DyConfigurationLoader.loadProperties(DyConfigurationLoader.java:63): 配置文件dy-application.properties加载成功  
+[INFO ] 2019-09-03 13:17:30,095(16) --> [main] com.duanya.spring.framework.core.scanner.impl.DyScannerImpl.doScanner(DyScannerImpl.java:50): DyScannerImpl开始扫描包com.duanya.spring.framework.jdbc下的所有类  
+[INFO ] 2019-09-03 13:17:30,217(138) --> [main] com.duanya.spring.framework.core.load.DyClassLoader.load(DyClassLoader.java:58): DyClassLoader已经加载com.duanya.spring.framework.jdbc下面的类  
+[INFO ] 2019-09-03 13:17:30,238(159) --> [main] com.duanya.spring.framework.core.scanner.impl.DyScannerImpl.doScanner(DyScannerImpl.java:50): DyScannerImpl开始扫描包com.duanya.spring.web下的所有类  
+[INFO ] 2019-09-03 13:17:30,240(161) --> [main] com.duanya.spring.framework.core.load.DyClassLoader.load(DyClassLoader.java:51): DyClassLoader已经加载com.duanya.spring.web下面的类  
+[INFO ] 2019-09-03 13:17:30,256(177) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.loadBean(DyIocLoader.java:72): loadBean加载bean到DySpringApplicationContent上下文中  
+[INFO ] 2019-09-03 13:17:30,256(177) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.initConfigurationBean(DyIocLoader.java:89): initConfigurationBean初始化配置类，并调用@DyBean的方法初始化一个bean注册到DySpringApplicationContent上下文中  
+[INFO ] 2019-09-03 13:17:30,257(178) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.doAutowirteAll(DyIocLoader.java:99): doAutowirteAll，配置类自动装配完成！  
+[INFO ] 2019-09-03 13:17:30,257(178) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.load(DyIocLoader.java:40): 上下文容器初始化成功  
+[INFO ] 2019-09-03 13:17:30,312(233) --> [main] com.duanya.spring.framework.jdbc.datasource.DyDataSourceFactory.createDataSource(DyDataSourceFactory.java:58): 数据源加载成功！  
+[INFO ] 2019-09-03 13:17:32,154(2075) --> [main] com.duanya.start.web.tomcat.InsideTomcat.start(InsideTomcat.java:63): dy-boot 成功启动，花费时间为2371ms  
+[INFO ] 2019-09-03 13:20:26,050(0) --> [main] com.duanya.spring.framework.core.load.DyConfigurationLoader.loadProperties(DyConfigurationLoader.java:63): 配置文件dy-application.properties加载成功  
+[INFO ] 2019-09-03 13:20:26,076(26) --> [main] com.duanya.spring.framework.core.scanner.impl.DyScannerImpl.doScanner(DyScannerImpl.java:50): DyScannerImpl开始扫描包com.duanya.spring.framework.jdbc下的所有类  
+[INFO ] 2019-09-03 13:20:26,398(348) --> [main] com.duanya.spring.framework.core.load.DyClassLoader.load(DyClassLoader.java:58): DyClassLoader已经加载com.duanya.spring.framework.jdbc下面的类  
+[INFO ] 2019-09-03 13:20:26,437(387) --> [main] com.duanya.spring.framework.core.scanner.impl.DyScannerImpl.doScanner(DyScannerImpl.java:50): DyScannerImpl开始扫描包com.duanya.spring.web下的所有类  
+[INFO ] 2019-09-03 13:20:26,442(392) --> [main] com.duanya.spring.framework.core.load.DyClassLoader.load(DyClassLoader.java:51): DyClassLoader已经加载com.duanya.spring.web下面的类  
+[INFO ] 2019-09-03 13:20:26,470(420) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.loadBean(DyIocLoader.java:72): loadBean加载bean到DySpringApplicationContent上下文中  
+[INFO ] 2019-09-03 13:20:26,487(437) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.initConfigurationBean(DyIocLoader.java:89): initConfigurationBean初始化配置类，并调用@DyBean的方法初始化一个bean注册到DySpringApplicationContent上下文中  
+[INFO ] 2019-09-03 13:20:26,488(438) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.doAutowirteAll(DyIocLoader.java:99): doAutowirteAll，配置类自动装配完成！  
+[INFO ] 2019-09-03 13:20:26,488(438) --> [main] com.duanya.spring.framework.core.load.DyIocLoader.load(DyIocLoader.java:40): 上下文容器初始化成功  
+[INFO ] 2019-09-03 13:20:26,576(526) --> [main] com.duanya.spring.framework.jdbc.datasource.DyDataSourceFactory.createDataSource(DyDataSourceFactory.java:58): 数据源加载成功！  
+[INFO ] 2019-09-03 13:20:28,822(2772) --> [main] com.duanya.start.web.tomcat.InsideTomcat.start(InsideTomcat.java:63): dy-boot 成功启动，花费时间为3247ms  
