@@ -21,11 +21,7 @@
             <artifactId>mybatis-plus</artifactId>
             <version>3.1.2</version>
         </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.0.16</version>
-        </dependency>
+        git
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
