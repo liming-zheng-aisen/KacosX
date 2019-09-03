@@ -16,14 +16,11 @@ import java.util.Properties;
  * @description
  */
 public class WebstaticResources {
-    private  static Class main;
-    private  String staticDir="static";
+    private  String staticDir="/static";
     private  String regex=".*\\.";
     private  String suffix=".*";
 
-    public WebstaticResources(Properties env,Class main){
-        WebstaticResources.main=main;
-
+    public WebstaticResources(Properties env){
         String baseDir=env.getProperty("dy.static.dir");
         if (StringUtils.isNotEmptyPlus(baseDir)){
             staticDir=baseDir;
@@ -41,45 +38,43 @@ public class WebstaticResources {
     public  void doResource(HttpServletRequest request, HttpServletResponse response){
         String requestUrl=request.getRequestURI();
         if (isStaticResourcesRequest(requestUrl)){
-            URL url =main.getClassLoader().getResource(staticDir+requestUrl);
-            if (null==url){
-                return;
-            }
             String fileType=requestUrl.substring(requestUrl.lastIndexOf(".")+1);
-            File file=new File(url.getFile());
-            if (file.exists()){
-                FileInputStream fis;
-                OutputStream out = null;
+            String filePath=staticDir+requestUrl;
+            OutputStream out = null;
+            InputStream inputStream=null;
+            try {
+                inputStream=this.getClass().getResourceAsStream(filePath);
+                long size = inputStream.available();
+                byte[] temp = new byte[(int) size];
+                inputStream.read(temp, 0, (int) size);
+                inputStream.close();
+                byte[] data = temp;
+                out = response.getOutputStream();
+                setContentType(response,fileType);
+                out.write(data);
+            } catch (Exception e) {
+                PrintWriter printWriter = null;
                 try {
-                    fis = new FileInputStream(file);
-                    long size = file.length();
-                    byte[] temp = new byte[(int) size];
-                    fis.read(temp, 0, (int) size);
-                    fis.close();
-                    byte[] data = temp;
-                    out = response.getOutputStream();
-                    setContentType(response,fileType);
-                    out.write(data);
-                } catch (Exception e) {
-                    PrintWriter printWriter = null;
-                    try {
-                        printWriter=response.getWriter();
-                        printWriter.println(JsonUtil.objectToJson(new ResultData<>(404,null,"Not Found")));
-                    } catch (IOException ex) {
-                        //....
-                    }
-                    printWriter.close();
-                }finally {
-                    try {
-                        out.flush();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    try {
+                    printWriter=response.getWriter();
+                    printWriter.println(JsonUtil.objectToJson(new ResultData<>(404,null,"Not Found")));
+                } catch (IOException ex) {
+                    //....
+                }
+                printWriter.close();
+            }finally {
+                try {
+                    if (null!=out) {
                         out.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (null!=inputStream) {
+                        inputStream.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -126,15 +121,15 @@ public class WebstaticResources {
             case "scss":
             case "less":
                 contentType="text/css";
-            break;
+                break;
             case "js":
                 contentType="application/x-javascript";
                 break;
             case "doc":
                 contentType="application/msword";
                 break;
-                default:
-                    contentType="application/octet-stream";
+            default:
+                contentType="application/octet-stream";
         }
         response.setContentType(contentType);
     }

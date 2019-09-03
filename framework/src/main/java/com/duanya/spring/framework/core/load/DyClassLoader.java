@@ -18,7 +18,7 @@ public class DyClassLoader implements DyBeanLoad {
 
     private static List<Class> classContainer;
 
-    private static String DY_PACKAGE="com.duanya.spring.framework";
+    private static String DY_PACKAGE="com.duanya.spring.framework.jdbc";
 
     private static boolean isLoadDefault=false;
 

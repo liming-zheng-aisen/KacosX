@@ -4,13 +4,13 @@ import com.duanya.spring.framework.core.annotation.DyBootApplication;
 import com.duanya.start.web.run.DyBootApplicationWeb;
 
 /**
- * @author zheng.liming
- * @date 2019/8/24
- * @description
+ * @Desc WebTestApplication
+ * @Author Zheng.LiMing
+ * @Date 2019/9/3
  */
 @DyBootApplication
 public class WebTestApplication {
-    public static void main(String[] args) {
+    public static  void  main(String [] args){
         DyBootApplicationWeb.run(WebTestApplication.class);
     }
 }

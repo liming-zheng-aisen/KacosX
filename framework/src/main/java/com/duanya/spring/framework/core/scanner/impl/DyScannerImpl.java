@@ -47,7 +47,7 @@ public class DyScannerImpl implements IDyScanner {
      */
     @Override
     public List<String> doScanner() throws IOException {
-        log.info("DyScannerImpl开始扫描包{}下的所有类"+basePackage);
+        log.info("DyScannerImpl开始扫描包{}下的所有类",basePackage);
         List<String> dsList=doScan(basePackage, new ArrayList<String>());
         return dueResult(dsList);
     }

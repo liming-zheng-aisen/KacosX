@@ -104,7 +104,7 @@ public class DyDispatchedServlet extends HttpServlet {
         resp.setHeader("content-type", "text/html;charset=utf-8");
 
         if (req.getRequestURI().indexOf(".") > 0) {
-            WebstaticResources webstaticResources=new WebstaticResources(DyConfigurationLoader.getEvn(),main);
+            WebstaticResources webstaticResources=new WebstaticResources(DyConfigurationLoader.getEvn());
             if (webstaticResources.isStaticResourcesRequest(req.getRequestURI())){
                 webstaticResources.doResource(req,resp);
                 return;

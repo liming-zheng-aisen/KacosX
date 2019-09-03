@@ -65,7 +65,7 @@ public class DyBootApplicationWeb {
             DyDataSourceFactory.createDataSource(DyConfigurationLoader.getEvn());
 
             //最后启动tomcat
-            InsideTomcat.start(timer,main);
+            new InsideTomcat(DyConfigurationLoader.getEvn()).start(timer,main);
 
         } catch (LifecycleException e) {
             e.printStackTrace();
