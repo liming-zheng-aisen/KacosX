@@ -1,7 +1,7 @@
 package com.duanya.spring.web;
 
-import com.duanya.spring.framework.core.annotation.DyBootApplication;
-import com.duanya.start.web.run.DyBootApplicationWeb;
+import com.duanya.spring.framework.annotation.DyBootApplication;
+import com.duanya.spring.framework.starter.run.DyBootApplicationRun;
 
 /**
  * @Desc WebTestApplication
@@ -11,6 +11,6 @@ import com.duanya.start.web.run.DyBootApplicationWeb;
 @DyBootApplication
 public class WebTestApplication {
     public static  void  main(String [] args){
-        DyBootApplicationWeb.run(WebTestApplication.class);
+        DyBootApplicationRun.run(WebTestApplication.class);
     }
 }

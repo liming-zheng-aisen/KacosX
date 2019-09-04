@@ -1,6 +1,6 @@
 package com.duanya.spring.web.controller;
 
-import com.duanya.spring.framework.core.annotation.*;
+import com.duanya.spring.framework.annotation.*;
 
 /**
  * @Desc WebController

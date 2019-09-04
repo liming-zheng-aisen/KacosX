@@ -1,13 +1,14 @@
 package com.duanya.spring.framework.core.load;
 
-import com.duanya.spring.commont.util.StringUtils;
-import com.duanya.spring.framework.context.exception.DyContextException;
-import com.duanya.spring.framework.core.properties.DyLoadPropeties;
-import com.duanya.spring.framework.core.properties.DyPropertiesException;
+import com.duanya.spring.common.properties.DyLoadPropeties;
+import com.duanya.spring.common.properties.DyPropertiesException;
+import com.duanya.spring.common.util.StringUtils;
+import com.duanya.spring.framework.annotation.DyAutoConfiguration;
+import com.duanya.spring.framework.annotation.DyBootApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.InvocationTargetException;
+import java.lang.annotation.Annotation;
 import java.util.Properties;
 
 /**
@@ -15,9 +16,10 @@ import java.util.Properties;
  * @date 2019/8/19
  * @description 加载propert配置文件
  */
-public class DyConfigurationLoader implements DyBeanLoad {
+public class DyConfigurationLoader extends DyBeanLoad {
 
     private static final Logger log = LoggerFactory.getLogger(DyConfigurationLoader.class);
+
 
     /**
      * evn全局配置文件。
@@ -29,15 +31,67 @@ public class DyConfigurationLoader implements DyBeanLoad {
      */
     private final static String DEFAULT_PROPERTIES_NAME="dy-application.properties";
 
+    public DyConfigurationLoader(){
 
+    }
+
+    public DyConfigurationLoader(DyBeanLoad beanLoad){
+        nextLoader=beanLoad;
+    }
     /**
      * 开始加载配置
      * @param c
      */
     @Override
-    public void load(Class c) throws ClassNotFoundException, InvocationTargetException, InstantiationException, DyContextException, IllegalAccessException {
+    public void load(Class c) throws Exception {
+
+       if (hasAnnotation(c)){
         //加载配置文件
         loadProperties(c,null);
+       }
+
+        if (null!=nextLoader){
+            nextLoader.load(c);
+        }
+
+    }
+
+    private boolean hasAnnotation(Class c){
+        if (c.isAnnotationPresent(DyBootApplication.class)||c.isAnnotationPresent(DyAutoConfiguration.class)){
+            return true;
+        }else {
+            Annotation[] annotations=c.getAnnotations();
+            boolean result=false;
+            for (Annotation a:annotations){
+               result = findAnnotation(a);
+               if (true==result){
+                   return result;
+               }
+            }
+            return result;
+        }
+    }
+
+    private  boolean findAnnotation(Annotation annotation){
+
+        if (annotation.annotationType().isAnnotationPresent(DyBootApplication.class)||annotation.annotationType().isAnnotationPresent(DyAutoConfiguration.class)){
+            return true;
+        }
+
+        Annotation[] ans=annotation.getClass().getAnnotations();
+        boolean result=false;
+
+        for (Annotation a:ans){
+
+           result= findAnnotation(a);
+
+           if (true==result){
+               return result;
+           }
+        }
+
+        return result;
+
     }
 
     /**
