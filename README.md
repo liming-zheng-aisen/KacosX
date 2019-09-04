@@ -12,10 +12,10 @@
   
     mvn install
     
-  ### 3.在工程pom中加入依赖(目前最新的版本是（1.0-SNAPSHOT）)
+  ### 3.在工程pom中加入依赖(目前最新的版本是（1.0.1-SNAPSHOT）)
     <dependency>
             <groupId>com.duanya</groupId>
-            <artifactId>dyboot</artifactId>
+            <artifactId>dyboot-starter-web</artifactId>
             <version>${dyboot-v}</version>
     </dependency>
     
@@ -24,7 +24,7 @@
       @DyBootApplication
       public class Mian {
       public static void main(String[] args) {
-          DyBootApplicationWeb.run(Mian.class);
+          DyBootApplicationRun.run(Mian.class);
      }
      }
      
