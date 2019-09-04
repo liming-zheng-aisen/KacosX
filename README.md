@@ -1,7 +1,6 @@
 ![image](https://github.com/1308404897/DySpring/blob/master/webTest/src/main/resources/static/images/testWeb.jpg?raw=true)
 # 什么是DySpring
-   [DySpring](https://github.com/1308404897/DySpring)是类似Spring boot的框架，一键启动。简单的web框架
-
+   [DySpring](https://github.com/1308404897/DySpring)是类似Spring boot的框架，一键启动。简单的web框架,可能大家都好奇dyspring与spring全家桶有什么关系呢？？？其实两个一点关系都没有，好比java与javaSCript一样，只是dyspring借鉴spring的经验，虽然有spring boot拆箱即用的好处，但是与其他产品搭建起来，却有不少的坑或者切合度不高，在此，我们逆向改变思维，主动拥抱社区，从人人为我变成我为人人。
   ### 1.下载源码
   
     https://codeload.github.com/1308404897/DySpring/zip/master
