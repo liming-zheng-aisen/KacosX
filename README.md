@@ -104,11 +104,20 @@
  dyboot虽然不提倡静态资源放在一起，但是还是提供了静态资源访问，默认情况下会在resource/static目录下访问静态资源，例如在resource/static/index.html,在游览器里面访问地址：http://127.0.0.1:8080/index.html. 默认情况下带点“.”的请求都被认为是静态资源请求！
  
  ## dyboot中的webTest
- webTest是dyboot案例，启动它，在地址栏输入：http://localhost:8080/index.html , 快速体验一下吧！【下方是webTest的运行界面哦】
- ![image](https://github.com/1308404897/DySpring/blob/master/webTest/src/main/resources/static/images/testWeb.jpg?raw=true)
+ webTest是dyboot案例，启动它，在地址栏输入：http://localhost:8080/index.html , 快速体验一下吧！
+ # 《新版本大改动》
+ ## 1.0.1新改动
+   ### （1）在1.0版本中，模块之间都放在一个工程里面，而且耦合度太高，1.0.1里面采用责任链设计模式将各个模块分离
+   ### （2）在1.0.1版本中，新增几个概念监听器（IDyLoadListener）、加载器（DyBeanLoad）、启动器（DyBootApplicationRun）、适配器（DyDefaultStarter和@DyBootApplicationStarter）
+   ### （3）在1.0.1版本中，新增三大管理器，加载器管理器（DyLoaderManager），监听器管理器（DyLoaderListerManager），上下文管理器（DyContextManager），三者关系是：加载器管理器执行load加载到的bean信息添加到上下文中，将上下文对象注册到上下文管理器中，并通知监听器管理器，监听器管理器会挨个通知监听器（通知步骤是多线程的，因为它们之间没有联系，而且需要及时通知并且不影响其他监听的执行，所以多线程通知就可以解决这个问题）
+   ### （4）在1.0.1版本中，特别关注的是dyboot-starter模块，它是实现各个组件自动化并与主工程无缝组合的必备模块之一。
   
-  
-  
- 
+## 如何实现一个监听器，有什么作用？
+   ### 概念：监听dyboot运行期间的运行状态分别为：开始初始化、初始化完成之后、更新
+   实现一个IDyLoadListener接口.....
+   
+   
+   # __还有几个点没写完，今晚8点继续更新...................__
+   
  
  
