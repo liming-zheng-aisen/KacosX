@@ -29,9 +29,16 @@ public class HandlerMapping {
         if (servletContext.containsKey(key)){
             return servletContext.get(key);
         }else {
-            key = url.substring(0, url.lastIndexOf("/"))+dymethod;
-            return servletContext.get(key);
-        }
+            key = url.substring(0, url.lastIndexOf("/")+1)+"*"+dymethod;
+            RequestUrlBean requestUrlBean= servletContext.get(key);
+            if (null!=requestUrlBean){
+                if (requestUrlBean.isBringParam()){
+                    return requestUrlBean;
+                }
+            }
+             return null;
+            }
+
     }
 
 

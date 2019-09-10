@@ -34,13 +34,11 @@
             <version>${dyspring}</version>
         </dependency>
 
-
         <dependency>
             <groupId>com.duanya</groupId>
-            <artifactId>mvc</artifactId>
+            <artifactId>bean</artifactId>
             <version>${dyspring}</version>
         </dependency>
-
 
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
         <dependency>

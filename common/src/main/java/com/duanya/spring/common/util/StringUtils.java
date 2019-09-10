@@ -9,6 +9,8 @@ import java.net.URL;
  */
 public class StringUtils {
 
+    private final static String DIAGONAL="/";
+
     /**
      * 判断非空(保留空格)，先判断是否为null，再判断是否为“”
      * @param obj
@@ -57,6 +59,11 @@ public class StringUtils {
         return obj.trim();
     }
 
+    /**
+     * 命名第一个字母转小写
+     * @param str
+     * @return
+     */
     public static String toLowerCaseFirstName(String str){
         if (isEmptyPlus(str)){
             return null;
@@ -65,6 +72,12 @@ public class StringUtils {
         strByte[0]+=32;
         return new String(strByte);
     }
+
+    /**
+     * 命名第一个字母转大写
+     * @param str
+     * @return
+     */
     public static String toUpCaseFirstName(String str){
         if (isEmptyPlus(str)){
             return null;
@@ -74,20 +87,25 @@ public class StringUtils {
         return new String(strByte);
     }
 
+    /**
+     * 双斜杆转单斜杆
+     * @param url
+     * @return
+     */
     public static String formatUrl(String url){
 
-        url=url.replace("//","/");
+        url=url.replace("//",DIAGONAL);
 
-        if (url.equals("/")){
+        if (url.equals(DIAGONAL)){
             return url;
         }
 
-        if (url.indexOf("/")!=0){
-            url="/"+url;
+        if (url.indexOf(DIAGONAL)!=0){
+            url=DIAGONAL+url;
         }
 
-        if (url.lastIndexOf("/")==url.length()-1){
-            url=url.substring(0,url.lastIndexOf("/"));
+        if (url.lastIndexOf(DIAGONAL)==url.length()-1){
+            url=url.substring(0,url.length()-1);
         }
 
         return  url;
@@ -112,10 +130,8 @@ public class StringUtils {
         }
         return result;
     }
-    /**
-     * "file:/home/whf/cn/fh" -> "/home/whf/cn/fh"
-     * "jar:file:/home/whf/foo.jar!cn/fh" -> "/home/whf/foo.jar"
-     */
+
+
     public static String getRootPath(URL url) {
         String fileUrl = url.getFile();
         int pos = fileUrl.indexOf('!');
@@ -127,18 +143,12 @@ public class StringUtils {
         return fileUrl.substring(5, pos);
     }
 
-    /**
-     * "cn.fh.lightning" -> "cn/fh/lightning"
-     * @param name
-     * @return
-     */
+
     public static String dotToSplash(String name) {
-        return name.replaceAll("\\.", "/");
+        return name.replaceAll("\\.", DIAGONAL);
     }
 
-    /**
-     * "Apple.class" -> "Apple"
-     */
+
     public static String trimExtension(String name) {
         int pos = name.indexOf('.');
         if (-1 != pos) {
@@ -155,7 +165,7 @@ public class StringUtils {
      */
     public static String trimURI(String uri) {
         String trimmed = uri.substring(1);
-        int splashIndex = trimmed.indexOf('/');
+        int splashIndex = trimmed.indexOf(DIAGONAL);
 
         return trimmed.substring(splashIndex);
     }

@@ -1,6 +1,6 @@
 package com.duanya.spring.common.scanner.api;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author zheng.liming
@@ -9,6 +9,8 @@ import java.util.List;
  */
 public interface IDyScanner {
 
-    public List<String> doScanner(boolean recursion)throws Exception;
+    public Set<Class> doScanner(String packageName)throws Exception;
+
+    public Set<Class> doScanner(String packageName, Class<?> ...annotations)throws Exception;
 
 }

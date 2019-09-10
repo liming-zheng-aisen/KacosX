@@ -1,8 +1,9 @@
 package com.duanya.spring.framework.core.listener.api.manager;
 
-import com.duanya.spring.framework.context.base.DyApplicationContext;
-import com.duanya.spring.framework.context.spring.DySpringApplicationContext;
 import com.duanya.spring.framework.core.listener.api.IDyLoadListener;
+import com.duanya.spring.framework.core.load.manager.DyLoaderManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,31 +17,26 @@ public class DyLoaderListerManager {
 
     private static List<IDyLoadListener> listeners=new ArrayList<>();
 
-    private static DyApplicationContext context;
+    private final static Logger log=LoggerFactory.getLogger(DyLoaderManager.class);
+
 
     public static void registerLister(IDyLoadListener loadListener){
         listeners.add(loadListener);
     }
 
     public static void  noticeLister(){
-
         if (listeners.size()>0){
-            listeners.stream().forEach(listener->(new Thread(){
-                @Override
-                public void run() {
-                   listener.notice(Builder.getContext());
-                }
-            }).start());
-        }
-    }
-
-    public static  class Builder{
-        public static DyApplicationContext getContext(){
-            if (context==null){
-                context=new DySpringApplicationContext();
+            log.info("开始执行监听通知");
+            for (IDyLoadListener listener:listeners) {
+                (new Thread(){
+                    @Override
+                    public void run() {
+                        listener.notice();
+                    }
+                }).start();
             }
-            return context;
         }
+
     }
 
 }

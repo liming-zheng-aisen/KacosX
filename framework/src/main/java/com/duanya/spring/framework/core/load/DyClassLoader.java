@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author zheng.liming
@@ -46,14 +46,14 @@ public  class DyClassLoader extends DyBeanLoad {
         //根据主入口的文件加载同级目录或子目录下的class文件
         //获取类全路径
         String basePackage=c.getPackage().getName();
-        DyScannerImpl dyScanner=new DyScannerImpl(basePackage);
-        List<String> list= null;
+        DyScannerImpl dyScanner=new DyScannerImpl();
+        Set<Class> classSet= null;
         try {
-            list = dyScanner.doScanner(true);
+            classSet = dyScanner.doScanner(basePackage);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        DyBeanManager.registerClassByClassString(list);
+        DyBeanManager.registerClassBySet(classSet);
         log.info("DyClassLoader已经加载"+basePackage+"下面的类");
         }
         if (null!=nextLoader){
@@ -63,10 +63,10 @@ public  class DyClassLoader extends DyBeanLoad {
 
     }
 
-    public void load(String packageName) throws IOException {
-        DyScannerImpl dyScanner=new DyScannerImpl(packageName);
-        List<String> list = dyScanner.doScanner(true);
-        DyBeanManager.registerClassByClassString(list);
+    public void load(String packageName) throws Exception {
+        DyScannerImpl dyScanner=new DyScannerImpl();
+        Set<Class> list = dyScanner.doScanner(packageName);
+        DyBeanManager.registerClassBySet(list);
         log.info("DyClassLoader已经加载"+packageName+"下面的类");
     }
 

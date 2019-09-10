@@ -4,7 +4,6 @@ import com.duanya.spring.framework.mvc.handler.bean.RequestUrlBean;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Properties;
 
 /**
  * @author zheng.liming
@@ -13,6 +12,6 @@ import java.util.Properties;
  */
 public interface DyHandlerAdapter {
 
-    Object handle(HttpServletRequest request, HttpServletResponse response, RequestUrlBean handler, Properties env) throws Exception;
+    Object handle(HttpServletRequest request, HttpServletResponse response, RequestUrlBean handler) throws Exception;
 
 }

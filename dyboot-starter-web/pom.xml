@@ -20,21 +20,23 @@
     <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
+        <scope>provided</scope>
     </dependency>
-    <!-- tomcat -->
+
     <dependency>
-        <groupId>org.apache.tomcat.embed</groupId>
-        <artifactId>tomcat-embed-websocket</artifactId>
+        <groupId>javax.annotation</groupId>
+        <artifactId>javax.annotation-api</artifactId>
+        <scope>compile</scope>
     </dependency>
-    <!-- jsp -->
+
     <dependency>
-        <groupId>javax.servlet.jsp</groupId>
-        <artifactId>javax.servlet.jsp-api</artifactId>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-webapp</artifactId>
     </dependency>
-    <!--jstl -->
+
     <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>jstl</artifactId>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-servlet</artifactId>
     </dependency>
 
     <!-- duanya framework -->
@@ -55,6 +57,11 @@
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-log4j12</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>axis</groupId>
+        <artifactId>axis-jaxrpc</artifactId>
+        <version>1.4</version>
     </dependency>
 </dependencies>
     <build>

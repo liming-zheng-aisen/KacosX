@@ -20,6 +20,7 @@
         <artifactId>common</artifactId>
         <version>${dyspring}</version>
     </dependency>
+
         <dependency>
             <groupId>com.duanya</groupId>
             <artifactId>annotation</artifactId>
@@ -30,15 +31,11 @@
             <groupId>com.duanya</groupId>
             <artifactId>bean</artifactId>
             <version>${dyspring}</version>
-        </dependency>  <dependency>
-            <groupId>com.duanya</groupId>
-            <artifactId>annotation</artifactId>
-            <version>${dyspring}</version>
         </dependency>
 
         <dependency>
             <groupId>com.duanya</groupId>
-            <artifactId>bean</artifactId>
+            <artifactId>annotation</artifactId>
             <version>${dyspring}</version>
         </dependency>
 

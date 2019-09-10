@@ -1,7 +1,5 @@
 package com.duanya.spring.framework.starter;
 
-import com.duanya.spring.framework.context.spring.DySpringApplicationContext;
-
 import java.util.Properties;
 
 /**
@@ -11,6 +9,6 @@ import java.util.Properties;
  */
 public interface DyDefaultStarter {
 
-   void doStart(Properties evn, Class cl, DySpringApplicationContext content) throws Exception;
+   void doStart(Properties evn, Class cl) throws Exception;
 
 }

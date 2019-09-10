@@ -1,10 +1,10 @@
 package com.duanya.spring.framework.starter;
 
 import com.duanya.spring.framework.annotation.DyBootApplicationStarter;
-import com.duanya.spring.framework.context.spring.DySpringApplicationContext;
 import com.duanya.spring.framework.core.listener.api.manager.DyLoaderListerManager;
-import com.duanya.spring.framework.mvc.dispatcher.DyDispatchedServlet;
-import com.duanya.start.web.tomcat.TomcatStarterListener;
+import com.duanya.start.web.jetty.JettyServerStarterListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 
@@ -13,13 +13,22 @@ import java.util.Properties;
  * @Author Zheng.LiMing
  * @Date 2019/9/4
  */
-@DyBootApplicationStarter(scannerPath = {"com.duanya.start.web.tomcat"})
+@DyBootApplicationStarter(scannerPath = {"com.duanya.start.web.jetty"})
 public class DyBootStarterWeb implements DyDefaultStarter {
 
+    private final static Logger log=LoggerFactory.getLogger(DyBootStarterWeb.class);
+
     @Override
-    public void doStart(Properties evn, Class cl, DySpringApplicationContext context) throws Exception {
-        DyLoaderListerManager.registerLister(new TomcatStarterListener());
-        context.registeredBean("dyDispatchedServlet",new DyDispatchedServlet(null,cl,evn));
+    public void doStart(Properties evn, Class cl) throws Exception {
+
+        JettyServerStarterListener serverStarterListener= new JettyServerStarterListener();
+        serverStarterListener.setCl(cl);
+        serverStarterListener.setProperties(evn);
+
+        log.info("注册TomcatStarterListener监听器");
+        DyLoaderListerManager.registerLister(serverStarterListener);
+
+
     }
 
 }

@@ -6,12 +6,12 @@ package com.duanya.spring.common.times;
  * @description
  */
 public class DyTimer {
-    private long start;
+    private  long start;
     public long doStart(){
         start=System.currentTimeMillis();
         return start;
     }
-    public long spendingTime(){
+    public  long spendingTime(){
         return System.currentTimeMillis()-start;
     }
 }

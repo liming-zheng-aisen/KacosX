@@ -15,6 +15,11 @@ public class RequestUrlBean {
     private Class handler;
 
     /**
+     * 请求路径
+     */
+    private String requestUrl;
+
+    /**
      * 关联的方法
      */
     private Method method;
@@ -22,7 +27,7 @@ public class RequestUrlBean {
     /**
      * url路径末尾是否是参数
      */
-    private boolean isBringParam;
+    private boolean isBringParam=false;
     /**
      * 参数名
      */
@@ -61,4 +66,11 @@ public class RequestUrlBean {
         this.paramName = paramName;
     }
 
+    public String getRequestUrl() {
+        return requestUrl;
+    }
+
+    public void setRequestUrl(String requestUrl) {
+        this.requestUrl = requestUrl;
+    }
 }

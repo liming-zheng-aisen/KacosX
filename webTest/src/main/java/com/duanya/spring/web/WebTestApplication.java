@@ -10,7 +10,8 @@ import com.duanya.spring.framework.starter.run.DyBootApplicationRun;
  */
 @DyBootApplication
 public class WebTestApplication {
+
     public static  void  main(String [] args){
-        DyBootApplicationRun.run(WebTestApplication.class);
+       DyBootApplicationRun.run(WebTestApplication.class);
     }
 }

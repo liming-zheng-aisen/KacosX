@@ -1,4 +1,4 @@
-package com.duanya.spring.framework.mvc.result;
+package com.duanya.spring.common.http.result;
 
 /**
  * @author zheng.liming

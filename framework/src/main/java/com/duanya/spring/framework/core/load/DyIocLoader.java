@@ -13,11 +13,7 @@ import com.duanya.spring.framework.core.bean.factory.bean.manager.DyBeanManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author zheng.liming
@@ -43,7 +39,7 @@ public class DyIocLoader extends DyBeanLoad{
     @Override
     public void load(Class c) throws Exception {
        if (null==applicationContent) {
-           applicationContent = new DySpringApplicationContext();
+           applicationContent = DySpringApplicationContext.Builder.getDySpringApplicationContext();
        }
         loadBean();
         initConfigurationBean();
@@ -57,7 +53,7 @@ public class DyIocLoader extends DyBeanLoad{
 
     private static void loadBean() throws ClassNotFoundException, InstantiationException, IllegalAccessException, DyContextException {
 
-        List<Class> clazzs=DyBeanManager.getClassContainer();
+        Set<Class> clazzs=DyBeanManager.getClassContainer();
 
         for (Class beanClass:clazzs){
 
@@ -76,12 +72,12 @@ public class DyIocLoader extends DyBeanLoad{
                         throw new InstantiationException("目标对象"+beanClass.getName()+"实现多个接口，请标注beanName名称以便区分!");
                     }else if (interfaceClass.length==1){
                         String iName=StringUtils.toLowerCaseFirstName(interfaceClass[0].getSimpleName());
-                        applicationContent.registeredBean(iName,bean);
+                        applicationContent.registerBean(iName,bean);
                     }
                      String oName=StringUtils.toLowerCaseFirstName(beanClass.getSimpleName());
-                     applicationContent.registeredBean(oName,bean);
+                     applicationContent.registerBean(oName,bean);
                 }else {
-                    applicationContent.registeredBean(beanName,bean);
+                    applicationContent.registerBean(beanName,bean);
 
                 }
                 DyValueFactory.doFields(bean,DyConfigurationLoader.getEvn());
@@ -91,7 +87,7 @@ public class DyIocLoader extends DyBeanLoad{
         log.info("loadBean加载bean到DySpringApplicationContent上下文中");
     }
 
-    private static void initConfigurationBean() throws IllegalAccessException, InvocationTargetException, DyContextException, InstantiationException, ClassNotFoundException {
+    private static void initConfigurationBean() throws Exception {
         Map<String,Object> context=applicationContent.getContext();
         Iterator<String> iterator=context.keySet().iterator();
         List<Map<String,Object>> list=new ArrayList< Map<String,Object>>();
@@ -112,7 +108,7 @@ public class DyIocLoader extends DyBeanLoad{
         log.info("initConfigurationBean初始化配置类，并调用@DyBean的方法初始化一个bean注册到DySpringApplicationContent上下文中");
     }
 
-    private static void doAutowirteAll() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    private static void doAutowirteAll() throws Exception {
         Map<String,Object> context=applicationContent.getContext();
         Iterator iterator=context.keySet().iterator();
         while (iterator.hasNext()){

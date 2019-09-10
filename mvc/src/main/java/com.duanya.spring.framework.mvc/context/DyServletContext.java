@@ -3,36 +3,56 @@ package com.duanya.spring.framework.mvc.context;
 import com.duanya.spring.common.util.StringUtils;
 import com.duanya.spring.framework.annotation.*;
 import com.duanya.spring.framework.context.base.DyApplicationContext;
+import com.duanya.spring.framework.context.exception.DyContextException;
+import com.duanya.spring.framework.context.manager.DyContextManager;
 import com.duanya.spring.framework.mvc.context.exception.DyServletException;
 import com.duanya.spring.framework.mvc.enums.DyMethod;
 import com.duanya.spring.framework.mvc.handler.bean.RequestUrlBean;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author zheng.liming
  * @date 2019/8/6
  * @description mvc上下文
  */
-public class DyServletContext extends DyApplicationContext {
+@SuppressWarnings("all")
+public class DyServletContext implements DyApplicationContext {
 
     /**
      * String是由路由+请求方式
      */
     private static Map<String,RequestUrlBean> servletContext=new HashMap<>();
 
-    public static void putServletContext(String contextUrl,RequestUrlBean bean){
-        servletContext.put(contextUrl,bean);
+    private static DyServletContext dyServletContext;
+
+
+    @Override
+    public Object getBean(String beanName,Class beanClass) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        if (servletContext.containsKey(beanName)){
+            return servletContext.get(beanName);
+        }else {
+            return null;
+        }
+
     }
 
-    public static Map<String,RequestUrlBean> getServletContext(){
-        return servletContext;
+    @Override
+    public void registerBean(String beanName, Object object) throws DyContextException {
+        if (servletContext.containsKey(beanName)) {
+            throw  new DyContextException(beanName+"命名重复");
+        }
+        if (!(object instanceof RequestUrlBean)){
+            throw  new DyContextException("mvc上下文不接受"+object.getClass()+"的类型！");
+        }
+        servletContext.put(beanName, (RequestUrlBean)object);
     }
 
-    public static void load( List<Class> clazzList) throws DyServletException {
+    public static void load(Set<Class> clazzList) throws DyServletException {
+
 
       if (clazzList==null){
         throw new DyServletException("DyServletContext容器加载失败，请检查是扫描路径是否正确！");
@@ -98,14 +118,42 @@ public class DyServletContext extends DyApplicationContext {
             int startIndex=url.lastIndexOf("/{");
             int endIndex=url.lastIndexOf("}");
             String paramName = url.substring(startIndex+2,endIndex);
-            url=url.substring(0,startIndex);
+            url=url.substring(0,startIndex+1);
+            url+="*";
             requestUrlBean.setParamName(paramName);
             requestUrlBean.setBringParam(true);
         }
+        requestUrlBean.setRequestUrl(url);
         url+=requestMethod;
         requestUrlBean.setMethod(md);
         requestUrlBean.setHandler(c);
         putServletContext(url,requestUrlBean);
+    }
+
+    public static void putServletContext(String contextUrl,RequestUrlBean bean){
+        servletContext.put(contextUrl,bean);
+    }
+
+    public static Map<String,RequestUrlBean> getServletContext(){
+        return servletContext;
+    }
+
+
+    private DyServletContext(){
+
+    }
+
+    public static class Builder{
+
+        private final static  DyServletContext dyServletContext=new DyServletContext();
+
+        public static DyServletContext getServletContext(){
+            DyContextManager contextManager=DyContextManager.BuilderContext.getContextManager();
+            if (!contextManager.hasContext(dyServletContext)){
+                contextManager.registerApplicationContext(dyServletContext);
+            }
+            return dyServletContext;
+        }
     }
 
 }

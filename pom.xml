@@ -20,10 +20,11 @@
         <module>bean</module>
         <module>dyboot-starter-jdbc</module>
         <module>println</module>
+        <module>dyboot-plugin</module>
     </modules>
     <properties>
         <servlet-v>4.0.1</servlet-v>
-        <tomcat-v>8.5.11</tomcat-v>
+        <tomcat-v>9.0.24</tomcat-v>
         <jsp-v>2.3.1</jsp-v>
         <jstl-v>1.2</jstl-v>
         <json-lib>2.4</json-lib>
@@ -31,6 +32,10 @@
         <mysql>8.0.12</mysql>
         <slf4j>1.7.25</slf4j>
         <druid>1.0.16</druid>
+        <mybatis>3.5.2</mybatis>
+        <pagehelper-version>5.1.10</pagehelper-version>
+        <jsqlparser-version>3.0</jsqlparser-version>
+        <jetty>9.4.19.v20190610</jetty>
     </properties>
 
     <dependencyManagement>
@@ -41,62 +46,120 @@
                 <artifactId>javax.servlet-api</artifactId>
                 <version>${servlet-v}</version>
             </dependency>
-            <!-- tomcat -->
+
+            <dependency>
+                <groupId>javax.annotation</groupId>
+                <artifactId>javax.annotation-api</artifactId>
+                <version>1.3.2</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-core</artifactId>
+                <version>${tomcat-v}</version>
+                <scope>compile</scope>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>tomcat-annotations-api</artifactId>
+                        <groupId>org.apache.tomcat</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-el</artifactId>
+                <version>${tomcat-v}</version>
+                <scope>compile</scope>
+            </dependency>
+
             <dependency>
                 <groupId>org.apache.tomcat.embed</groupId>
                 <artifactId>tomcat-embed-websocket</artifactId>
                 <version>${tomcat-v}</version>
+                <scope>compile</scope>
+            </dependency>
 
-            </dependency>
-            <!-- jsp -->
+
             <dependency>
-                <groupId>javax.servlet.jsp</groupId>
-                <artifactId>javax.servlet.jsp-api</artifactId>
-                <version>${jsp-v}</version>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-webapp</artifactId>
+                <version>${jetty}</version>
             </dependency>
-            <!--jstl -->
+
             <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>jstl</artifactId>
-                <version>${jstl-v}</version>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-servlet</artifactId>
+                <version>${jetty}</version>
             </dependency>
+
             <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
                 <version>${jackson-v}</version>
             </dependency>
+
             <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
                 <version>${jackson-v}</version>
             </dependency>
+
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson-v}</version>
             </dependency>
+
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql}</version>
             </dependency>
+
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>${druid}</version>
             </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis}</version>
+            </dependency>
+
+            <!--pagehelper-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${pagehelper-version}</version>
+            </dependency>
+
+            <!-- pagehelper的依赖包:jsqlparser -->
+            <dependency>
+                <groupId>com.github.jsqlparser</groupId>
+                <artifactId>jsqlparser</artifactId>
+                <version>${jsqlparser-version}</version>
+            </dependency>
+
+
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>${slf4j}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
     <build>

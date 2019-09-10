@@ -12,7 +12,7 @@
     <artifactId>dyboot-starter-jdbc</artifactId>
 
     <properties >
-        <dyspring>1.0-SNAPSHOT</dyspring>
+        <dyspring>1.0.1-SNAPSHOT</dyspring>
     </properties>
 
 
@@ -21,21 +21,36 @@
 
     <dependency>
         <groupId>com.duanya</groupId>
-        <artifactId>context</artifactId>
+        <artifactId>dyboot-starter</artifactId>
         <version>${dyspring}</version>
     </dependency>
 
     <dependency>
-        <groupId>com.duanya</groupId>
-        <artifactId>bean</artifactId>
-        <version>${dyspring}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.duanya</groupId>
-        <artifactId>common</artifactId>
-        <version>${dyspring}</version>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
     </dependency>
 
+    <!--pagehelper-->
+    <dependency>
+        <groupId>com.github.pagehelper</groupId>
+        <artifactId>pagehelper</artifactId>
+    </dependency>
+
+    <!-- pagehelper的依赖包:jsqlparser -->
+    <dependency>
+        <groupId>com.github.jsqlparser</groupId>
+        <artifactId>jsqlparser</artifactId>
+    </dependency>
+
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+    </dependency>
+
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+    </dependency>
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>

@@ -11,7 +11,7 @@ import java.io.FileReader;
  */
 public class DyConsolePrint {
 
-    private static void printLogo(Class c){
+    public static void printLogo(Class c){
         try {
             File file = new File(c.getResource("/dy.txt").getPath());
             if (file.exists()) {

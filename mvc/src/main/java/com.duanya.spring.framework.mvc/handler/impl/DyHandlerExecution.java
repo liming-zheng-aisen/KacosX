@@ -7,6 +7,7 @@ import com.duanya.spring.framework.annotation.DyRequestParameter;
 import com.duanya.spring.framework.core.bean.factory.DyAutowiredFactory;
 import com.duanya.spring.framework.core.bean.factory.DyBeanFactory;
 import com.duanya.spring.framework.core.bean.factory.DyValueFactory;
+import com.duanya.spring.framework.mvc.dispatcher.DyDispatchedServlet;
 import com.duanya.spring.framework.mvc.handler.DyHandlerAdapter;
 import com.duanya.spring.framework.mvc.handler.bean.RequestUrlBean;
 import com.duanya.spring.framework.mvc.util.JsonUtil;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Parameter;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Date;
 import java.util.Properties;
 
 /**
@@ -26,9 +28,11 @@ import java.util.Properties;
  */
 public class DyHandlerExecution implements DyHandlerAdapter {
 
-    @Override
-    public Object handle(HttpServletRequest request, HttpServletResponse response, RequestUrlBean handler, Properties env) throws Exception {
 
+    @Override
+    public Object handle(HttpServletRequest request, HttpServletResponse response, RequestUrlBean handler) throws Exception {
+
+        Properties env=DyDispatchedServlet.getEvn();
         Object[] param = null;
         if (handler.getMethod().getParameterCount() > 0) {
             param = new Object[handler.getMethod().getParameterCount()];
@@ -52,18 +56,17 @@ public class DyHandlerExecution implements DyHandlerAdapter {
                         }
 
                     }
-                    param[index] = data;
+                    param[index]= setParam(parameter.getType().getSimpleName(),data);
                 } else if (parameter.isAnnotationPresent(DyPathVariable.class)) {
                     if (handler.isBringParam()) {
                         String url = StringUtils.formatUrl(request.getRequestURI());
-                        String pathParam = url.substring(url.lastIndexOf("/") + 1);
+                        String pathParam = url.substring(handler.getRequestUrl().length() - 1);
                         param[index] = pathParam;
                     }
                 } else if (parameter.isAnnotationPresent(DyRequestBody.class)) {
                     String json = RequestJosnUtil.getRequestJsonString(request);
                     if (StringUtils.isEmptyPlus(json)) {
-                        param[index] = null;
-                        continue;
+                        throw new Exception(request.getRequestURI()+"请求缺少主体，类型为："+parameter.getType().getName());
                     }
                     if (parameter.getClass().getSimpleName().equals("List")) {
                         param[index] = JsonUtil.jsonToList(json, getActualTypeArgument(parameter.getType()));
@@ -87,6 +90,7 @@ public class DyHandlerExecution implements DyHandlerAdapter {
         return result;
     }
 
+
     /**
      * 获取泛型类Class对象，不是泛型类则返回null
      */
@@ -101,6 +105,37 @@ public class DyHandlerExecution implements DyHandlerAdapter {
             }
         }
         return entitiClass;
+    }
+
+    public Object setParam(String type,String value) throws Exception {
+        Object targer=null;
+      switch (type){
+          case "Integer":
+          case "int":
+              targer=Integer.parseInt(value);
+              break;
+          case "String":
+              targer=value;
+              break;
+          case "Double":
+          case "double":
+              targer=Double.parseDouble(value);
+              break;
+          case "Float":
+          case "float":
+              targer=Float.parseFloat(value);
+              break;
+          case "Boolean":
+          case "boolean":
+              targer=Boolean.parseBoolean(value);
+              break;
+          case "Date":
+              targer=Date.parse(value);
+              break;
+         default:
+             throw new Exception("不支持此类型的数据！");
+      }
+      return targer;
     }
 
 }

@@ -5,6 +5,8 @@ import com.duanya.spring.framework.core.load.DyBeanLoad;
 import com.duanya.spring.framework.core.load.DyClassLoader;
 import com.duanya.spring.framework.core.load.DyConfigurationLoader;
 import com.duanya.spring.framework.core.load.DyIocLoader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -14,11 +16,14 @@ import com.duanya.spring.framework.core.load.DyIocLoader;
  */
 public class DyLoaderManager {
 
+    private final static Logger log=LoggerFactory.getLogger(DyLoaderManager.class);
+
     private  DyBeanLoad  fristLoader;
 
     private  DyBeanLoad  lastLoader;
 
     public  void registerLoader(DyBeanLoad loader){
+
         if (null==fristLoader){
             fristLoader=loader;
             return;
@@ -34,8 +39,14 @@ public class DyLoaderManager {
     }
 
     public  void doLoad(Class c) throws  Exception{
+
+        log.info("开始执行DyBeanLoad加载器");
         fristLoader.load(c);
+
+        log.info("调用DyLoaderListerManager监听管理器通知");
+
         DyLoaderListerManager.noticeLister();
+
     }
 
     /**
@@ -43,6 +54,7 @@ public class DyLoaderManager {
      * @throws Exception
      */
     public  void doDefalultLoad() throws Exception {
+
         fristLoader=null;
         lastLoader=null;
         registerLoader(new DyConfigurationLoader());

@@ -1,17 +1,17 @@
 package com.duanya.spring.framework.mvc.dispatcher;
 
+import com.duanya.spring.common.http.HttpResponsePrintln;
+import com.duanya.spring.common.http.result.ResultData;
+import com.duanya.spring.common.properties.DyLoadPropeties;
 import com.duanya.spring.common.scanner.api.IDyScanner;
 import com.duanya.spring.common.scanner.impl.DyScannerImpl;
 import com.duanya.spring.common.util.StringUtils;
-import com.duanya.spring.framework.core.bean.factory.DyBeanFactory;
+import com.duanya.spring.framework.core.bean.factory.bean.manager.DyBeanManager;
 import com.duanya.spring.framework.mvc.context.DyServletContext;
-import com.duanya.spring.framework.mvc.context.exception.DyServletException;
-import com.duanya.spring.framework.mvc.dispatcher.staticresouce.WebstaticResources;
 import com.duanya.spring.framework.mvc.enums.DyMethod;
 import com.duanya.spring.framework.mvc.handler.bean.RequestUrlBean;
 import com.duanya.spring.framework.mvc.handler.impl.DyHandlerExecution;
 import com.duanya.spring.framework.mvc.handler.mapping.HandlerMapping;
-import com.duanya.spring.framework.mvc.result.ResultData;
 import com.duanya.spring.framework.mvc.util.JsonUtil;
 
 import javax.servlet.ServletConfig;
@@ -20,11 +20,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 /**
  * @author zheng.liming
@@ -35,41 +33,22 @@ public class DyDispatchedServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private static String config;
+    private final static String DEFAULT_SCANNER_KEY="dy.mvc.scan";
 
-    private static Class main=null;
+    private static String config;
 
     private static Properties evn;
 
-    private static List<Class> cl;
+    private static Set<Class> cl;
+
 
     public DyDispatchedServlet() {
 
     }
 
-    public DyDispatchedServlet(String conf,Class main,Properties properties) {
-        if (StringUtils.isNotEmptyPlus(conf)) {
-            config = conf;
-        }
-        if (null!=main) {
-            DyDispatchedServlet.main = main;
-        }
+    public DyDispatchedServlet(Properties properties,Set<Class> classes) {
         evn=properties;
-
-        IDyScanner scanner= new DyScannerImpl(main.getPackage().getName(),main.getClassLoader());
-        try {
-            cl=new ArrayList<>();
-            List<String> clssList=scanner.doScanner(true);
-            clssList.stream().forEach(c-> {
-                try {
-                    cl.add(DyBeanFactory.classLoad(c));
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        cl=classes;
     }
 
     @Override
@@ -78,9 +57,32 @@ public class DyDispatchedServlet extends HttpServlet {
         if (null == config) {
             config = servletConfig.getInitParameter("contextConfigLocation");
         }
+
         try {
+
+            if (null == evn) {
+                evn = DyLoadPropeties.doLoadProperties(null, config, this.getClass());
+            }
+
+            if (cl == null && DyBeanManager.isLoad()) {
+                cl = DyBeanManager.getClassContainer();
+            }
+
+            if (cl == null) {
+                if (null != evn) {
+                    String path = evn.getProperty(DEFAULT_SCANNER_KEY);
+                    if (StringUtils.isNotEmptyPlus(path)) {
+                        IDyScanner scanner = new DyScannerImpl();
+                        cl = scanner.doScanner(path);
+                    } else {
+                        throw new Exception("请在dy-properties配置dy.mvc.scan（mvc根路径）的值");
+                    }
+                }
+            }
+
             DyServletContext.load(cl);
-        } catch (DyServletException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
             System.exit(0);
         }
@@ -123,54 +125,42 @@ public class DyDispatchedServlet extends HttpServlet {
         doDispatched(req, resp, DyMethod.TRACE);
     }
 
-    private void doDispatched(HttpServletRequest req, HttpServletResponse resp, DyMethod method) throws IOException {
+    private void doDispatched(HttpServletRequest req, HttpServletResponse resp, DyMethod method) throws IOException, ServletException {
 
         setDefaultEncoding(req,resp);
 
-        if (req.getRequestURI().indexOf(".") > 0) {
-            WebstaticResources webstaticResources=new WebstaticResources(evn);
-            if (webstaticResources.isStaticResourcesRequest(req.getRequestURI())){
-                webstaticResources.doResource(req,resp);
-                return;
-            }
-        }
-
-        resp.setContentType("application/json;charset=UTF-8");
-        PrintWriter out = resp.getWriter();
         try {
+            Properties  evn = DyDispatchedServlet.getEvn();
+
             HandlerMapping handlerMapping = new HandlerMapping();
 
             RequestUrlBean bean = handlerMapping.requestMethod(req.getRequestURI(), method);
 
+
             if (null == bean) {
                 String result = JsonUtil.objectToJson(new ResultData<Object>(404, null, " NOT FOUND "));
-                out.print(result);
+                HttpResponsePrintln.writer(resp,result);
                 return;
             }
+
             DyHandlerExecution exec = new DyHandlerExecution();
 
-            Object data = exec.handle(req, resp, bean,evn);
+            Object data = exec.handle(req, resp, bean);
+
             if (isBaseType(data.getClass(), true)) {
-                out.print(data);
+                HttpResponsePrintln.writer(resp,data);
             } else {
-                out.print(JsonUtil.objectToJson(data));
+                HttpResponsePrintln.writer(resp,JsonUtil.objectToJson(data));
             }
 
         } catch (Exception e) {
             e.printStackTrace();
             String result = JsonUtil.objectToJson(new ResultData<Object>(502, e.getMessage(), " SERVER ERROR "));
-            out.print(result);
-        } finally {
-            out.close();
+            HttpResponsePrintln.writer(resp,result);
         }
-    }
-    private  void  setDefaultEncoding(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
-        req.setCharacterEncoding("UTF-8");
-        resp.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html;charset=UTF-8");
-        resp.setHeader("content-type", "text/html;charset=utf-8");
 
     }
+
     /**
      * 判断对象属性是否是基本数据类型,包括是否包括string
      *
@@ -178,7 +168,7 @@ public class DyDispatchedServlet extends HttpServlet {
      * @param incString 是否包括string判断,如果为true就认为string也是基本数据类型
      * @return
      */
-    public static boolean isBaseType(Class className, boolean incString) {
+    private static boolean isBaseType(Class className, boolean incString) {
         if (incString && className.equals(String.class)) {
             return true;
         }
@@ -199,5 +189,23 @@ public class DyDispatchedServlet extends HttpServlet {
                 className.equals(Boolean.class) ||
                 className.equals(boolean.class);
     }
+    private  void  setDefaultEncoding(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html;charset=UTF-8");
+        resp.setHeader("content-type", "text/html;charset=utf-8");
+        resp.setContentType("application/json;charset=UTF-8");
+    }
 
+    public static Properties getEvn() {
+        return evn;
+    }
+
+    public static Set<Class> getCl() {
+        return cl;
+    }
+
+    public static void setCl(Set<Class> cl) {
+        DyDispatchedServlet.cl = cl;
+    }
 }

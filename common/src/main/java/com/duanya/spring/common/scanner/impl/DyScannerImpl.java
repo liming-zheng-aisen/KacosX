@@ -1,19 +1,11 @@
 package com.duanya.spring.common.scanner.impl;
 
 import com.duanya.spring.common.scanner.api.IDyScanner;
-import com.duanya.spring.common.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.jar.JarEntry;
-import java.util.jar.JarInputStream;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author zheng.liming
@@ -24,140 +16,58 @@ public class DyScannerImpl implements IDyScanner {
 
     private static final Logger log = LoggerFactory.getLogger(DyScannerImpl.class);
 
-    private String basePackage;
-
-    private ClassLoader cl;
-
-
-    public DyScannerImpl(String basePackage) {
-        this.basePackage = basePackage;
-        this.cl = getClass().getClassLoader();
-
-    }
-
-    //初始化類的包和根路徑
-    public DyScannerImpl(String basePackage, ClassLoader cl) {
-        this.basePackage = basePackage;
-        this.cl = cl;
-    }
-    /**
-     * 获取包下全部的类
-     * @return
-     * @throws IOException
-     */
     @Override
-    public List<String> doScanner(boolean recursion) throws IOException {
-        log.info("DyScannerImpl开始扫描包{}下的所有类",basePackage);
-        List<String> dsList=doScan(basePackage, new ArrayList<String>(),recursion);
-        return dueResult(dsList);
-    }
-
-    /**
-     * 处理结果，在jar和开发时数据的格式有所不同
-     * @param result
-     * @return
-     */
-    private List<String> dueResult(List<String> result){
-        List<String> ls=new ArrayList<>();
-        for (String str:result) {
-            if (str.indexOf("/")>0){
-                String clzz= str.substring(str.lastIndexOf(".")+1);
-                clzz=clzz.replace("/",".");
-                System.out.println(clzz);
-                ls.add(clzz);
+    public Set<Class> doScanner(String packageName) throws Exception {
+        Set<Class> result=new HashSet<>();
+        DyScanStarter scanPackage = new DyScanStarter();
+        scanPackage.addPackage(packageName);
+        scanPackage.setFilter(new DyScanStarter.ScanPackageFilter()
+        {
+            @Override
+            public boolean accept(Class<?> clazz)
+            {
+                return true;
             }
-        }
-        if (ls.size()==0){
-            ls=result;
-        }
-
-        return ls;
+        });
+        scanPackage.setListener(new DyScanStarter.ScanPackageListener()
+        {
+            @Override
+            public void onScanClass(Class<?> clazz)
+            {
+                result.add(clazz);
+            }
+        });
+        scanPackage.scan();
+        return result;
     }
-    /**
-     *
-     *扫描包
-     * @param basePackage
-     * @param nameList
-     * @return
-     * @throws IOException
-     */
-    private List<String> doScan(String basePackage, List<String> nameList , boolean recursion) throws IOException {
 
-
-        String splashPath = StringUtils.dotToSplash(basePackage);
-
-
-        URL url = cl.getResource(splashPath);
-        String filePath = StringUtils.getRootPath(url);
-
-        List<String> names = null;
-        if (isJarFile(filePath)) {
-
-            names = readFromJarFile(filePath, splashPath);
-        } else {
-
-
-            names = readFromDirectory(filePath);
-        }
-
-        for (String name : names) {
-            if (isClassFile(name)) {
-
-                nameList.add(toFullyQualifiedName(name, basePackage));
-            } else {
-
-                if (recursion) {
-                    doScan(basePackage + "." + name, nameList,recursion);
+    @Override
+    public Set<Class> doScanner(String packageName, Class<?> ...annotations) throws Exception {
+        Set<Class> result=new HashSet<>();
+        DyScanStarter scanPackage = new DyScanStarter();
+        scanPackage.addPackage(packageName);
+        scanPackage.setFilter(new DyScanStarter.ScanPackageFilter()
+        {
+            @Override
+            public boolean accept(Class<?> clazz)
+            {
+                for (Class a:annotations){
+                    if (clazz.isAnnotationPresent(a)){
+                        return true;
+                    }
                 }
-
+                return false;
             }
-        }
-
-        return nameList;
-    }
-
-
-    private String toFullyQualifiedName(String shortName, String basePackage) {
-        StringBuilder sb = new StringBuilder(basePackage);
-        sb.append('.');
-        sb.append(StringUtils.trimExtension(shortName));
-        return sb.toString();
-    }
-
-    private List<String> readFromJarFile(String jarPath, String splashedPackageName) throws IOException {
-
-        JarInputStream jarIn = new JarInputStream(new FileInputStream(jarPath));
-        JarEntry entry = jarIn.getNextJarEntry();
-
-        List<String> nameList = new ArrayList<String>();
-        while (null != entry) {
-            String name = entry.getName();
-            if (name.startsWith(splashedPackageName) && isClassFile(name)) {
-                nameList.add(name);
+        });
+        scanPackage.setListener(new DyScanStarter.ScanPackageListener()
+        {
+            @Override
+            public void onScanClass(Class<?> clazz)
+            {
+               result.add(clazz);
             }
-
-            entry = jarIn.getNextJarEntry();
-        }
-        return nameList;
+        });
+        scanPackage.scan();
+        return result;
     }
-
-    private List<String> readFromDirectory(String path) {
-        File file = new File(path);
-        String[] names = file.list();
-
-        if (null == names) {
-            return null;
-        }
-
-        return Arrays.asList(names);
-    }
-
-    private boolean isClassFile(String name) {
-        return name.endsWith(".class");
-    }
-
-    private boolean isJarFile(String name) {
-        return name.endsWith(".jar");
-    }
-
 }
