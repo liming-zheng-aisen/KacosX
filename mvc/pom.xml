@@ -23,21 +23,10 @@
 
         <dependency>
             <groupId>com.duanya</groupId>
-            <artifactId>annotation</artifactId>
+            <artifactId>framework</artifactId>
             <version>${dyspring}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.duanya</groupId>
-            <artifactId>bean</artifactId>
-            <version>${dyspring}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.duanya</groupId>
-            <artifactId>annotation</artifactId>
-            <version>${dyspring}</version>
-        </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>

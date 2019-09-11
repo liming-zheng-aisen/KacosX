@@ -30,7 +30,7 @@ import java.util.Set;
  * @Date 2019/9/4
  */
 
-@DyBootApplicationStarter(scannerPath = {})
+@DyBootApplicationStarter(scannerPath = {},order = 1000)
 public class DybootStarterJdbc  implements DyDefaultStarter {
 
     private static final String DEF_STATUS="development";

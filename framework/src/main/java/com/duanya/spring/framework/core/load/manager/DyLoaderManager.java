@@ -54,7 +54,6 @@ public class DyLoaderManager {
      * @throws Exception
      */
     public  void doDefalultLoad() throws Exception {
-
         fristLoader=null;
         lastLoader=null;
         registerLoader(new DyConfigurationLoader());

@@ -5,10 +5,8 @@ import com.duanya.spring.common.scanner.impl.DyScannerImpl;
 import com.duanya.spring.common.util.StringUtils;
 import com.duanya.spring.framework.annotation.DyOrder;
 import com.duanya.spring.framework.annotation.DyWebFilter;
-import com.duanya.spring.framework.core.bean.factory.DyAutowiredFactory;
 import com.duanya.spring.framework.core.bean.factory.DyBeanFactory;
-import com.duanya.spring.framework.core.bean.factory.DyValueFactory;
-import com.duanya.spring.framework.mvc.dispatcher.DyDispatchedServlet;
+import com.duanya.spring.framework.core.load.DyConfigurationLoader;
 import com.duanya.start.web.jetty.filter.DyFilterBean;
 import com.duanya.start.web.jetty.filter.DyWebFilterMannager;
 
@@ -48,9 +46,8 @@ public class DyFilterRegisterServer {
                         filterName=StringUtils.toLowerCaseFirstName(c.getSimpleName());
                     }
 
-                    Filter filter = (Filter) DyBeanFactory.createNewBean(c);
-                    DyValueFactory.doFields(filter,DyDispatchedServlet.getEvn());
-                    DyAutowiredFactory.doAutowired(filter);
+                    Filter filter = (Filter) DyBeanFactory.initNewBean(c,DyConfigurationLoader.getEvn());
+
 
                     registerFilter(filter,orderNum,requestUrl,filterName);
 
@@ -94,5 +91,7 @@ public class DyFilterRegisterServer {
         filterBean.setUrl(url);
 
         DyWebFilterMannager.registerFilterBean(filterBean);
+
     }
+
 }

@@ -12,7 +12,6 @@
         <module>framework</module>
         <module>common</module>
         <module>dyboot-starter-web</module>
-        <module>webTest</module>
         <module>dyboot-starter</module>
         <module>annotation</module>
         <module>context</module>
@@ -21,6 +20,8 @@
         <module>dyboot-starter-jdbc</module>
         <module>println</module>
         <module>dyboot-plugin</module>
+        <module>dyboot-starter-nacos-config</module>
+        <module>dyboot-starter-nacos-cp</module>
     </modules>
     <properties>
         <servlet-v>4.0.1</servlet-v>

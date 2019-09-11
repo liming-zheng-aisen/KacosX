@@ -4,7 +4,7 @@ import com.duanya.spring.framework.annotation.DyWebServlet;
 import com.duanya.spring.framework.core.bean.factory.DyAutowiredFactory;
 import com.duanya.spring.framework.core.bean.factory.DyBeanFactory;
 import com.duanya.spring.framework.core.bean.factory.DyValueFactory;
-import com.duanya.spring.framework.mvc.dispatcher.DyDispatchedServlet;
+import com.duanya.spring.framework.core.load.DyConfigurationLoader;
 
 import javax.servlet.Servlet;
 import java.util.HashSet;
@@ -38,7 +38,7 @@ public class DyServletBeanInitManager {
         try {
             Servlet servlet1=(Servlet)DyBeanFactory.createNewBean(servlet);
             DyAutowiredFactory.doAutowired(servlet1);
-            DyValueFactory.doFields(servlet1,DyDispatchedServlet.getEvn());
+            DyValueFactory.doFields(servlet1,DyConfigurationLoader.getEvn());
             DyServletBean dyServletBean=new DyServletBean(servlet1,url);
             servletBeans.add(dyServletBean);
         } catch (Exception e) {

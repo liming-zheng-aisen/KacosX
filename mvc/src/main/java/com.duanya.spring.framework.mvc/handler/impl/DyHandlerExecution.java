@@ -7,7 +7,7 @@ import com.duanya.spring.framework.annotation.DyRequestParameter;
 import com.duanya.spring.framework.core.bean.factory.DyAutowiredFactory;
 import com.duanya.spring.framework.core.bean.factory.DyBeanFactory;
 import com.duanya.spring.framework.core.bean.factory.DyValueFactory;
-import com.duanya.spring.framework.mvc.dispatcher.DyDispatchedServlet;
+import com.duanya.spring.framework.core.load.DyConfigurationLoader;
 import com.duanya.spring.framework.mvc.handler.DyHandlerAdapter;
 import com.duanya.spring.framework.mvc.handler.bean.RequestUrlBean;
 import com.duanya.spring.framework.mvc.util.JsonUtil;
@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Parameter;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.Properties;
 
@@ -32,7 +33,7 @@ public class DyHandlerExecution implements DyHandlerAdapter {
     @Override
     public Object handle(HttpServletRequest request, HttpServletResponse response, RequestUrlBean handler) throws Exception {
 
-        Properties env=DyDispatchedServlet.getEvn();
+        Properties env=DyConfigurationLoader.getEvn();
         Object[] param = null;
         if (handler.getMethod().getParameterCount() > 0) {
             param = new Object[handler.getMethod().getParameterCount()];
@@ -61,7 +62,8 @@ public class DyHandlerExecution implements DyHandlerAdapter {
                     if (handler.isBringParam()) {
                         String url = StringUtils.formatUrl(request.getRequestURI());
                         String pathParam = url.substring(handler.getRequestUrl().length() - 1);
-                        param[index] = pathParam;
+                        pathParam = URLDecoder.decode(pathParam,"utf-8");
+                        param[index] = setParam(parameter.getType().getSimpleName(),pathParam);
                     }
                 } else if (parameter.isAnnotationPresent(DyRequestBody.class)) {
                     String json = RequestJosnUtil.getRequestJsonString(request);

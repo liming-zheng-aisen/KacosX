@@ -9,6 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * @author zheng.liming
@@ -43,6 +44,21 @@ public class DyBeanFactory {
      */
     public static Object createNewBean(Class c) throws IllegalAccessException, InstantiationException {
         return c.newInstance();
+    }
+
+    /**
+     * 根据已经加载的class创建一个实例
+     *
+     * @param c
+     * @return
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     */
+    public static Object initNewBean(Class c, Properties evn) throws Exception {
+        Object object=createNewBean(c);
+        DyAutowiredFactory.doAutowired(c);
+        DyValueFactory.doFields(object,evn);
+        return object;
     }
 
 

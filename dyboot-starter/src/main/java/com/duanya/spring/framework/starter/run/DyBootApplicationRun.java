@@ -2,11 +2,11 @@ package com.duanya.spring.framework.starter.run;
 
 import com.duanya.spring.DyConsolePrint;
 import com.duanya.spring.common.times.DyTimer;
+import com.duanya.spring.framework.context.spring.DySpringApplicationContext;
 import com.duanya.spring.framework.core.load.DyClassLoader;
 import com.duanya.spring.framework.core.load.DyConfigurationLoader;
 import com.duanya.spring.framework.core.load.DyIocLoader;
 import com.duanya.spring.framework.core.load.manager.DyLoaderManager;
-import com.duanya.spring.framework.starter.context.DyStarterContext;
 import com.duanya.spring.framework.starter.load.DyBootStarterLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +31,8 @@ public class DyBootApplicationRun {
         try {
             //开始计时
             dyTimer.doStart();
-            DyStarterContext context=DyStarterContext.Builder.getContext();
+
+            DySpringApplicationContext context=DySpringApplicationContext.Builder.getDySpringApplicationContext();
 
             context.registerBean("dyTimer",dyTimer);
 

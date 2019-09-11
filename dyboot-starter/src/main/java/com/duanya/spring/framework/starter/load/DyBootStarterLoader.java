@@ -13,8 +13,11 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @Desc DyBootStarterLoader
@@ -35,22 +38,34 @@ public class DyBootStarterLoader extends  DyBeanLoad {
 
         Set<Class> starters= scanner.doScanner(STARTER_PATH,DyBootApplicationStarter.class);
 
-        doStarter(starters,c);
+        Set<DyStarterBean> starterBeanSet=convertToStarterBean(starters);
+
+        doStarter(starterBeanSet,c);
 
         logger.info("dyboot-starter加载结束");
 
         if (null!=nextLoader){
             nextLoader.load(c);
         }
-
+    }
+    private  Set<DyStarterBean> convertToStarterBean(Set<Class> classes){
+        Set<DyStarterBean> starterBeanSet=new HashSet<>();
+        for (Class c:classes){
+            if (c.isAnnotationPresent(DyBootApplicationStarter.class)) {
+                DyBootApplicationStarter starter = (DyBootApplicationStarter) c.getAnnotation(DyBootApplicationStarter.class);
+                Integer order = starter.order();
+                String[] path = starter.scannerPath();
+                DyStarterBean starterBean=new DyStarterBean(order,c,path);
+                starterBeanSet.add(starterBean);
+            }
+        }
+      return starterBeanSet.stream().sorted(Comparator.comparing(DyStarterBean::getOrder)).collect(Collectors.toSet());
     }
 
-    private void doStarter(Set<Class> starters,Class main) throws Exception{
-        for (Class cl :starters){
-            invokeStarter(cl,main);
-            DyBootApplicationStarter starter=(DyBootApplicationStarter)cl.getAnnotation(DyBootApplicationStarter.class);
-            String[] paths=starter.scannerPath();
-            registerToClassLoader(paths);
+    private void doStarter(Set<DyStarterBean> starters,Class main) throws Exception{
+        for (DyStarterBean cl :starters){
+            invokeStarter(cl.getTarget(),main);
+            registerToClassLoader(cl.getScannerPath());
         }
     }
 

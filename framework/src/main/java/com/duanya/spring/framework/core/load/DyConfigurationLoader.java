@@ -20,7 +20,6 @@ public class DyConfigurationLoader extends DyBeanLoad {
 
     private static final Logger log = LoggerFactory.getLogger(DyConfigurationLoader.class);
 
-
     /**
      * evn全局配置文件。
      */
@@ -130,5 +129,7 @@ public class DyConfigurationLoader extends DyBeanLoad {
         return evn;
     }
 
-
+    public static void setEvn(Properties evn) {
+        DyConfigurationLoader.evn = evn;
+    }
 }

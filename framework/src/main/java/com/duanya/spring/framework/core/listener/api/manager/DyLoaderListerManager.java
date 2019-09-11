@@ -7,11 +7,12 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @Desc DyLoaderListerManager
  * @Author Zheng.LiMing
- * @Date 2019/9/4
+ * @Date 2019/9/4 加载器监听
  */
 public class DyLoaderListerManager {
 
@@ -32,6 +33,21 @@ public class DyLoaderListerManager {
                     @Override
                     public void run() {
                         listener.notice();
+                    }
+                }).start();
+            }
+        }
+
+    }
+
+    public static void  updateLister(Properties env){
+        if (listeners.size()>0){
+            log.info("更新配置");
+            for (IDyLoadListener listener:listeners) {
+                (new Thread(){
+                    @Override
+                    public void run() {
+                        listener.update(env);
                     }
                 }).start();
             }

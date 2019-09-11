@@ -7,6 +7,7 @@ import com.duanya.spring.common.scanner.api.IDyScanner;
 import com.duanya.spring.common.scanner.impl.DyScannerImpl;
 import com.duanya.spring.common.util.StringUtils;
 import com.duanya.spring.framework.core.bean.factory.bean.manager.DyBeanManager;
+import com.duanya.spring.framework.core.load.DyConfigurationLoader;
 import com.duanya.spring.framework.mvc.context.DyServletContext;
 import com.duanya.spring.framework.mvc.enums.DyMethod;
 import com.duanya.spring.framework.mvc.handler.bean.RequestUrlBean;
@@ -37,18 +38,11 @@ public class DyDispatchedServlet extends HttpServlet {
 
     private static String config;
 
-    private static Properties evn;
-
     private static Set<Class> cl;
 
 
     public DyDispatchedServlet() {
-
-    }
-
-    public DyDispatchedServlet(Properties properties,Set<Class> classes) {
-        evn=properties;
-        cl=classes;
+        cl=DyBeanManager.getClassContainer();
     }
 
     @Override
@@ -59,6 +53,8 @@ public class DyDispatchedServlet extends HttpServlet {
         }
 
         try {
+
+            Properties evn=DyConfigurationLoader.getEvn();
 
             if (null == evn) {
                 evn = DyLoadPropeties.doLoadProperties(null, config, this.getClass());
@@ -130,7 +126,6 @@ public class DyDispatchedServlet extends HttpServlet {
         setDefaultEncoding(req,resp);
 
         try {
-            Properties  evn = DyDispatchedServlet.getEvn();
 
             HandlerMapping handlerMapping = new HandlerMapping();
 
@@ -148,8 +143,10 @@ public class DyDispatchedServlet extends HttpServlet {
             Object data = exec.handle(req, resp, bean);
 
             if (isBaseType(data.getClass(), true)) {
+                resp.setContentType("text/html;charset=UTF-8");
                 HttpResponsePrintln.writer(resp,data);
             } else {
+                resp.setContentType("application/json;charset=UTF-8");
                 HttpResponsePrintln.writer(resp,JsonUtil.objectToJson(data));
             }
 
@@ -192,14 +189,10 @@ public class DyDispatchedServlet extends HttpServlet {
     private  void  setDefaultEncoding(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html;charset=UTF-8");
+
         resp.setHeader("content-type", "text/html;charset=utf-8");
-        resp.setContentType("application/json;charset=UTF-8");
     }
 
-    public static Properties getEvn() {
-        return evn;
-    }
 
     public static Set<Class> getCl() {
         return cl;
