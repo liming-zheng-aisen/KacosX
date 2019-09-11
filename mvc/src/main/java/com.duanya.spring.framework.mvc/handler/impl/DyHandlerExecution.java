@@ -75,13 +75,15 @@ public class DyHandlerExecution implements DyHandlerAdapter {
                     } else {
                         param[index] = JsonUtil.jsonToBean(json, parameter.getType());
                     }
-                } else if (parameter.getClass().getSimpleName().equals("HttpServletRequest")) {
+                } else if (parameter.getType().getSimpleName().equals("HttpServletRequest")) {
                     param[index] = request;
-                } else if (parameter.getClass().getSimpleName().equals("HttpServletResponse")) {
+                } else if (parameter.getType().getSimpleName().equals("HttpServletResponse")) {
                     param[index] = response;
                 } else {
                     param[index] = null;
                 }
+                System.out.println(parameter.getType().getName());
+                System.out.println(parameter.getType().getSimpleName());
                 index++;
             }
         }
