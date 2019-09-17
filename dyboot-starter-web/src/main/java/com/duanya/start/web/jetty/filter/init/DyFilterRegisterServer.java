@@ -1,11 +1,11 @@
 package com.duanya.start.web.jetty.filter.init;
 
-import com.duanya.spring.common.scanner.api.IDyScanner;
-import com.duanya.spring.common.scanner.impl.DyScannerImpl;
 import com.duanya.spring.common.util.StringUtils;
 import com.duanya.spring.framework.annotation.DyOrder;
 import com.duanya.spring.framework.annotation.DyWebFilter;
+import com.duanya.spring.framework.context.spring.DySpringApplicationContext;
 import com.duanya.spring.framework.core.bean.factory.DyBeanFactory;
+import com.duanya.spring.framework.core.bean.factory.DyValueFactory;
 import com.duanya.spring.framework.core.load.DyConfigurationLoader;
 import com.duanya.start.web.jetty.filter.DyFilterBean;
 import com.duanya.start.web.jetty.filter.DyWebFilterMannager;
@@ -22,10 +22,12 @@ import java.util.Set;
 public class DyFilterRegisterServer {
 
     public void autoRegisterFilter(Set<Class> classes){
-        IDyScanner dyScanner=new DyScannerImpl();
+
         try {
 
             Set<Class> result=getWebFilterClass(classes);
+
+            DySpringApplicationContext context=DySpringApplicationContext.Builder.getDySpringApplicationContext();
 
             for (Class c:result){
                 if (isFilter(c)){
@@ -46,10 +48,18 @@ public class DyFilterRegisterServer {
                         filterName=StringUtils.toLowerCaseFirstName(c.getSimpleName());
                     }
 
-                    Filter filter = (Filter) DyBeanFactory.initNewBean(c,DyConfigurationLoader.getEvn());
+                    Filter filter = (Filter) DyBeanFactory.createNewBean(c);
 
+                    DyValueFactory.doFields(filter,DyConfigurationLoader.getEvn());
 
                     registerFilter(filter,orderNum,requestUrl,filterName);
+
+                    context.registerBean(filterName,filter);
+
+                    String beanName = StringUtils.toLowerCaseFirstName(c.getSimpleName());
+                    if (!beanName.equals(filterName)) {
+                        context.registerBean(beanName, filter);
+                    }
 
                 }
             }

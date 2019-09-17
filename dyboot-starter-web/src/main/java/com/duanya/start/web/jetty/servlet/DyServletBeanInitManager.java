@@ -1,7 +1,8 @@
 package com.duanya.start.web.jetty.servlet;
 
+import com.duanya.spring.common.util.StringUtils;
 import com.duanya.spring.framework.annotation.DyWebServlet;
-import com.duanya.spring.framework.core.bean.factory.DyAutowiredFactory;
+import com.duanya.spring.framework.context.spring.DySpringApplicationContext;
 import com.duanya.spring.framework.core.bean.factory.DyBeanFactory;
 import com.duanya.spring.framework.core.bean.factory.DyValueFactory;
 import com.duanya.spring.framework.core.load.DyConfigurationLoader;
@@ -18,6 +19,8 @@ import java.util.Set;
 public class DyServletBeanInitManager {
 
     private Set<DyServletBean> servletBeans=new HashSet<>();
+
+    private DySpringApplicationContext applicationContext=DySpringApplicationContext.Builder.getDySpringApplicationContext();
 
     public void init(Set<Class> classes){
         for (Class c:classes){
@@ -37,14 +40,16 @@ public class DyServletBeanInitManager {
 
         try {
             Servlet servlet1=(Servlet)DyBeanFactory.createNewBean(servlet);
-            DyAutowiredFactory.doAutowired(servlet1);
             DyValueFactory.doFields(servlet1,DyConfigurationLoader.getEvn());
             DyServletBean dyServletBean=new DyServletBean(servlet1,url);
             servletBeans.add(dyServletBean);
+            //交给applicationContext管理，因为Servlet有可能需要注入
+            applicationContext.registerBean(StringUtils.toLowerCaseFirstName(servlet.getSimpleName()),servlet1);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
 
     public boolean hasServlet(Class servlet){

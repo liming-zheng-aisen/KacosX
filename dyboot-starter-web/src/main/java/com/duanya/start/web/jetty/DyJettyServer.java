@@ -4,6 +4,7 @@ import com.duanya.spring.common.times.DyTimer;
 import com.duanya.spring.framework.context.manager.DyContextManager;
 import com.duanya.spring.framework.core.bean.factory.DyBeanFactory;
 import com.duanya.spring.framework.core.load.DyConfigurationLoader;
+import com.duanya.spring.framework.mvc.util.JsonUtil;
 import org.eclipse.jetty.server.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,9 +25,12 @@ public class DyJettyServer {
 
     public   void start() throws Exception {
 
-        config=(DyJettyConfig) DyBeanFactory.initNewBean(DyJettyConfig.class,DyConfigurationLoader.getEvn());
+        DyJettyConfig config=(DyJettyConfig) DyBeanFactory.initNewBean(DyJettyConfig.class,DyConfigurationLoader.getEvn());
+
+        copyConfig(config);
 
         server =DyJettyFactory.createServer(config,this.getClass());
+
 
         server.start();
 
@@ -34,10 +38,23 @@ public class DyJettyServer {
         DyTimer dyTimer=(DyTimer) context.getBean("dyTimer",DyTimer.class);
         log.info("DyBoot Starter Web 启动完成，花费时间为{}ms",dyTimer.spendingTime());
 
-        server.join();
+        //server.join();
 
     }
 
+
+    public void destroy(){
+        server.destroy();
+    }
+
+    private void copyConfig(DyJettyConfig config){
+        try {
+            String data = JsonUtil.objectToJson(config);
+            this.config=JsonUtil.jsonToBean(data,DyJettyConfig.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void stop() throws Exception {
         server.stop();

@@ -21,15 +21,15 @@ public class DruidConfig {
 
     private String password="123456";
 
-    private String driverClassName="com.mysql.jdbc.Driver";
+    private String driverClassName="com.mysql.cj.jdbc.Driver";
 
-    private int initialSize=5;
+    private int initialSize=100;
 
-    private int minIdle=5;
+    private int minIdle=50;
 
-    private int maxActive=20;
+    private int maxActive=200;
 
-    private int maxWait=60000;
+    private int maxWait=2000;
 
     private int timeBetweenEvictionRunsMillis=60000;
 
@@ -63,7 +63,10 @@ public class DruidConfig {
         datasource.setTestWhileIdle(Boolean.parseBoolean(evn.getProperty("dy.datasource.testWhileIdle",testWhileIdle+"")));
         datasource.setTestOnBorrow(Boolean.parseBoolean(evn.getProperty("dy.datasource.testOnBorrow",testOnBorrow+"")));
         datasource.setTestOnReturn(Boolean.parseBoolean(evn.getProperty("dy.datasource.testOnReturn",testOnReturn+"")));
-
+        datasource.setRemoveAbandoned(true);
+        datasource.setRemoveAbandonedTimeout(180);
+        datasource.setLogAbandoned(true);
+        datasource.setDefaultAutoCommit(true);
         try {
             datasource.setFilters(evn.getProperty("dy.datasource.filters",filters));
         } catch (SQLException e) {

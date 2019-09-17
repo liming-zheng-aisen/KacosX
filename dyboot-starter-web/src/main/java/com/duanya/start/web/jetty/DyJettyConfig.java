@@ -18,16 +18,14 @@ public class DyJettyConfig {
     @DyValue("${dy.server.port}:8099")
     private Integer port;
 
-    @DyValue("${dy.server.host}:localhost")
+    @DyValue("${dy.server.host}:0.0.0.0")
     private String host;
 
     @DyValue("${dy.server.static.source.path}:static")
     private String sourcePath;
 
-    @DyValue("${dy.server.static.source.request.prefix}:/")
-    private String prefix;
 
-    @DyValue("${dy.server.static.source.request.sufix}:*")
+    @DyValue("${dy.server.static.source.request.sufix}:.*")
     private String sufix;
 
     @DyValue("${dy.server.default.path}:/")
@@ -36,6 +34,14 @@ public class DyJettyConfig {
     @DyValue("${dy.server.idleTimeout}:120000")
     private Integer idleTimeout;
 
+    @DyValue("${dy.server.minThreads}:10")
+    private Integer minThreads;
+
+    @DyValue("${dy.server.maxThreads}:500")
+    private Integer maxThreads;
+
+    @DyValue("${dy.server.ignorePath}: ")
+    private String ignorePath;
 
 
     public Integer getPort() {
@@ -52,14 +58,6 @@ public class DyJettyConfig {
 
     public void setSourcePath(String sourcePath) {
         this.sourcePath = sourcePath;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
     }
 
     public String getSufix() {
@@ -94,16 +92,42 @@ public class DyJettyConfig {
         this.idleTimeout = idleTimeout;
     }
 
+    public Integer getMinThreads() {
+        return minThreads;
+    }
+
+    public void setMinThreads(Integer minThreads) {
+        this.minThreads = minThreads;
+    }
+
+    public Integer getMaxThreads() {
+        return maxThreads;
+    }
+
+    public void setMaxThreads(Integer maxThreads) {
+        this.maxThreads = maxThreads;
+    }
+
+    public String getIgnorePath() {
+        return ignorePath;
+    }
+
+    public void setIgnorePath(String ignorePath) {
+        this.ignorePath = ignorePath;
+    }
+
     @Override
     public String toString() {
         return "DyJettyConfig{" +
                 "port=" + port +
                 ", host='" + host + '\'' +
                 ", sourcePath='" + sourcePath + '\'' +
-                ", prefix='" + prefix + '\'' +
                 ", sufix='" + sufix + '\'' +
                 ", defaultPaht='" + defaultPaht + '\'' +
                 ", idleTimeout=" + idleTimeout +
+                ", minThreads=" + minThreads +
+                ", maxThreads=" + maxThreads +
+                ", ignorePath=" + ignorePath +
                 '}';
     }
 }

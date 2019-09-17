@@ -111,6 +111,11 @@ public class StringUtils {
         return  url;
     }
 
+    /**
+     * 格式化命名规则
+     * @param name
+     * @return
+     */
     public static  String formatDefinedName(String name){
 
         if (isEmptyPlus(name)){
@@ -132,6 +137,11 @@ public class StringUtils {
     }
 
 
+    /**
+     * 获取根路径的资源
+     * @param url
+     * @return
+     */
     public static String getRootPath(URL url) {
         String fileUrl = url.getFile();
         int pos = fileUrl.indexOf('!');
@@ -144,11 +154,20 @@ public class StringUtils {
     }
 
 
+    /**
+     * 将"."转成"/"
+     * @param name
+     * @return
+     */
     public static String dotToSplash(String name) {
         return name.replaceAll("\\.", DIAGONAL);
     }
 
-
+    /**
+     * 获取文件名字，比如test.class，文件名为test
+     * @param name
+     * @return
+     */
     public static String trimExtension(String name) {
         int pos = name.indexOf('.');
         if (-1 != pos) {
@@ -169,4 +188,6 @@ public class StringUtils {
 
         return trimmed.substring(splashIndex);
     }
+
+
 }

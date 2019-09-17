@@ -3,9 +3,10 @@ package com.duanya.spring.framework.jdbc.context;
 import com.duanya.spring.framework.context.base.DyApplicationContext;
 import com.duanya.spring.framework.context.exception.DyContextException;
 import com.duanya.spring.framework.context.manager.DyContextManager;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.duanya.spring.framework.core.load.DyConfigurationLoader;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 
 
 /**
@@ -15,29 +16,32 @@ import java.util.Map;
  */
 public class DyJdbcContext implements DyApplicationContext {
 
-
-
-    private static Map<String,Object> jdbcContext=new HashMap<>();
-
-
+    private SqlSessionFactory sqlSessionFactory;
 
     @Override
     public Object getBean(String beanName,Class beanClass) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-
-        if (jdbcContext.containsKey(beanName)){
-            return jdbcContext.get(beanName);
+        if (sqlSessionFactory!=null&&beanClass.isAnnotationPresent(Mapper.class)) {
+            SqlSession sqlSession = sqlSessionFactory.openSession(Boolean.parseBoolean(DyConfigurationLoader.getEvn().getProperty("dy.datasource.autoTransaction", "true")));
+            return sqlSession.getMapper(beanClass);
         }
-
        return null;
     }
 
 
     @Override
     public void registerBean(String beanName, Object object) throws DyContextException {
-        jdbcContext.put(beanName, object);
+        if (sqlSessionFactory!=null&&object.getClass().isAnnotationPresent(Mapper.class)) {
+            sqlSessionFactory.getConfiguration().addMapper(object.getClass());
+        }
     }
 
+    public SqlSessionFactory getSqlSessionFactory() {
+        return sqlSessionFactory;
+    }
 
+    public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
+    }
 
     public static class Builder{
 

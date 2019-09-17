@@ -6,6 +6,7 @@ import com.duanya.spring.common.properties.DyLoadPropeties;
 import com.duanya.spring.common.scanner.api.IDyScanner;
 import com.duanya.spring.common.scanner.impl.DyScannerImpl;
 import com.duanya.spring.common.util.StringUtils;
+import com.duanya.spring.common.util.TypeUtil;
 import com.duanya.spring.framework.core.bean.factory.bean.manager.DyBeanManager;
 import com.duanya.spring.framework.core.load.DyConfigurationLoader;
 import com.duanya.spring.framework.mvc.context.DyServletContext;
@@ -15,7 +16,6 @@ import com.duanya.spring.framework.mvc.handler.impl.DyHandlerExecution;
 import com.duanya.spring.framework.mvc.handler.mapping.HandlerMapping;
 import com.duanya.spring.framework.mvc.util.JsonUtil;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,15 +43,6 @@ public class DyDispatchedServlet extends HttpServlet {
 
     public DyDispatchedServlet() {
         cl=DyBeanManager.getClassContainer();
-    }
-
-    @Override
-    public void init(ServletConfig servletConfig) {
-
-        if (null == config) {
-            config = servletConfig.getInitParameter("contextConfigLocation");
-        }
-
         try {
 
             Properties evn=DyConfigurationLoader.getEvn();
@@ -83,6 +74,7 @@ public class DyDispatchedServlet extends HttpServlet {
             System.exit(0);
         }
     }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -142,7 +134,7 @@ public class DyDispatchedServlet extends HttpServlet {
 
             Object data = exec.handle(req, resp, bean);
 
-            if (isBaseType(data.getClass(), true)) {
+            if (TypeUtil.isBaseType(data.getClass(), true)) {
                 resp.setContentType("text/html;charset=UTF-8");
                 HttpResponsePrintln.writer(resp,data);
             } else {
@@ -158,34 +150,6 @@ public class DyDispatchedServlet extends HttpServlet {
 
     }
 
-    /**
-     * 判断对象属性是否是基本数据类型,包括是否包括string
-     *
-     * @param className
-     * @param incString 是否包括string判断,如果为true就认为string也是基本数据类型
-     * @return
-     */
-    private static boolean isBaseType(Class className, boolean incString) {
-        if (incString && className.equals(String.class)) {
-            return true;
-        }
-        return className.equals(Integer.class) ||
-                className.equals(int.class) ||
-                className.equals(Byte.class) ||
-                className.equals(byte.class) ||
-                className.equals(Long.class) ||
-                className.equals(long.class) ||
-                className.equals(Double.class) ||
-                className.equals(double.class) ||
-                className.equals(Float.class) ||
-                className.equals(float.class) ||
-                className.equals(Character.class) ||
-                className.equals(char.class) ||
-                className.equals(Short.class) ||
-                className.equals(short.class) ||
-                className.equals(Boolean.class) ||
-                className.equals(boolean.class);
-    }
     private  void  setDefaultEncoding(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");

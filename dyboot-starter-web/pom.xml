@@ -16,12 +16,6 @@
     </properties>
 
 <dependencies>
-    <!-- servlet -->
-    <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>javax.servlet-api</artifactId>
-        <scope>provided</scope>
-    </dependency>
 
     <dependency>
         <groupId>javax.annotation</groupId>
@@ -38,7 +32,26 @@
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-servlet</artifactId>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-http -->
+    <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-http</artifactId>
+    </dependency>
 
+    <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-io</artifactId>
+    </dependency>
+
+    <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-security</artifactId>
+    </dependency>
+
+    <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-util</artifactId>
+    </dependency>
     <!-- duanya framework -->
     <dependency>
         <groupId>com.duanya</groupId>

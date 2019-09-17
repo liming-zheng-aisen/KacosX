@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 import java.util.Properties;
 
 /**
- * @Desc DyValueFactory
+ * @Desc 属性注入工厂
  * @Author Zheng.LiMing
  * @Date 2019/9/4
  */

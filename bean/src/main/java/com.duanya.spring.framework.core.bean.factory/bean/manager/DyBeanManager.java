@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @Desc BeanManager
+ * @Desc bean class全局管理
  * @Author Zheng.LiMing
  * @Date 2019/9/4
  */

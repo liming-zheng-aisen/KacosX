@@ -5,7 +5,7 @@ import java.lang.annotation.*;
 /**
  * @author zheng.liming
  * @date 2019/8/26
- * @description
+ * @description 自动配置
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

@@ -95,7 +95,7 @@ public class DyIocLoader extends DyBeanLoad{
             String key=iterator.next();
                Object bean= context.get(key);
                if (bean.getClass().isAnnotationPresent(DyConfiguration.class)) {
-                   DyAutowiredFactory.doAutowired(bean);
+                   DyAutowiredFactory.doAutowired(bean,DyConfigurationLoader.getEvn());
                    //调用bean的方法创建实例
                    Map<String, Object> beans = DyBeanFactory.doMethodsInitialBean(bean);
                    list.add(beans);
@@ -113,7 +113,7 @@ public class DyIocLoader extends DyBeanLoad{
         Iterator iterator=context.keySet().iterator();
         while (iterator.hasNext()){
             String key=(String)iterator.next();
-            DyAutowiredFactory.doAutowired(context.get(key));
+            DyAutowiredFactory.doAutowired(context.get(key),DyConfigurationLoader.getEvn());
         }
         log.info("doAutowirteAll，配置类自动装配完成！");
     }

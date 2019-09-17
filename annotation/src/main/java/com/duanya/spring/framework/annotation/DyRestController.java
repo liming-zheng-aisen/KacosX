@@ -12,5 +12,9 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE,ElementType.ANNOTATION_TYPE})
 @DyComponent
 public @interface DyRestController {
+    /**
+     * 实例名称
+     * @return
+     */
     String value() default "";
 }

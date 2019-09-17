@@ -56,7 +56,21 @@ public class DyBeanFactory {
      */
     public static Object initNewBean(Class c, Properties evn) throws Exception {
         Object object=createNewBean(c);
-        DyAutowiredFactory.doAutowired(c);
+        DyAutowiredFactory.doAutowired(object,evn);
+        DyValueFactory.doFields(object,evn);
+        return object;
+    }
+    /**
+     * 根据已经加载的class创建一个实例
+     *
+     * @param c
+     * @return
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     */
+    public static Object initNewBean(String c, Properties evn) throws Exception {
+        Object object=createNewBean(c);
+        DyAutowiredFactory.doAutowired(object,evn);
         DyValueFactory.doFields(object,evn);
         return object;
     }

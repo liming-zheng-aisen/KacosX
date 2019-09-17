@@ -5,7 +5,7 @@ import java.lang.annotation.*;
 /**
  * @author zheng.liming
  * @date 2019/8/24
- * @description
+ * @description dyboot程序
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

@@ -4,7 +4,7 @@ import java.lang.annotation.*;
 
 
 /**
- * @Desc DyNacosConfigStarter
+ * @Desc dyboot组件启动器
  * @Author Zheng.LiMing
  * @Date 2019/8/29
  */

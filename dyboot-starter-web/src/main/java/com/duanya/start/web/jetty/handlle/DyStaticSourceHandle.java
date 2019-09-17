@@ -1,5 +1,6 @@
 package com.duanya.start.web.jetty.handlle;
 
+import com.duanya.spring.common.util.StringUtils;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 
@@ -16,24 +17,24 @@ import java.io.IOException;
 
 public class DyStaticSourceHandle extends ResourceHandler{
 
-    private String prefixRegex="\\/.*";
 
     private String suffixRegex="\\..*";
 
+    private String ignorePath=null;
+
     @Override
     public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        if (target.matches(prefixRegex+suffixRegex)) {
-            super.handle(target, baseRequest, request, response);
+
+        if (StringUtils.isNotEmptyPlus(ignorePath)){
+            if (target.matches(ignorePath)){
+                return;
+            }
         }
-    }
 
-    public String getPrefixRegex() {
-        return prefixRegex;
-    }
-
-    public void setPrefixRegex(String prefixRegex) {
-
-        this.prefixRegex =formatRegex(prefixRegex,false);
+        if (target.matches(suffixRegex)) {
+                super.handle(target, baseRequest, request, response);
+                ((Request) request).setHandled(true);
+            }
     }
 
     public String getSuffixRegex() {
@@ -49,8 +50,16 @@ public class DyStaticSourceHandle extends ResourceHandler{
         regex= regex.replace("*",".*");
         regex=regex.replace("/","\\/");
         if (isSuffix){
-            regex=".*\\."+regex.replace(",","|");
+            regex=regex.replace(",","|");
         }
         return  regex;
+    }
+
+    public String getIgnorePath() {
+        return ignorePath;
+    }
+
+    public void setIgnorePath(String ignorePath) {
+        this.ignorePath = formatRegex(ignorePath,true);
     }
 }

@@ -1,8 +1,7 @@
 package com.duanya.spring;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.InputStreamReader;
 
 /**
  * @Desc DyConsolePrint
@@ -12,19 +11,16 @@ import java.io.FileReader;
 public class DyConsolePrint {
 
     public static void printLogo(Class c){
-        try {
-            File file = new File(c.getResource("/dy.txt").getPath());
-            if (file.exists()) {
-                FileReader in = new FileReader(file);
-                BufferedReader buff = new BufferedReader(in);
-                while (buff.ready()){
-                    System.out.println(buff.readLine());
+            try {
+                BufferedReader br=new BufferedReader(new InputStreamReader(c.getResourceAsStream("/dy.txt"),"utf-8"));
+                while(br.ready()) {
+                    System.out.println(br.readLine());
                 }
-                buff.close();
-                in.close();
+
+                br.close();
+
+            } catch (Exception var4) {
+                var4.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
