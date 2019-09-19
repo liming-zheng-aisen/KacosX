@@ -31,7 +31,7 @@ import java.util.Set;
  * @Date 2019/9/4
  */
 
-@DyBootApplicationStarter(scannerPath = {},order = 1000)
+@DyBootApplicationStarter(scannerPath = {}, order =Integer.MAX_VALUE-100)
 public class DybootStarterJdbc  implements DyDefaultStarter {
 
     private static final String DEF_STATUS="development";

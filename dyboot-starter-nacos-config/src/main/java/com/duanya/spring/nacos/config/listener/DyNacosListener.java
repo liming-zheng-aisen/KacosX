@@ -32,7 +32,8 @@ public class DyNacosListener implements Listener {
             nacosPropertisMannager.updateInputStream(dataId,configInfo);
             Properties nacosPropertis=nacosPropertisMannager.getNacosEvn();
             DyPropertiesUtil.cloneEvn(DyNacosConfigStarter.defaultEvn,nacosPropertis);
-            DyConfigurationLoader.setEvn(nacosPropertis);
+            DyConfigurationLoader.getEvn().clear();
+            DyPropertiesUtil.cloneEvn(nacosPropertis,DyConfigurationLoader.getEvn());
             DyLoaderListerManager.updateLister(DyConfigurationLoader.getEvn());
         } catch (IOException e) {
             e.printStackTrace();

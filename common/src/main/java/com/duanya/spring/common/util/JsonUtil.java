@@ -1,10 +1,11 @@
-package com.duanya.spring.framework.mvc.util;
+package com.duanya.spring.common.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zheng.liming
@@ -12,7 +13,7 @@ import java.util.List;
  * @description
  */
 @SuppressWarnings("all")
-public class JsonUtil{
+public class JsonUtil {
 
     // 定义jackson对象
     private static final ObjectMapper MAPPER = new ObjectMapper();
@@ -54,6 +55,19 @@ public class JsonUtil{
         JavaType javaType = MAPPER.getTypeFactory().constructParametricType(List.class, beanType);
         List<T> list = MAPPER.readValue(jsonData, javaType);
         return list;
+
+    }
+    /**
+     * Description：将json数据转换成pojo对象map
+     *
+     * @param jsonData
+     * @param beanType
+     * @return
+     */
+    public static Map jsonToMap(String jsonData, Class key, Class value) throws IOException {
+        JavaType javaType = MAPPER.getTypeFactory().constructParametricType(Map.class, key,value);
+        Map map= MAPPER.readValue(jsonData, javaType);
+        return map;
 
     }
 

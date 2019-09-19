@@ -43,12 +43,11 @@ public class DyBootApplicationRun {
             loaderManager.registerLoader(new DyConfigurationLoader());
 
 
-            logger.info("注册一个dyboot启动加载器");
-            loaderManager.registerLoader(new DyBootStarterLoader());
-
-
             logger.info("注册一个类加载器，用于加载目标项目的类");
             loaderManager.registerLoader(new DyClassLoader());
+
+            logger.info("注册一个dyboot启动加载器");
+            loaderManager.registerLoader(new DyBootStarterLoader());
 
             logger.info("注册一个IOC注入加载器");
             loaderManager.registerLoader(new DyIocLoader());

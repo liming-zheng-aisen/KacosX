@@ -17,7 +17,7 @@ import java.util.Set;
  * @Author Zheng.LiMing
  * @Date 2019/9/4
  */
-@DyBootApplicationStarter(scannerPath = {},order = Integer.MAX_VALUE)
+@DyBootApplicationStarter(scannerPath = {},order =Integer.MAX_VALUE)
 public class DyJettyWebStarter implements DyDefaultStarter {
 
     private final static Logger log=LoggerFactory.getLogger(DyJettyWebStarter.class);

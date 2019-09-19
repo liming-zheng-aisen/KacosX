@@ -22,6 +22,7 @@
         <module>dyboot-plugin</module>
         <module>dyboot-starter-nacos-config</module>
         <module>dyboot-starter-nacos-cp</module>
+        <module>dyboot-starter-nacos-proxy-client</module>
     </modules>
     <properties>
         <servlet-v>4.0.1</servlet-v>

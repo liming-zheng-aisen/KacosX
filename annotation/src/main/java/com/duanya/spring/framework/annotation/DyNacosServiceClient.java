@@ -1,12 +1,17 @@
 package com.duanya.spring.framework.annotation;
 
 
+import java.lang.annotation.*;
+
 /**
  * @author zheng.liming
  * @date 2019/9/15
  * @description nacos服务客户端http代理模式
  */
-public @interface DyNacosSerivceClient {
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE,ElementType.ANNOTATION_TYPE})
+public @interface DyNacosServiceClient {
 
     /**
      * 服务名称
