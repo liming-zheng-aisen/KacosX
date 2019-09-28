@@ -1,6 +1,6 @@
 ![image](https://github.com/1308404897/DySpring/blob/master/img/testWeb.jpg?raw=true)
 # 什么是DySpring
-   [DySpring](https://github.com/1308404897/DySpring)是类似Spring boot的框架，一键启动。简单的web框架,可能大家都好奇dyspring与spring全家桶有什么关系呢？？？其实两个一点关系都没有，好比java与javaScript一样，只是dyspring借鉴spring的经验，虽然spring boot有拆箱即用的好处，但是与其他产品搭建起来，却有不少的坑或者切合度不高，在此，我们逆向改变思维，主动拥抱社区，从人人为我变成我为人人。1.0.2版本将提供dyboot-starter-nacos的启动器
+   [DySpring](https://github.com/1308404897/DySpring)是类似Spring boot的框架，一键启动。简单的web框架,dyspring代表一个定制版生态，并不是万能贴，针对微服务场景提供一个解决方案吧了，dyspring对比spring更加易懂和简洁，mvc只是一个路由控制框架，不提供ModeAndView的功能，主流的模式是前后端分离，只有把它去掉了才能更有规范性可言，dyboot starter web 提供了静态页面的访问，但是不提倡这么做，除非是swagger或druid组件的页面，因为druid+Mybatis+Mysql是主流的搭配方案，所以我提供了dyboot starter jdbc 就直接集成了，方便快速开发；Nacos未来成为服务注册与发现的主流，集成了它，可以降低微服务集成成本，因为它提供了配置管理和服务发布、订阅。我开源的目的是三点：1.减小微服务带来的成本；2.使微服务更加简便；3.我想得到更多人的认可！
   ## [案例] (https://github.com/1308404897/dyboot-example)
   ### 1.下载源码
   
