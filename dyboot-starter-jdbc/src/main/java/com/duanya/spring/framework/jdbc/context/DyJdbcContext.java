@@ -8,6 +8,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * @Desc DyJdbcContext
@@ -18,13 +21,20 @@ public class DyJdbcContext implements DyApplicationContext {
 
     private SqlSessionFactory sqlSessionFactory;
 
+    private Map<Class,Object> jdbcContext=new HashMap<>();
+
     @Override
     public Object getBean(String beanName,Class beanClass) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        Object bean=null;
         if (sqlSessionFactory!=null&&beanClass.isAnnotationPresent(Mapper.class)) {
-            SqlSession sqlSession = sqlSessionFactory.openSession(Boolean.parseBoolean(DyConfigurationLoader.getEvn().getProperty("dy.datasource.autoTransaction", "true")));
-            return sqlSession.getMapper(beanClass);
+            bean=jdbcContext.get(beanClass);
+            if (null==bean) {
+                SqlSession sqlSession = sqlSessionFactory.openSession(Boolean.parseBoolean(DyConfigurationLoader.getEvn().getProperty("dy.datasource.autoTransaction", "true")));
+                bean=sqlSession.getMapper(beanClass);
+                jdbcContext.put(beanClass,bean);
+            }
         }
-       return null;
+       return bean;
     }
 
 

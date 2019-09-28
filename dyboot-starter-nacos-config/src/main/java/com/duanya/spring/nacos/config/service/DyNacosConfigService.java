@@ -28,7 +28,7 @@ public class DyNacosConfigService {
 
     private  Integer timeoutMs;
 
-    public static DyNacosConfigService naocsConfigService=new DyNacosConfigService();
+    private static DyNacosConfigService naocsConfigService=new DyNacosConfigService();
 
     private DyNacosConfigService(){
 
@@ -66,5 +66,8 @@ public class DyNacosConfigService {
         return properties;
     }
 
+    public static DyNacosConfigService getNaocsConfigService() {
+        return naocsConfigService;
+    }
 
 }

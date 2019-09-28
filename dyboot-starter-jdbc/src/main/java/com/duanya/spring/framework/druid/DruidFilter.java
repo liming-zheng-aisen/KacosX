@@ -30,6 +30,7 @@ import java.util.*;
  */
 @DyWebFilter
 @DyOrder(1)
+@SuppressWarnings("all")
 public class DruidFilter extends AbstractWebStatImpl implements Filter {
     private static final Log LOG = LogFactory.getLog(WebStatFilter.class);
     public static final String PARAM_NAME_PROFILE_ENABLE = "profileEnable";
@@ -356,6 +357,7 @@ public class DruidFilter extends AbstractWebStatImpl implements Filter {
             this.status = statusCode;
         }
 
+        @Override
         public void setStatus(int statusCode, String statusMessage) {
             super.setStatus(statusCode, statusMessage);
             this.status = statusCode;

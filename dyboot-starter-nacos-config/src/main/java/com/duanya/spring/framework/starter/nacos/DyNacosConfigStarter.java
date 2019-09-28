@@ -27,7 +27,7 @@ public class DyNacosConfigStarter implements DyDefaultStarter {
 
         DyNacosConfig nacosConfig=(DyNacosConfig)DyBeanFactory.initNewBean(DyNacosConfig.class,evn);
 
-        DyNacosConfigService nacosConfigService=DyNacosConfigService.naocsConfigService;
+        DyNacosConfigService nacosConfigService=DyNacosConfigService.getNaocsConfigService();
 
         nacosConfigService.init(nacosConfig);
 
