@@ -1,4 +1,4 @@
-package com.duanya.spring.framework.starter;
+package com.macos.framework.starter;
 
 import java.util.Properties;
 

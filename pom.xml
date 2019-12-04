@@ -19,7 +19,6 @@
         <module>macos-bean</module>
         <module>macos-starter-jdbc</module>
         <module>macos-println</module>
-        <module>macos-plugin</module>
         <module>macos-starter-nacos-config</module>
         <module>macos-starter-nacos-cp</module>
         <module>macos-starter-nacos-proxy-client</module>

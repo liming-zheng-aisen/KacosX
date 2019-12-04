@@ -1,4 +1,4 @@
-package com.duanya.spring.framework.starter.load;
+package com.macos.framework.starter.load;
 
 /**
  * @Desc DyStarterBean

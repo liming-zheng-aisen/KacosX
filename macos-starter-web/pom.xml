@@ -13,6 +13,7 @@
 
     <properties >
         <macos>1.0.1-SNAPSHOT</macos>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
 <dependencies>
@@ -72,7 +73,7 @@
         <artifactId>slf4j-log4j12</artifactId>
     </dependency>
     <dependency>
-        <groupId>axis</groupId>
+        <groupId>org.apache.axis</groupId>
         <artifactId>axis-jaxrpc</artifactId>
         <version>1.4</version>
     </dependency>

@@ -1,12 +1,15 @@
-package com.duanya.spring.framework.starter.run;
+package com.macos.framework.starter.run;
 
-import com.macos.println.DyConsolePrint;
-import com.macos.println.common.times.DyTimer;
-import com.macos.println.framework.context.spring.DySpringApplicationContext;
-import com.macos.framework.core.load.DyClassLoader;
-import com.macos.framework.core.load.DyConfigurationLoader;
-import com.macos.framework.core.load.DyIocLoader;
-import com.macos.framework.core.load.manager.DyLoaderManager;
+import com.macos.ConsolePrint;
+import com.macos.common.times.Timer;
+import com.macos.framework.context.ApplicationContextImpl;
+import com.macos.framework.context.base.ApplicationContextApi;
+import com.macos.framework.core.load.ApplicationClassLoader;
+import com.macos.framework.core.load.ConfigurationLoader;
+import com.macos.framework.core.load.IocLoader;
+import com.macos.framework.core.load.manager.LoaderManager;
+import com.macos.framework.starter.load.BootStarterLoader;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,39 +20,39 @@ import org.slf4j.LoggerFactory;
  */
 public class BootApplicationRun {
 
-    static Logger logger= LoggerFactory.getLogger(com.duanya.spring.framework.starter.run.BootApplicationRun.class);
+    static Logger logger= LoggerFactory.getLogger(BootApplicationRun.class);
 
     public static void run(Class main) {
 
-        DyConsolePrint.printLogo(main);
+        ConsolePrint.printLogo(main);
 
         logger.info("DyBootApplicationRun执行run方法");
 
-        DyTimer dyTimer=new DyTimer();
+        Timer dyTimer=new Timer();
 
         try {
             //开始计时
             dyTimer.doStart();
 
-            DySpringApplicationContext context=DySpringApplicationContext.Builder.getDySpringApplicationContext();
+            ApplicationContextApi context= ApplicationContextImpl.Builder.getDySpringApplicationContext();
 
             context.registerBean("dyTimer",dyTimer);
 
             logger.info("配置DyLoaderManager加载管理器");
-            DyLoaderManager loaderManager=new DyLoaderManager();
+            LoaderManager loaderManager=new LoaderManager();
 
             logger.info("注册一个配置文件加载器");
-            loaderManager.registerLoader(new DyConfigurationLoader());
+            loaderManager.registerLoader(new ConfigurationLoader());
 
 
             logger.info("注册一个类加载器，用于加载目标项目的类");
-            loaderManager.registerLoader(new DyClassLoader());
+            loaderManager.registerLoader(new ApplicationClassLoader());
 
             logger.info("注册一个dyboot启动加载器");
-            loaderManager.registerLoader(new com.duanya.spring.framework.starter.load.BootStarterLoader());
+            loaderManager.registerLoader(new BootStarterLoader());
 
             logger.info("注册一个IOC注入加载器");
-            loaderManager.registerLoader(new DyIocLoader());
+            loaderManager.registerLoader(new IocLoader());
 
             logger.info("启动DyLoaderManager加载管理器");
             loaderManager.doLoad(main);

@@ -13,6 +13,7 @@ import com.macos.framework.druid.DruidServlet;
 import com.macos.framework.jdbc.config.DruidConfig;
 import com.macos.framework.jdbc.context.JdbcContext;
 import com.github.pagehelper.PageInterceptor;
+import com.macos.framework.starter.DefaultStarter;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.Configuration;
@@ -32,7 +33,7 @@ import java.util.Set;
  */
 
 @MacosApplicationStarter(scannerPath = {}, order =Integer.MAX_VALUE-100)
-public class StarterJdbc implements com.duanya.spring.framework.starter.DefaultStarter {
+public class StarterJdbc implements DefaultStarter {
 
     private static final String DEF_STATUS="development";
 

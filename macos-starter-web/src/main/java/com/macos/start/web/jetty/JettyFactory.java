@@ -1,7 +1,7 @@
 package com.macos.start.web.jetty;
 
 import com.macos.common.ip.IpUtil;
-import com.macos.framework.mvc.dispatcher.DyDispatchedServlet;
+import com.macos.framework.mvc.dispatcher.DispatchedServlet;
 import com.macos.start.web.jetty.filter.FilterBean;
 import com.macos.start.web.jetty.filter.WebFilterMannager;
 import com.macos.start.web.jetty.handlle.StaticSourceHandle;
@@ -139,9 +139,9 @@ public class JettyFactory {
     }
 
     private static void setDyDispatchedServlet(ServletHandler servletHandler, JettyConfig config){
-        DyDispatchedServlet dyDispatchedServlet=new DyDispatchedServlet();
+        DispatchedServlet dispatchedServlet =new DispatchedServlet();
         ServletHolder servletHolder=new ServletHolder();
-        servletHolder.setServlet(dyDispatchedServlet);
+        servletHolder.setServlet(dispatchedServlet);
         servletHandler.addServletWithMapping(servletHolder,config.getDefaultPaht());
     }
 

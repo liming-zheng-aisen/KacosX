@@ -1,17 +1,17 @@
 package com.macos.framework.mvc.handler.impl;
 
-import com.macos.println.common.util.StringUtils;
-import com.macos.println.common.util.TypeUtil;
-import com.macos.framework.annotation.DyPathVariable;
-import com.macos.framework.annotation.DyRequestBody;
-import com.macos.framework.annotation.DyRequestParameter;
-import com.macos.framework.core.bean.factory.DyAutowiredFactory;
-import com.macos.framework.core.bean.factory.DyBeanFactory;
-import com.macos.framework.core.bean.factory.DyValueFactory;
-import com.macos.framework.mvc.handler.DyHandlerAdapter;
-import com.macos.framework.mvc.handler.bean.RequestUrlBean;
-import com.macos.framework.mvc.util.JsonUtil;
-import com.macos.framework.mvc.util.RequestJosnUtil;
+
+import com.macos.common.util.JsonUtil;
+import com.macos.common.util.StringUtils;
+import com.macos.common.util.TypeUtil;
+import com.macos.framework.annotation.PathVariable;
+import com.macos.framework.annotation.RequestBody;
+import com.macos.framework.annotation.RequestParameter;
+import com.macos.framework.core.bean.factory.AutowiredFactory;
+import com.macos.framework.core.bean.factory.BeanFactory;
+import com.macos.framework.core.bean.factory.ValueFactory;
+import com.macos.framework.core.load.ConfigurationLoader;
+import com.macos.framework.mvc.handler.HandlerAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,21 +26,21 @@ import java.util.Properties;
  * @date 2019/8/6
  * @description
  */
-public class DyHandlerExecution implements DyHandlerAdapter {
+public class HandlerExecution implements HandlerAdapter {
 
 
     @Override
-    public Object handle(HttpServletRequest request, HttpServletResponse response, RequestUrlBean handler) throws Exception {
+    public Object handle(HttpServletRequest request, HttpServletResponse response, com.duanya.spring.framework.mvc.handler.bean.RequestUrlBean handler) throws Exception {
 
-        Properties env= com.duanya.spring.framework.core.load.ConfigurationLoader.getEvn();
+        Properties env= ConfigurationLoader.getEvn();
         Object[] param = null;
         if (handler.getMethod().getParameterCount() > 0) {
             param = new Object[handler.getMethod().getParameterCount()];
             int index = 0;
             Parameter[] parameters = handler.getMethod().getParameters();
             for (Parameter parameter : parameters) {
-                if (parameter.isAnnotationPresent(DyRequestParameter.class)) {
-                    DyRequestParameter requestParameter = parameter.getAnnotation(DyRequestParameter.class);
+                if (parameter.isAnnotationPresent(RequestParameter.class)) {
+                    RequestParameter requestParameter = parameter.getAnnotation(RequestParameter.class);
                     String value = requestParameter.value();
                     if (StringUtils.isEmptyPlus(value)) {
                         value = parameter.getName();
@@ -57,15 +57,15 @@ public class DyHandlerExecution implements DyHandlerAdapter {
 
                     }
                     param[index]= TypeUtil.baseType(parameter.getType().getSimpleName(),data);
-                } else if (parameter.isAnnotationPresent(DyPathVariable.class)) {
+                } else if (parameter.isAnnotationPresent(PathVariable.class)) {
                     if (handler.isBringParam()) {
                         String url = StringUtils.formatUrl(request.getRequestURI());
                         String pathParam = url.substring(handler.getRequestUrl().length() - 1);
                         pathParam = URLDecoder.decode(pathParam,"utf-8");
                         param[index] = TypeUtil.baseType(parameter.getType().getSimpleName(),pathParam);
                     }
-                } else if (parameter.isAnnotationPresent(DyRequestBody.class)) {
-                    String json = RequestJosnUtil.getRequestJsonString(request);
+                } else if (parameter.isAnnotationPresent(RequestBody.class)) {
+                    String json = com.duanya.spring.framework.mvc.util.RequestJosnUtil.getRequestJsonString(request);
                     if (StringUtils.isEmptyPlus(json)) {
                         throw new Exception(request.getRequestURI()+"请求缺少主体，类型为："+parameter.getType().getName());
                     }
@@ -84,9 +84,9 @@ public class DyHandlerExecution implements DyHandlerAdapter {
                 index++;
             }
         }
-        Object obj=DyBeanFactory.createNewBean(handler.getHandler());
-        DyValueFactory.doFields(obj,env);
-        DyAutowiredFactory.doAutowired(obj,env);
+        Object obj= BeanFactory.createNewBean(handler.getHandler());
+        ValueFactory.doFields(obj,env);
+        AutowiredFactory.doAutowired(obj,env);
         Object result=handler.getMethod().invoke(obj, param);
         return result;
     }

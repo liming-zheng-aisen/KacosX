@@ -1,4 +1,4 @@
-package com.duanya.spring.framework.mvc.handler;
+package com.macos.framework.mvc.handler;
 
 import com.duanya.spring.framework.mvc.handler.bean.RequestUrlBean;
 
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2019/8/6
  * @description
  */
-public interface DyHandlerAdapter {
+public interface HandlerAdapter {
 
     Object handle(HttpServletRequest request, HttpServletResponse response, RequestUrlBean handler) throws Exception;
 

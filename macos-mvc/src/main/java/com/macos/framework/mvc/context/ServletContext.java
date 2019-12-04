@@ -19,13 +19,12 @@ import java.util.Set;
  * @date 2019/8/6
  * @description mvc上下文
  */
-@SuppressWarnings("all")
 public class ServletContext implements ApplicationContextApi {
 
     /**
      * String是由路由+请求方式
      */
-    private static Map<String,RequestUrlBean> servletContext=new HashMap<>();
+    private static volatile Map<String,RequestUrlBean> servletContext=new HashMap<>();
 
     @Override
     public Object getBean(String beanName,Class beanClass) throws IllegalAccessException, InstantiationException, ClassNotFoundException {

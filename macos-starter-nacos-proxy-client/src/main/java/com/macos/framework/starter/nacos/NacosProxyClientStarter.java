@@ -8,6 +8,7 @@ import com.macos.framework.context.base.ApplicationContextApi;
 import com.macos.framework.context.manager.ContextManager;
 import com.macos.framework.core.bean.BeanManager;
 import com.macos.framework.nacos.rest.RestClient;
+import com.macos.framework.starter.DefaultStarter;
 import com.macos.framework.starter.nacos.proxy.NacosProxy;
 
 
@@ -21,7 +22,7 @@ import java.util.Set;
  * @Date 2019/9/18
  */
 @MacosApplicationStarter(scannerPath = {},order = Integer.MAX_VALUE-100)
-public class NacosProxyClientStarter implements com.duanya.spring.framework.starter.DefaultStarter {
+public class NacosProxyClientStarter implements DefaultStarter {
 
     @Override
     public void doStart(Properties evn, Class cl) throws Exception {

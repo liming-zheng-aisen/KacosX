@@ -12,9 +12,9 @@ import com.alibaba.druid.support.profile.Profiler;
 import com.alibaba.druid.util.DruidWebUtils;
 import com.alibaba.druid.util.PatternMatcher;
 import com.alibaba.druid.util.ServletPathMatcher;
-import com.duanya.spring.framework.annotation.DyOrder;
-import com.duanya.spring.framework.annotation.DyValue;
-import com.duanya.spring.framework.annotation.DyWebFilter;
+import com.macos.framework.annotation.Order;
+import com.macos.framework.annotation.Value;
+import com.macos.framework.annotation.WebFilter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +28,8 @@ import java.util.*;
  * @Author Zheng.LiMing
  * @Date 2019/9/13
  */
-@DyWebFilter
-@DyOrder(1)
+@WebFilter
+@Order(1)
 @SuppressWarnings("all")
 public class DruidFilter extends AbstractWebStatImpl implements Filter {
     private static final Log LOG = LogFactory.getLog(WebStatFilter.class);
@@ -41,20 +41,20 @@ public class DruidFilter extends AbstractWebStatImpl implements Filter {
     public static final String PARAM_NAME_PRINCIPAL_COOKIE_NAME = "principalCookieName";
     public static final String PARAM_NAME_REAL_IP_HEADER = "realIpHeader";
 
-    @DyValue("${dy.druid.exclusions}:*.js,*.gif,*.jpg,*.png,*.css,*.ico,*.jsp,/druid/*,/download/*")
+    @Value("${dy.druid.exclusions}:*.js,*.gif,*.jpg,*.png,*.css,*.ico,*.jsp,/druid/*,/download/*")
     private String exclusions;
 
-    @DyValue("${dy.druid.sessionStatMaxCount}:2000")
+    @Value("${dy.druid.sessionStatMaxCount}:2000")
     private String sessionStatMaxCount2;
 
-    @DyValue("${dy.druid.sessionStatEnable}:true")
+    @Value("${dy.druid.sessionStatEnable}:true")
     private String sessionStatEnable2;
 
 
-    @DyValue("${dy.druid.principalSessionName}:session_user_key")
+    @Value("${dy.druid.principalSessionName}:session_user_key")
     private String principalSessionName2;
 
-    @DyValue("${dy.druid.profileEnable}:true")
+    @Value("${dy.druid.profileEnable}:true")
     private String profileEnable2;
 
 

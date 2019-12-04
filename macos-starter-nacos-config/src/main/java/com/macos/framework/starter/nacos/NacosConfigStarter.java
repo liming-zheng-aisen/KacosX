@@ -3,6 +3,7 @@ package com.macos.framework.starter.nacos;
 import com.macos.framework.annotation.MacosApplicationStarter;
 import com.macos.framework.core.bean.factory.BeanFactory;
 import com.macos.framework.core.load.ConfigurationLoader;
+import com.macos.framework.starter.DefaultStarter;
 import com.macos.nacos.config.NacosConfig;
 import com.macos.nacos.config.service.NacosConfigService;
 import com.macos.nacos.config.util.PropertiesUtil;
@@ -15,7 +16,7 @@ import java.util.Properties;
  * @Date 2019/9/11
  */
 @MacosApplicationStarter(scannerPath = {},order = Integer.MIN_VALUE)
-public class NacosConfigStarter implements com.duanya.spring.framework.starter.DefaultStarter {
+public class NacosConfigStarter implements DefaultStarter {
 
     public static Properties defaultEvn=new Properties();
 

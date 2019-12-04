@@ -1,6 +1,5 @@
 package com.macos.framework.druid;
 
-import com.alibaba.druid.support.http.ResourceServlet;
 import com.alibaba.druid.support.http.util.IPAddress;
 import com.alibaba.druid.support.http.util.IPRange;
 import com.alibaba.druid.support.logging.Log;

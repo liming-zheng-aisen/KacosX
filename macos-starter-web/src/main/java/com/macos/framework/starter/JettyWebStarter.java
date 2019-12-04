@@ -6,8 +6,9 @@ import com.macos.framework.core.listener.api.manager.LoaderListerManager;
 import com.macos.start.web.jetty.JettyServerStarterListener;
 import com.macos.start.web.jetty.filter.init.FilterRegisterServer;
 import com.macos.start.web.jetty.servlet.DyServletBeanInitManager;
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.util.Properties;
 import java.util.Set;
@@ -18,7 +19,7 @@ import java.util.Set;
  * @Date 2019/9/4
  */
 @MacosApplicationStarter(scannerPath = {},order =Integer.MAX_VALUE)
-public class JettyWebStarter implements com.duanya.spring.framework.starter.DefaultStarter {
+public class JettyWebStarter implements DefaultStarter {
 
     private final static Logger log= LoggerFactory.getLogger(JettyWebStarter.class);
 

@@ -12,7 +12,8 @@
     <artifactId>macos-starter-jdbc</artifactId>
 
     <properties >
-        <dyspring>1.0.1-SNAPSHOT</dyspring>
+        <macos>1.0.1-SNAPSHOT</macos>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
 
@@ -22,7 +23,7 @@
     <dependency>
         <groupId>com.macos</groupId>
         <artifactId>macos-starter</artifactId>
-        <version>${dyspring}</version>
+        <version>${macos}</version>
     </dependency>
 
     <dependency>

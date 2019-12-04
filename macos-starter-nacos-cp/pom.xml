@@ -14,6 +14,7 @@
     <properties>
         <nacos>1.1.3</nacos>
         <macos>1.0.1-SNAPSHOT</macos>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>

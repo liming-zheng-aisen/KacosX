@@ -10,4 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>macos-annotation</artifactId>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 </project>

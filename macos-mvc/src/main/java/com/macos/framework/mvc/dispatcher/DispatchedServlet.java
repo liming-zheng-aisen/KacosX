@@ -1,19 +1,20 @@
 package com.macos.framework.mvc.dispatcher;
 
-import com.macos.println.common.http.HttpResponsePrintln;
-import com.macos.println.common.http.result.ResultData;
-import com.macos.println.common.properties.DyLoadPropeties;
-import com.macos.println.common.scanner.api.IDyScanner;
-import com.macos.println.common.scanner.impl.DyScannerImpl;
-import com.macos.println.common.util.StringUtils;
-import com.macos.println.common.util.TypeUtil;
-import com.macos.framework.core.bean.factory.bean.manager.DyBeanManager;
-import com.macos.framework.mvc.context.DyServletContext;
-import com.macos.framework.mvc.enums.DyMethod;
-import com.macos.framework.mvc.handler.bean.RequestUrlBean;
-import com.macos.framework.mvc.handler.impl.DyHandlerExecution;
+
+import com.macos.common.http.HttpResponsePrintln;
+import com.macos.common.http.result.ResultData;
+import com.macos.common.properties.LoadPropeties;
+import com.macos.common.scanner.api.ScannerApi;
+import com.macos.common.scanner.impl.ScannerImpl;
+import com.macos.common.util.JsonUtil;
+import com.macos.common.util.StringUtils;
+import com.macos.common.util.TypeUtil;
+import com.macos.framework.core.bean.BeanManager;
+import com.macos.framework.core.load.ConfigurationLoader;
+import com.macos.framework.mvc.context.ServletContext;
+import com.macos.framework.mvc.enums.HttpMethod;
+import com.macos.framework.mvc.handler.impl.HandlerExecution;
 import com.macos.framework.mvc.handler.mapping.HandlerMapping;
-import com.macos.framework.mvc.util.JsonUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +30,7 @@ import java.util.Set;
  * @date 2019/8/4
  * @description 请求分发器
  */
-public class DyDispatchedServlet extends HttpServlet {
+public class DispatchedServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
@@ -40,25 +41,25 @@ public class DyDispatchedServlet extends HttpServlet {
     private static Set<Class> cl;
 
 
-    public DyDispatchedServlet() {
-        cl=DyBeanManager.getClassContainer();
+    public DispatchedServlet() {
+        cl= BeanManager.getClassContainer();
         try {
 
-            Properties evn= com.duanya.spring.framework.core.load.ConfigurationLoader.getEvn();
+            Properties evn= ConfigurationLoader.getEvn();
 
             if (null == evn) {
-                evn = DyLoadPropeties.doLoadProperties(null, config, this.getClass());
+                evn = LoadPropeties.doLoadProperties(null, config, this.getClass());
             }
 
-            if (cl == null && DyBeanManager.isLoad()) {
-                cl = DyBeanManager.getClassContainer();
+            if (cl == null && BeanManager.isLoad()) {
+                cl = BeanManager.getClassContainer();
             }
 
             if (cl == null) {
                 if (null != evn) {
                     String path = evn.getProperty(DEFAULT_SCANNER_KEY);
                     if (StringUtils.isNotEmptyPlus(path)) {
-                        IDyScanner scanner = new DyScannerImpl();
+                        ScannerApi scanner = new ScannerImpl();
                         cl = scanner.doScanner(path);
                     } else {
                         throw new Exception("请在dy-properties配置dy.mvc.scan（mvc根路径）的值");
@@ -66,7 +67,7 @@ public class DyDispatchedServlet extends HttpServlet {
                 }
             }
 
-            DyServletContext.load(cl);
+            ServletContext.load(cl);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,42 +78,42 @@ public class DyDispatchedServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doDispatched(req, resp, DyMethod.GET);
+        doDispatched(req, resp, HttpMethod.GET);
     }
 
     @Override
     protected void doHead(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doDispatched(req, resp, DyMethod.HEAD);
+        doDispatched(req, resp, HttpMethod.HEAD);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doDispatched(req, resp, DyMethod.POST);
+        doDispatched(req, resp, HttpMethod.POST);
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doDispatched(req, resp, DyMethod.PUT);
+        doDispatched(req, resp, HttpMethod.PUT);
 
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doDispatched(req, resp, DyMethod.DELETE);
+        doDispatched(req, resp, HttpMethod.DELETE);
 
     }
 
     @Override
     protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doDispatched(req, resp, DyMethod.OPTIONS);
+        doDispatched(req, resp, HttpMethod.OPTIONS);
     }
 
     @Override
     protected void doTrace(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doDispatched(req, resp, DyMethod.TRACE);
+        doDispatched(req, resp, HttpMethod.TRACE);
     }
 
-    private void doDispatched(HttpServletRequest req, HttpServletResponse resp, DyMethod method) throws IOException, ServletException {
+    private void doDispatched(HttpServletRequest req, HttpServletResponse resp, HttpMethod method) throws IOException, ServletException {
 
         setDefaultEncoding(req,resp);
 
@@ -120,7 +121,7 @@ public class DyDispatchedServlet extends HttpServlet {
 
             HandlerMapping handlerMapping = new HandlerMapping();
 
-            RequestUrlBean bean = handlerMapping.requestMethod(req.getRequestURI(), method);
+            com.duanya.spring.framework.mvc.handler.bean.RequestUrlBean bean = handlerMapping.requestMethod(req.getRequestURI(), method);
 
 
             if (null == bean) {
@@ -129,7 +130,7 @@ public class DyDispatchedServlet extends HttpServlet {
                 return;
             }
 
-            DyHandlerExecution exec = new DyHandlerExecution();
+            HandlerExecution exec = new HandlerExecution();
 
             Object data = exec.handle(req, resp, bean);
 
@@ -162,6 +163,6 @@ public class DyDispatchedServlet extends HttpServlet {
     }
 
     public static void setCl(Set<Class> cl) {
-        DyDispatchedServlet.cl = cl;
+        DispatchedServlet.cl = cl;
     }
 }

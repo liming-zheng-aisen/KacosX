@@ -1,8 +1,10 @@
-package com.duanya.spring.framework.mvc.handler.mapping;
+package com.macos.framework.mvc.handler.mapping;
 
-import com.macos.println.common.util.StringUtils;
-import com.duanya.spring.framework.mvc.enums.DyMethod;
+
 import com.duanya.spring.framework.mvc.handler.bean.RequestUrlBean;
+import com.macos.common.util.StringUtils;
+import com.macos.framework.mvc.context.ServletContext;
+import com.macos.framework.mvc.enums.HttpMethod;
 
 import java.util.Map;
 
@@ -13,9 +15,9 @@ import java.util.Map;
  */
 public class HandlerMapping {
 
-    public  RequestUrlBean requestMethod(String url,DyMethod dymethod){
+    public  RequestUrlBean requestMethod(String url, HttpMethod dymethod){
 
-        Map<String,RequestUrlBean> servletContext= com.duanya.spring.framework.mvc.context.ServletContext.getServletContext();
+        Map<String,RequestUrlBean> servletContext= ServletContext.getServletContext();
 
         if (StringUtils.isEmptyPlus(url)||servletContext.size()==0){
             return null;

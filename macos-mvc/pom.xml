@@ -12,6 +12,7 @@
     <artifactId>macos-mvc</artifactId>
     <properties >
         <macos>1.0.1-SNAPSHOT</macos>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
 

@@ -10,8 +10,9 @@ import com.macos.framework.core.bean.factory.BeanFactory;
 import com.macos.framework.core.load.ApplicationClassLoader;
 import com.macos.framework.core.load.BeanLoad;
 import com.macos.framework.core.load.ConfigurationLoader;
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -28,44 +29,44 @@ import java.util.stream.Collectors;
  */
 public class BootStarterLoader extends BeanLoad {
 
-    private static Logger logger= LoggerFactory.getLogger(BootStarterLoader.class);
+    private static Logger logger= (Logger) LoggerFactory.getLogger(BootStarterLoader.class);
 
 
     private final String STARTER_PATH="com.macos.framework.starter";
 
     @Override
     public void load(Class c) throws Exception {
-        logger.debug("开始加载dyboot-starter，默认包为{}",STARTER_PATH);
+        logger.info("开始加载macos-starter，默认包为{}",STARTER_PATH);
         ScannerApi scanner=new ScannerImpl();
 
         Set<Class> starters= scanner.doScanner(STARTER_PATH, MacosApplicationStarter.class);
 
-        Set<com.duanya.spring.framework.starter.load.StarterBean> starterBeanSet=convertToStarterBean(starters);
+        Set<StarterBean> starterBeanSet=convertToStarterBean(starters);
 
         doStarter(starterBeanSet,c);
 
-        logger.debug("dyboot-starter加载结束");
+        logger.debug("macos-starter加载结束");
 
         if (null!=nextLoader){
             nextLoader.load(c);
         }
     }
-    private  Set<com.duanya.spring.framework.starter.load.StarterBean> convertToStarterBean(Set<Class> classes){
-        Set<com.duanya.spring.framework.starter.load.StarterBean> starterBeanSet=new HashSet<>();
+    private  Set<StarterBean> convertToStarterBean(Set<Class> classes){
+        Set<StarterBean> starterBeanSet=new HashSet<>();
         for (Class c:classes){
             if (c.isAnnotationPresent(MacosApplicationStarter.class)) {
                 MacosApplicationStarter starter = (MacosApplicationStarter) c.getAnnotation(MacosApplicationStarter.class);
                 Integer order = starter.order();
                 String[] path = starter.scannerPath();
-                com.duanya.spring.framework.starter.load.StarterBean starterBean=new com.duanya.spring.framework.starter.load.StarterBean(order,c,path);
+                StarterBean starterBean=new StarterBean(order,c,path);
                 starterBeanSet.add(starterBean);
             }
         }
-      return starterBeanSet.stream().sorted(Comparator.comparing(com.duanya.spring.framework.starter.load.StarterBean::getOrder)).collect(Collectors.toSet());
+      return starterBeanSet.stream().sorted(Comparator.comparing(StarterBean::getOrder)).collect(Collectors.toSet());
     }
 
-    private void doStarter(Set<com.duanya.spring.framework.starter.load.StarterBean> starters, Class main) throws Exception{
-        for (com.duanya.spring.framework.starter.load.StarterBean cl :starters){
+    private void doStarter(Set<StarterBean> starters, Class main) throws Exception{
+        for (StarterBean cl :starters){
             invokeStarter(cl.getTarget(),main);
             registerToClassLoader(cl.getScannerPath());
         }
@@ -74,12 +75,12 @@ public class BootStarterLoader extends BeanLoad {
     private void invokeStarter(Class cl,Class main) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Class[] ins=cl.getInterfaces();
         for (Class it:ins){
-            if (it.getName().equals("com.macos.framework.starter.DyDefaultStarter")){
+            if (it.getName().equals("com.macos.framework.starter.DefaultStarter")){
                 Object beans= BeanFactory.createNewBean(cl);
                 Class[] params={Properties.class,Class.class};
                 Method method = cl.getMethod("doStart",params);
                 method.invoke(beans, ConfigurationLoader.getEvn(),main);
-                logger.debug("dyboot-starter执行{}的doStart方法",cl.getSimpleName());
+                logger.info("macos-starter执行{}的doStart方法",cl.getSimpleName());
                 break;
             }
         }
@@ -89,7 +90,7 @@ public class BootStarterLoader extends BeanLoad {
         ApplicationClassLoader classLoader=new ApplicationClassLoader();
         for (String str:paths){
             if (StringUtils.isNotEmptyPlus(str)) {
-                logger.debug("dyboot-starter调用DyClassLoader加载{}包下的类",str);
+                logger.info("macos-starter调用DyClassLoader加载{}包下的类",str);
                 classLoader.load(str);
             }
         }
