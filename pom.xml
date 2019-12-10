@@ -23,6 +23,7 @@
         <module>macos-starter-nacos-cp</module>
         <module>macos-starter-nacos-proxy-client</module>
         <module>macos-parent</module>
+        <module>macos-starter-router</module>
     </modules>
 
 </project>
