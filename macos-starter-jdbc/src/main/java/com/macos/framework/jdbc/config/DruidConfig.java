@@ -49,26 +49,26 @@ public class DruidConfig {
     public DataSource druidDataSource(Properties evn) {
 
         DruidDataSource datasource = new DruidDataSource();
-        datasource.setUrl(evn.getProperty("dy.datasource.url",dbUrl));
-        datasource.setUsername(evn.getProperty("dy.datasource.username",username));
-        datasource.setPassword(evn.getProperty("dy.datasource.password",password));
-        datasource.setDriverClassName(evn.getProperty("dy.datasource.driver-class-name",driverClassName));
-        datasource.setInitialSize(Integer.parseInt(evn.getProperty("dy.datasource.initialSize",initialSize+"")));
-        datasource.setMinIdle(Integer.parseInt(evn.getProperty("dy.datasource.minIdle",minIdle+"")));
-        datasource.setMaxActive(Integer.parseInt(evn.getProperty("dy.datasource.maxActive",maxActive+"")));
-        datasource.setMaxWait(Integer.parseInt(evn.getProperty("dy.datasource.maxWait",maxWait+"")));
-        datasource.setTimeBetweenEvictionRunsMillis(Integer.parseInt(evn.getProperty("dy.datasource.timeBetweenEvictionRunsMillis",timeBetweenEvictionRunsMillis+"")));
-        datasource.setMinEvictableIdleTimeMillis(Integer.parseInt(evn.getProperty("dy.datasource.minEvictableIdleTimeMillis",minEvictableIdleTimeMillis+"")));
-        datasource.setValidationQuery(evn.getProperty("dy.datasource.validationQuery",validationQuery));
-        datasource.setTestWhileIdle(Boolean.parseBoolean(evn.getProperty("dy.datasource.testWhileIdle",testWhileIdle+"")));
-        datasource.setTestOnBorrow(Boolean.parseBoolean(evn.getProperty("dy.datasource.testOnBorrow",testOnBorrow+"")));
-        datasource.setTestOnReturn(Boolean.parseBoolean(evn.getProperty("dy.datasource.testOnReturn",testOnReturn+"")));
+        datasource.setUrl(evn.getProperty("datasource.url",dbUrl));
+        datasource.setUsername(evn.getProperty("datasource.username",username));
+        datasource.setPassword(evn.getProperty("datasource.password",password));
+        datasource.setDriverClassName(evn.getProperty("datasource.driver-class-name",driverClassName));
+        datasource.setInitialSize(Integer.parseInt(evn.getProperty("datasource.initialSize",initialSize+"")));
+        datasource.setMinIdle(Integer.parseInt(evn.getProperty("datasource.minIdle",minIdle+"")));
+        datasource.setMaxActive(Integer.parseInt(evn.getProperty("datasource.maxActive",maxActive+"")));
+        datasource.setMaxWait(Integer.parseInt(evn.getProperty("datasource.maxWait",maxWait+"")));
+        datasource.setTimeBetweenEvictionRunsMillis(Integer.parseInt(evn.getProperty("datasource.timeBetweenEvictionRunsMillis",timeBetweenEvictionRunsMillis+"")));
+        datasource.setMinEvictableIdleTimeMillis(Integer.parseInt(evn.getProperty("datasource.minEvictableIdleTimeMillis",minEvictableIdleTimeMillis+"")));
+        datasource.setValidationQuery(evn.getProperty("datasource.validationQuery",validationQuery));
+        datasource.setTestWhileIdle(Boolean.parseBoolean(evn.getProperty("datasource.testWhileIdle",testWhileIdle+"")));
+        datasource.setTestOnBorrow(Boolean.parseBoolean(evn.getProperty("datasource.testOnBorrow",testOnBorrow+"")));
+        datasource.setTestOnReturn(Boolean.parseBoolean(evn.getProperty("datasource.testOnReturn",testOnReturn+"")));
         datasource.setRemoveAbandoned(true);
-        datasource.setRemoveAbandonedTimeout(180);
+        datasource.setRemoveAbandonedTimeout(1800);
         datasource.setLogAbandoned(true);
         datasource.setDefaultAutoCommit(true);
         try {
-            datasource.setFilters(evn.getProperty("dy.datasource.filters",filters));
+            datasource.setFilters(evn.getProperty("datasource.filters",filters));
         } catch (SQLException e) {
             logger.error("druid configuration initialization filter", e);
         }

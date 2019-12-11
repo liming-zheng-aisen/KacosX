@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class BeanManager {
 
-    private static Set<Class> classContainer=new HashSet<>();;
+    private static volatile Set<Class> classContainer=new HashSet<>();;
 
     public static void registerClassBySet(Set<Class> result){
             classContainer.addAll(result);

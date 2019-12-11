@@ -1,8 +1,9 @@
-package com.macos.framework.core.load;
+package com.macos.framework.core.load.clazz;
 
 import com.macos.common.scanner.impl.ScannerImpl;
 import com.macos.framework.core.bean.BeanManager;
-import com.macos.framework.annotation.Scanner;
+import com.macos.framework.annotation.MacosXScanner;
+import com.macos.framework.core.load.abs.BeanLoad;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
@@ -25,11 +26,16 @@ public  class ApplicationClassLoader extends BeanLoad {
         nextLoader=beanLoad;
     }
 
+    /**
+     * 根据当前位置，加载程序中的class
+     * @param c
+     * @throws Exception
+     */
     @Override
     public  void load(Class c) throws Exception{
-        if (c.isAnnotationPresent(Scanner.class)){
-            Scanner scanner= (Scanner) c.getAnnotation(Scanner.class);
-            String[] packageNames=scanner.packageNames();
+        if (c.isAnnotationPresent(MacosXScanner.class)){
+            MacosXScanner macosXScanner = (MacosXScanner) c.getAnnotation(MacosXScanner.class);
+            String[] packageNames= macosXScanner.packageNames();
             if (packageNames.length==0){
                 log.error("扫描路径不允许为空或\"  \"");
                 throw new Exception("扫描路径不允许为空或\"  \"");
@@ -58,10 +64,13 @@ public  class ApplicationClassLoader extends BeanLoad {
         if (null!=nextLoader){
             nextLoader.load(c);
         }
-
-
     }
 
+    /**
+     * 根据包名加载class
+     * @param packageName
+     * @throws Exception
+     */
     public void load(String packageName) throws Exception {
         ScannerImpl dyScanner=new ScannerImpl();
         Set<Class> list = dyScanner.doScanner(packageName);

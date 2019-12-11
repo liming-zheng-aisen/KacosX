@@ -1,4 +1,4 @@
-package com.macos.framework.core.listener.api.manager;
+package com.macos.framework.core.listener.manager;
 
 import com.macos.framework.core.listener.api.LoadListener;
 import com.macos.framework.core.load.manager.LoaderManager;
@@ -23,13 +23,16 @@ public class LoaderListerManager {
     private static ExecutorService executorService;
 
     static {
+        /**
+         * 初始化线程池
+         */
         int coreSize = Runtime.getRuntime().availableProcessors();
         executorService = new ThreadPoolExecutor(
                 coreSize,
                 coreSize+2,
                 5L,
                 TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>(512),
+                new LinkedBlockingQueue<>(1024),
                 Executors.defaultThreadFactory(),
                 new ThreadPoolExecutor.CallerRunsPolicy());
     }

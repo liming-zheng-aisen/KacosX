@@ -4,9 +4,9 @@ import com.macos.ConsolePrint;
 import com.macos.common.times.Timer;
 import com.macos.framework.context.ApplicationContextImpl;
 import com.macos.framework.context.base.ApplicationContextApi;
-import com.macos.framework.core.load.ApplicationClassLoader;
-import com.macos.framework.core.load.ConfigurationLoader;
-import com.macos.framework.core.load.IocLoader;
+import com.macos.framework.core.load.clazz.ApplicationClassLoader;
+import com.macos.framework.core.load.conf.ConfigurationLoader;
+import com.macos.framework.core.load.ioc.IocLoader;
 import com.macos.framework.core.load.manager.LoaderManager;
 import com.macos.framework.starter.load.BootStarterLoader;
 

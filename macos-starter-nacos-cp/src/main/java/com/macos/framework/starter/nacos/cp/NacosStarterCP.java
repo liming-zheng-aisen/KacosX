@@ -2,7 +2,7 @@ package com.macos.framework.starter.nacos.cp;
 
 
 import com.macos.framework.annotation.MacosApplicationStarter;
-import com.macos.framework.core.listener.api.manager.LoaderListerManager;
+import com.macos.framework.core.listener.manager.LoaderListerManager;
 import com.macos.framework.starter.DefaultStarter;
 import com.macos.framework.starter.nacos.cp.listener.DybootNacosStarterListener;
 

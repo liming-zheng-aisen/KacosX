@@ -8,7 +8,7 @@ import com.macos.framework.context.ApplicationContextImpl;
 import com.macos.framework.context.base.ApplicationContextApi;
 import com.macos.framework.core.bean.factory.BeanFactory;
 import com.macos.framework.core.bean.factory.ValueFactory;
-import com.macos.framework.core.load.ConfigurationLoader;
+import com.macos.framework.core.load.conf.ConfigurationLoader;
 import com.macos.start.web.jetty.filter.FilterBean;
 import com.macos.start.web.jetty.filter.WebFilterMannager;
 

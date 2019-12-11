@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Scanner {
+public @interface MacosXScanner {
     /**
      * 包路径
      * @return

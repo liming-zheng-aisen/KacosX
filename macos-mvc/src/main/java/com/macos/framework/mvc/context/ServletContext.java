@@ -56,10 +56,12 @@ public class ServletContext implements ApplicationContextApi {
 
       for (Class c:clazzList){
           if (c.isAnnotationPresent(RestAPI.class)){
-               String baseUrl="";
+               String baseUrl="/";
                if (c.isAnnotationPresent(RequestMapping.class)){
-                   RequestMapping dyRequestMapping= (RequestMapping) c.getAnnotation(RestAPI.class);
+                   RequestMapping dyRequestMapping= (RequestMapping) c.getAnnotation(RequestMapping.class);
                    baseUrl=dyRequestMapping.value();
+                   addServletContextBean(c,baseUrl);
+               }else {
                    addServletContextBean(c,baseUrl);
                }
           }

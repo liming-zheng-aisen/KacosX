@@ -1,10 +1,11 @@
-package com.macos.framework.core.load;
+package com.macos.framework.core.load.conf;
 
 import com.macos.common.properties.LoadPropeties;
 import com.macos.common.properties.PropertiesException;
 import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.AutoConfiguration;
 import com.macos.framework.annotation.MacosApplication;
+import com.macos.framework.core.load.abs.BeanLoad;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +29,7 @@ public class ConfigurationLoader extends BeanLoad {
     /**
      * 默认的配置文件名
      */
-    private final static String DEFAULT_PROPERTIES_NAME="dy-application.properties";
+    private final static String DEFAULT_PROPERTIES_NAME="application.properties";
 
     public ConfigurationLoader(){
 
@@ -106,7 +107,7 @@ public class ConfigurationLoader extends BeanLoad {
             }
             LoadPropeties.doLoadProperties(evn,propertiesName,c);
             //如果存在其他配置文件，读取文件流并加载到evn
-            String otherProperties=evn.getProperty("dy.properties.loader.other");
+            String otherProperties=evn.getProperty("macos.conf.loader.other");
             if (StringUtils.isNotEmptyPlus(otherProperties)){
                 String [] names=otherProperties.split(",");
                 for (String n : names){

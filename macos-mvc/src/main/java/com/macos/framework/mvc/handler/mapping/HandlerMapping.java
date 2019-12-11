@@ -15,6 +15,12 @@ import java.util.Map;
  */
 public class HandlerMapping {
 
+    /**
+     * 获取请求的处理类
+     * @param url
+     * @param dymethod
+     * @return
+     */
     public  RequestUrlBean requestMethod(String url, HttpMethod dymethod){
 
         Map<String,RequestUrlBean> servletContext= ServletContext.getServletContext();

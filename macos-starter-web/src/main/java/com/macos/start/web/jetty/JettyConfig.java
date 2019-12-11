@@ -15,32 +15,32 @@ public class JettyConfig {
     /**
      * Jetty的端口号
      */
-    @Value("${dy.server.port}:8099")
+    @Value("${server.port}:8099")
     private Integer port;
 
-    @Value("${dy.server.host}:0.0.0.0")
+    @Value("${server.host}:0.0.0.0")
     private String host;
 
-    @Value("${dy.server.static.source.path}:static")
+    @Value("${server.static.source.path}:static")
     private String sourcePath;
 
 
-    @Value("${dy.server.static.source.request.sufix}:.*")
+    @Value("${server.static.source.request.sufix}:.*")
     private String sufix;
 
-    @Value("${dy.server.default.path}:/")
+    @Value("${server.default.path}:/")
     private String defaultPaht;
 
-    @Value("${dy.server.idleTimeout}:120000")
+    @Value("${server.idleTimeout}:120000")
     private Integer idleTimeout;
 
-    @Value("${dy.server.minThreads}:10")
+    @Value("${server.minThreads}:10")
     private Integer minThreads;
 
-    @Value("${dy.server.maxThreads}:500")
+    @Value("${server.maxThreads}:500")
     private Integer maxThreads;
 
-    @Value("${dy.server.ignorePath}: ")
+    @Value("${server.ignorePath}: ")
     private String ignorePath;
 
 

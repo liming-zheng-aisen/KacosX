@@ -7,9 +7,9 @@ import com.macos.common.scanner.impl.ScannerImpl;
 import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.MacosApplicationStarter;
 import com.macos.framework.core.bean.factory.BeanFactory;
-import com.macos.framework.core.load.ApplicationClassLoader;
-import com.macos.framework.core.load.BeanLoad;
-import com.macos.framework.core.load.ConfigurationLoader;
+import com.macos.framework.core.load.clazz.ApplicationClassLoader;
+import com.macos.framework.core.load.abs.BeanLoad;
+import com.macos.framework.core.load.conf.ConfigurationLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,7 +90,7 @@ public class BootStarterLoader extends BeanLoad {
         ApplicationClassLoader classLoader=new ApplicationClassLoader();
         for (String str:paths){
             if (StringUtils.isNotEmptyPlus(str)) {
-                logger.info("macos-starter调用DyClassLoader加载{}包下的类",str);
+                logger.info("macos-starter调用ClassLoader加载{}包下的类",str);
                 classLoader.load(str);
             }
         }

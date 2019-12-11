@@ -22,7 +22,7 @@ import java.net.InetAddress;
 @SuppressWarnings("all")
 public class Application {
     /**设置服务端端口*/
-    private static final int port = 6789;
+    private static final int port = 9999;
     /**
      * 通过nio方式来接收连接和处理连接
      */

@@ -2,7 +2,7 @@ package com.macos.framework.starter.nacos;
 
 import com.macos.framework.annotation.MacosApplicationStarter;
 import com.macos.framework.core.bean.factory.BeanFactory;
-import com.macos.framework.core.load.ConfigurationLoader;
+import com.macos.framework.core.load.conf.ConfigurationLoader;
 import com.macos.framework.starter.DefaultStarter;
 import com.macos.nacos.config.NacosConfig;
 import com.macos.nacos.config.service.NacosConfigService;

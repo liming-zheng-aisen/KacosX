@@ -1,4 +1,4 @@
-package com.macos.framework.core.load;
+package com.macos.framework.core.load.abs;
 
 /**
  * @author zheng.liming

@@ -1,8 +1,8 @@
 package com.macos.nacos.config.listener;
 
 import com.alibaba.nacos.api.config.listener.Listener;
-import com.macos.framework.core.listener.api.manager.LoaderListerManager;
-import com.macos.framework.core.load.ConfigurationLoader;
+import com.macos.framework.core.listener.manager.LoaderListerManager;
+import com.macos.framework.core.load.conf.ConfigurationLoader;
 import com.macos.framework.starter.nacos.NacosConfigStarter;
 import com.macos.nacos.config.NacosPropertisMannager;
 import com.macos.nacos.config.util.PropertiesUtil;

@@ -5,7 +5,7 @@ import com.macos.common.scanner.impl.ScannerImpl;
 import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.MacosApplication;
 import com.macos.framework.annotation.MacosApplicationStarter;
-import com.macos.framework.annotation.Scanner;
+import com.macos.framework.annotation.MacosXScanner;
 
 import com.macos.framework.core.bean.BeanManager;
 import com.macos.framework.druid.DruidFilter;
@@ -18,7 +18,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 
 import javax.sql.DataSource;
@@ -41,9 +41,9 @@ public class StarterJdbc implements DefaultStarter {
     public void doStart(Properties evn, Class cl) throws Exception {
         ScannerApi scanner=new ScannerImpl();
         Set<Class> result=new HashSet<>();
-        if (cl.isAnnotationPresent(Scanner.class)){
-            Scanner dyScanner=(Scanner)cl.getAnnotation(Scanner.class);
-            String[] scanPaths=dyScanner.packageNames();
+        if (cl.isAnnotationPresent(MacosXScanner.class)){
+            MacosXScanner dyMacosXScanner =(MacosXScanner)cl.getAnnotation(MacosXScanner.class);
+            String[] scanPaths= dyMacosXScanner.packageNames();
 
             for (String p:scanPaths){
                 if (StringUtils.isNotEmptyPlus(p)) {
@@ -78,7 +78,12 @@ public class StarterJdbc implements DefaultStarter {
         //骆驼命名开启
         configuration.setMapUnderscoreToCamelCase(Boolean.parseBoolean(evn.getProperty("dy.datasource.mapUnderscoreToCamelCase","true")));
 
-        SqlSessionFactory sqlSessionFactory= new DefaultSqlSessionFactory(configuration);
+        //自动提交事务
+        for (Class cl:result){
+            configuration.addMapper(cl);
+        }
+
+        SqlSessionFactory sqlSessionFactory= new SqlSessionFactoryBuilder().build(configuration);;
 
         PageInterceptor pageInterceptor=new PageInterceptor();
 
@@ -86,11 +91,6 @@ public class StarterJdbc implements DefaultStarter {
         properties.setProperty("dialect",evn.getProperty("dy.datasource.driver-class-name",druidConfig.getDriverClassName()));
         //pageInterceptor.setProperties(properties);
         configuration.addInterceptor(pageInterceptor);
-        //自动提交事务
-        for (Class cl:result){
-            configuration.addMapper(cl);
-        }
-
         JdbcContext jdbcContext=  JdbcContext.Builder.getDySpringApplicationContext();
         jdbcContext.setSqlSessionFactory(sqlSessionFactory);
 

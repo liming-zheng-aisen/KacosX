@@ -1,4 +1,4 @@
-package com.macos.framework.core.load;
+package com.macos.framework.core.load.ioc;
 
 import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.Component;
@@ -10,6 +10,8 @@ import com.macos.framework.core.bean.factory.AutowiredFactory;
 import com.macos.framework.core.bean.factory.BeanFactory;
 import com.macos.framework.core.bean.factory.ValueFactory;
 import com.macos.framework.core.bean.BeanManager;
+import com.macos.framework.core.load.abs.BeanLoad;
+import com.macos.framework.core.load.conf.ConfigurationLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +20,7 @@ import java.util.*;
 /**
  * @author zheng.liming
  * @date 2019/8/19
- * @description
+ * @description IOC加载器
  */
 
 public class IocLoader extends BeanLoad {
@@ -36,6 +38,12 @@ public class IocLoader extends BeanLoad {
     public IocLoader(BeanLoad beanLoad){
         nextLoader=beanLoad;
     }
+
+    /**
+     * 加载
+     * @param c
+     * @throws Exception
+     */
     @Override
     public void load(Class c) throws Exception {
        if (null==applicationContent) {
@@ -45,7 +53,6 @@ public class IocLoader extends BeanLoad {
         initConfigurationBean();
         doAutowirteAll();
         log.info("上下文容器初始化成功");
-
         if (null!=nextLoader){
             nextLoader.load(c);
         }

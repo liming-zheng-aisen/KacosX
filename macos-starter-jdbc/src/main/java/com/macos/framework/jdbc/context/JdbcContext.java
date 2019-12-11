@@ -3,7 +3,7 @@ package com.macos.framework.jdbc.context;
 import com.macos.framework.context.base.ApplicationContextApi;
 import com.macos.framework.context.exception.ContextException;
 import com.macos.framework.context.manager.ContextManager;
-import com.macos.framework.core.load.ConfigurationLoader;
+import com.macos.framework.core.load.conf.ConfigurationLoader;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -13,7 +13,7 @@ import java.util.Map;
 
 
 /**
- * @Desc DyJdbcContext
+ * @Desc JDBC上下文
  * @Author Zheng.LiMing
  * @Date 2019/9/5
  */

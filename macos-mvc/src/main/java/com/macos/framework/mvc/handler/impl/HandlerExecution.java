@@ -10,7 +10,7 @@ import com.macos.framework.annotation.RequestParameter;
 import com.macos.framework.core.bean.factory.AutowiredFactory;
 import com.macos.framework.core.bean.factory.BeanFactory;
 import com.macos.framework.core.bean.factory.ValueFactory;
-import com.macos.framework.core.load.ConfigurationLoader;
+import com.macos.framework.core.load.conf.ConfigurationLoader;
 import com.macos.framework.mvc.handler.HandlerAdapter;
 
 import javax.servlet.http.HttpServletRequest;
