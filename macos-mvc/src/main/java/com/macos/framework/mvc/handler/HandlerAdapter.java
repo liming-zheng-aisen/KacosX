@@ -1,6 +1,7 @@
 package com.macos.framework.mvc.handler;
 
-import com.duanya.spring.framework.mvc.handler.bean.RequestUrlBean;
+
+import com.macos.framework.mvc.handler.bean.RequestUrlBean;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

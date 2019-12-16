@@ -25,5 +25,16 @@
         <module>macos-parent</module>
         <module>macos-starter-router</module>
     </modules>
-
+    <distributionManagement>
+        <repository>
+            <id>MacosX</id>
+            <name>Release Deploy</name>
+            <url>http://duanya.online:9700/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>MacosX</id>
+            <name>Snapshot Deploy</name>
+            <url>http://duanya.online:9700/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>

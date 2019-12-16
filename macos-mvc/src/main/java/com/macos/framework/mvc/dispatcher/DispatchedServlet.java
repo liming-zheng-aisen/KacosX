@@ -13,6 +13,7 @@ import com.macos.framework.core.bean.BeanManager;
 import com.macos.framework.core.load.conf.ConfigurationLoader;
 import com.macos.framework.mvc.context.ServletContext;
 import com.macos.framework.mvc.enums.HttpMethod;
+import com.macos.framework.mvc.handler.bean.RequestUrlBean;
 import com.macos.framework.mvc.handler.impl.HandlerExecution;
 import com.macos.framework.mvc.handler.mapping.HandlerMapping;
 
@@ -34,7 +35,7 @@ public class DispatchedServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private final static String DEFAULT_SCANNER_KEY="dy.mvc.scan";
+    private final static String DEFAULT_SCANNER_KEY="mvc.scan";
 
     private static String config;
 
@@ -62,7 +63,7 @@ public class DispatchedServlet extends HttpServlet {
                         ScannerApi scanner = new ScannerImpl();
                         cl = scanner.doScanner(path);
                     } else {
-                        throw new Exception("请在dy-properties配置dy.mvc.scan（mvc根路径）的值");
+                        throw new Exception("请在properties配置mvc.scan（mvc根路径）的值");
                     }
                 }
             }
@@ -121,7 +122,7 @@ public class DispatchedServlet extends HttpServlet {
 
             HandlerMapping handlerMapping = new HandlerMapping();
 
-            com.duanya.spring.framework.mvc.handler.bean.RequestUrlBean bean = handlerMapping.requestMethod(req.getRequestURI(), method);
+           RequestUrlBean bean = handlerMapping.requestMethod(req.getRequestURI(), method);
 
 
             if (null == bean) {

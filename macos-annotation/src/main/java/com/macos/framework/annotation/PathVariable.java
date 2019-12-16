@@ -11,6 +11,7 @@ import java.lang.annotation.*;
 @Target(ElementType.PARAMETER)
 @Documented
 public @interface PathVariable {
+    String value() default "";
     /**参数说明*/
     String doc() default "";
 }
