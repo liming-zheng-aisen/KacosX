@@ -5,7 +5,7 @@
     <parent>
         <artifactId>macos-parent</artifactId>
         <groupId>com.macos</groupId>
-        <version>0.0.1-dev</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -19,7 +19,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <macos>0.0.1-dev</macos>
     </properties>
 
     <dependencies>

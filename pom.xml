@@ -7,7 +7,7 @@
     <groupId>com.macos</groupId>
     <artifactId>macos</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1-dev</version>
+    <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>macos-framework</module>
         <module>macos-common</module>
