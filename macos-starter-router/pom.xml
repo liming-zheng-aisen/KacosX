@@ -6,7 +6,7 @@
 
   <groupId>com.macos</groupId>
   <artifactId>macos-starter-router</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>0.0.1-dev</version>
 
   <name>macos-starter-router</name>
 
@@ -14,7 +14,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <macos>1.0.1-SNAPSHOT</macos>
+    <macos>0.0.1-dev</macos>
   </properties>
 
   <dependencies>

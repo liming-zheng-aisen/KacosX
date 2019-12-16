@@ -8,7 +8,7 @@ import javax.servlet.Servlet;
  * @Date 2019/9/7
  */
 
-public class DyServletBean {
+public class ServletBean {
 
     private Servlet servlet;
 
@@ -30,11 +30,11 @@ public class DyServletBean {
         this.url = url;
     }
 
-    public DyServletBean(){
+    public ServletBean(){
 
     }
 
-    public DyServletBean(Servlet servlet, String url) {
+    public ServletBean(Servlet servlet, String url) {
         this.servlet = servlet;
         this.url = url;
     }

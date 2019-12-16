@@ -59,7 +59,7 @@ public  class ApplicationClassLoader extends BeanLoad {
             e.printStackTrace();
         }
        BeanManager.registerClassBySet(classSet);
-        log.info("DyClassLoader已经加载"+basePackage+"下面的类");
+        log.info("ApplicationClassLoader已经加载"+basePackage+"下面的类");
         }
         if (null!=nextLoader){
             nextLoader.load(c);
@@ -75,7 +75,7 @@ public  class ApplicationClassLoader extends BeanLoad {
         ScannerImpl dyScanner=new ScannerImpl();
         Set<Class> list = dyScanner.doScanner(packageName);
         BeanManager.registerClassBySet(list);
-        log.info("DyClassLoader已经加载"+packageName+"下面的类");
+        log.info("ApplicationClassLoader已经加载"+packageName+"下面的类");
     }
 
 

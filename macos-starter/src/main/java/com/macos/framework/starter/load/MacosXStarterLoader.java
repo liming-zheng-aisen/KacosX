@@ -27,9 +27,9 @@ import java.util.stream.Collectors;
  * @Author Zheng.LiMing
  * @Date 2019/9/4
  */
-public class BootStarterLoader extends BeanLoad {
+public class MacosXStarterLoader extends BeanLoad {
 
-    private static Logger logger= (Logger) LoggerFactory.getLogger(BootStarterLoader.class);
+    private static Logger logger= (Logger) LoggerFactory.getLogger(MacosXStarterLoader.class);
 
 
     private final String STARTER_PATH="com.macos.framework.starter";
@@ -90,7 +90,7 @@ public class BootStarterLoader extends BeanLoad {
         ApplicationClassLoader classLoader=new ApplicationClassLoader();
         for (String str:paths){
             if (StringUtils.isNotEmptyPlus(str)) {
-                logger.info("macos-starter调用ClassLoader加载{}包下的类",str);
+                logger.info("macos-starter调用ApplicationClassLoader加载{}包下的类",str);
                 classLoader.load(str);
             }
         }

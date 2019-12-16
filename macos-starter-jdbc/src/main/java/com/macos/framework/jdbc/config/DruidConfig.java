@@ -70,7 +70,7 @@ public class DruidConfig {
         try {
             datasource.setFilters(evn.getProperty("datasource.filters",filters));
         } catch (SQLException e) {
-            logger.error("druid configuration initialization filter", e);
+            logger.error("Druid configuration initialization filter error", e);
         }
         return datasource;
     }

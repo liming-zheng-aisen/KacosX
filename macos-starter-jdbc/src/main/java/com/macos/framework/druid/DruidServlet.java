@@ -37,11 +37,11 @@ public class DruidServlet extends ResourceServlet {
     private String jmxUsername = null;
     private String jmxPassword = null;
 
-    @Value("${dy.druid.userName}:dyboot")
-    private String dyUserName="dyboot";
+    @Value("${dy.druid.userName}:MacosX")
+    private String dyUserName;
 
     @Value("${dy.druid.pwd}:123456")
-    private String pwd="123456";
+    private String pwd;
 
     private MBeanServerConnection conn = null;
     private ServletConfig config2;

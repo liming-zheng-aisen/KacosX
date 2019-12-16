@@ -6,7 +6,7 @@
 
   <groupId>com.macos</groupId>
   <artifactId>macos-parent</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>0.0.1-dev</version>
   <name>macos-parent</name>
   <packaging>pom</packaging>
   <properties>
