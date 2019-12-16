@@ -1,6 +1,5 @@
 package com.macos.framework.mvc.context;
 
-import com.duanya.spring.framework.mvc.handler.bean.RequestUrlBean;
 import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.*;
 import com.macos.framework.context.base.ApplicationContextApi;
@@ -8,6 +7,9 @@ import com.macos.framework.context.exception.ContextException;
 import com.macos.framework.context.manager.ContextManager;
 import com.macos.framework.mvc.context.exception.ServletException;
 import com.macos.framework.mvc.enums.HttpMethod;
+import com.macos.framework.mvc.handler.bean.RequestUrlBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -21,19 +23,55 @@ import java.util.Set;
  */
 public class ServletContext implements ApplicationContextApi {
 
+    private static final Logger log = LoggerFactory.getLogger(ServletContext.class);
+
     /**
      * String是由路由+请求方式
      */
-    private static volatile Map<String,RequestUrlBean> servletContext=new HashMap<>();
+    private static volatile Map<String, RequestUrlBean> servletContext=new HashMap<>();
 
     @Override
     public Object getBean(String beanName,Class beanClass) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+
         if (servletContext.containsKey(beanName)){
             return servletContext.get(beanName);
         }else {
-            return null;
+            return getBean(beanName);
         }
 
+    }
+
+    public Object getBean(String beanName){
+        String[] mu = beanName.split("\\:");
+        if (mu.length<2){
+            return null;
+        }
+        String[] urls =mu[1].split("\\/");
+        for (RequestUrlBean urlBean : servletContext.values()){
+            if (urls.length != urlBean.getRequestUrl().length ||
+                    !urlBean.getHttpMethod().name().equals(mu[0])){
+                continue;
+            }
+            if (difData(urls,urlBean.getRequestUrl())){
+                return urlBean;
+            }
+        }
+        return null;
+    }
+
+    private boolean difData(String[] target,String[] source){
+        if (target.length!=source.length){
+            return false;
+        }
+        for (int i=0;i<target.length;i++){
+            if (source[i].contains("{") && source[i].contains("}")){
+                continue;
+            }
+            if (!source[i].equals(target[i])){
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -68,68 +106,70 @@ public class ServletContext implements ApplicationContextApi {
       }
     }
 
-    private static void  addServletContextBean(Class c,String baseUrl){
+    private static void  addServletContextBean(Class c,String baseUrl) throws ServletException {
 
         Method[] methods=c.getDeclaredMethods();
 
         for (Method md:methods){
             String requestUrl=baseUrl;
-            String requestMethod=null;
+            HttpMethod requestMethod=null;
             if (md.isAnnotationPresent(Get.class)){
                 Get get=md.getDeclaredAnnotation(Get.class);
                 requestUrl+=get.value();
-                requestMethod= HttpMethod.GET.name();
-
+                requestMethod= HttpMethod.GET;
             }else if (md.isAnnotationPresent(Post.class)){
                 Post post=md.getDeclaredAnnotation(Post.class);
                 requestUrl+=post.value();
-                requestMethod= HttpMethod.POST.name();
+                requestMethod= HttpMethod.POST;
             }else if (md.isAnnotationPresent(Delete.class)){
                 Delete delete=md.getDeclaredAnnotation(Delete.class);
                 requestUrl+=delete.value();
-                requestMethod= HttpMethod.DELETE.name();
+                requestMethod= HttpMethod.DELETE;
             }else if (md.isAnnotationPresent(Put.class)){
                 Put put=md.getDeclaredAnnotation(Put.class);
                 requestUrl+=put.value();
-                requestMethod= HttpMethod.PUT.name();
+                requestMethod= HttpMethod.PUT;
             }else if (md.isAnnotationPresent(RequestMapping.class)){
                 RequestMapping requestMapping=md.getDeclaredAnnotation(RequestMapping.class);
                 requestUrl+=requestMapping.value();
-                requestMethod = requestMapping.method().name();
+                requestMethod = requestMapping.method();
             }
-
-            if (StringUtils.isNotEmptyPlus(requestMethod)) {
+            if (requestMethod != null) {
                 createBeanAndAddServletContext(c, md,requestUrl,requestMethod);
             }
-
         }
-
     }
 
-    private static void createBeanAndAddServletContext(Class c,Method md,String url,String requestMethod){
+    public synchronized static String newUrl(String requestMethod,String[] urlArray){
+        String url =requestMethod +":";
+        for (String u:urlArray){
+            if (u.indexOf("{")>=0 && u.indexOf("}")>=0){
+                url+="/"+"*";
+                continue;
+            }
+            url+= "/"+u;
+        }
+        return url;
+    }
+
+    private static void createBeanAndAddServletContext(Class c,Method md,String url,HttpMethod requestMethod) throws ServletException {
         RequestUrlBean requestUrlBean=new RequestUrlBean();
         url=StringUtils.formatUrl(url);
-        //附带/{}的处理
-        String regex=".*\\/\\{.*\\}.*";
-        if (url.matches(regex)){
-            requestUrlBean.setBringParam(true);
-            int startIndex=url.lastIndexOf("/{");
-            int endIndex=url.lastIndexOf("}");
-            String paramName = url.substring(startIndex+2,endIndex);
-            url=url.substring(0,startIndex+1);
-            url+="*";
-            requestUrlBean.setParamName(paramName);
-            requestUrlBean.setBringParam(true);
-        }
-        requestUrlBean.setRequestUrl(url);
-        url+=requestMethod;
-        requestUrlBean.setMethod(md);
+        String[] urlArray=url.split("\\/");
+        requestUrlBean.setRequestUrl(urlArray);
+        requestUrlBean.setHandlerMethod(md);
         requestUrlBean.setHandler(c);
-        putServletContext(url,requestUrlBean);
+        String requestUrl = newUrl(requestMethod.name(),urlArray);
+        requestUrlBean.setPathRequest(requestUrl.contains("*"));
+        requestUrlBean.setHttpMethod(requestMethod);
+        putServletContext(requestUrl,requestUrlBean);
     }
 
-    public static void putServletContext(String contextUrl,RequestUrlBean bean){
-        servletContext.put(contextUrl,bean);
+    public static void putServletContext(String contextUrl,RequestUrlBean bean) throws ServletException {
+        if (servletContext.containsKey(contextUrl)) {
+            throw new ServletException("请求路径"+contextUrl+"重复！");
+        }
+        servletContext.put(contextUrl, bean);
     }
 
     public static Map<String,RequestUrlBean> getServletContext(){
@@ -153,5 +193,6 @@ public class ServletContext implements ApplicationContextApi {
             return SERVLET_CONTEXT;
         }
     }
+
 
 }

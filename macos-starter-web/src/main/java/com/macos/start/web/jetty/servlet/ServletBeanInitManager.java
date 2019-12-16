@@ -19,9 +19,9 @@ import java.util.Set;
  * @Author Zheng.LiMing
  * @Date 2019/9/11
  */
-public class DyServletBeanInitManager {
+public class ServletBeanInitManager {
 
-    private Set<DyServletBean> servletBeans=new HashSet<>();
+    private Set<ServletBean> servletBeans=new HashSet<>();
 
     private ApplicationContextApi applicationContext= ApplicationContextImpl.Builder.getDySpringApplicationContext();
 
@@ -44,8 +44,8 @@ public class DyServletBeanInitManager {
         try {
             Servlet servlet1=(Servlet) BeanFactory.createNewBean(servlet);
             ValueFactory.doFields(servlet1, ConfigurationLoader.getEvn());
-            DyServletBean dyServletBean=new DyServletBean(servlet1,url);
-            servletBeans.add(dyServletBean);
+            ServletBean servletBean =new ServletBean(servlet1,url);
+            servletBeans.add(servletBean);
             //交给applicationContext管理，因为Servlet有可能需要注入
             applicationContext.registerBean(StringUtils.toLowerCaseFirstName(servlet.getSimpleName()),servlet1);
         } catch (Exception e) {
@@ -56,7 +56,7 @@ public class DyServletBeanInitManager {
 
 
     public boolean hasServlet(Class servlet){
-        for (DyServletBean servletBean:servletBeans){
+        for (ServletBean servletBean:servletBeans){
             if (servletBean.getServlet().getClass()==servlet){
                 return true;
             }
@@ -64,18 +64,18 @@ public class DyServletBeanInitManager {
         return false;
     }
 
-    public Set<DyServletBean> getServletBeans() {
+    public Set<ServletBean> getServletBeans() {
         return servletBeans;
     }
 
-    private DyServletBeanInitManager(){
+    private ServletBeanInitManager(){
 
     }
 
     public static class Builder{
-        private final static DyServletBeanInitManager dyServletBeanInitManager=new DyServletBeanInitManager();
-        public static DyServletBeanInitManager getDyServletBeanInitManager(){
-            return dyServletBeanInitManager;
+        private final static ServletBeanInitManager SERVLET_BEAN_INIT_MANAGER =new ServletBeanInitManager();
+        public static ServletBeanInitManager getServletBeanInitManager(){
+            return SERVLET_BEAN_INIT_MANAGER;
         }
     }
 }

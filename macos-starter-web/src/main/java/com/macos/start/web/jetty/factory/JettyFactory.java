@@ -1,12 +1,13 @@
-package com.macos.start.web.jetty;
+package com.macos.start.web.jetty.factory;
 
 import com.macos.common.ip.IpUtil;
 import com.macos.framework.mvc.dispatcher.DispatchedServlet;
+import com.macos.start.web.jetty.conf.JettyConfig;
 import com.macos.start.web.jetty.filter.FilterBean;
 import com.macos.start.web.jetty.filter.WebFilterMannager;
 import com.macos.start.web.jetty.handlle.StaticSourceHandle;
-import com.macos.start.web.jetty.servlet.DyServletBean;
-import com.macos.start.web.jetty.servlet.DyServletBeanInitManager;
+import com.macos.start.web.jetty.servlet.ServletBean;
+import com.macos.start.web.jetty.servlet.ServletBeanInitManager;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
@@ -118,11 +119,11 @@ public class JettyFactory {
 
 
     private static void setServletHandler(ServletHandler servletHandler){
-        Set<DyServletBean> servletBeans= DyServletBeanInitManager.Builder.getDyServletBeanInitManager().getServletBeans();
+        Set<ServletBean> servletBeans= ServletBeanInitManager.Builder.getServletBeanInitManager().getServletBeans();
         if(servletBeans==null||servletBeans.size()==0){
             return;
         }
-        for (DyServletBean servletBean:servletBeans){
+        for (ServletBean servletBean:servletBeans){
             ServletHolder servletHolder=new ServletHolder();
             servletHolder.setServlet(servletBean.getServlet());
             servletHandler.addServletWithMapping(servletHolder,servletBean.getUrl());

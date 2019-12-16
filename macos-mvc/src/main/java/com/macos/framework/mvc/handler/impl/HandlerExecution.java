@@ -12,14 +12,19 @@ import com.macos.framework.core.bean.factory.BeanFactory;
 import com.macos.framework.core.bean.factory.ValueFactory;
 import com.macos.framework.core.load.conf.ConfigurationLoader;
 import com.macos.framework.mvc.handler.HandlerAdapter;
+import com.macos.framework.mvc.handler.bean.RequestUrlBean;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Parameter;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 /**
  * @author zheng.liming
@@ -28,16 +33,21 @@ import java.util.Properties;
  */
 public class HandlerExecution implements HandlerAdapter {
 
-
     @Override
-    public Object handle(HttpServletRequest request, HttpServletResponse response, com.duanya.spring.framework.mvc.handler.bean.RequestUrlBean handler) throws Exception {
+    public Object handle(HttpServletRequest request, HttpServletResponse response, RequestUrlBean handler) throws Exception {
 
         Properties env= ConfigurationLoader.getEvn();
         Object[] param = null;
-        if (handler.getMethod().getParameterCount() > 0) {
-            param = new Object[handler.getMethod().getParameterCount()];
+        String url = StringUtils.formatUrl(request.getRequestURI());
+        String[] urls = url.split("\\/");
+        Map<String,String> paramValue = null;
+        if (handler.isPathRequest()){
+            paramValue = initPathValue(urls,handler.getRequestUrl());
+        }
+        if (handler.getHandlerMethod().getParameterCount() > 0) {
+            param = new Object[handler.getHandlerMethod().getParameterCount()];
             int index = 0;
-            Parameter[] parameters = handler.getMethod().getParameters();
+            Parameter[] parameters = handler.getHandlerMethod().getParameters();
             for (Parameter parameter : parameters) {
                 if (parameter.isAnnotationPresent(RequestParameter.class)) {
                     RequestParameter requestParameter = parameter.getAnnotation(RequestParameter.class);
@@ -47,22 +57,27 @@ public class HandlerExecution implements HandlerAdapter {
                     }
                     String data = request.getParameter(value);
                     if (StringUtils.isEmptyPlus(data)) {
-
                         if (requestParameter.request()) {
                             data = requestParameter.defaultValue();
                             if (StringUtils.isEmptyPlus(data)) {
                                 throw new Exception("参数缺失！");
                             }
                         }
-
                     }
                     param[index]= TypeUtil.baseType(parameter.getType().getSimpleName(),data);
                 } else if (parameter.isAnnotationPresent(PathVariable.class)) {
-                    if (handler.isBringParam()) {
-                        String url = StringUtils.formatUrl(request.getRequestURI());
-                        String pathParam = url.substring(handler.getRequestUrl().length() - 1);
-                        pathParam = URLDecoder.decode(pathParam,"utf-8");
-                        param[index] = TypeUtil.baseType(parameter.getType().getSimpleName(),pathParam);
+                    if (handler.isPathRequest()) {
+                        PathVariable pathVariable = parameter.getAnnotation(PathVariable.class);
+                        String paramName = pathVariable.value();
+                        String pValue = null;
+                        if (StringUtils.isEmptyPlus(paramName) && paramValue.size()>0){
+                           if (paramValue.size()>0) {
+                               pValue = (String) paramValue.values().toArray()[0];
+                           }
+                        }else{
+                            pValue = paramValue.get(paramName);
+                        }
+                        param[index] = TypeUtil.baseType(parameter.getType().getSimpleName(),pValue);
                     }
                 } else if (parameter.isAnnotationPresent(RequestBody.class)) {
                     String json = com.duanya.spring.framework.mvc.util.RequestJosnUtil.getRequestJsonString(request);
@@ -87,7 +102,7 @@ public class HandlerExecution implements HandlerAdapter {
         Object obj= BeanFactory.createNewBean(handler.getHandler());
         ValueFactory.doFields(obj,env);
         AutowiredFactory.doAutowired(obj,env);
-        Object result=handler.getMethod().invoke(obj, param);
+        Object result=handler.getHandlerMethod().invoke(obj, param);
         return result;
     }
 
@@ -108,5 +123,23 @@ public class HandlerExecution implements HandlerAdapter {
         return entitiClass;
     }
 
+    private Map<String,String> initPathValue(String[] target,String[] source) throws UnsupportedEncodingException {
+        Map<String,String> values = new HashMap<>();
+        for (int i =0 ; i < source.length ; i++){
+            if (i>=target.length){
+                values.put(formatPathParam(source[i]),null);
+                continue;
+            }
+            if (source[i].contains("{") && source[i].contains("}")){
+                values.put(formatPathParam(formatPathParam(source[i])),URLDecoder.decode(target[i],"utf-8"));
+            }
+        }
+        return values;
+    }
 
+    private String formatPathParam(String paramName){
+        paramName = paramName.replace("{","");
+        paramName = paramName.replace("}","");
+        return paramName;
+    }
 }

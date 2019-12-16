@@ -1,4 +1,4 @@
-package com.macos.start.web.jetty;
+package com.macos.start.web.jetty.conf;
 
 import com.macos.framework.annotation.Configuration;
 import com.macos.framework.annotation.Value;

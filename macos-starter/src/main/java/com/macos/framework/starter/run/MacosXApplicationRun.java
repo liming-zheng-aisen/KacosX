@@ -8,7 +8,7 @@ import com.macos.framework.core.load.clazz.ApplicationClassLoader;
 import com.macos.framework.core.load.conf.ConfigurationLoader;
 import com.macos.framework.core.load.ioc.IocLoader;
 import com.macos.framework.core.load.manager.LoaderManager;
-import com.macos.framework.starter.load.BootStarterLoader;
+import com.macos.framework.starter.load.MacosXStarterLoader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,43 +18,43 @@ import org.slf4j.LoggerFactory;
  * @date 2019/8/4
  * @description 启动
  */
-public class BootApplicationRun {
+public class MacosXApplicationRun {
 
-    static Logger logger= LoggerFactory.getLogger(BootApplicationRun.class);
+    static Logger logger= LoggerFactory.getLogger(MacosXApplicationRun.class);
 
-    public static void run(Class main) {
+    public static void run(Class main,String[] args) {
 
         ConsolePrint.printLogo(main);
 
-        logger.info("DyBootApplicationRun执行run方法");
+        logger.info("开始执行..................");
 
-        Timer dyTimer=new Timer();
+        Timer timer=new Timer();
 
         try {
             //开始计时
-            dyTimer.doStart();
+            timer.doStart();
 
             ApplicationContextApi context= ApplicationContextImpl.Builder.getDySpringApplicationContext();
 
-            context.registerBean("dyTimer",dyTimer);
+            context.registerBean("MacosXTimer",timer);
 
-            logger.info("配置DyLoaderManager加载管理器");
+            logger.info("配置LoaderManager加载管理器");
             LoaderManager loaderManager=new LoaderManager();
 
-            logger.info("注册一个配置文件加载器");
+            logger.info("注册一个配置文件ConfigurationLoader加载器");
             loaderManager.registerLoader(new ConfigurationLoader());
 
 
-            logger.info("注册一个类加载器，用于加载目标项目的类");
+            logger.info("注册一个ApplicationClassLoader类加载器");
             loaderManager.registerLoader(new ApplicationClassLoader());
 
-            logger.info("注册一个dyboot启动加载器");
-            loaderManager.registerLoader(new BootStarterLoader());
+            logger.info("注册一个MacosXStarterLoader启动加载器");
+            loaderManager.registerLoader(new MacosXStarterLoader());
 
-            logger.info("注册一个IOC注入加载器");
+            logger.info("注册一个IocLoader注入加载器");
             loaderManager.registerLoader(new IocLoader());
 
-            logger.info("启动DyLoaderManager加载管理器");
+            logger.info("管理器注册结束，执行加载器的doLoad程序");
             loaderManager.doLoad(main);
 
         } catch (Exception e) {

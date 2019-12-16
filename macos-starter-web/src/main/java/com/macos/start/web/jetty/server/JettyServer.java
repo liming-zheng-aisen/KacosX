@@ -1,10 +1,12 @@
-package com.macos.start.web.jetty;
+package com.macos.start.web.jetty.server;
 
 import com.duanya.spring.framework.mvc.util.JsonUtil;
 import com.macos.common.times.Timer;
 import com.macos.framework.context.manager.ContextManager;
 import com.macos.framework.core.bean.factory.BeanFactory;
 import com.macos.framework.core.load.conf.ConfigurationLoader;
+import com.macos.start.web.jetty.factory.JettyFactory;
+import com.macos.start.web.jetty.conf.JettyConfig;
 import org.eclipse.jetty.server.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,8 +37,8 @@ public class JettyServer {
         server.start();
 
         ContextManager context=ContextManager.BuilderContext.getContextManager();
-        Timer dyTimer=(Timer) context.getBean("dyTimer",Timer.class);
-        log.info("DyBoot Starter Web 启动完成，花费时间为{}ms",dyTimer.spendingTime());
+        Timer macosXTimer=(Timer) context.getBean("MacosXTimer",Timer.class);
+        log.info("DyBoot Starter Web 启动完成，花费时间为{}ms",macosXTimer.spendingTime());
 
         //server.join();
 

@@ -41,20 +41,20 @@ public class DruidFilter extends AbstractWebStatImpl implements Filter {
     public static final String PARAM_NAME_PRINCIPAL_COOKIE_NAME = "principalCookieName";
     public static final String PARAM_NAME_REAL_IP_HEADER = "realIpHeader";
 
-    @Value("${dy.druid.exclusions}:*.js,*.gif,*.jpg,*.png,*.css,*.ico,*.jsp,/druid/*,/download/*")
+    @Value("${druid.exclusions}:*.js,*.gif,*.jpg,*.png,*.css,*.ico,*.jsp,/druid/*,/download/*")
     private String exclusions;
 
-    @Value("${dy.druid.sessionStatMaxCount}:2000")
+    @Value("${druid.sessionStatMaxCount}:2000")
     private String sessionStatMaxCount2;
 
-    @Value("${dy.druid.sessionStatEnable}:true")
+    @Value("${druid.sessionStatEnable}:true")
     private String sessionStatEnable2;
 
 
-    @Value("${dy.druid.principalSessionName}:session_user_key")
+    @Value("${druid.principalSessionName}:session_user_key")
     private String principalSessionName2;
 
-    @Value("${dy.druid.profileEnable}:true")
+    @Value("${druid.profileEnable}:true")
     private String profileEnable2;
 
 

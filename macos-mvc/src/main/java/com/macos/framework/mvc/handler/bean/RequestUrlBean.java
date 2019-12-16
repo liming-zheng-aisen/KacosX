@@ -1,4 +1,6 @@
-package com.duanya.spring.framework.mvc.handler.bean;
+package com.macos.framework.mvc.handler.bean;
+
+import com.macos.framework.mvc.enums.HttpMethod;
 
 import java.lang.reflect.Method;
 
@@ -17,21 +19,22 @@ public class RequestUrlBean {
     /**
      * 请求路径
      */
-    private String requestUrl;
+    private String[] requestUrl;
 
     /**
      * 关联的方法
      */
-    private Method method;
+    private Method handlerMethod;
 
     /**
-     * url路径末尾是否是参数
+     * 关联的方法
      */
-    private boolean isBringParam=false;
+    private HttpMethod httpMethod;
+
     /**
      * 参数名
      */
-    private String paramName;
+    private boolean pathRequest;
 
 
     public Class getHandler() {
@@ -42,35 +45,35 @@ public class RequestUrlBean {
         this.handler = handler;
     }
 
-    public Method getMethod() {
-        return method;
+    public Method getHandlerMethod() {
+        return handlerMethod;
     }
 
-    public void setMethod(Method method) {
-        this.method = method;
+    public void setHandlerMethod(Method handlerMethod) {
+        this.handlerMethod = handlerMethod;
     }
 
-    public boolean isBringParam() {
-        return isBringParam;
+    public HttpMethod getHttpMethod() {
+        return httpMethod;
     }
 
-    public void setBringParam(boolean bringParam) {
-        isBringParam = bringParam;
+    public void setHttpMethod(HttpMethod httpMethod) {
+        this.httpMethod = httpMethod;
     }
 
-    public String getParamName() {
-        return paramName;
+    public boolean isPathRequest() {
+        return pathRequest;
     }
 
-    public void setParamName(String paramName) {
-        this.paramName = paramName;
+    public void setPathRequest(boolean pathRequest) {
+        this.pathRequest = pathRequest;
     }
 
-    public String getRequestUrl() {
+    public String[] getRequestUrl() {
         return requestUrl;
     }
 
-    public void setRequestUrl(String requestUrl) {
+    public void setRequestUrl(String[] requestUrl) {
         this.requestUrl = requestUrl;
     }
 }

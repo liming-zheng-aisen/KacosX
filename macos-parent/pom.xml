@@ -6,7 +6,7 @@
 
   <groupId>com.macos</groupId>
   <artifactId>macos-parent</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>0.0.1-SNAPSHOT</version>
   <name>macos-parent</name>
   <packaging>pom</packaging>
   <properties>
@@ -19,6 +19,7 @@
     <slf4j>1.7.29</slf4j>
     <druid>1.0.16</druid>
     <mybatis>3.5.2</mybatis>
+    <macos>0.0.1-SNAPSHOT</macos>
     <pagehelper-version>5.1.10</pagehelper-version>
     <jsqlparser-version>3.0</jsqlparser-version>
     <jetty>9.4.19.v20190610</jetty>
@@ -144,6 +145,21 @@
 
     </dependencies>
   </dependencyManagement>
+
+  <distributionManagement>
+    <repository>
+      <id>MacosX</id>
+      <name>Release Deploy</name>
+      <url>http://duanya.online:9700/repository/maven-releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>MacosX</id>
+      <name>Snapshot Deploy</name>
+      <url>http://duanya.online:9700/repository/maven-snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+
   <build>
     <pluginManagement>
       <plugins>

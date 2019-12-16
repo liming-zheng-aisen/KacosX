@@ -58,9 +58,9 @@ public class StarterJdbc implements DefaultStarter {
         classSet.add(DruidFilter.class);
         classSet.add(DruidServlet.class);
 
-        String ignorePath=evn.getProperty("dy.server.ignorePath");
+        String ignorePath=evn.getProperty("server.ignorePath");
         if (StringUtils.isEmptyPlus(ignorePath)) {
-            evn.setProperty("dy.server.ignorePath", "/druid/*,/download/*");
+            evn.setProperty("server.ignorePath", "/druid/*,/download/*");
         }
         BeanManager.registerClassBySet(classSet);
         registerDyJdbcContext(result,evn);
@@ -76,9 +76,8 @@ public class StarterJdbc implements DefaultStarter {
         Environment environment=new Environment(DEF_STATUS,new JdbcTransactionFactory(),dataSource);
         Configuration configuration=new Configuration(environment);
         //骆驼命名开启
-        configuration.setMapUnderscoreToCamelCase(Boolean.parseBoolean(evn.getProperty("dy.datasource.mapUnderscoreToCamelCase","true")));
+        configuration.setMapUnderscoreToCamelCase(Boolean.parseBoolean(evn.getProperty("datasource.mapUnderscoreToCamelCase","true")));
 
-        //自动提交事务
         for (Class cl:result){
             configuration.addMapper(cl);
         }
@@ -88,7 +87,7 @@ public class StarterJdbc implements DefaultStarter {
         PageInterceptor pageInterceptor=new PageInterceptor();
 
         Properties properties=new Properties();
-        properties.setProperty("dialect",evn.getProperty("dy.datasource.driver-class-name",druidConfig.getDriverClassName()));
+        properties.setProperty("dialect",evn.getProperty("datasource.driver-class-name",druidConfig.getDriverClassName()));
         //pageInterceptor.setProperties(properties);
         configuration.addInterceptor(pageInterceptor);
         JdbcContext jdbcContext=  JdbcContext.Builder.getDySpringApplicationContext();

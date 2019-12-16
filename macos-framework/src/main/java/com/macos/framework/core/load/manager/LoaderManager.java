@@ -19,11 +19,11 @@ public class LoaderManager {
     private final static Logger log=LoggerFactory.getLogger(LoaderManager.class);
 
     /**
-     * 首加载器
+     * 链首（加载器）
      */
     private BeanLoad fristLoader;
     /**
-     * 最后的加载器
+     * 链尾（加载器）
      */
     private BeanLoad lastLoader;
 
@@ -32,10 +32,16 @@ public class LoaderManager {
      * @param loader
      */
     public  void registerLoader(BeanLoad loader){
+        /**
+         * 链首为null的话，则将第一个加载器变成链首
+         */
         if (null==fristLoader){
             fristLoader=loader;
             return;
         }
+        /**
+         * 如果链尾为null，说明链首是的下一个加载器为null，先赋值给链首的下个加载器，同时也赋值给链尾
+         */
         if (null==lastLoader){
             fristLoader.setNextLoader(loader);
             lastLoader=loader;
