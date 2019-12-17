@@ -10,6 +10,7 @@ import java.util.List;
  * @desc bean的定义信息
  */
 public class BeanDefinition {
+    /**是否为*/
     private volatile boolean prototype;
     private volatile List<Class> superClasses = new ArrayList<>();
     private volatile Class target = null;

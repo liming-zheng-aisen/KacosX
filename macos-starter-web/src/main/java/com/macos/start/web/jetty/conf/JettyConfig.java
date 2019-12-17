@@ -4,7 +4,7 @@ import com.macos.framework.annotation.Configuration;
 import com.macos.framework.annotation.Value;
 
 /**
- * @Desc TomcatConfig
+ * @Desc JettyConfig
  * @Author Zheng.LiMing
  * @Date 2019/9/4
  */
@@ -15,7 +15,7 @@ public class JettyConfig {
     /**
      * Jetty的端口号
      */
-    @Value("${server.port}:8099")
+    @Value("${server.port}:8080")
     private Integer port;
 
     @Value("${server.host}:0.0.0.0")

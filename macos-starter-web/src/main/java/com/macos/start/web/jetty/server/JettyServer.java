@@ -38,7 +38,7 @@ public class JettyServer {
 
         ContextManager context=ContextManager.BuilderContext.getContextManager();
         Timer macosXTimer=(Timer) context.getBean("MacosXTimer",Timer.class);
-        log.info("DyBoot Starter Web 启动完成，花费时间为{}ms",macosXTimer.spendingTime());
+        log.info("MacosX Application启动完成，花费时间为{}ms",macosXTimer.spendingTime());
 
         //server.join();
 

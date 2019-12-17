@@ -35,7 +35,7 @@ import java.util.Set;
 public class JettyFactory {
 
 
-    private final static  String THREAD_NAME="DYBOOT";
+    private final static  String THREAD_NAME="MacosX";
 
 
     public static Server createServer(JettyConfig config, Class main) throws Exception {
