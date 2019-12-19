@@ -13,7 +13,6 @@ import com.macos.framework.core.bean.factory.ValueFactory;
 import com.macos.framework.core.load.conf.ConfigurationLoader;
 import com.macos.framework.mvc.handler.HandlerAdapter;
 import com.macos.framework.mvc.handler.bean.RequestUrlBean;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
@@ -24,7 +23,7 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
+
 
 /**
  * @author zheng.liming

@@ -1,6 +1,6 @@
 package com.macos.framework.starter.nacos;
 
-import com.macos.framework.annotation.MacosApplicationStarter;
+import com.macos.framework.annotation.MacosXApplicationStarter;
 import com.macos.framework.core.bean.factory.BeanFactory;
 import com.macos.framework.core.load.conf.ConfigurationLoader;
 import com.macos.framework.starter.DefaultStarter;
@@ -15,7 +15,7 @@ import java.util.Properties;
  * @Author Zheng.LiMing
  * @Date 2019/9/11
  */
-@MacosApplicationStarter(scannerPath = {},order = Integer.MIN_VALUE)
+@MacosXApplicationStarter(scannerPath = {},order = Integer.MIN_VALUE)
 public class NacosConfigStarter implements DefaultStarter {
 
     public static Properties defaultEvn=new Properties();

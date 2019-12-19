@@ -19,18 +19,15 @@
         <dependency>
             <groupId>com.macos</groupId>
             <artifactId>macos-common</artifactId>
-            <version>${macos}</version>
         </dependency>
         <dependency>
             <groupId>com.macos</groupId>
             <artifactId>macos-annotation</artifactId>
-            <version>${macos}</version>
         </dependency>
 
         <dependency>
             <groupId>com.macos</groupId>
             <artifactId>macos-context</artifactId>
-            <version>${macos}</version>
         </dependency>
 
         <dependency>

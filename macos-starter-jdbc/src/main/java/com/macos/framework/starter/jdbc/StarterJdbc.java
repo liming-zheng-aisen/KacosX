@@ -3,8 +3,8 @@ package com.macos.framework.starter.jdbc;
 import com.macos.common.scanner.api.ScannerApi;
 import com.macos.common.scanner.impl.ScannerImpl;
 import com.macos.common.util.StringUtils;
-import com.macos.framework.annotation.MacosApplication;
-import com.macos.framework.annotation.MacosApplicationStarter;
+import com.macos.framework.annotation.MacosXApplication;
+import com.macos.framework.annotation.MacosXApplicationStarter;
 import com.macos.framework.annotation.MacosXScanner;
 
 import com.macos.framework.core.bean.BeanManager;
@@ -32,7 +32,7 @@ import java.util.Set;
  * @Date 2019/9/4
  */
 
-@MacosApplicationStarter(scannerPath = {}, order =Integer.MAX_VALUE-100)
+@MacosXApplicationStarter(scannerPath = {}, order =Integer.MAX_VALUE-100)
 public class StarterJdbc implements DefaultStarter {
 
     private static final String DEF_STATUS="development";
@@ -51,7 +51,7 @@ public class StarterJdbc implements DefaultStarter {
                      result.addAll(scannerClass);
                 }
             }
-        }else if (cl.isAnnotationPresent(MacosApplication.class)){
+        }else if (cl.isAnnotationPresent(MacosXApplication.class)){
            result.addAll(scanner.doScanner(cl.getPackage().getName(),Mapper.class));
         }
         Set<Class> classSet=new HashSet<>();

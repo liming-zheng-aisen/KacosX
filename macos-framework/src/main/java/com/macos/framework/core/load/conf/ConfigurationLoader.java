@@ -4,7 +4,7 @@ import com.macos.common.properties.LoadPropeties;
 import com.macos.common.properties.PropertiesException;
 import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.AutoConfiguration;
-import com.macos.framework.annotation.MacosApplication;
+import com.macos.framework.annotation.MacosXApplication;
 import com.macos.framework.core.load.abs.BeanLoad;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +57,7 @@ public class ConfigurationLoader extends BeanLoad {
     }
 
     private boolean hasAnnotation(Class c){
-        if (c.isAnnotationPresent(MacosApplication.class)||c.isAnnotationPresent(AutoConfiguration.class)){
+        if (c.isAnnotationPresent(MacosXApplication.class)||c.isAnnotationPresent(AutoConfiguration.class)){
             return true;
         }else {
             Annotation[] annotations=c.getAnnotations();
@@ -74,7 +74,7 @@ public class ConfigurationLoader extends BeanLoad {
 
     private  boolean findAnnotation(Annotation annotation){
 
-        if (annotation.annotationType().isAnnotationPresent(MacosApplication.class)||annotation.annotationType().isAnnotationPresent(AutoConfiguration.class)){
+        if (annotation.annotationType().isAnnotationPresent(MacosXApplication.class)||annotation.annotationType().isAnnotationPresent(AutoConfiguration.class)){
             return true;
         }
 

@@ -31,12 +31,10 @@
         <dependency>
             <groupId>com.macos</groupId>
             <artifactId>macos-framework</artifactId>
-            <version>${macos}</version>
         </dependency>
         <dependency>
             <groupId>com.macos</groupId>
             <artifactId>macos-println</artifactId>
-            <version>${macos}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

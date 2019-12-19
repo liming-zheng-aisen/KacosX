@@ -23,10 +23,89 @@
     <pagehelper-version>5.1.10</pagehelper-version>
     <jsqlparser-version>3.0</jsqlparser-version>
     <jetty>9.4.19.v20190610</jetty>
+    <nacos>1.1.3</nacos>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <!-- MacosX -->
+      <dependency>
+        <groupId>com.macos</groupId>
+        <artifactId>macos-framework</artifactId>
+        <version>${macos}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.macos</groupId>
+        <artifactId>macos-common</artifactId>
+        <version>${macos}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.macos</groupId>
+        <artifactId>macos-starter-web</artifactId>
+        <version>${macos}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.macos</groupId>
+        <artifactId>macos-starter</artifactId>
+        <version>${macos}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.macos</groupId>
+        <artifactId>macos-annotation</artifactId>
+        <version>${macos}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.macos</groupId>
+        <artifactId>macos-context</artifactId>
+        <version>${macos}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.macos</groupId>
+        <artifactId>macos-mvc</artifactId>
+        <version>${macos}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.macos</groupId>
+        <artifactId>macos-bean</artifactId>
+        <version>${macos}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.macos</groupId>
+        <artifactId>macos-starter-jdbc</artifactId>
+        <version>${macos}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.macos</groupId>
+        <artifactId>macos-println</artifactId>
+        <version>${macos}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.macos</groupId>
+        <artifactId>macos-starter-nacos-config</artifactId>
+        <version>${macos}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.macos</groupId>
+        <artifactId>macos-starter-nacos-proxy-client</artifactId>
+        <version>${macos}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.macos</groupId>
+        <artifactId>macos-starter-nacos-cp</artifactId>
+        <version>${macos}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.macos</groupId>
+        <artifactId>macos-starter-router</artifactId>
+        <version>${macos}</version>
+      </dependency>
+
+      <!--Nacos-->
+      <dependency>
+        <groupId>com.alibaba.nacos</groupId>
+        <artifactId>nacos-client</artifactId>
+        <version>${nacos}</version>
+      </dependency>
       <!-- servlet -->
       <dependency>
         <groupId>javax.servlet</groupId>

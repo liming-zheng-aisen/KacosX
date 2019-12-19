@@ -19,25 +19,21 @@
         <dependency>
             <groupId>com.macos</groupId>
             <artifactId>macos-common</artifactId>
-            <version>${macos}</version>
         </dependency>
 
         <dependency>
             <groupId>com.macos</groupId>
             <artifactId>macos-annotation</artifactId>
-            <version>${macos}</version>
         </dependency>
 
         <dependency>
             <groupId>com.macos</groupId>
             <artifactId>macos-context</artifactId>
-            <version>${macos}</version>
         </dependency>
 
         <dependency>
             <groupId>com.macos</groupId>
             <artifactId>macos-bean</artifactId>
-            <version>${macos}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->

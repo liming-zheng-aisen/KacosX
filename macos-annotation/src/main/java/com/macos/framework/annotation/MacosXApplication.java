@@ -12,6 +12,6 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @AutoConfiguration
 @MacosXScanner(packageNames = {})
-public @interface MacosApplication {
+public @interface MacosXApplication {
 
 }

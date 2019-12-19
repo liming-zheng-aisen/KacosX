@@ -1,7 +1,7 @@
 package com.macos.framework.starter.nacos;
 
 import com.macos.common.util.StringUtils;
-import com.macos.framework.annotation.MacosApplicationStarter;
+import com.macos.framework.annotation.MacosXApplicationStarter;
 import com.macos.framework.annotation.NacosServiceClient;
 import com.macos.framework.context.ApplicationContextImpl;
 import com.macos.framework.context.base.ApplicationContextApi;
@@ -21,7 +21,7 @@ import java.util.Set;
  * @Author Zheng.LiMing
  * @Date 2019/9/18
  */
-@MacosApplicationStarter(scannerPath = {},order = Integer.MAX_VALUE-100)
+@MacosXApplicationStarter(scannerPath = {},order = Integer.MAX_VALUE-100)
 public class NacosProxyClientStarter implements DefaultStarter {
 
     @Override

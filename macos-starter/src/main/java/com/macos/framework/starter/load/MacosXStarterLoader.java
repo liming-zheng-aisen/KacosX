@@ -5,7 +5,7 @@ package com.macos.framework.starter.load;
 import com.macos.common.scanner.api.ScannerApi;
 import com.macos.common.scanner.impl.ScannerImpl;
 import com.macos.common.util.StringUtils;
-import com.macos.framework.annotation.MacosApplicationStarter;
+import com.macos.framework.annotation.MacosXApplicationStarter;
 import com.macos.framework.core.bean.factory.BeanFactory;
 import com.macos.framework.core.load.clazz.ApplicationClassLoader;
 import com.macos.framework.core.load.abs.BeanLoad;
@@ -39,7 +39,7 @@ public class MacosXStarterLoader extends BeanLoad {
         logger.info("开始加载macos-starter，默认包为{}",STARTER_PATH);
         ScannerApi scanner=new ScannerImpl();
 
-        Set<Class> starters= scanner.doScanner(STARTER_PATH, MacosApplicationStarter.class);
+        Set<Class> starters= scanner.doScanner(STARTER_PATH, MacosXApplicationStarter.class);
 
         Set<StarterBean> starterBeanSet=convertToStarterBean(starters);
 
@@ -54,8 +54,8 @@ public class MacosXStarterLoader extends BeanLoad {
     private  Set<StarterBean> convertToStarterBean(Set<Class> classes){
         Set<StarterBean> starterBeanSet=new HashSet<>();
         for (Class c:classes){
-            if (c.isAnnotationPresent(MacosApplicationStarter.class)) {
-                MacosApplicationStarter starter = (MacosApplicationStarter) c.getAnnotation(MacosApplicationStarter.class);
+            if (c.isAnnotationPresent(MacosXApplicationStarter.class)) {
+                MacosXApplicationStarter starter = (MacosXApplicationStarter) c.getAnnotation(MacosXApplicationStarter.class);
                 Integer order = starter.order();
                 String[] path = starter.scannerPath();
                 StarterBean starterBean=new StarterBean(order,c,path);

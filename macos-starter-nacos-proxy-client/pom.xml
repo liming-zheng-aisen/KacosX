@@ -19,7 +19,6 @@
         <dependency>
             <groupId>com.macos</groupId>
             <artifactId>macos-starter-nacos-cp</artifactId>
-            <version>${macos}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

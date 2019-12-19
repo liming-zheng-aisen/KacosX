@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-public @interface MacosApplicationStarter {
+public @interface MacosXApplicationStarter {
     String[] scannerPath();
     int order();
 }

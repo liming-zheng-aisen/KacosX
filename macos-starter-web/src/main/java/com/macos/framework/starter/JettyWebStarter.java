@@ -1,6 +1,6 @@
 package com.macos.framework.starter;
 
-import com.macos.framework.annotation.MacosApplicationStarter;
+import com.macos.framework.annotation.MacosXApplicationStarter;
 import com.macos.framework.core.bean.BeanManager;
 import com.macos.framework.core.listener.manager.LoaderListerManager;
 import com.macos.start.web.jetty.listener.JettyServerStarterListener;
@@ -18,7 +18,7 @@ import java.util.Set;
  * @Author Zheng.LiMing
  * @Date 2019/9/4
  */
-@MacosApplicationStarter(scannerPath = {},order =Integer.MAX_VALUE)
+@MacosXApplicationStarter(scannerPath = {},order =Integer.MAX_VALUE)
 public class JettyWebStarter implements DefaultStarter {
 
     private final static Logger log= LoggerFactory.getLogger(JettyWebStarter.class);

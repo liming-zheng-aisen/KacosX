@@ -30,7 +30,6 @@
     <dependency>
       <groupId>com.macos</groupId>
       <artifactId>macos-starter</artifactId>
-      <version>${macos}</version>
     </dependency>
 
   </dependencies>
