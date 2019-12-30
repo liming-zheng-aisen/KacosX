@@ -1,11 +1,10 @@
 package com.macos.framework.core.load.clazz;
 
 import com.macos.common.scanner.impl.ScannerImpl;
-import com.macos.framework.core.bean.BeanManager;
+import com.macos.framework.core.bean.manage.BeanManager;
 import com.macos.framework.annotation.MacosXScanner;
 import com.macos.framework.core.load.abs.BeanLoad;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.util.Set;
 
@@ -14,10 +13,9 @@ import java.util.Set;
  * @date 2019/8/20
  * @description 主要任务是加载
  */
+@Slf4j
+@SuppressWarnings("all")
 public  class ApplicationClassLoader extends BeanLoad {
-
-    private static final Logger log = LoggerFactory.getLogger(ApplicationClassLoader.class);
-
 
     public ApplicationClassLoader(){
     }
@@ -58,7 +56,7 @@ public  class ApplicationClassLoader extends BeanLoad {
         } catch (IOException e) {
             e.printStackTrace();
         }
-       BeanManager.registerClassBySet(classSet);
+        BeanManager.registerClassBySet(classSet);
         log.info("ApplicationClassLoader已经加载"+basePackage+"下面的类");
         }
         if (null!=nextLoader){
@@ -72,8 +70,8 @@ public  class ApplicationClassLoader extends BeanLoad {
      * @throws Exception
      */
     public void load(String packageName) throws Exception {
-        ScannerImpl dyScanner=new ScannerImpl();
-        Set<Class> list = dyScanner.doScanner(packageName);
+        ScannerImpl scanner=new ScannerImpl();
+        Set<Class> list = scanner.doScanner(packageName);
         BeanManager.registerClassBySet(list);
         log.info("ApplicationClassLoader已经加载"+packageName+"下面的类");
     }

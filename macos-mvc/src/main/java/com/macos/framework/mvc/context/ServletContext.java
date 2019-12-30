@@ -6,7 +6,7 @@ import com.macos.framework.context.base.ApplicationContextApi;
 import com.macos.framework.context.exception.ContextException;
 import com.macos.framework.context.manager.ContextManager;
 import com.macos.framework.mvc.context.exception.ServletException;
-import com.macos.framework.mvc.enums.HttpMethod;
+import com.macos.framework.enums.HttpMethod;
 import com.macos.framework.mvc.handler.bean.RequestUrlBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

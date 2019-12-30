@@ -1,20 +1,19 @@
 package com.macos.framework.core.load.ioc;
 
 import com.macos.common.util.StringUtils;
-import com.macos.framework.annotation.Component;
-import com.macos.framework.annotation.Configuration;
-import com.macos.framework.annotation.Service;
-import com.macos.framework.context.exception.ContextException;
+import com.macos.framework.annotation.*;
 import com.macos.framework.context.ApplicationContextImpl;
-import com.macos.framework.core.bean.factory.AutowiredFactory;
-import com.macos.framework.core.bean.factory.BeanFactory;
-import com.macos.framework.core.bean.factory.ValueFactory;
-import com.macos.framework.core.bean.BeanManager;
+import com.macos.framework.context.manager.ContextManager;
+import com.macos.framework.core.bean.manage.BeanManager;
+import com.macos.framework.core.bean.definition.BeanDefinition;
+import com.macos.framework.core.factory.BeanProxy;
 import com.macos.framework.core.load.abs.BeanLoad;
 import com.macos.framework.core.load.conf.ConfigurationLoader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.macos.framework.core.util.BeanUtil;
+import com.macos.framework.core.util.FieldUtil;
+import lombok.extern.slf4j.Slf4j;
+import java.lang.reflect.Field;
+import java.lang.reflect.Proxy;
 import java.util.*;
 
 /**
@@ -22,11 +21,8 @@ import java.util.*;
  * @date 2019/8/19
  * @description IOC加载器
  */
-
+@Slf4j
 public class IocLoader extends BeanLoad {
-
-
-    private static final Logger log = LoggerFactory.getLogger(IocLoader.class);
 
     private static ApplicationContextImpl applicationContent;
 
@@ -49,6 +45,7 @@ public class IocLoader extends BeanLoad {
        if (null==applicationContent) {
            applicationContent = ApplicationContextImpl.Builder.getDySpringApplicationContext();
        }
+
         loadBean();
         initConfigurationBean();
         doAutowirteAll();
@@ -58,18 +55,20 @@ public class IocLoader extends BeanLoad {
         }
     }
 
-    private static void loadBean() throws ClassNotFoundException, InstantiationException, IllegalAccessException, ContextException {
+    private static void loadBean() throws Exception {
 
-        Set<Class> clazzs= BeanManager.getClassContainer();
+        Set<BeanDefinition> clazzs= BeanManager.getClassContainer();
 
-        for (Class beanClass:clazzs){
+        for (BeanDefinition beanDefinition:clazzs){
+
+            Class beanClass = beanDefinition.getTarget();
 
             if (beanClass.isAnnotationPresent(Service.class)
                     ||beanClass.isAnnotationPresent(Component.class)||beanClass.isAnnotationPresent(Configuration.class)){
 
-                Object bean = BeanFactory.createNewBean(beanClass);
+                Object bean = BeanUtil.createNewBean(beanClass);
 
-                ValueFactory.doFields(bean, ConfigurationLoader.getEvn());
+                FieldUtil.doFields(bean);
 
                 String beanName=getAnnotationValue(beanClass);
 
@@ -87,7 +86,7 @@ public class IocLoader extends BeanLoad {
                     applicationContent.registerBean(beanName,bean);
 
                 }
-                ValueFactory.doFields(bean, ConfigurationLoader.getEvn());
+                FieldUtil.doFields(bean);
 
             }
         }
@@ -102,9 +101,9 @@ public class IocLoader extends BeanLoad {
             String key=iterator.next();
                Object bean= context.get(key);
                if (bean.getClass().isAnnotationPresent(Configuration.class)) {
-                   AutowiredFactory.doAutowired(bean,ConfigurationLoader.getEvn());
+                   doAutowired(bean,ConfigurationLoader.getEvn());
                    //调用bean的方法创建实例
-                   Map<String, Object> beans = BeanFactory.doMethodsInitialBean(bean);
+                   Map<String, Object> beans = BeanUtil.doMethodsInitialBean(bean);
                    list.add(beans);
                }
         }
@@ -120,7 +119,7 @@ public class IocLoader extends BeanLoad {
         Iterator iterator=context.keySet().iterator();
         while (iterator.hasNext()){
             String key=(String)iterator.next();
-            AutowiredFactory.doAutowired(context.get(key),ConfigurationLoader.getEvn());
+           doAutowired(context.get(key),ConfigurationLoader.getEvn());
         }
         log.info("doAutowirteAll，配置类自动装配完成！");
     }
@@ -137,5 +136,41 @@ public class IocLoader extends BeanLoad {
         return result;
     }
 
+    public static void doAutowired(Object bean, Properties evn) throws Exception {
+        if (null==bean){
+            return;
+        }
+        ContextManager contextManager= ContextManager.BuilderContext.getContextManager();
+        Field[] fields= bean.getClass().getDeclaredFields();
+        for (Field f:fields){
+            if (f.isAnnotationPresent(Autowired.class)){
+                f.setAccessible(true);
+                Autowired dyAutowired=f.getAnnotation(Autowired.class);
+                String beanName=dyAutowired.value();
+                Class beanClass=null;
+                if (StringUtils.isEmptyPlus(beanName)){
+                    String fName=f.getType().getCanonicalName();
+                    beanClass= Class.forName(fName);
+                    beanName=StringUtils.toLowerCaseFirstName(beanClass.getSimpleName());
+                }
+                Object fBean=contextManager.getBean(beanName,beanClass);
+                if (fBean==null){
+                    if (f.getType().isAnnotationPresent(RestAPI.class)){
+                        fBean= BeanUtil.initNewBean(f.getType().getName(),evn);
+                    }else {
+                        throw new Exception(beanClass.getName().toString() + "为空！");
+                    }
+                }
+                Class[] classes=f.getType().getInterfaces();
+                Class[] classes1=new Class[classes.length+1];
+                System.arraycopy(classes,0,classes1,0,classes.length);
+                classes1[classes1.length-1]=f.getType();
+                BeanProxy beanProxy =new BeanProxy(fBean);
+                Object object = Proxy.newProxyInstance(f.getType().getClassLoader(),classes1, beanProxy);
+                f.set(bean,object);
+
+            }
+        }
+    }
 
 }

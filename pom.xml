@@ -21,7 +21,7 @@
         <module>macos-println</module>
         <module>macos-starter-nacos-config</module>
         <module>macos-starter-nacos-cp</module>
-        <module>macos-starter-nacos-proxy-client</module>
+        <module>macos-starter-npc</module>
         <module>macos-parent</module>
         <module>macos-starter-router</module>
     </modules>

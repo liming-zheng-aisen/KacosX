@@ -1,4 +1,4 @@
-package com.macos.framework.core.bean.factory;
+package com.macos.framework.core.factory;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

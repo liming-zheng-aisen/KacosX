@@ -1,7 +1,7 @@
 package com.macos.framework.starter.nacos;
 
 import com.macos.framework.annotation.MacosXApplicationStarter;
-import com.macos.framework.core.bean.factory.BeanFactory;
+import com.macos.framework.core.bean.util.BeanUtil;
 import com.macos.framework.core.load.conf.ConfigurationLoader;
 import com.macos.framework.starter.DefaultStarter;
 import com.macos.nacos.config.NacosConfig;
@@ -25,7 +25,7 @@ public class NacosConfigStarter implements DefaultStarter {
 
         PropertiesUtil.cloneEvn(evn,defaultEvn);
 
-        NacosConfig nacosConfig=(NacosConfig) BeanFactory.initNewBean(NacosConfig.class,evn);
+        NacosConfig nacosConfig=(NacosConfig) BeanUtil.initNewBean(NacosConfig.class,evn);
 
         NacosConfigService nacosConfigService =  NacosConfigService.getNaocsConfigService();
 

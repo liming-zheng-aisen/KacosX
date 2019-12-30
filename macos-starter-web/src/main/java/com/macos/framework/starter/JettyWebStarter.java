@@ -1,7 +1,7 @@
 package com.macos.framework.starter;
 
 import com.macos.framework.annotation.MacosXApplicationStarter;
-import com.macos.framework.core.bean.BeanManager;
+import com.macos.framework.core.bean.manage.BeanManager;
 import com.macos.framework.core.listener.manager.LoaderListerManager;
 import com.macos.start.web.jetty.listener.JettyServerStarterListener;
 import com.macos.start.web.jetty.filter.init.FilterRegisterServer;

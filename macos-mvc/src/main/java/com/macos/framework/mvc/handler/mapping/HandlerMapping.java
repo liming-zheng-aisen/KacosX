@@ -3,7 +3,7 @@ package com.macos.framework.mvc.handler.mapping;
 
 import com.macos.common.util.StringUtils;
 import com.macos.framework.mvc.context.ServletContext;
-import com.macos.framework.mvc.enums.HttpMethod;
+import com.macos.framework.enums.HttpMethod;
 import com.macos.framework.mvc.handler.bean.RequestUrlBean;
 
 

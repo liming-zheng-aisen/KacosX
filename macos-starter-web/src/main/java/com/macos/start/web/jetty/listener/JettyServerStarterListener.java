@@ -1,7 +1,7 @@
 package com.macos.start.web.jetty.listener;
 
 import com.macos.framework.context.ApplicationContextImpl;
-import com.macos.framework.core.bean.factory.BeanFactory;
+import com.macos.framework.core.bean.util.BeanUtil;
 import com.macos.framework.core.bean.factory.ValueFactory;
 import com.macos.framework.core.listener.api.LoadListener;
 import com.macos.start.web.jetty.conf.JettyConfig;
@@ -37,7 +37,7 @@ public class JettyServerStarterListener implements LoadListener {
     @Override
     public void update(Properties evn) {
         try {
-            JettyConfig config2= (JettyConfig)  BeanFactory.initNewBean(JettyConfig.class,evn);
+            JettyConfig config2= (JettyConfig)  BeanUtil.initNewBean(JettyConfig.class,evn);
             if (!config2.toString().equals(server.getConfig().toString())){
                 serverUpdate=new JettyServer();
                 serverUpdate.start();

@@ -6,7 +6,7 @@ import com.macos.framework.annotation.Order;
 import com.macos.framework.annotation.WebFilter;
 import com.macos.framework.context.ApplicationContextImpl;
 import com.macos.framework.context.base.ApplicationContextApi;
-import com.macos.framework.core.bean.factory.BeanFactory;
+import com.macos.framework.core.bean.util.BeanUtil;
 import com.macos.framework.core.bean.factory.ValueFactory;
 import com.macos.framework.core.load.conf.ConfigurationLoader;
 import com.macos.start.web.jetty.filter.FilterBean;
@@ -50,7 +50,7 @@ public class FilterRegisterServer {
                         filterName=StringUtils.toLowerCaseFirstName(c.getSimpleName());
                     }
 
-                    Filter filter = (Filter) BeanFactory.createNewBean(c);
+                    Filter filter = (Filter) BeanUtil.createNewBean(c);
 
                     ValueFactory.doFields(filter, ConfigurationLoader.getEvn());
 

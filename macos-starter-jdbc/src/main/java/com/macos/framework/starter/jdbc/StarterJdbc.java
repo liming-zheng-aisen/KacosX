@@ -7,7 +7,7 @@ import com.macos.framework.annotation.MacosXApplication;
 import com.macos.framework.annotation.MacosXApplicationStarter;
 import com.macos.framework.annotation.MacosXScanner;
 
-import com.macos.framework.core.bean.BeanManager;
+import com.macos.framework.core.bean.manage.BeanManager;
 import com.macos.framework.druid.DruidFilter;
 import com.macos.framework.druid.DruidServlet;
 import com.macos.framework.jdbc.config.DruidConfig;

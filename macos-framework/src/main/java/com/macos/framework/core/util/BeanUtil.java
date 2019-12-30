@@ -1,7 +1,9 @@
-package com.macos.framework.core.bean.factory;
+package com.macos.framework.core.util;
 
 import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.Bean;
+import com.macos.framework.core.bean.definition.BeanDefinition;
+import com.macos.framework.core.load.ioc.IocLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,12 +16,10 @@ import java.util.Properties;
 /**
  * @author zheng.liming
  * @date 2019/8/20
- * @description 对bean加工的工厂，主要功能：创建bean实例、为bean的字段赋值
+ * @description bean工具类
  */
-public class BeanFactory {
 
-    private static final Logger log = LoggerFactory.getLogger(BeanFactory.class);
-
+public class BeanUtil {
     /**
      * 根据类全路径，创建一个实例
      *
@@ -56,8 +56,8 @@ public class BeanFactory {
      */
     public static Object initNewBean(Class c, Properties evn) throws Exception {
         Object object=createNewBean(c);
-        AutowiredFactory.doAutowired(object,evn);
-        ValueFactory.doFields(object,evn);
+        IocLoader.doAutowired(object,evn);
+        FieldUtil.doFields(object);
         return object;
     }
     /**
@@ -70,8 +70,8 @@ public class BeanFactory {
      */
     public static Object initNewBean(String c, Properties evn) throws Exception {
         Object object=createNewBean(c);
-        AutowiredFactory.doAutowired(object,evn);
-        ValueFactory.doFields(object,evn);
+        IocLoader.doAutowired(object,evn);
+        FieldUtil.doFields(object);
         return object;
     }
 
@@ -107,6 +107,5 @@ public class BeanFactory {
     public static  Class classLoad(String str) throws ClassNotFoundException {
         return Class.forName(str);
     }
-
 
 }

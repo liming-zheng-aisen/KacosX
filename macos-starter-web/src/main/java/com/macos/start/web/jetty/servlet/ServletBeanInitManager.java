@@ -6,7 +6,7 @@ import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.WebServlet;
 import com.macos.framework.context.ApplicationContextImpl;
 import com.macos.framework.context.base.ApplicationContextApi;
-import com.macos.framework.core.bean.factory.BeanFactory;
+import com.macos.framework.core.bean.util.BeanUtil;
 import com.macos.framework.core.bean.factory.ValueFactory;
 import com.macos.framework.core.load.conf.ConfigurationLoader;
 
@@ -42,7 +42,7 @@ public class ServletBeanInitManager {
         }
 
         try {
-            Servlet servlet1=(Servlet) BeanFactory.createNewBean(servlet);
+            Servlet servlet1=(Servlet) BeanUtil.createNewBean(servlet);
             ValueFactory.doFields(servlet1, ConfigurationLoader.getEvn());
             ServletBean servletBean =new ServletBean(servlet1,url);
             servletBeans.add(servletBean);

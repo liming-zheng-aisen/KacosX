@@ -1,5 +1,7 @@
 package com.macos.framework.annotation;
 
+import com.macos.framework.enums.ScopeType;
+
 import java.lang.annotation.*;
 
 /**
@@ -17,4 +19,9 @@ public @interface RestAPI {
      * @return
      */
     String value() default "";
+    /**
+     * 原型模式还是单例模式，默认单例
+     * @return
+     */
+    ScopeType scope() default ScopeType.SINGLETON;
 }

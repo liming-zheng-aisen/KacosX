@@ -1,7 +1,7 @@
 package com.macos.framework.annotation;
 
 
-import com.macos.framework.mvc.enums.HttpMethod;
+import com.macos.framework.enums.HttpMethod;
 
 import java.lang.annotation.*;
 

@@ -6,7 +6,7 @@ import com.macos.common.scanner.api.ScannerApi;
 import com.macos.common.scanner.impl.ScannerImpl;
 import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.MacosXApplicationStarter;
-import com.macos.framework.core.bean.factory.BeanFactory;
+import com.macos.framework.core.bean.util.BeanUtil;
 import com.macos.framework.core.load.clazz.ApplicationClassLoader;
 import com.macos.framework.core.load.abs.BeanLoad;
 import com.macos.framework.core.load.conf.ConfigurationLoader;
@@ -76,7 +76,7 @@ public class MacosXStarterLoader extends BeanLoad {
         Class[] ins=cl.getInterfaces();
         for (Class it:ins){
             if (it.getName().equals("com.macos.framework.starter.DefaultStarter")){
-                Object beans= BeanFactory.createNewBean(cl);
+                Object beans= BeanUtil.createNewBean(cl);
                 Class[] params={Properties.class,Class.class};
                 Method method = cl.getMethod("doStart",params);
                 method.invoke(beans, ConfigurationLoader.getEvn(),main);

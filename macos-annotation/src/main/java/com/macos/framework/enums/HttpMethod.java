@@ -1,4 +1,4 @@
-package com.macos.framework.mvc.enums;
+package com.macos.framework.enums;
 
 /**
  * @author zheng.liming

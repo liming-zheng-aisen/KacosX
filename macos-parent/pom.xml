@@ -79,21 +79,25 @@
         <artifactId>macos-println</artifactId>
         <version>${macos}</version>
       </dependency>
+
       <dependency>
         <groupId>com.macos</groupId>
         <artifactId>macos-starter-nacos-config</artifactId>
         <version>${macos}</version>
       </dependency>
+
       <dependency>
         <groupId>com.macos</groupId>
-        <artifactId>macos-starter-nacos-proxy-client</artifactId>
+        <artifactId>macos-starter-npc</artifactId>
         <version>${macos}</version>
       </dependency>
+
       <dependency>
         <groupId>com.macos</groupId>
         <artifactId>macos-starter-nacos-cp</artifactId>
         <version>${macos}</version>
       </dependency>
+
       <dependency>
         <groupId>com.macos</groupId>
         <artifactId>macos-starter-router</artifactId>
@@ -209,17 +213,23 @@
         <version>${jsqlparser-version}</version>
       </dependency>
 
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.4</version>
+      </dependency>
+
 
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>${slf4j}</version>
+        <version>1.7.5</version>
       </dependency>
 
       <dependency>
         <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-log4j12</artifactId>
-        <version>${slf4j}</version>
+        <artifactId>slf4j-simple</artifactId>
+        <version>1.7.5</version>
       </dependency>
 
     </dependencies>

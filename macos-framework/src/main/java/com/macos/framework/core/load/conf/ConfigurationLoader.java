@@ -6,6 +6,7 @@ import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.AutoConfiguration;
 import com.macos.framework.annotation.MacosXApplication;
 import com.macos.framework.core.load.abs.BeanLoad;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,10 +18,8 @@ import java.util.Properties;
  * @date 2019/8/19
  * @description 加载propert配置文件
  */
+@Slf4j
 public class ConfigurationLoader extends BeanLoad {
-
-    private static final Logger log = LoggerFactory.getLogger(ConfigurationLoader.class);
-
     /**
      * evn全局配置文件。
      */

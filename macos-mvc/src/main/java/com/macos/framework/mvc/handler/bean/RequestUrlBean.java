@@ -1,6 +1,6 @@
 package com.macos.framework.mvc.handler.bean;
 
-import com.macos.framework.mvc.enums.HttpMethod;
+import com.macos.framework.enums.HttpMethod;
 
 import java.lang.reflect.Method;
 

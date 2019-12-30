@@ -8,7 +8,7 @@ import com.macos.framework.annotation.PathVariable;
 import com.macos.framework.annotation.RequestBody;
 import com.macos.framework.annotation.RequestParameter;
 import com.macos.framework.core.bean.factory.AutowiredFactory;
-import com.macos.framework.core.bean.factory.BeanFactory;
+import com.macos.framework.core.bean.util.BeanUtil;
 import com.macos.framework.core.bean.factory.ValueFactory;
 import com.macos.framework.core.load.conf.ConfigurationLoader;
 import com.macos.framework.mvc.handler.HandlerAdapter;
@@ -98,7 +98,7 @@ public class HandlerExecution implements HandlerAdapter {
                 index++;
             }
         }
-        Object obj= BeanFactory.createNewBean(handler.getHandler());
+        Object obj= BeanUtil.createNewBean(handler.getHandler());
         ValueFactory.doFields(obj,env);
         AutowiredFactory.doAutowired(obj,env);
         Object result=handler.getHandlerMethod().invoke(obj, param);
