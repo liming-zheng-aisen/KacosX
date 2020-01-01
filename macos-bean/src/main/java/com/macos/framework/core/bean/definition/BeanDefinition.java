@@ -1,6 +1,6 @@
 package com.macos.framework.core.bean.definition;
 
-import com.macos.framework.core.bean.factory.api.BeanFactory;
+import com.macos.framework.context.base.ApplicationContextApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,20 +25,21 @@ public class BeanDefinition {
     /**bean的名字*/
     private volatile String beanName;
 
-    /**当前bean的实例*/
-    private volatile Object bean;
-
-    private volatile BeanFactory factory;
+    /**指定上下文管理，允许替换*/
+    private volatile ApplicationContextApi contextApi;
 
     public boolean isPrototype(){
         return prototype;
     }
+
     public boolean isSington(){
         return !prototype;
     }
+
     public void setPrototype(){
         prototype = true;
     }
+
     public void setSingleton() {
         prototype = false;
     }
@@ -67,11 +68,14 @@ public class BeanDefinition {
         this.beanName = beanName;
     }
 
-    public Object getBean() {
-        return bean;
+    public void setContextApi(ApplicationContextApi contextApi) {
+        this.contextApi = contextApi;
     }
 
-    public void setBean(Object bean) {
-        this.bean = bean;
+
+    public ApplicationContextApi getContextApi(){
+        return this.contextApi;
     }
+
+
 }

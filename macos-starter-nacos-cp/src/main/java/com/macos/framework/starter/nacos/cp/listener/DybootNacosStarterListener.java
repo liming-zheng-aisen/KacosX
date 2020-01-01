@@ -6,7 +6,7 @@ import com.alibaba.nacos.api.naming.listener.Event;
 import com.alibaba.nacos.api.naming.listener.EventListener;
 import com.alibaba.nacos.api.naming.listener.NamingEvent;
 import com.macos.common.ip.IpUtil;
-import com.macos.framework.context.ApplicationContextImpl;
+import com.macos.framework.context.impl.ApplicationContextImpl;
 import com.macos.framework.context.base.ApplicationContextApi;
 import com.macos.framework.context.manager.ContextManager;
 import com.macos.framework.core.listener.api.LoadListener;

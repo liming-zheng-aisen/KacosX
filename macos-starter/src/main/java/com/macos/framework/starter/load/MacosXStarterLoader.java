@@ -6,10 +6,10 @@ import com.macos.common.scanner.api.ScannerApi;
 import com.macos.common.scanner.impl.ScannerImpl;
 import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.MacosXApplicationStarter;
-import com.macos.framework.core.bean.util.BeanUtil;
 import com.macos.framework.core.load.clazz.ApplicationClassLoader;
 import com.macos.framework.core.load.abs.BeanLoad;
 import com.macos.framework.core.load.conf.ConfigurationLoader;
+import com.macos.framework.core.util.BeanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,10 +46,6 @@ public class MacosXStarterLoader extends BeanLoad {
         doStarter(starterBeanSet,c);
 
         logger.debug("macos-starter加载结束");
-
-        if (null!=nextLoader){
-            nextLoader.load(c);
-        }
     }
     private  Set<StarterBean> convertToStarterBean(Set<Class> classes){
         Set<StarterBean> starterBeanSet=new HashSet<>();

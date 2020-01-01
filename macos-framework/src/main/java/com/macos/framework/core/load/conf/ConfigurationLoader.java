@@ -34,9 +34,6 @@ public class ConfigurationLoader extends BeanLoad {
 
     }
 
-    public ConfigurationLoader(BeanLoad beanLoad){
-        nextLoader=beanLoad;
-    }
     /**
      * 开始加载配置
      * @param c
@@ -48,10 +45,6 @@ public class ConfigurationLoader extends BeanLoad {
         //加载配置文件
         loadProperties(c,null);
        }
-
-        if (null!=nextLoader){
-            nextLoader.load(c);
-        }
 
     }
 

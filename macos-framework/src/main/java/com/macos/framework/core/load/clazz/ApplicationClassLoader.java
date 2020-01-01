@@ -20,10 +20,6 @@ public  class ApplicationClassLoader extends BeanLoad {
     public ApplicationClassLoader(){
     }
 
-    public ApplicationClassLoader(BeanLoad beanLoad){
-        nextLoader=beanLoad;
-    }
-
     /**
      * 根据当前位置，加载程序中的class
      * @param c
@@ -31,37 +27,7 @@ public  class ApplicationClassLoader extends BeanLoad {
      */
     @Override
     public  void load(Class c) throws Exception{
-        if (c.isAnnotationPresent(MacosXScanner.class)){
-            MacosXScanner macosXScanner = (MacosXScanner) c.getAnnotation(MacosXScanner.class);
-            String[] packageNames= macosXScanner.packageNames();
-            if (packageNames.length==0){
-                log.error("扫描路径不允许为空或\"  \"");
-                throw new Exception("扫描路径不允许为空或\"  \"");
-            }
-            for (String p:packageNames){
-                try {
-                    load(p);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }else {
-        //根据主入口的文件加载同级目录或子目录下的class文件
-        //获取类全路径
-        String basePackage=c.getPackage().getName();
-        ScannerImpl dyScanner=new ScannerImpl();
-        Set<Class> classSet= null;
-        try {
-            classSet = dyScanner.doScanner(basePackage);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        BeanManager.registerClassBySet(classSet);
-        log.info("ApplicationClassLoader已经加载"+basePackage+"下面的类");
-        }
-        if (null!=nextLoader){
-            nextLoader.load(c);
-        }
+
     }
 
     /**

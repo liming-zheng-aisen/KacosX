@@ -22,6 +22,11 @@ public class BeanDefinitionUtil {
 
     private static BeanDefinitionUtil beanDefinitionUtil= new BeanDefinitionUtil();
 
+    /**
+     * 将class信息解析到BeanDefinition中
+     * @param c
+     * @return
+     */
     public static BeanDefinition convertToBeanDefinition(Class c){
         if (c==null){
             return null;
@@ -33,11 +38,22 @@ public class BeanDefinitionUtil {
         return beanDefinition;
     }
 
+    /**
+     * 开始解析
+     * @param c
+     * @param beanDefinition
+     * @return
+     */
     private BeanDefinitionUtil start(Class c,BeanDefinition beanDefinition){
         beanDefinition.setTarget(c);
         return this;
     }
 
+    /**
+     * 实现接口
+     * @param c
+     * @param classList
+     */
     private static void setInterfaces(Class c,List<Class> classList){
         if (c==Object.class){
             return ;
@@ -51,6 +67,11 @@ public class BeanDefinitionUtil {
         }
     }
 
+    /**
+     * 实现class对象
+     * @param c
+     * @param classList
+     */
     private static void setSuperClass(Class c,List<Class> classList){
 
         if (c==Object.class){
@@ -68,6 +89,12 @@ public class BeanDefinitionUtil {
         setSuperClass(superclass,classList);
     }
 
+    /**
+     * 初始化接口
+     * @param c
+     * @param beanDefinition
+     * @return
+     */
     private BeanDefinitionUtil  initSuperClass(Class c,BeanDefinition beanDefinition){
         List<Class> classList = new ArrayList<>();
         setInterfaces(c,classList);
@@ -76,30 +103,43 @@ public class BeanDefinitionUtil {
         return this;
     }
 
+    /**
+     * 设置bean名字和实例类型
+     * @param c
+     * @param beanDefinition
+     * @return
+     */
     private BeanDefinitionUtil initPrototypeAndBeanName(Class c,BeanDefinition beanDefinition){
 
         if (c.isAnnotationPresent(Component.class)){
             Component component = (Component)c.getAnnotation(Component.class);
-            setPrototypeAndBeanNam(c,component.scope().isPrototype(),component.value(),beanDefinition);
+            setPrototypeAndBeanName(c,component.scope().isPrototype(),component.value(),beanDefinition);
             return this;
         }
 
         if (c.isAnnotationPresent(RestAPI.class)){
             RestAPI component = (RestAPI)c.getAnnotation(RestAPI.class);
-            setPrototypeAndBeanNam(c,component.scope().isPrototype(),component.value(),beanDefinition);
+            setPrototypeAndBeanName(c,component.scope().isPrototype(),component.value(),beanDefinition);
             return this;
         }
 
         if (c.isAnnotationPresent(Service.class)){
             Service component = (Service)c.getAnnotation(Service.class);
-            setPrototypeAndBeanNam(c,component.scope().isPrototype(),component.value(),beanDefinition);
+            setPrototypeAndBeanName(c,component.scope().isPrototype(),component.value(),beanDefinition);
             return this;
         }
 
         return this;
     }
 
-    private void setPrototypeAndBeanNam(Class c,boolean isPrototype,String beanName,BeanDefinition beanDefinition){
+    /**
+     * 设置bean名字和实例类型
+     * @param c
+     * @param isPrototype
+     * @param beanName
+     * @param beanDefinition
+     */
+    private void setPrototypeAndBeanName(Class c,boolean isPrototype,String beanName,BeanDefinition beanDefinition){
        if (StringUtils.isEmpty(beanName)){
            beanName =  StringUtils.toLowerCaseFirstName(c.getSimpleName());
        }

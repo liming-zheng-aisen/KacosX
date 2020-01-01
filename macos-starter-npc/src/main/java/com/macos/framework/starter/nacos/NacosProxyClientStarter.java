@@ -3,7 +3,7 @@ package com.macos.framework.starter.nacos;
 import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.MacosXApplicationStarter;
 import com.macos.framework.annotation.NacosServiceClient;
-import com.macos.framework.context.ApplicationContextImpl;
+import com.macos.framework.context.impl.ApplicationContextImpl;
 import com.macos.framework.context.base.ApplicationContextApi;
 import com.macos.framework.context.manager.ContextManager;
 import com.macos.framework.core.bean.manage.BeanManager;

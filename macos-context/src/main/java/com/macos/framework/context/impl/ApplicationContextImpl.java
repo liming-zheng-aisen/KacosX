@@ -1,11 +1,8 @@
-package com.macos.framework.context;
+package com.macos.framework.context.impl;
 
 import com.macos.framework.context.base.ApplicationContextApi;
 import com.macos.framework.context.exception.ContextException;
-import com.macos.framework.context.manager.ContextManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import lombok.extern.slf4j.Slf4j;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -15,9 +12,8 @@ import java.util.Map;
  * @date 2019/8/20
  * @description
  */
+@Slf4j
 public class ApplicationContextImpl implements ApplicationContextApi {
-
-    private static final Logger log = LoggerFactory.getLogger(ApplicationContextImpl.class);
 
     private static Map<String,Object> applicationContext;
 
@@ -55,20 +51,23 @@ public class ApplicationContextImpl implements ApplicationContextApi {
     }
 
     @Override
-    public void registerBean(String beanName, Object object) throws ContextException {
+    public boolean registerBean(String beanName, Object object) throws ContextException {
         applicationContext.put(beanName,object);
+        return true;
+    }
+
+    @Override
+    public boolean registerBean(Object object) throws ContextException {
+        return false;
     }
 
     public static class Builder{
 
         private final static ApplicationContextImpl context=new ApplicationContextImpl();
 
-        public static ApplicationContextImpl getDySpringApplicationContext() {
-            ContextManager contextManager= ContextManager.BuilderContext.getContextManager();
-            if (!contextManager.hasContext(context)){
-                contextManager.registerApplicationContext(context);
-            }
+        public static ApplicationContextImpl getApplicationContext() {
             return context;
         }
+
     }
 }

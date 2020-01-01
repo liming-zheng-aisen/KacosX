@@ -1,9 +1,7 @@
 package com.macos.framework.core.load.ioc;
-
 import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.*;
-import com.macos.framework.context.ApplicationContextImpl;
-import com.macos.framework.context.manager.ContextManager;
+import com.macos.framework.context.impl.ApplicationContextImpl;
 import com.macos.framework.core.bean.manage.BeanManager;
 import com.macos.framework.core.bean.definition.BeanDefinition;
 import com.macos.framework.core.factory.BeanProxy;
@@ -31,9 +29,6 @@ public class IocLoader extends BeanLoad {
 
     }
 
-    public IocLoader(BeanLoad beanLoad){
-        nextLoader=beanLoad;
-    }
 
     /**
      * 加载
@@ -43,16 +38,13 @@ public class IocLoader extends BeanLoad {
     @Override
     public void load(Class c) throws Exception {
        if (null==applicationContent) {
-           applicationContent = ApplicationContextImpl.Builder.getDySpringApplicationContext();
+           applicationContent = ApplicationContextImpl.Builder.getApplicationContext();
        }
 
         loadBean();
         initConfigurationBean();
         doAutowirteAll();
         log.info("上下文容器初始化成功");
-        if (null!=nextLoader){
-            nextLoader.load(c);
-        }
     }
 
     private static void loadBean() throws Exception {
@@ -140,7 +132,6 @@ public class IocLoader extends BeanLoad {
         if (null==bean){
             return;
         }
-        ContextManager contextManager= ContextManager.BuilderContext.getContextManager();
         Field[] fields= bean.getClass().getDeclaredFields();
         for (Field f:fields){
             if (f.isAnnotationPresent(Autowired.class)){
@@ -153,7 +144,7 @@ public class IocLoader extends BeanLoad {
                     beanClass= Class.forName(fName);
                     beanName=StringUtils.toLowerCaseFirstName(beanClass.getSimpleName());
                 }
-                Object fBean=contextManager.getBean(beanName,beanClass);
+                Object fBean=BeanManager.getBeanDefinition(beanName,beanClass).getContextApi().getBean(beanName,beanClass);
                 if (fBean==null){
                     if (f.getType().isAnnotationPresent(RestAPI.class)){
                         fBean= BeanUtil.initNewBean(f.getType().getName(),evn);

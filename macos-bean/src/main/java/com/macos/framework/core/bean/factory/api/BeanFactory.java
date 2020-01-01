@@ -7,7 +7,18 @@ package com.macos.framework.core.bean.factory.api;
  */
 public interface BeanFactory {
 
-    Object getBean(String beanName,Class beanClass);
+    /**
+     * 获取一个实例
+     * @param beanName
+     * @param beanClass
+     * @return
+     */
+    Object getBean(String beanName,Class beanClass)throws Exception;
 
-    void registerBean(String beanName,Class beanClass);
+    /**
+     * 注册一个bean
+     * @param beanName
+     * @param beanClass
+     */
+    boolean registerBean(String beanName,Class beanClass)throws Exception;
 }

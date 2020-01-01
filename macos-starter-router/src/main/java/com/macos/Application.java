@@ -64,6 +64,11 @@ public class Application {
                 String path=httpRequest.uri();          //获取路径
                 String body = getBody(httpRequest);     //获取参数
                 HttpMethod method=httpRequest.method();//获取请求方法
+
+                if (method.equals(HttpMethod.OPTIONS)){
+                    options(ctx,HttpResponseStatus.OK);
+                    return;
+                }
                 //如果不是这个路径，就直接返回错误
                 if(!"/test".equalsIgnoreCase(path)){
                     result="非法请求!";
@@ -71,6 +76,9 @@ public class Application {
                     return;
                 }
                 System.out.println("接收到:"+method+" 请求");
+                HttpHeaders httpHeaders = httpRequest.headers();
+                String v = httpHeaders.get("token");
+                System.out.println(v);
                 //如果是GET请求
                 if(HttpMethod.GET.equals(method)){
                     //接受到的消息，做业务逻辑处理...
@@ -131,6 +139,26 @@ public class Application {
         private void send(ChannelHandlerContext ctx, String context,HttpResponseStatus status) {
             FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, status, Unpooled.copiedBuffer(context, CharsetUtil.UTF_8));
             response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain; charset=UTF-8");
+            response.headers().set(HttpHeaderNames.ACCESS_CONTROL_ALLOW_HEADERS, "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,token");
+            response.headers().set(HttpHeaderNames.ACCESS_CONTROL_ALLOW_METHODS,"GET, POST, PUT, DELETE, OPTIONS");
+            response.headers().set(HttpHeaderNames.ACCESS_CONTROL_ALLOW_ORIGIN,"*");
+            response.headers().set(HttpHeaderNames.ACCESS_CONTROL_ALLOW_CREDENTIALS,"true");
+            response.headers().set(HttpHeaderNames.ACCESS_CONTROL_MAX_AGE,"3600");
+            response.headers().set(HttpHeaderNames.ACCESS_CONTROL_REQUEST_HEADERS, "uthorization,Origin, X-Requested-With,content-Type,Accept");
+            response.headers().set(HttpHeaderNames.ACCESS_CONTROL_EXPOSE_HEADERS, "*");
+            ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
+        }
+
+        private void options(ChannelHandlerContext ctx,HttpResponseStatus status){
+            FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, status,true);
+            response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain; charset=UTF-8");
+            response.headers().set(HttpHeaderNames.ACCESS_CONTROL_ALLOW_HEADERS, "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,token");
+            response.headers().set(HttpHeaderNames.ACCESS_CONTROL_ALLOW_METHODS,"GET, POST, PUT, DELETE, OPTIONS");
+            response.headers().set(HttpHeaderNames.ACCESS_CONTROL_ALLOW_ORIGIN,"*");
+            response.headers().set(HttpHeaderNames.ACCESS_CONTROL_ALLOW_CREDENTIALS,"true");
+            response.headers().set(HttpHeaderNames.ACCESS_CONTROL_MAX_AGE,"3600");
+            response.headers().set(HttpHeaderNames.ACCESS_CONTROL_REQUEST_HEADERS, "uthorization,Origin, X-Requested-With,content-Type,Accept");
+            response.headers().set(HttpHeaderNames.ACCESS_CONTROL_EXPOSE_HEADERS, "*");
             ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
         }
 

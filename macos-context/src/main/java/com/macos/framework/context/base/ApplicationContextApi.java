@@ -11,9 +11,10 @@ import com.macos.framework.context.exception.ContextException;
 public interface ApplicationContextApi {
 
 
-    public Object getBean(String beanName,Class beanClass) throws IllegalAccessException, InstantiationException, ClassNotFoundException;
+     Object getBean(String beanName,Class beanClass) throws IllegalAccessException, InstantiationException, ClassNotFoundException;
 
-    public  void registerBean(String beanName,Object object) throws ContextException;
+     boolean registerBean(String beanName,Object object) throws ContextException;
 
+     boolean registerBean(Object object) throws ContextException;
 
 }
