@@ -11,6 +11,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @AutoConfiguration
+@Configuration
 @MacosXScanner(packageNames = {})
 public @interface MacosXApplication {
 

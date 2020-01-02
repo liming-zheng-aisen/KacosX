@@ -16,7 +16,7 @@ import java.util.Set;
  * @Date 2020/1/1
  */
 @Slf4j
-public class MaocsXScannerHandle implements BaseHandle {
+public class MacosXScannerHandle implements BaseHandle {
 
     /**缓存已经执行的class，避免死循环*/
     private static Set<Class> cache = new HashSet<>();
