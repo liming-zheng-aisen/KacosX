@@ -4,7 +4,7 @@ import com.macos.framework.annotation.*;
 import com.macos.framework.context.impl.ApplicationContextImpl;
 import com.macos.framework.core.bean.manage.BeanManager;
 import com.macos.framework.core.bean.definition.BeanDefinition;
-import com.macos.framework.core.factory.BeanProxy;
+import com.macos.framework.core.proxy.BeanProxy;
 import com.macos.framework.core.load.abs.BeanLoad;
 import com.macos.framework.core.load.conf.ConfigurationLoader;
 import com.macos.framework.core.util.BeanUtil;

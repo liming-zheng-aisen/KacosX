@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- * Created by arnold.zhu on 6/13/2017.
+ * @author Aisen
  */
 public class DruidConfig {
 

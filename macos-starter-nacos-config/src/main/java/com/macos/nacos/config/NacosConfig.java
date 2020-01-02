@@ -11,16 +11,16 @@ import com.macos.framework.annotation.Value;
 @Configuration
 public class NacosConfig {
 
-    @Value("${dy.nacos.config.serverAddr}:127.0.0.1:8848")
+    @Value("${dy.nacos.config.serverAddr:127.0.0.1:8848}")
     private String serverAddr;
 
-    @Value("${dy.nacos.config.dataId}:example.properties")
+    @Value("${dy.nacos.config.dataId:example.properties}")
     private String dataId;
 
-    @Value("${dy.nacos.config.group}:DEFAULT_GROUP")
+    @Value("${dy.nacos.config.group:DEFAULT_GROUP}")
     private String group;
 
-    @Value("${dy.nacos.config.timeoutMs}:5000")
+    @Value("${dy.nacos.config.timeoutMs:5000}")
     private Integer timeoutMs;
 
     public String getServerAddr() {

@@ -6,6 +6,7 @@ import com.macos.framework.core.handle.base.BaseHandle;
 import com.macos.framework.core.handle.common.ScannerHandle;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -17,9 +18,20 @@ import java.util.Set;
 @Slf4j
 public class MaocsXScannerHandle implements BaseHandle {
 
+    /**缓存已经执行的class，避免死循环*/
+    private static Set<Class> cache = new HashSet<>();
 
+    /**
+     * 扫描class，并注册到BeanManager中
+     * @param c
+     * @throws Exception
+     */
     @Override
     public void doHandle(Class c) throws Exception {
+        if (cache.contains(c)){
+            return;
+        }
+        cache.add(c);
         String[] basePath = getScannerPath(c);
         if (basePath==null){
             return;
@@ -28,6 +40,12 @@ public class MaocsXScannerHandle implements BaseHandle {
         BeanManager.registerClassBySet(result);
     }
 
+    /**
+     * 获取扫描路径
+     * @param c
+     * @return
+     * @throws Exception
+     */
     private String[] getScannerPath(Class c) throws Exception {
         if (c.isAnnotationPresent(MacosXScanner.class)) {
             MacosXScanner macosXScanner = (MacosXScanner) c.getAnnotation(MacosXScanner.class);
