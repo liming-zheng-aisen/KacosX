@@ -135,6 +135,10 @@ public class DispatchedServlet extends HttpServlet {
 
             Object data = exec.handle(req, resp, bean);
 
+            if (data==null){
+                return;
+            }
+
             if (TypeUtil.isBaseType(data.getClass(), true)) {
                 resp.setContentType("text/html;charset=UTF-8");
                 HttpResponsePrintln.writer(resp,data);

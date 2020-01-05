@@ -1,15 +1,11 @@
 package com.macos.framework.core.load.clazz;
 
-import com.macos.framework.annotation.Configuration;
-import com.macos.framework.core.bean.definition.BeanDefinition;
-import com.macos.framework.core.bean.manage.BeanManager;
 import com.macos.framework.annotation.MacosXScanner;
 import com.macos.framework.core.handle.ConfigurationHandle;
 import com.macos.framework.core.handle.MacosXScannerHandle;
 import com.macos.framework.core.load.abs.BeanLoad;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Set;
 
 /**
  * @author zheng.liming
