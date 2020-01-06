@@ -1,5 +1,6 @@
 package com.macos.framework.core.bean.manage;
 
+import com.macos.common.util.AnnotationUtil;
 import com.macos.common.util.StringUtils;
 import com.macos.framework.context.base.ApplicationContextApi;
 import com.macos.framework.core.bean.definition.BeanDefinition;
@@ -90,6 +91,25 @@ public class BeanManager implements BeanFactory {
     }
 
     /**
+     * 通过注解寻找符合的bean
+     * @param annotations
+     * @return
+     */
+    public static Set<BeanDefinition> getBeanDefinitionsByAnnotation(Class ...annotations){
+        if (classContainer.size()==0){
+            return null;
+        }
+        Set<BeanDefinition> result = new HashSet<>();
+        for (BeanDefinition beanDefinition : classContainer){
+            Class target = beanDefinition.getTarget();
+            if (AnnotationUtil.hasAnnotion(target,annotations)){
+                result.add(beanDefinition);
+            }
+        }
+        return result;
+    }
+
+    /**
      * 是否包含该class
      * @param beanDefinition
      * @param beanClass
@@ -104,6 +124,12 @@ public class BeanManager implements BeanFactory {
         return false;
     }
 
+    /**
+     * 注册一个bean
+     * @param beanName
+     * @param beanClass
+     * @return
+     */
     @Override
     public boolean registerBean(String beanName,Class beanClass) {
         BeanDefinition beanDefinition = BeanDefinitionUtil.convertToBeanDefinition(beanClass);
@@ -114,6 +140,13 @@ public class BeanManager implements BeanFactory {
         return false;
     }
 
+    /**
+     * 获取bean的实例
+     * @param beanName
+     * @param target
+     * @return
+     * @throws Exception
+     */
     @Override
     public  Object getBean(String beanName,Class target) throws Exception {
         BeanDefinition beanDefinition = getBeanDefinition(beanName,target);

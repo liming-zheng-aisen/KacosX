@@ -2,7 +2,7 @@ package com.macos.nacos.config.listener;
 
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.macos.framework.core.listener.manager.LoaderListerManager;
-import com.macos.framework.core.load.conf.ConfigurationLoader;
+import com.macos.framework.core.load.conf.PropertiesFileLoader;
 import com.macos.framework.starter.nacos.NacosConfigStarter;
 import com.macos.nacos.config.NacosPropertisMannager;
 import com.macos.nacos.config.util.PropertiesUtil;
@@ -32,9 +32,9 @@ public class NacosListener implements Listener {
             nacosPropertisMannager.updateInputStream(dataId,configInfo);
             Properties nacosPropertis=nacosPropertisMannager.getNacosEvn();
             PropertiesUtil.cloneEvn(NacosConfigStarter.defaultEvn,nacosPropertis);
-            ConfigurationLoader.getEvn().clear();
-            PropertiesUtil.cloneEvn(nacosPropertis,ConfigurationLoader.getEvn());
-            LoaderListerManager.updateLister(ConfigurationLoader.getEvn());
+            PropertiesFileLoader.getEvn().clear();
+            PropertiesUtil.cloneEvn(nacosPropertis, PropertiesFileLoader.getEvn());
+            LoaderListerManager.updateLister(PropertiesFileLoader.getEvn());
         } catch (IOException e) {
             e.printStackTrace();
         }

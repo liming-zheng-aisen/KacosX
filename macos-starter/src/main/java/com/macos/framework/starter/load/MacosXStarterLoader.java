@@ -8,7 +8,7 @@ import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.MacosXApplicationStarter;
 import com.macos.framework.core.load.clazz.ApplicationClassLoader;
 import com.macos.framework.core.load.abs.BeanLoad;
-import com.macos.framework.core.load.conf.ConfigurationLoader;
+import com.macos.framework.core.load.conf.PropertiesFileLoader;
 import com.macos.framework.core.util.BeanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,7 +75,7 @@ public class MacosXStarterLoader extends BeanLoad {
                 Object beans= BeanUtil.createNewBean(cl);
                 Class[] params={Properties.class,Class.class};
                 Method method = cl.getMethod("doStart",params);
-                method.invoke(beans, ConfigurationLoader.getEvn(),main);
+                method.invoke(beans, PropertiesFileLoader.getEvn(),main);
                 logger.info("macos-starter执行{}的doStart方法",cl.getSimpleName());
                 break;
             }
@@ -87,7 +87,7 @@ public class MacosXStarterLoader extends BeanLoad {
         for (String str:paths){
             if (StringUtils.isNotEmptyPlus(str)) {
                 logger.info("macos-starter调用ApplicationClassLoader加载{}包下的类",str);
-                classLoader.load(str);
+                //classLoader.load(str);
             }
         }
     }

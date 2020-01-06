@@ -28,7 +28,7 @@ public  class ApplicationClassLoader extends BeanLoad {
     public  void load(Class c) throws Exception{
         MacosXScannerHandle macosXScannerHandle = new MacosXScannerHandle();
         macosXScannerHandle.doHandle(c);
-        ConfigurationHandle.registerHandle(MacosXScanner.class,macosXScannerHandle);
+        //ConfigurationHandle.registerHandle(MacosXScanner.class,macosXScannerHandle);
         ConfigurationHandle configurationHandle = new ConfigurationHandle();
         configurationHandle.doHandle(c);
     }

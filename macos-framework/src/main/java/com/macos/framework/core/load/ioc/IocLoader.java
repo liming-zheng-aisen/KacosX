@@ -6,7 +6,7 @@ import com.macos.framework.core.bean.manage.BeanManager;
 import com.macos.framework.core.bean.definition.BeanDefinition;
 import com.macos.framework.core.proxy.BeanProxy;
 import com.macos.framework.core.load.abs.BeanLoad;
-import com.macos.framework.core.load.conf.ConfigurationLoader;
+import com.macos.framework.core.load.conf.PropertiesFileLoader;
 import com.macos.framework.core.util.BeanUtil;
 import com.macos.framework.core.util.FieldUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -93,7 +93,7 @@ public class IocLoader extends BeanLoad {
             String key=iterator.next();
                Object bean= context.get(key);
                if (bean.getClass().isAnnotationPresent(Configuration.class)) {
-                   doAutowired(bean,ConfigurationLoader.getEvn());
+                   doAutowired(bean, PropertiesFileLoader.getEvn());
                    //调用bean的方法创建实例
                    Map<String, Object> beans = BeanUtil.doMethodsInitialBean(bean);
                    list.add(beans);
@@ -111,7 +111,7 @@ public class IocLoader extends BeanLoad {
         Iterator iterator=context.keySet().iterator();
         while (iterator.hasNext()){
             String key=(String)iterator.next();
-           doAutowired(context.get(key),ConfigurationLoader.getEvn());
+           doAutowired(context.get(key), PropertiesFileLoader.getEvn());
         }
         log.info("doAutowirteAll，配置类自动装配完成！");
     }

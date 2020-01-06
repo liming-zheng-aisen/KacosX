@@ -3,7 +3,7 @@ package com.macos.framework.jdbc.context;
 import com.macos.framework.context.base.ApplicationContextApi;
 import com.macos.framework.context.exception.ContextException;
 import com.macos.framework.context.manager.ContextManager;
-import com.macos.framework.core.load.conf.ConfigurationLoader;
+import com.macos.framework.core.load.conf.PropertiesFileLoader;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -29,7 +29,7 @@ public class JdbcContext implements ApplicationContextApi {
         if (sqlSessionFactory!=null&&beanClass.isAnnotationPresent(Mapper.class)) {
             bean=jdbcContext.get(beanClass);
             if (null==bean) {
-                SqlSession sqlSession = sqlSessionFactory.openSession(Boolean.parseBoolean(ConfigurationLoader.getEvn().getProperty("dy.datasource.autoTransaction", "true")));
+                SqlSession sqlSession = sqlSessionFactory.openSession(Boolean.parseBoolean(PropertiesFileLoader.getEvn().getProperty("dy.datasource.autoTransaction", "true")));
                 bean=sqlSession.getMapper(beanClass);
                 jdbcContext.put(beanClass,bean);
             }

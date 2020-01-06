@@ -10,7 +10,7 @@ import com.macos.common.util.JsonUtil;
 import com.macos.common.util.StringUtils;
 import com.macos.common.util.TypeUtil;
 import com.macos.framework.core.bean.manage.BeanManager;
-import com.macos.framework.core.load.conf.ConfigurationLoader;
+import com.macos.framework.core.load.conf.PropertiesFileLoader;
 import com.macos.framework.mvc.context.ServletContext;
 import com.macos.framework.enums.HttpMethod;
 import com.macos.framework.mvc.handler.bean.RequestUrlBean;
@@ -46,7 +46,7 @@ public class DispatchedServlet extends HttpServlet {
         cl= BeanManager.getClassContainer();
         try {
 
-            Properties evn= ConfigurationLoader.getEvn();
+            Properties evn= PropertiesFileLoader.getEvn();
 
             if (null == evn) {
                 evn = LoadPropeties.doLoadProperties(null, config, this.getClass());

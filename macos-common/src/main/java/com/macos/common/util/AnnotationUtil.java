@@ -1,8 +1,4 @@
-package com.macos.framework.core.util;
-
-import com.macos.framework.annotation.AutoConfiguration;
-import com.macos.framework.annotation.Configuration;
-import com.macos.framework.annotation.MacosXApplication;
+package com.macos.common.util;
 
 import java.lang.annotation.Annotation;
 
@@ -12,7 +8,6 @@ import java.lang.annotation.Annotation;
  * @creater 2020/1/2 15:05:43
  * @desc
  */
-@MacosXApplication
 public class AnnotationUtil {
 
     public static Annotation findAnnotation(Class target,Class annotation){

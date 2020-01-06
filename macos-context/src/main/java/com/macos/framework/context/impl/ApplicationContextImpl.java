@@ -47,6 +47,9 @@ public class ApplicationContextImpl implements ApplicationContextApi {
 
     @Override
     public Object getBean(String beanName, Class beanClass) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        if (beanName!=null||beanName.isEmpty()){
+
+        }
         return applicationContext.get(beanName);
     }
 

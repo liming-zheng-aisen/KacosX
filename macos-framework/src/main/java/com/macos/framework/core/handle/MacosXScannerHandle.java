@@ -5,7 +5,6 @@ import com.macos.framework.core.bean.manage.BeanManager;
 import com.macos.framework.core.handle.base.BaseHandle;
 import com.macos.framework.core.handle.common.ScannerHandle;
 import lombok.extern.slf4j.Slf4j;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +15,7 @@ import java.util.Set;
  * @Date 2020/1/1
  */
 @Slf4j
-public class MacosXScannerHandle implements BaseHandle {
+public class MacosXScannerHandle extends BaseHandle {
 
     /**缓存已经执行的class，避免死循环*/
     private static Set<Class> cache = new HashSet<>();

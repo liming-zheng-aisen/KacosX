@@ -7,8 +7,6 @@ import com.macos.framework.annotation.AutoConfiguration;
 import com.macos.framework.annotation.MacosXApplication;
 import com.macos.framework.core.load.abs.BeanLoad;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.annotation.Annotation;
 import java.util.Properties;
@@ -19,18 +17,24 @@ import java.util.Properties;
  * @description 加载propert配置文件
  */
 @Slf4j
-public class ConfigurationLoader extends BeanLoad {
+public class PropertiesFileLoader extends BeanLoad {
     /**
      * evn全局配置文件。
      */
-    private static Properties evn=new Properties();
+    private static Properties env=new Properties();
+
+    /**
+     * 路径加载优先级
+     */
+    private final static String[] DEFAULT_LOADER_PATH_ORDER={"classpath",System.getProperty("user.dir")+"/config"};
 
     /**
      * 默认的配置文件名
      */
-    private final static String DEFAULT_PROPERTIES_NAME="application.properties";
+    private final static String[] DEFAULT_PROPERTIES_NAME={"application.properties","application.yml","application.yaml"};
 
-    public ConfigurationLoader(){
+
+    public PropertiesFileLoader(){
 
     }
 
@@ -95,15 +99,15 @@ public class ConfigurationLoader extends BeanLoad {
 
         try {
             if(StringUtils.isEmptyPlus(propertiesName)){
-                propertiesName=DEFAULT_PROPERTIES_NAME;
+                propertiesName=DEFAULT_PROPERTIES_NAME[0];
             }
-            LoadPropeties.doLoadProperties(evn,propertiesName,c);
+            LoadPropeties.doLoadProperties(env,propertiesName,c);
             //如果存在其他配置文件，读取文件流并加载到evn
-            String otherProperties=evn.getProperty("macos.conf.loader.other");
+            String otherProperties=env.getProperty("macos.conf.loader.other");
             if (StringUtils.isNotEmptyPlus(otherProperties)){
                 String [] names=otherProperties.split(",");
                 for (String n : names){
-                    LoadPropeties.doLoadProperties(evn,n,c);
+                    LoadPropeties.doLoadProperties(env,n,c);
                 }
             }
             log.info("配置文件{}加载成功",DEFAULT_PROPERTIES_NAME);
@@ -119,10 +123,10 @@ public class ConfigurationLoader extends BeanLoad {
      * @return
      */
     public static Properties getEvn(){
-        return evn;
+        return env;
     }
 
     public static void setEvn(Properties evn) {
-        ConfigurationLoader.evn = evn;
+        PropertiesFileLoader.env = evn;
     }
 }

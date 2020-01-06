@@ -2,7 +2,7 @@ package com.macos.framework.core.util;
 
 import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.Value;
-import com.macos.framework.core.load.conf.ConfigurationLoader;
+import com.macos.framework.core.load.conf.PropertiesFileLoader;
 import lombok.extern.slf4j.Slf4j;
 import java.lang.reflect.Field;
 
@@ -52,7 +52,7 @@ public class FieldUtil {
             return values[0];
         }
 
-        String endValue = ConfigurationLoader.getEvn().getProperty(values[0]);
+        String endValue = PropertiesFileLoader.getEvn().getProperty(values[0]);
 
         if (StringUtils.isEmpty(endValue)&& values.length>1){
             endValue = values[1];

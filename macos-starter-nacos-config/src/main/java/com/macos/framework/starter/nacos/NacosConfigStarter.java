@@ -2,7 +2,7 @@ package com.macos.framework.starter.nacos;
 
 import com.macos.framework.annotation.MacosXApplicationStarter;
 import com.macos.framework.core.bean.util.BeanUtil;
-import com.macos.framework.core.load.conf.ConfigurationLoader;
+import com.macos.framework.core.load.conf.PropertiesFileLoader;
 import com.macos.framework.starter.DefaultStarter;
 import com.macos.nacos.config.NacosConfig;
 import com.macos.nacos.config.service.NacosConfigService;
@@ -35,7 +35,7 @@ public class NacosConfigStarter implements DefaultStarter {
 
         PropertiesUtil.cloneEvn(evn,newEvn);
 
-        ConfigurationLoader.setEvn(newEvn);
+        PropertiesFileLoader.setEvn(newEvn);
 
         nacosConfigService.doListener();
 

@@ -3,7 +3,7 @@ package com.macos.framework.core.load.manager;
 import com.macos.framework.core.listener.manager.LoaderListerManager;
 import com.macos.framework.core.load.clazz.ApplicationClassLoader;
 import com.macos.framework.core.load.abs.BeanLoad;
-import com.macos.framework.core.load.conf.ConfigurationLoader;
+import com.macos.framework.core.load.conf.PropertiesFileLoader;
 import com.macos.framework.core.load.ioc.IocLoader;
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,7 +48,7 @@ public class LoaderManager {
      * @throws Exception
      */
     public  void doDefalultLoad() throws Exception {
-        registerLoader(new ConfigurationLoader());
+        registerLoader(new PropertiesFileLoader());
         registerLoader(new ApplicationClassLoader());
         registerLoader(new IocLoader());
         doLoad(this.getClass());

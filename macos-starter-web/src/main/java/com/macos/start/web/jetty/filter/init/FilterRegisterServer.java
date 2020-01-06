@@ -8,7 +8,7 @@ import com.macos.framework.context.impl.ApplicationContextImpl;
 import com.macos.framework.context.base.ApplicationContextApi;
 import com.macos.framework.core.bean.util.BeanUtil;
 import com.macos.framework.core.bean.factory.ValueFactory;
-import com.macos.framework.core.load.conf.ConfigurationLoader;
+import com.macos.framework.core.load.conf.PropertiesFileLoader;
 import com.macos.start.web.jetty.filter.FilterBean;
 import com.macos.start.web.jetty.filter.WebFilterMannager;
 
@@ -52,7 +52,7 @@ public class FilterRegisterServer {
 
                     Filter filter = (Filter) BeanUtil.createNewBean(c);
 
-                    ValueFactory.doFields(filter, ConfigurationLoader.getEvn());
+                    ValueFactory.doFields(filter, PropertiesFileLoader.getEvn());
 
                     registerFilter(filter,orderNum,requestUrl,filterName);
 

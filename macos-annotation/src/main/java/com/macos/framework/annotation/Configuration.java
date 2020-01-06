@@ -12,4 +12,9 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE,ElementType.ANNOTATION_TYPE})
 @Component
 public @interface Configuration {
+    /**
+     * 实例名字
+     * @return
+     */
+    String value() default "";
 }

@@ -8,7 +8,7 @@ import com.macos.framework.context.impl.ApplicationContextImpl;
 import com.macos.framework.context.base.ApplicationContextApi;
 import com.macos.framework.core.bean.util.BeanUtil;
 import com.macos.framework.core.bean.factory.ValueFactory;
-import com.macos.framework.core.load.conf.ConfigurationLoader;
+import com.macos.framework.core.load.conf.PropertiesFileLoader;
 
 import javax.servlet.Servlet;
 import java.util.HashSet;
@@ -43,7 +43,7 @@ public class ServletBeanInitManager {
 
         try {
             Servlet servlet1=(Servlet) BeanUtil.createNewBean(servlet);
-            ValueFactory.doFields(servlet1, ConfigurationLoader.getEvn());
+            ValueFactory.doFields(servlet1, PropertiesFileLoader.getEvn());
             ServletBean servletBean =new ServletBean(servlet1,url);
             servletBeans.add(servletBean);
             //交给applicationContext管理，因为Servlet有可能需要注入

@@ -1,74 +1,99 @@
 package com.macos.framework.core.handle;
 
+import com.macos.common.util.AnnotationUtil;
+import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.Configuration;
-import com.macos.framework.annotation.MacosXApplication;
+import com.macos.framework.context.exception.ContextException;
 import com.macos.framework.core.bean.definition.BeanDefinition;
 import com.macos.framework.core.bean.manage.BeanManager;
 import com.macos.framework.core.handle.base.BaseHandle;
-import com.macos.framework.core.util.AnnotationUtil;
+import com.macos.framework.core.util.BeanUtil;
 
-import java.lang.annotation.Annotation;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
+
 
 /**
  * @Desc @Configuration处理类
  * @Author Zheng.LiMing
  * @Date 2020/1/1
  */
-public class ConfigurationHandle implements BaseHandle {
+public class ConfigurationHandle extends BaseHandle {
 
-    private static Map<Class,BaseHandle> handleMap = new HashMap<>();
-
-    @Override
-    public void doHandle(Class c) throws Exception {
-        if (AnnotationUtil.hasAnnotion(c,new Class[]{Configuration.class,MacosXApplication.class})){
-           registePathBeanDefinition(c);
-        }
-        doHandleMap();
-
+    static {
+        annotationclass=new Class[]{Configuration.class};
     }
 
     /**
-     * 通过注解信息对其进行处理
-     * @throws Exception
-     */
-    public void doHandleMap() throws Exception {
-        Set<BeanDefinition> classContainer = BeanManager.getClassContainer();
-        for (BeanDefinition beanDefinition: classContainer) {
-            Class c = beanDefinition.getTarget();
-            if (AnnotationUtil.hasAnnotion(c, new Class[]{Configuration.class, MacosXApplication.class})) {
-                notifyHandle(c);
-            }
-        }
-    }
-
-    /**
-     * 调用对应的handle进行处理
+     * 实例化配置类，并执行前置通知和后置通知
      * @param c
      * @throws Exception
      */
-    public void notifyHandle(Class c) throws Exception {
-        Annotation[] annotations = c.getAnnotations();
-        if (annotations==null||annotations.length==0){
-            return;
+    @Override
+    public void doHandle(Class c) throws Exception {
+        if (AnnotationUtil.hasAnnotion(c,annotationclass)){
+           registePathBeanDefinition(c);
         }
-        for (Annotation an:annotations){
-           BaseHandle handle = handleMap.get(an.annotationType());
-           if (handle!=null){
-               handle.doHandle(c);
-           }
+        Set<BeanDefinition> classContainer = BeanManager.getBeanDefinitionsByAnnotation(annotationclass);
+        for (BeanDefinition beanDefinition : classContainer){
+            doBefore(beanDefinition.getTarget());
+            newConfiguration(beanDefinition);
+            doAfter(beanDefinition.getTarget());
         }
     }
 
+    /**
+     * 创建配置类实例，并注册到上下文中
+     * @param beanDefinition
+     * @return
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws ContextException
+     */
+    private Object newConfiguration(BeanDefinition beanDefinition) throws InstantiationException, IllegalAccessException, ContextException {
+        Class target = beanDefinition.getTarget();
+        if (target.isInterface()){
+            return null;
+        }
+        Object config = BeanUtil.createNewBean(target);
+
+        String beanName = target.getName();
+        Configuration configuration = (Configuration) target.getAnnotation(Configuration.class);
+        if (StringUtils.isEmptyPlus(configuration.value())){
+            beanName = configuration.value();
+        }
+        beanDefinition.setBeanName(beanName);
+        beanDefinition.setContextApi(applicationContextApi);
+        applicationContextApi.registerBean(beanName,config);
+        return config;
+    }
+
+
+    /**
+     * 注册开始调用方的类信息，也就是main的class信息
+     * @param c
+     * @throws Exception
+     */
     private void registePathBeanDefinition(Class c) throws Exception {
            BeanManager beanManager =  new BeanManager();
            beanManager.registerBean(null,c);
     }
 
-    public static void registerHandle(Class key,BaseHandle value) {
-        ConfigurationHandle.handleMap.put(key,value);
+    /***
+     * 注册前置处理器
+     * @param key
+     * @param value
+     */
+    public static void registerBeforeHandle(Class key,BaseHandle value) {
+        ConfigurationHandle.beforeHandleMap.put(key,value);
+    }
+
+    /***
+     * 注册后置处理器
+     * @param key
+     * @param value
+     */
+    public static void registerAfterHandle(Class key,BaseHandle value) {
+        ConfigurationHandle.afterHandleMap.put(key,value);
     }
 
 }

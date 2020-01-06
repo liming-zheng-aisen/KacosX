@@ -4,7 +4,7 @@ import com.duanya.spring.framework.mvc.util.JsonUtil;
 import com.macos.common.times.Timer;
 import com.macos.framework.context.manager.ContextManager;
 import com.macos.framework.core.bean.util.BeanUtil;
-import com.macos.framework.core.load.conf.ConfigurationLoader;
+import com.macos.framework.core.load.conf.PropertiesFileLoader;
 import com.macos.start.web.jetty.factory.JettyFactory;
 import com.macos.start.web.jetty.conf.JettyConfig;
 import org.eclipse.jetty.server.Server;
@@ -27,7 +27,7 @@ public class JettyServer {
 
     public   void start() throws Exception {
 
-        JettyConfig config=(JettyConfig) BeanUtil.initNewBean(JettyConfig.class, ConfigurationLoader.getEvn());
+        JettyConfig config=(JettyConfig) BeanUtil.initNewBean(JettyConfig.class, PropertiesFileLoader.getEvn());
 
         copyConfig(config);
 

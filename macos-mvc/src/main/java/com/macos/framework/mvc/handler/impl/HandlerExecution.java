@@ -10,7 +10,7 @@ import com.macos.framework.annotation.RequestParameter;
 import com.macos.framework.core.bean.factory.AutowiredFactory;
 import com.macos.framework.core.bean.util.BeanUtil;
 import com.macos.framework.core.bean.factory.ValueFactory;
-import com.macos.framework.core.load.conf.ConfigurationLoader;
+import com.macos.framework.core.load.conf.PropertiesFileLoader;
 import com.macos.framework.mvc.handler.HandlerAdapter;
 import com.macos.framework.mvc.handler.bean.RequestUrlBean;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +35,7 @@ public class HandlerExecution implements HandlerAdapter {
     @Override
     public Object handle(HttpServletRequest request, HttpServletResponse response, RequestUrlBean handler) throws Exception {
 
-        Properties env= ConfigurationLoader.getEvn();
+        Properties env= PropertiesFileLoader.getEvn();
         Object[] param = null;
         String url = StringUtils.formatUrl(request.getRequestURI());
         String[] urls = url.split("\\/");
