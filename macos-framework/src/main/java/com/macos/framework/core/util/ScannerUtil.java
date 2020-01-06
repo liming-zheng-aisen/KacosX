@@ -1,4 +1,4 @@
-package com.macos.framework.core.handle.common;
+package com.macos.framework.core.util;
 
 import com.macos.common.scanner.impl.ScannerImpl;
 import com.macos.common.util.StringUtils;
@@ -11,7 +11,7 @@ import java.util.Set;
  * @Author Zheng.LiMing
  * @Date 2020/1/1
  */
-public class ScannerHandle {
+public class ScannerUtil {
 
     private final static ScannerImpl scanner=new ScannerImpl();
 

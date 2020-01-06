@@ -3,7 +3,7 @@ import com.macos.framework.annotation.MacosXApplication;
 import com.macos.framework.annotation.MacosXScanner;
 import com.macos.framework.core.bean.manage.BeanManager;
 import com.macos.framework.core.handle.base.BaseHandle;
-import com.macos.framework.core.handle.common.ScannerHandle;
+import com.macos.framework.core.util.ScannerUtil;
 import lombok.extern.slf4j.Slf4j;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,7 +35,7 @@ public class MacosXScannerHandle extends BaseHandle {
         if (basePath==null){
             return;
         }
-        Set<Class> result = ScannerHandle.doHandle(basePath,null);
+        Set<Class> result = ScannerUtil.doHandle(basePath,null);
         BeanManager.registerClassBySet(result);
     }
 
