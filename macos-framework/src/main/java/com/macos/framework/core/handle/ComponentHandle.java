@@ -9,7 +9,7 @@ import com.macos.framework.core.handle.base.BaseHandle;
  */
 public class ComponentHandle extends BaseHandle {
     @Override
-    public void doHandle(Class c) throws Exception {
-
+    public boolean doHandle(Class target,String[] args) throws Exception {
+        return true;
     }
 }

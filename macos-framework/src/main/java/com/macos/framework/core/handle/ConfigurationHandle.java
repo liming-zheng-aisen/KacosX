@@ -25,13 +25,14 @@ public class ConfigurationHandle extends BaseHandle {
 
     /**
      * 实例化配置类，并执行前置通知和后置通知
-     * @param c
+     * @param target
+     * @param args
      * @throws Exception
      */
     @Override
-    public void doHandle(Class c) throws Exception {
-        if (AnnotationUtil.hasAnnotion(c,annotationclass)){
-           registePathBeanDefinition(c);
+    public boolean doHandle(Class target,String[] args) throws Exception {
+        if (AnnotationUtil.hasAnnotion(target,annotationclass)){
+           registePathBeanDefinition(target);
         }
         Set<BeanDefinition> classContainer = BeanManager.getBeanDefinitionsByAnnotation(annotationclass);
         for (BeanDefinition beanDefinition : classContainer){
@@ -39,6 +40,7 @@ public class ConfigurationHandle extends BaseHandle {
             newConfiguration(beanDefinition);
             doAfter(beanDefinition.getTarget());
         }
+        return true;
     }
 
     /**
@@ -78,22 +80,6 @@ public class ConfigurationHandle extends BaseHandle {
            beanManager.registerBean(null,c);
     }
 
-    /***
-     * 注册前置处理器
-     * @param key
-     * @param value
-     */
-    public static void registerBeforeHandle(Class key,BaseHandle value) {
-        ConfigurationHandle.beforeHandleMap.put(key,value);
-    }
 
-    /***
-     * 注册后置处理器
-     * @param key
-     * @param value
-     */
-    public static void registerAfterHandle(Class key,BaseHandle value) {
-        ConfigurationHandle.afterHandleMap.put(key,value);
-    }
 
 }

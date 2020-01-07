@@ -22,21 +22,22 @@ public class MacosXScannerHandle extends BaseHandle {
 
     /**
      * 扫描class，并注册到BeanManager中
-     * @param c
+     * @param target
      * @throws Exception
      */
     @Override
-    public void doHandle(Class c) throws Exception {
-        if (cache.contains(c)){
-            return;
+    public boolean doHandle(Class target,String[] args) throws Exception {
+        if (cache.contains(target)){
+            return true;
         }
-        cache.add(c);
-        String[] basePath = getScannerPath(c);
+        cache.add(target);
+        String[] basePath = getScannerPath(target);
         if (basePath==null){
-            return;
+            return true;
         }
         Set<Class> result = ScannerUtil.doHandle(basePath,null);
         BeanManager.registerClassBySet(result);
+        return true;
     }
 
     /**
