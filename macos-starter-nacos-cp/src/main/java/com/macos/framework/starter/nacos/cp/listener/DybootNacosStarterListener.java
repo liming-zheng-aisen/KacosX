@@ -9,7 +9,7 @@ import com.macos.common.ip.IpUtil;
 import com.macos.framework.context.impl.ApplicationContextImpl;
 import com.macos.framework.context.base.ApplicationContextApi;
 import com.macos.framework.context.manager.ContextManager;
-import com.macos.framework.core.listener.api.LoadListener;
+import com.macos.framework.core.listener.api.MacosXListener;
 import com.macos.framework.nacos.config.NacosCPConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ import java.util.Properties;
  * @Author Zheng.LiMing
  * @Date 2019/9/12
  */
-public class DybootNacosStarterListener implements LoadListener {
+public class DybootNacosStarterListener implements MacosXListener {
 
     private final  static Logger log = LoggerFactory.getLogger(DybootNacosStarterListener.class);
     @Override

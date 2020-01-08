@@ -6,7 +6,7 @@ import com.macos.framework.annotation.Configuration;
 import com.macos.framework.context.exception.ContextException;
 import com.macos.framework.core.bean.definition.BeanDefinition;
 import com.macos.framework.core.bean.manage.BeanManager;
-import com.macos.framework.core.handle.base.BaseHandle;
+import com.macos.framework.core.handle.base.BaseHandler;
 import com.macos.framework.core.util.BeanUtil;
 
 import java.util.Set;
@@ -17,7 +17,7 @@ import java.util.Set;
  * @Author Zheng.LiMing
  * @Date 2020/1/1
  */
-public class ConfigurationHandle extends BaseHandle {
+public class ConfigurationHandler extends BaseHandler {
 
     static {
         annotationclass=new Class[]{Configuration.class};

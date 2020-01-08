@@ -1,6 +1,6 @@
 package com.macos.framework.core.listener.manager;
 
-import com.macos.framework.core.listener.api.LoadListener;
+import com.macos.framework.core.listener.api.MacosXListener;
 import com.macos.framework.core.load.manager.LoaderManager;
 import com.macos.framework.core.util.ThreadServiceUtil;
 import org.slf4j.Logger;
@@ -16,13 +16,13 @@ import java.util.Properties;
  * @Date 2019/9/4
  */
 @SuppressWarnings("all")
-public class LoaderListerManager {
+public class MacosXListerManager {
 
     private final static Logger log=LoggerFactory.getLogger(LoaderManager.class);
 
-    private static List<LoadListener> listeners=new ArrayList<>();
+    private static List<MacosXListener> listeners=new ArrayList<>();
 
-    public static void registerLister(LoadListener loadListener){
+    public static void registerLister(MacosXListener loadListener){
         listeners.add(loadListener);
     }
 
@@ -32,7 +32,7 @@ public class LoaderListerManager {
     public static void  noticeLister(){
         if (listeners.size()>0){
             log.info("开始执行监听通知");
-            for (LoadListener listener:listeners) {
+            for (MacosXListener listener:listeners) {
                 ThreadServiceUtil.execute (new Thread(){
                     @Override
                     public void run() {
@@ -50,7 +50,7 @@ public class LoaderListerManager {
     public static void  updateLister(Properties env){
         if (listeners.size()>0){
             log.info("更新配置");
-            for (LoadListener listener:listeners) {
+            for (MacosXListener listener:listeners) {
                 ThreadServiceUtil.execute(new Thread(){
                     @Override
                     public void run() {

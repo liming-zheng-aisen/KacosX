@@ -2,7 +2,7 @@ package com.macos.framework.starter;
 
 import com.macos.framework.annotation.MacosXApplicationStarter;
 import com.macos.framework.core.bean.manage.BeanManager;
-import com.macos.framework.core.listener.manager.LoaderListerManager;
+import com.macos.framework.core.listener.manager.MacosXListerManager;
 import com.macos.start.web.jetty.listener.JettyServerStarterListener;
 import com.macos.start.web.jetty.filter.init.FilterRegisterServer;
 import com.macos.start.web.jetty.servlet.ServletBeanInitManager;
@@ -36,7 +36,7 @@ public class JettyWebStarter implements DefaultStarter {
 
         JettyServerStarterListener serverStarterListener= new JettyServerStarterListener();
         log.debug("注册TomcatStarterListener监听器");
-        LoaderListerManager.registerLister(serverStarterListener);
+        MacosXListerManager.registerLister(serverStarterListener);
 
     }
 

@@ -1,7 +1,7 @@
 package com.macos.framework.core.handle.base;
 import com.macos.framework.context.base.ApplicationContextApi;
 import com.macos.framework.context.impl.ApplicationContextImpl;
-import com.macos.framework.core.handle.ConfigurationHandle;
+import com.macos.framework.core.handle.ConfigurationHandler;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,13 +11,13 @@ import java.util.Set;
  * @Author Zheng.LiMing
  * @Date 2020/1/1
  */
-public abstract class BaseHandle {
+public abstract class BaseHandler {
 
     /**前置处理集合*/
-    protected static Set<BaseHandle> beforeHandleMap = new HashSet<>();
+    protected static Set<BaseHandler> beforeHandleMap = new HashSet<>();
 
     /**后置处理集合*/
-    protected static Set<BaseHandle>afterHandleMap = new HashSet<>();
+    protected static Set<BaseHandler> afterHandleMap = new HashSet<>();
 
     /**需要处理的注解*/
     public static Class[] annotationclass;
@@ -65,8 +65,8 @@ public abstract class BaseHandle {
      * @param handleSet
      * @throws Exception
      */
-    protected void execute(Class c , String[] args , Set<BaseHandle> handleSet) throws Exception {
-        for (BaseHandle handle: handleSet){
+    protected void execute(Class c , String[] args , Set<BaseHandler> handleSet) throws Exception {
+        for (BaseHandler handle: handleSet){
             if (handle != null) {
               boolean result = handle.doHandle(c,args);
               if (!result){
@@ -80,23 +80,23 @@ public abstract class BaseHandle {
      * 注册前置处理器
      * @param value
      */
-    public static void registerBeforeHandle(BaseHandle value) {
-        ConfigurationHandle.beforeHandleMap.add(value);
+    public static void registerBeforeHandle(BaseHandler value) {
+        ConfigurationHandler.beforeHandleMap.add(value);
     }
 
     /***
      * 注册后置处理器
      * @param value
      */
-    public static void registerAfterHandle(BaseHandle value) {
-        ConfigurationHandle.afterHandleMap.add(value);
+    public static void registerAfterHandle(BaseHandler value) {
+        ConfigurationHandler.afterHandleMap.add(value);
     }
 
-    public static Set<BaseHandle> getBeforeHandleMap() {
+    public static Set<BaseHandler> getBeforeHandleMap() {
         return beforeHandleMap;
     }
 
-    public static Set<BaseHandle> getAfterHandleMap() {
+    public static Set<BaseHandler> getAfterHandleMap() {
         return afterHandleMap;
     }
 }

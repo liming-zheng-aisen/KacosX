@@ -3,7 +3,7 @@ package com.macos.start.web.jetty.listener;
 import com.macos.framework.context.impl.ApplicationContextImpl;
 import com.macos.framework.core.bean.util.BeanUtil;
 import com.macos.framework.core.bean.factory.ValueFactory;
-import com.macos.framework.core.listener.api.LoadListener;
+import com.macos.framework.core.listener.api.MacosXListener;
 import com.macos.start.web.jetty.conf.JettyConfig;
 import com.macos.start.web.jetty.server.JettyServer;
 
@@ -16,7 +16,7 @@ import java.util.Properties;
  * @Author Zheng.LiMing
  * @Date 2019/9/4
  */
-public class JettyServerStarterListener implements LoadListener {
+public class JettyServerStarterListener implements MacosXListener {
 
     private JettyServer server;
 

@@ -3,7 +3,7 @@ package com.macos.framework.mvc.dispatcher;
 
 import com.macos.common.http.HttpResponsePrintln;
 import com.macos.common.http.result.ResultData;
-import com.macos.common.properties.LoadPropeties;
+import com.macos.common.properties.PropetiesUtil;
 import com.macos.common.scanner.api.ScannerApi;
 import com.macos.common.scanner.impl.ScannerImpl;
 import com.macos.common.util.JsonUtil;
@@ -49,7 +49,7 @@ public class DispatchedServlet extends HttpServlet {
             Properties evn= PropertiesFileLoader.getEvn();
 
             if (null == evn) {
-                evn = LoadPropeties.doLoadProperties(null, config, this.getClass());
+                evn = PropetiesUtil.doLoadProperties(null, config, this.getClass());
             }
 
             if (cl == null && BeanManager.isLoad()) {

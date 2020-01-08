@@ -1,7 +1,6 @@
 package com.macos.common.properties;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,9 +13,8 @@ import java.util.Properties;
  * @date 2019/8/5
  * @description 加载配置
  */
-public class LoadPropeties {
-
-    private static final Logger log = LoggerFactory.getLogger(LoadPropeties.class);
+@Slf4j
+public class PropetiesUtil {
 
     public static Properties doLoadProperties( Properties properties,String contextConfigLocation,Class c) throws PropertiesException {
 
@@ -28,7 +26,6 @@ public class LoadPropeties {
 
         BufferedReader br=null;
         try {
-
             inputStream= c.getClassLoader().getResourceAsStream(contextConfigLocation);
             if (null==inputStream){
                 return properties;
@@ -63,3 +60,4 @@ public class LoadPropeties {
     }
 
 }
+
