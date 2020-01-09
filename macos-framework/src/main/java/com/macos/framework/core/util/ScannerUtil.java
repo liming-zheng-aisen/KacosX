@@ -15,25 +15,31 @@ public class ScannerUtil {
 
     private final static ScannerImpl scanner=new ScannerImpl();
 
-    public static Set<Class> doHandle(String[] basePath,Set<Class> result) throws Exception {
-
+    /**
+     * 多个根路径扫描
+     * @param basePath
+     * @param result
+     * @return
+     * @throws Exception
+     */
+    public static Set<Class> scanner(String[] basePath,Set<Class> result) throws Exception {
         if (basePath == null || basePath.length == 0){
             return result;
         }
-
-        if (result==null){
-            result = new HashSet<>();
-        }
-
         for (String base : basePath){
-           Set<Class> list = scanner.doScanner(base);
-           result.addAll(list);
+           scanner(base,result);
         }
-
         return result;
     }
 
-    public static Set<Class> doHandle(String basePath,Set<Class> result) throws Exception {
+    /**
+     * 根路径扫描
+     * @param basePath
+     * @param result
+     * @return
+     * @throws Exception
+     */
+    public static Set<Class> scanner(String basePath,Set<Class> result) throws Exception {
 
         if (StringUtils.isEmptyPlus(basePath)){
             return result;

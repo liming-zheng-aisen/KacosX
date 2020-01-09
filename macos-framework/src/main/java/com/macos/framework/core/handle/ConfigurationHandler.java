@@ -1,85 +1,63 @@
 package com.macos.framework.core.handle;
 
-import com.macos.common.util.AnnotationUtil;
 import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.Configuration;
-import com.macos.framework.context.exception.ContextException;
 import com.macos.framework.core.bean.definition.BeanDefinition;
 import com.macos.framework.core.bean.manage.BeanManager;
 import com.macos.framework.core.handle.base.BaseHandler;
-import com.macos.framework.core.util.BeanUtil;
 
 import java.util.Set;
 
 
 /**
- * @Desc @Configuration处理类
+ * @Desc 配置类处理器
  * @Author Zheng.LiMing
  * @Date 2020/1/1
  */
+@SuppressWarnings("all")
 public class ConfigurationHandler extends BaseHandler {
 
     static {
-        annotationclass=new Class[]{Configuration.class};
+        handleAnnotations = new Class[]{Configuration.class};
     }
 
     /**
      * 实例化配置类，并执行前置通知和后置通知
-     * @param target
+     *
+     * @param mainClass   程序入口对象
+     * @param handleClass 当前处理对象
      * @param args
+     * @return
      * @throws Exception
      */
     @Override
-    public boolean doHandle(Class target,String[] args) throws Exception {
-        if (AnnotationUtil.hasAnnotion(target,annotationclass)){
-           registePathBeanDefinition(target);
-        }
-        Set<BeanDefinition> classContainer = BeanManager.getBeanDefinitionsByAnnotation(annotationclass);
-        for (BeanDefinition beanDefinition : classContainer){
-            doBefore(beanDefinition.getTarget());
-            newConfiguration(beanDefinition);
-            doAfter(beanDefinition.getTarget());
+    public boolean doHandle(Class mainClass, Class handleClass, String[] args) throws Exception {
+        Set<BeanDefinition> classContainer = BeanManager.getBeanDefinitionsByAnnotation(handleAnnotations);
+        for (BeanDefinition beanDefinition : classContainer) {
+            Class currentHandleClass = beanDefinition.getTarget();
+            //执行前置处理
+            doBefore(mainClass,currentHandleClass, args);
+            //创建并注册当前实例
+            newInstance(beanDefinition,getBeanName(currentHandleClass));
+            //执行后置处理
+            doAfter(mainClass,currentHandleClass, args);
         }
         return true;
     }
 
     /**
-     * 创建配置类实例，并注册到上下文中
-     * @param beanDefinition
+     * 获取bean的名字
+     * @param target
      * @return
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws ContextException
      */
-    private Object newConfiguration(BeanDefinition beanDefinition) throws InstantiationException, IllegalAccessException, ContextException {
-        Class target = beanDefinition.getTarget();
-        if (target.isInterface()){
-            return null;
-        }
-        Object config = BeanUtil.createNewBean(target);
-
+    private String getBeanName(Class target) {
         String beanName = target.getName();
         Configuration configuration = (Configuration) target.getAnnotation(Configuration.class);
-        if (StringUtils.isEmptyPlus(configuration.value())){
+        if (StringUtils.isNotEmptyPlus(configuration.value())) {
             beanName = configuration.value();
         }
-        beanDefinition.setBeanName(beanName);
-        beanDefinition.setContextApi(applicationContextApi);
-        applicationContextApi.registerBean(beanName,config);
-        return config;
+        return beanName;
     }
-
-
-    /**
-     * 注册开始调用方的类信息，也就是main的class信息
-     * @param c
-     * @throws Exception
-     */
-    private void registePathBeanDefinition(Class c) throws Exception {
-           BeanManager beanManager =  new BeanManager();
-           beanManager.registerBean(null,c);
-    }
-
 
 
 }

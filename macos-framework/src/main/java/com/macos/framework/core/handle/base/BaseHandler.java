@@ -1,7 +1,10 @@
 package com.macos.framework.core.handle.base;
 import com.macos.framework.context.base.ApplicationContextApi;
+import com.macos.framework.context.exception.ContextException;
 import com.macos.framework.context.impl.ApplicationContextImpl;
-import com.macos.framework.core.handle.ConfigurationHandler;
+import com.macos.framework.core.bean.definition.BeanDefinition;
+import com.macos.framework.core.bean.manage.BeanManager;
+import com.macos.framework.core.util.BeanUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,13 +17,13 @@ import java.util.Set;
 public abstract class BaseHandler {
 
     /**前置处理集合*/
-    protected static Set<BaseHandler> beforeHandleMap = new HashSet<>();
+    protected Set<BaseHandler> beforeHandleMap = new HashSet<>();
 
     /**后置处理集合*/
-    protected static Set<BaseHandler> afterHandleMap = new HashSet<>();
+    protected Set<BaseHandler> afterHandleMap = new HashSet<>();
 
     /**需要处理的注解*/
-    public static Class[] annotationclass;
+    public static Class[] handleAnnotations;
 
     /**
      * 应用程序上下文
@@ -28,47 +31,55 @@ public abstract class BaseHandler {
     protected static ApplicationContextApi applicationContextApi = ApplicationContextImpl.Builder.getApplicationContext();
 
     /**
-     * 执行处理
-     * @param target
+     * 执行处理,返回true，则继续调用下个处理器
+     * @param mainClass 程序入口对象
+     * @param handleClass 当前处理对象
      * @param args
+     * @return
      * @throws Exception
      */
-    public abstract boolean doHandle(Class target,String[] args) throws Exception;
+    public abstract boolean doHandle(Class mainClass,Class handleClass,String[] args) throws Exception;
 
     /**
      * 执行前置处理
-     * @param target
+     * @param mainClass
+     * @param handleClass
+     * @param args
      * @throws Exception
      */
-    protected void doBefore(Class target,String[] args) throws Exception {
+    protected void doBefore(Class mainClass,Class handleClass,String[] args) throws Exception {
         if (beforeHandleMap.size()==0){
             return;
         }
-        execute(target,args, beforeHandleMap);
+        execute(mainClass,handleClass,args, beforeHandleMap);
     }
 
     /**
      * 执行后置处理
-     * @param target
+     * @param mainClass
+     * @param handleClass
+     * @param args
      * @throws Exception
      */
-    protected void doAfter(Class target,String[] args) throws Exception {
+    protected void doAfter(Class mainClass,Class handleClass,String[] args) throws Exception {
         if (afterHandleMap.size()==0){
             return;
         }
-        execute(target, args,afterHandleMap);
+        execute(mainClass,handleClass, args,afterHandleMap);
     }
 
     /**
-     * 执行
-     * @param c
+     * 执行处理
+     * @param mainClass
+     * @param handleClass
+     * @param args
      * @param handleSet
      * @throws Exception
      */
-    protected void execute(Class c , String[] args , Set<BaseHandler> handleSet) throws Exception {
+    protected void execute(Class mainClass,Class handleClass, String[] args , Set<BaseHandler> handleSet) throws Exception {
         for (BaseHandler handle: handleSet){
             if (handle != null) {
-              boolean result = handle.doHandle(c,args);
+              boolean result = handle.doHandle(mainClass,handleClass, args);
               if (!result){
                   return;
               }
@@ -80,23 +91,53 @@ public abstract class BaseHandler {
      * 注册前置处理器
      * @param value
      */
-    public static void registerBeforeHandle(BaseHandler value) {
-        ConfigurationHandler.beforeHandleMap.add(value);
+    public  void registerBeforeHandle(BaseHandler value) {
+        beforeHandleMap.add(value);
     }
 
     /***
      * 注册后置处理器
      * @param value
      */
-    public static void registerAfterHandle(BaseHandler value) {
-        ConfigurationHandler.afterHandleMap.add(value);
+    protected  void registerAfterHandle(BaseHandler value) {
+        afterHandleMap.add(value);
     }
 
-    public static Set<BaseHandler> getBeforeHandleMap() {
+
+    /**
+     * 注册开始调用方的类信息，也就是main的class信息
+     * @param c
+     * @throws Exception
+     */
+    public void registePathBeanDefinition(Class c) throws Exception {
+        BeanManager beanManager =  new BeanManager();
+        beanManager.registerBean(null,c);
+    }
+
+    /**
+     * 创建类实例，并注册到上下文中
+     * @param beanDefinition
+     * @return
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws ContextException
+     */
+    public Object newInstance(BeanDefinition beanDefinition,String beanName) throws InstantiationException, IllegalAccessException, ContextException {
+        Class target = beanDefinition.getTarget();
+        if (target.isInterface()){
+            return null;
+        }
+        Object config = BeanUtil.createNewBean(target);
+        beanDefinition.setBeanName(beanName);
+        beanDefinition.setContextApi(applicationContextApi);
+        applicationContextApi.registerBean(beanName,config);
+        return config;
+    }
+    public  Set<BaseHandler> getBeforeHandleMap() {
         return beforeHandleMap;
     }
 
-    public static Set<BaseHandler> getAfterHandleMap() {
+    public  Set<BaseHandler> getAfterHandleMap() {
         return afterHandleMap;
     }
 }

@@ -10,33 +10,47 @@ import java.util.Set;
 
 
 /**
- * @Desc MaocsXScannerHandle
+ * @Desc 扫描处理器，用于加载Class
  * @Author Zheng.LiMing
  * @Date 2020/1/1
  */
 @Slf4j
+@SuppressWarnings("all")
 public class MacosXScannerHandler extends BaseHandler {
+
+    static {
+        handleAnnotations = new Class[]{MacosXScanner.class, MacosXApplication.class};
+    }
 
     /**缓存已经执行的class，避免死循环*/
     private static Set<Class> cache = new HashSet<>();
 
     /**
      * 扫描class，并注册到BeanManager中
-     * @param target
+     * @param mainClass 程序入口对象
+     * @param handleClass 当前处理对象
+     * @param args
+     * @return
      * @throws Exception
      */
     @Override
-    public boolean doHandle(Class target,String[] args) throws Exception {
-        if (cache.contains(target)){
+    public boolean doHandle(Class mainClass,Class handleClass,String[] args) throws Exception {
+        //如果处理对象已经被处理过，则跳过
+        if (cache.contains(handleClass)){
             return true;
         }
-        cache.add(target);
-        String[] basePath = getScannerPath(target);
+        cache.add(handleClass);
+        //获取处理对象的扫描路径
+        String[] basePath = getScannerPath(handleClass);
         if (basePath==null){
             return true;
         }
-        Set<Class> result = ScannerUtil.doHandle(basePath,null);
-        BeanManager.registerClassBySet(result);
+        doBefore(mainClass,handleClass,args);
+        Set<Class> result = ScannerUtil.scanner(basePath,null);
+        if (result.size()>0) {
+            BeanManager.registerClassBySet(result);
+        }
+        doAfter(mainClass,handleClass,args);
         return true;
     }
 

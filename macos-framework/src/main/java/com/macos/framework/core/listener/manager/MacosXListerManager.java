@@ -1,10 +1,8 @@
 package com.macos.framework.core.listener.manager;
 
 import com.macos.framework.core.listener.api.MacosXListener;
-import com.macos.framework.core.load.manager.LoaderManager;
 import com.macos.framework.core.util.ThreadServiceUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +14,9 @@ import java.util.Properties;
  * @Date 2019/9/4
  */
 @SuppressWarnings("all")
+@Slf4j
 public class MacosXListerManager {
 
-    private final static Logger log=LoggerFactory.getLogger(LoaderManager.class);
 
     private static List<MacosXListener> listeners=new ArrayList<>();
 

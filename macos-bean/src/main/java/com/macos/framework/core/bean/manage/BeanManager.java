@@ -71,21 +71,30 @@ public class BeanManager implements BeanFactory {
      */
     public static BeanDefinition getBeanDefinition(String beanName, Class beanClass) throws Exception {
         List<BeanDefinition> result = new ArrayList<>();
+
+        //优先通过beanName获取
         for (BeanDefinition b : classContainer){
-            if (StringUtils.isNotEmptyPlus(beanName) && b.getBeanName().equals(beanName) && hasClass(b,beanClass)){
-                    result.add(b);
-                    continue;
+            if (StringUtils.isNotEmptyPlus(beanName) ){
+                    if (b.getBeanName().equals(beanName) && hasClass(b,beanClass)) {
+                        result.add(b);
+                    }
+                continue;
             }
-           if (hasClass(b,beanClass)){
-               result.add(b);
-           }
+        }
+
+        if (result.size()==0){
+            for (BeanDefinition b : classContainer) {
+                if (hasClass(b, beanClass)) {
+                    result.add(b);
+                }
+            }
         }
 
         if (result.size()==0){
             throw new Exception("未定义"+beanClass.toString());
         }
         if (result.size()>1){
-            throw new Exception("多个"+beanClass.toString()+"的定义，请确保beanName唯一！");
+            throw new Exception("多个"+beanClass.toString()+"的定义，请确保bean唯一！");
         }
         return result.get(0);
     }

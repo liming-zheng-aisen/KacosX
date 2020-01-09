@@ -46,36 +46,6 @@ public class BeanUtil {
         return c.newInstance();
     }
 
-    /**
-     * 根据已经加载的class创建一个实例
-     *
-     * @param c
-     * @return
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     */
-    public static Object initNewBean(Class c, Properties evn) throws Exception {
-        Object object=createNewBean(c);
-        IocLoader.doAutowired(object,evn);
-        FieldUtil.doFields(object);
-        return object;
-    }
-    /**
-     * 根据已经加载的class创建一个实例
-     *
-     * @param c
-     * @return
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     */
-    public static Object initNewBean(String c, Properties evn) throws Exception {
-        Object object=createNewBean(c);
-        IocLoader.doAutowired(object,evn);
-        FieldUtil.doFields(object);
-        return object;
-    }
-
-
 
     /**
      * 通过调用已存在的bean的方法创建一个实例（该方法上必须有@DyBean注解）
