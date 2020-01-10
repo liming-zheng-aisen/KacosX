@@ -25,6 +25,10 @@ public class BeanDefinition {
     /**bean的名字*/
     private volatile String beanName;
 
+    /**字段前缀仅对于导入配置有效*/
+    private volatile String prefix="";
+
+
     /**指定上下文管理，允许替换*/
     private volatile ApplicationContextApi contextApi;
 
@@ -77,5 +81,11 @@ public class BeanDefinition {
         return this.contextApi;
     }
 
+    public String getPrefix() {
+        return prefix;
+    }
 
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
 }

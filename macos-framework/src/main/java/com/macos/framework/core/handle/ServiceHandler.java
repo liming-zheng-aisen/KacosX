@@ -9,8 +9,9 @@ import com.macos.framework.core.handle.base.BaseHandler;
  */
 public class ServiceHandler extends BaseHandler {
 
+
     @Override
-    public boolean doHandle(Class target,String[] args) throws Exception {
-        return true;
+    public boolean doHandle(Class mainClass, Class handleClass, String[] args) throws Exception {
+        return false;
     }
 }

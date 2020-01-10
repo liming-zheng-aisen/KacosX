@@ -9,9 +9,9 @@ import com.macos.framework.core.handle.base.BaseHandler;
  */
 public class AutowiredHandler extends BaseHandler {
 
+
     @Override
-    public boolean doHandle(Class target, String[] args) throws Exception {
+    public boolean doHandle(Class mainClass, Class handleClass, String[] args) throws Exception {
         return false;
     }
-
 }

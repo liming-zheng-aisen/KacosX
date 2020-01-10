@@ -125,6 +125,9 @@ public class BeanManager implements BeanFactory {
      * @return
      */
     public static boolean hasClass(BeanDefinition beanDefinition,Class beanClass){
+        if (beanClass == beanDefinition.getTarget()){
+            return  true;
+        }
         for (Class c : beanDefinition.getSuperClasses()){
             if (c.equals(beanClass)){
                 return true;

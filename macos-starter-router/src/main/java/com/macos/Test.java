@@ -1,6 +1,5 @@
 package com.macos;
 
-import com.macos.framework.core.load.abs.BeanLoad;
 import org.reflections.Reflections;
 import org.reflections.scanners.*;
 import org.reflections.util.ConfigurationBuilder;
@@ -24,8 +23,8 @@ public class Test {
         );
 
         // 反射出子类
-        Set<Class<? extends BeanLoad>> set = reflections.getSubTypesOf( BeanLoad.class ) ;
-        System.out.println("getSubTypesOf:" + set);
+//        Set<String> set = reflections.getSubTypesOf();
+//        System.out.println("getSubTypesOf:" + set);
 
         // 反射出带有指定注解的类
         //Set<Class<?>> ss = reflections.getTypesAnnotatedWith( MyAnnotation.class );

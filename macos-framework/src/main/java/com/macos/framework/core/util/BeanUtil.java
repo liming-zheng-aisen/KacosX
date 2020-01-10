@@ -2,16 +2,12 @@ package com.macos.framework.core.util;
 
 import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.Bean;
-import com.macos.framework.core.bean.definition.BeanDefinition;
-import com.macos.framework.core.load.ioc.IocLoader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
+
 
 /**
  * @author zheng.liming

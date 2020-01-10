@@ -36,11 +36,14 @@ public class ConfigurationHandler extends BaseHandler {
         for (BeanDefinition beanDefinition : classContainer) {
             Class currentHandleClass = beanDefinition.getTarget();
             //执行前置处理
-            doBefore(mainClass,currentHandleClass, args);
-            //创建并注册当前实例
-            newInstance(beanDefinition,getBeanName(currentHandleClass));
+            if(doBefore(mainClass,currentHandleClass, args)) {
+                //创建并注册当前实例
+                newInstance(beanDefinition, getBeanName(currentHandleClass));
+            }
             //执行后置处理
-            doAfter(mainClass,currentHandleClass, args);
+            if (doAfter(mainClass, currentHandleClass, args) && nextHandler!=null){
+                nextHandler.doHandle(mainClass,handleClass,args);
+            }
         }
         return true;
     }

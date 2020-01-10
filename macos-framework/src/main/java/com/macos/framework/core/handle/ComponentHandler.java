@@ -21,14 +21,17 @@ public class ComponentHandler extends BaseHandler {
     @Override
     public boolean doHandle(Class mainClass, Class handleClass, String[] args) throws Exception {
         Set<BeanDefinition> classContainer = BeanManager.getBeanDefinitionsByAnnotation(handleAnnotations);
-        for (BeanDefinition beanDefinition : classContainer){
-            Class currentHandleClass = beanDefinition.getTarget();
-            //执行前置处理
-            doBefore(mainClass,currentHandleClass, args);
-            //创建并注册当前实例
-            newInstance(beanDefinition,getBeanName(currentHandleClass));
-            //执行后置处理
-            doAfter(mainClass,currentHandleClass, args);
+        if (classContainer.size()>0) {
+            for (BeanDefinition beanDefinition : classContainer) {
+                Class currentHandleClass = beanDefinition.getTarget();
+                //执行前置处理
+                if (doBefore(mainClass, currentHandleClass, args)) {
+                    //创建并注册当前实例
+                    newInstance(beanDefinition, getBeanName(currentHandleClass));
+                }
+                //执行后置处理
+                return doAfter(mainClass, currentHandleClass, args);
+            }
         }
         return true;
     }

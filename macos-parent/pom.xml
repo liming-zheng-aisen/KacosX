@@ -16,7 +16,7 @@
     <json-lib>2.4</json-lib>
     <jackson-v>2.9.10</jackson-v>
     <mysql>8.0.12</mysql>
-    <slf4j>1.7.29</slf4j>
+    <slf4j>1.7.5</slf4j>
     <druid>1.0.16</druid>
     <mybatis>3.5.2</mybatis>
     <macos>0.0.1-SNAPSHOT</macos>
@@ -24,6 +24,8 @@
     <jsqlparser-version>3.0</jsqlparser-version>
     <jetty>9.4.19.v20190610</jetty>
     <nacos>1.1.3</nacos>
+    <commons>3.9</commons>
+    <lombok>1.18.4</lombok>
   </properties>
 
   <dependencyManagement>
@@ -216,20 +218,25 @@
       <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
-        <version>1.18.4</version>
+        <version>${lombok}</version>
       </dependency>
 
 
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>1.7.5</version>
+        <version>${slf4j}</version>
       </dependency>
 
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-simple</artifactId>
-        <version>1.7.5</version>
+        <version>${slf4j}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons}</version>
       </dependency>
 
     </dependencies>

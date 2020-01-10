@@ -6,9 +6,7 @@ import com.macos.common.scanner.api.ScannerApi;
 import com.macos.common.scanner.impl.ScannerImpl;
 import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.MacosXApplicationStarter;
-import com.macos.framework.core.load.clazz.ApplicationClassLoader;
-import com.macos.framework.core.load.abs.BeanLoad;
-import com.macos.framework.core.load.conf.PropertiesFileLoader;
+
 import com.macos.framework.core.util.BeanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,14 +25,14 @@ import java.util.stream.Collectors;
  * @Author Zheng.LiMing
  * @Date 2019/9/4
  */
-public class MacosXStarterLoader extends BeanLoad {
+public class MacosXStarterLoader {
 
     private static Logger logger= (Logger) LoggerFactory.getLogger(MacosXStarterLoader.class);
 
 
     private final String STARTER_PATH="com.macos.framework.starter";
 
-    @Override
+
     public void load(Class c) throws Exception {
         logger.info("开始加载macos-starter，默认包为{}",STARTER_PATH);
         ScannerApi scanner=new ScannerImpl();
@@ -75,7 +73,7 @@ public class MacosXStarterLoader extends BeanLoad {
                 Object beans= BeanUtil.createNewBean(cl);
                 Class[] params={Properties.class,Class.class};
                 Method method = cl.getMethod("doStart",params);
-                method.invoke(beans, PropertiesFileLoader.getEvn(),main);
+              // method.invoke(beans, PropertiesFileLoader.getEvn(),main);
                 logger.info("macos-starter执行{}的doStart方法",cl.getSimpleName());
                 break;
             }
@@ -83,7 +81,7 @@ public class MacosXStarterLoader extends BeanLoad {
     }
 
     public void registerToClassLoader(String[] paths) throws Exception {
-        ApplicationClassLoader classLoader=new ApplicationClassLoader();
+      ///  ApplicationClassLoader classLoader=new ApplicationClassLoader();
         for (String str:paths){
             if (StringUtils.isNotEmptyPlus(str)) {
                 logger.info("macos-starter调用ApplicationClassLoader加载{}包下的类",str);

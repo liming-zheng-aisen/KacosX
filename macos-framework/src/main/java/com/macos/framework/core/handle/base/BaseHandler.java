@@ -25,10 +25,13 @@ public abstract class BaseHandler {
     /**需要处理的注解*/
     public static Class[] handleAnnotations;
 
+    protected BaseHandler nextHandler;
+
     /**
      * 应用程序上下文
      */
     protected static ApplicationContextApi applicationContextApi = ApplicationContextImpl.Builder.getApplicationContext();
+
 
     /**
      * 执行处理,返回true，则继续调用下个处理器
@@ -47,11 +50,11 @@ public abstract class BaseHandler {
      * @param args
      * @throws Exception
      */
-    protected void doBefore(Class mainClass,Class handleClass,String[] args) throws Exception {
+    protected boolean doBefore(Class mainClass,Class handleClass,String[] args) throws Exception {
         if (beforeHandleMap.size()==0){
-            return;
+            return true;
         }
-        execute(mainClass,handleClass,args, beforeHandleMap);
+       return execute(mainClass,handleClass,args, beforeHandleMap);
     }
 
     /**
@@ -61,11 +64,11 @@ public abstract class BaseHandler {
      * @param args
      * @throws Exception
      */
-    protected void doAfter(Class mainClass,Class handleClass,String[] args) throws Exception {
+    protected boolean doAfter(Class mainClass,Class handleClass,String[] args) throws Exception {
         if (afterHandleMap.size()==0){
-            return;
+            return true;
         }
-        execute(mainClass,handleClass, args,afterHandleMap);
+       return execute(mainClass,handleClass, args,afterHandleMap);
     }
 
     /**
@@ -76,15 +79,16 @@ public abstract class BaseHandler {
      * @param handleSet
      * @throws Exception
      */
-    protected void execute(Class mainClass,Class handleClass, String[] args , Set<BaseHandler> handleSet) throws Exception {
+    protected boolean execute(Class mainClass,Class handleClass, String[] args , Set<BaseHandler> handleSet) throws Exception {
         for (BaseHandler handle: handleSet){
             if (handle != null) {
               boolean result = handle.doHandle(mainClass,handleClass, args);
               if (!result){
-                  return;
+                  return false;
               }
             }
         }
+        return true;
     }
 
     /***
@@ -139,5 +143,13 @@ public abstract class BaseHandler {
 
     public  Set<BaseHandler> getAfterHandleMap() {
         return afterHandleMap;
+    }
+
+    public BaseHandler getNextHandler() {
+        return nextHandler;
+    }
+
+    public void setNextHandler(BaseHandler nextHandler) {
+        this.nextHandler = nextHandler;
     }
 }
