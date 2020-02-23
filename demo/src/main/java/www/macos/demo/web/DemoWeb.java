@@ -1,10 +1,9 @@
 package www.macos.demo.web;
 
-import com.macos.framework.annotation.Autowired;
-import com.macos.framework.annotation.Get;
-import com.macos.framework.annotation.RequestMapping;
-import com.macos.framework.annotation.RestAPI;
+import com.macos.framework.annotation.*;
 import www.macos.demo.config.DemoConfig;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Desc DemoWeb
@@ -19,7 +18,32 @@ public class DemoWeb {
     private DemoConfig demoConfig;
 
     @Get
-    public String getVersion(){
+    public String get(){
         return demoConfig.getVersion();
+    }
+
+    @Post
+    public String post(){
+        return demoConfig.getVersion();
+    }
+
+    @Put
+    public String put(){
+        return demoConfig.getVersion();
+    }
+
+    @Delete
+    public String delete(){
+        return demoConfig.getVersion();
+    }
+
+    @Get("/{id}")
+    public String getId(@PathVariable String id){
+        return id;
+    }
+
+    @Get("/http/do")
+    public String doHttp(HttpServletRequest request){
+        return request.getRequestURI();
     }
 }

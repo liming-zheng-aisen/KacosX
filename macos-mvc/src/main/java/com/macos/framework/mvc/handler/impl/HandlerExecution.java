@@ -96,7 +96,7 @@ public class HandlerExecution implements HandlerAdapter {
             }
         }
         Object obj= BeanManager.getBeanDefinition(null,handler.getHandler(),true).getBean(null,handler.getHandler());
-        Object result=handler.getHandlerMethod().invoke(obj, param);
+            Object result=handler.getHandlerMethod().invoke(obj, param);
         return result;
     }
 

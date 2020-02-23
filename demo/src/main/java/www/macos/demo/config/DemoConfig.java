@@ -12,7 +12,7 @@ import com.macos.framework.annotation.Value;
 public class DemoConfig {
 
     @Value("${version:1.0.0}")
-    private String version="1.0.0";
+    private String version;
 
     public String getVersion() {
         return version;
