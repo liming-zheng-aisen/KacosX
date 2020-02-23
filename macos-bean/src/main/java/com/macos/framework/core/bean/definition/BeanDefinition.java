@@ -1,6 +1,8 @@
 package com.macos.framework.core.bean.definition;
 
 import com.macos.framework.context.base.ApplicationContextApi;
+import com.macos.framework.context.exception.ContextException;
+import com.macos.framework.core.bean.definition.work.WorkEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,26 +13,35 @@ import java.util.List;
  * @creater 2019/12/16 10:18:35
  * @desc bean的定义信息
  */
-public class BeanDefinition {
+public class BeanDefinition implements ApplicationContextApi{
+
 
     /**是否为prototype*/
-    private volatile boolean prototype;
+    private volatile boolean prototype ;
 
     /**父类信息*/
-    private volatile List<Class> superClasses = new ArrayList<>();
+    private volatile List<Class> superClasses = new ArrayList<>() ;
 
     /**当前类信息*/
-    private volatile Class target = null;
+    private volatile Class target = null ;
 
     /**bean的名字*/
-    private volatile String beanName;
+    private volatile String beanName = null ;
 
     /**字段前缀仅对于导入配置有效*/
-    private volatile String prefix="";
+    private volatile String prefix = "" ;
+
+    /**工作环境，默认应用程序*/
+    private volatile WorkEnum work = WorkEnum.Apllication ;
+
+    /**
+     * 请求根路径
+     */
+    private volatile String requestPath = "/" ;
 
 
     /**指定上下文管理，允许替换*/
-    private volatile ApplicationContextApi contextApi;
+    private volatile ApplicationContextApi contextApi ;
 
     public boolean isPrototype(){
         return prototype;
@@ -76,6 +87,13 @@ public class BeanDefinition {
         this.contextApi = contextApi;
     }
 
+    public String getRequestPath() {
+        return requestPath;
+    }
+
+    public void setRequestPath(String requestPath) {
+        this.requestPath = requestPath;
+    }
 
     public ApplicationContextApi getContextApi(){
         return this.contextApi;
@@ -87,5 +105,38 @@ public class BeanDefinition {
 
     public void setPrefix(String prefix) {
         this.prefix = prefix;
+    }
+
+    public WorkEnum getWork() {
+        return work;
+    }
+
+    public void setWork(WorkEnum work) {
+        this.work = work;
+    }
+
+    @Override
+    public Object getBean(String beanName, Class beanClass) throws Exception {
+       if (contextApi == null){
+           return null;
+       }
+
+      return contextApi.getBean(beanName,beanClass);
+    }
+
+    @Override
+    public boolean registerBean(String beanName, Object object) throws ContextException {
+        if (contextApi == null){
+            return false;
+        }
+        return contextApi.registerBean(beanName,object);
+    }
+
+    @Override
+    public Object registerBean(String beanName, Class object) throws ContextException {
+        if (contextApi == null){
+            return false;
+        }
+        return contextApi.registerBean(beanName,object);
     }
 }

@@ -2,30 +2,35 @@ package com.macos.framework.starter.run;
 
 import com.macos.ConsolePrint;
 import com.macos.common.times.Timer;
-import com.macos.framework.context.impl.ApplicationContextImpl;
 import com.macos.framework.context.base.ApplicationContextApi;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.macos.framework.core.context.ApplicationContextImpl;
+import com.macos.framework.core.listener.manager.MacosXListerManager;
+import com.macos.framework.starter.work.MacosXApplicationWork;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author zheng.liming
  * @date 2019/8/4
  * @description 启动
  */
+@Slf4j
 public class MacosXApplicationRun {
-
-    static Logger logger= LoggerFactory.getLogger(MacosXApplicationRun.class);
-
+    /**
+     * 启动
+     * @param main
+     * @param args
+     */
     public static void run(Class main,String[] args) {
 
         ConsolePrint.printLogo(main);
 
-        logger.info("开始执行..................");
+        log.info("开始执行..................");
 
         Timer timer=new Timer();
 
         try {
+
             //开始计时
             timer.doStart();
 
@@ -33,6 +38,9 @@ public class MacosXApplicationRun {
 
             context.registerBean("MacosXTimer",timer);
 
+            MacosXApplicationWork.run(main,args);
+
+            MacosXListerManager.noticeLister();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,5 +50,9 @@ public class MacosXApplicationRun {
     private static void close(){
         System.exit(0);
     }
+
+
+
+
 
 }

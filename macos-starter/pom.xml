@@ -30,8 +30,9 @@
         </dependency>
         <dependency>
             <groupId>com.macos</groupId>
-            <artifactId>macos-framework</artifactId>
+            <artifactId>macos-core</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.macos</groupId>
             <artifactId>macos-println</artifactId>

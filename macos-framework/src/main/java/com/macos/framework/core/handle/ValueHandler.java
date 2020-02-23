@@ -1,12 +1,12 @@
 package com.macos.framework.core.handle;
 
+import com.macos.common.util.ReflectionsUtil;
 import com.macos.common.util.StringUtils;
 import com.macos.framework.annotation.Value;
 import com.macos.framework.core.bean.definition.BeanDefinition;
 import com.macos.framework.core.bean.manage.BeanManager;
 import com.macos.framework.core.env.ApplicationENV;
 import com.macos.framework.core.handle.base.BaseHandler;
-import com.macos.framework.core.util.ReflectionsUtil;
 
 import java.lang.reflect.Field;
 
@@ -17,17 +17,16 @@ import java.lang.reflect.Field;
  */
 public class ValueHandler extends BaseHandler {
 
-    static {
+    public ValueHandler() {
         handleAnnotations = new Class[]{Value.class};
     }
-
 
     @Override
     public boolean doHandle(Class mainClass, Class handleClass, String[] args) throws Exception {
         if (handleClass == null || handleClass.isInterface()){
             return true;
         }
-        BeanDefinition beanDefinition = BeanManager.getBeanDefinition(null,handleClass);
+        BeanDefinition beanDefinition = BeanManager.getBeanDefinition(null,handleClass,true);
         if (beanDefinition==null){
             return true;
         }
@@ -63,13 +62,13 @@ public class ValueHandler extends BaseHandler {
         }
 
         String endValue = null;
-        BeanDefinition beanDefinition = BeanManager.getBeanDefinition(null,ApplicationENV.class);
+        BeanDefinition beanDefinition = BeanManager.getBeanDefinition(null,ApplicationENV.class,true);
         if (beanDefinition!=null){
             ApplicationENV env = (ApplicationENV)beanDefinition.getContextApi().getBean(null,ApplicationENV.class);
             endValue = (String) env.getElementValue(values[0]);
         }
 
-        if (StringUtils.isEmpty(endValue)&& values.length>1){
+        if (StringUtils.isEmpty(endValue) && values.length>1){
             endValue = values[1];
         }
 

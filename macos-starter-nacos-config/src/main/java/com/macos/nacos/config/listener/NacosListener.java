@@ -2,7 +2,6 @@ package com.macos.nacos.config.listener;
 
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.macos.framework.core.listener.manager.MacosXListerManager;
-import com.macos.framework.core.load.conf.PropertiesFileLoader;
 import com.macos.framework.starter.nacos.NacosConfigStarter;
 import com.macos.nacos.config.NacosPropertisMannager;
 import com.macos.nacos.config.util.PropertiesUtil;
@@ -27,17 +26,17 @@ public class NacosListener implements Listener {
 
     @Override
     public void receiveConfigInfo(String configInfo) {
-        NacosPropertisMannager nacosPropertisMannager = NacosPropertisMannager.Buider.getMannager();
-        try {
-            nacosPropertisMannager.updateInputStream(dataId,configInfo);
-            Properties nacosPropertis=nacosPropertisMannager.getNacosEvn();
-            PropertiesUtil.cloneEvn(NacosConfigStarter.defaultEvn,nacosPropertis);
-            PropertiesFileLoader.getEvn().clear();
-            PropertiesUtil.cloneEvn(nacosPropertis, PropertiesFileLoader.getEvn());
-            MacosXListerManager.updateLister(PropertiesFileLoader.getEvn());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        NacosPropertisMannager nacosPropertisMannager = NacosPropertisMannager.Buider.getMannager();
+//        try {
+//            nacosPropertisMannager.updateInputStream(dataId,configInfo);
+//            Properties nacosPropertis=nacosPropertisMannager.getNacosEvn();
+//            PropertiesUtil.cloneEvn(NacosConfigStarter.defaultEvn,nacosPropertis);
+//            PropertiesFileLoader.getEvn().clear();
+//            PropertiesUtil.cloneEvn(nacosPropertis, PropertiesFileLoader.getEvn());
+//            MacosXListerManager.updateLister(PropertiesFileLoader.getEvn());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public String getDataId() {

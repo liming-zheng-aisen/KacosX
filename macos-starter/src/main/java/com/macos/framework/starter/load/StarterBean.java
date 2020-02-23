@@ -1,7 +1,7 @@
 package com.macos.framework.starter.load;
 
 /**
- * @Desc DyStarterBean
+ * @Desc 启动顺序
  * @Author Zheng.LiMing
  * @Date 2019/9/11 starter执行对象
  */

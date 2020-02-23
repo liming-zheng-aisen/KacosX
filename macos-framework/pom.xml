@@ -28,6 +28,11 @@
 
         <dependency>
             <groupId>com.macos</groupId>
+            <artifactId>macos-aop</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.macos</groupId>
             <artifactId>macos-context</artifactId>
         </dependency>
 
@@ -59,8 +64,14 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/cglib/cglib -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
         </dependency>
 
     </dependencies>

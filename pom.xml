@@ -24,6 +24,9 @@
         <module>macos-starter-npc</module>
         <module>macos-parent</module>
         <module>macos-starter-router</module>
+        <module>macos-aop</module>
+        <module>macos-core</module>
+        <module>demo</module>
     </modules>
     <distributionManagement>
         <repository>

@@ -1,12 +1,12 @@
 package com.macos.framework.core.listener.manager;
 
+import com.macos.common.util.ThreadServiceUtil;
+import com.macos.framework.core.env.ApplicationENV;
 import com.macos.framework.core.listener.api.MacosXListener;
-import com.macos.framework.core.util.ThreadServiceUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * @Desc 监听加载器管理器
@@ -45,7 +45,7 @@ public class MacosXListerManager {
      * 异步通知监听器更新配置
      * @param env
      */
-    public static void  updateLister(Properties env){
+    public static void  updateLister(ApplicationENV env){
         if (listeners.size()>0){
             log.info("更新配置");
             for (MacosXListener listener:listeners) {

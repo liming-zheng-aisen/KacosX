@@ -3,15 +3,8 @@ package com.macos.framework.mvc.dispatcher;
 
 import com.macos.common.http.HttpResponsePrintln;
 import com.macos.common.http.result.ResultData;
-import com.macos.common.properties.PropetiesUtil;
-import com.macos.common.scanner.api.ScannerApi;
-import com.macos.common.scanner.impl.ScannerImpl;
 import com.macos.common.util.JsonUtil;
-import com.macos.common.util.StringUtils;
 import com.macos.common.util.TypeUtil;
-import com.macos.framework.core.bean.manage.BeanManager;
-import com.macos.framework.core.load.conf.PropertiesFileLoader;
-import com.macos.framework.mvc.context.ServletContext;
 import com.macos.framework.enums.HttpMethod;
 import com.macos.framework.mvc.handler.bean.RequestUrlBean;
 import com.macos.framework.mvc.handler.impl.HandlerExecution;
@@ -23,8 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.Properties;
-import java.util.Set;
 
 /**
  * @author zheng.liming
@@ -34,48 +25,6 @@ import java.util.Set;
 public class DispatchedServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-
-    private final static String DEFAULT_SCANNER_KEY="mvc.scan";
-
-    private static String config;
-
-    private static Set<Class> cl;
-
-
-    public DispatchedServlet() {
-        cl= BeanManager.getClassContainer();
-        try {
-
-            Properties evn= PropertiesFileLoader.getEvn();
-
-            if (null == evn) {
-                evn = PropetiesUtil.doLoadProperties(null, config, this.getClass());
-            }
-
-            if (cl == null && BeanManager.isLoad()) {
-                cl = BeanManager.getClassContainer();
-            }
-
-            if (cl == null) {
-                if (null != evn) {
-                    String path = evn.getProperty(DEFAULT_SCANNER_KEY);
-                    if (StringUtils.isNotEmptyPlus(path)) {
-                        ScannerApi scanner = new ScannerImpl();
-                        cl = scanner.doScanner(path);
-                    } else {
-                        throw new Exception("请在properties配置mvc.scan（mvc根路径）的值");
-                    }
-                }
-            }
-
-            ServletContext.load(cl);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(0);
-        }
-    }
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -122,7 +71,7 @@ public class DispatchedServlet extends HttpServlet {
 
             HandlerMapping handlerMapping = new HandlerMapping();
 
-           RequestUrlBean bean = handlerMapping.requestMethod(req.getRequestURI(), method);
+            RequestUrlBean bean = handlerMapping.requestMethod(req.getRequestURI(), method);
 
 
             if (null == bean) {
@@ -146,7 +95,6 @@ public class DispatchedServlet extends HttpServlet {
                 resp.setContentType("application/json;charset=UTF-8");
                 HttpResponsePrintln.writer(resp,JsonUtil.objectToJson(data));
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             String result = JsonUtil.objectToJson(new ResultData<Object>(502, e.getMessage(), " SERVER ERROR "));
@@ -162,12 +110,4 @@ public class DispatchedServlet extends HttpServlet {
         resp.setHeader("content-type", "text/html;charset=utf-8");
     }
 
-
-    public static Set<Class> getCl() {
-        return cl;
-    }
-
-    public static void setCl(Set<Class> cl) {
-        DispatchedServlet.cl = cl;
-    }
 }

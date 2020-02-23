@@ -26,6 +26,8 @@
     <nacos>1.1.3</nacos>
     <commons>3.9</commons>
     <lombok>1.18.4</lombok>
+    <cglib>3.3.0</cglib>
+    <beanutils>1.9.4</beanutils>
   </properties>
 
   <dependencyManagement>
@@ -41,6 +43,13 @@
         <artifactId>macos-common</artifactId>
         <version>${macos}</version>
       </dependency>
+
+      <dependency>
+        <groupId>com.macos</groupId>
+        <artifactId>macos-core</artifactId>
+        <version>${macos}</version>
+      </dependency>
+
       <dependency>
         <groupId>com.macos</groupId>
         <artifactId>macos-starter-web</artifactId>
@@ -49,6 +58,12 @@
       <dependency>
         <groupId>com.macos</groupId>
         <artifactId>macos-starter</artifactId>
+        <version>${macos}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.macos</groupId>
+        <artifactId>macos-aop</artifactId>
         <version>${macos}</version>
       </dependency>
       <dependency>
@@ -238,7 +253,19 @@
         <artifactId>commons-lang3</artifactId>
         <version>${commons}</version>
       </dependency>
+      <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+      <dependency>
+        <groupId>commons-beanutils</groupId>
+        <artifactId>commons-beanutils</artifactId>
+        <version>${beanutils}</version>
+      </dependency>
 
+      <!-- https://mvnrepository.com/artifact/cglib/cglib -->
+      <dependency>
+        <groupId>cglib</groupId>
+        <artifactId>cglib</artifactId>
+        <version>${cglib}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 

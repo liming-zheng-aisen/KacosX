@@ -1,7 +1,7 @@
 package com.macos.framework.enums;
 
 /**
- * @Desc ScopeType
+ * @Desc 作用域
  * @Author Zheng.LiMing
  * @Date 2019/12/31
  */

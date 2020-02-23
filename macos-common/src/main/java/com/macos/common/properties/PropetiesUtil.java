@@ -1,11 +1,10 @@
 package com.macos.common.properties;
 
 import lombok.extern.slf4j.Slf4j;
+import org.yaml.snakeyaml.Yaml;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -16,45 +15,116 @@ import java.util.Properties;
 @Slf4j
 public class PropetiesUtil {
 
-    public static Properties doLoadProperties( Properties properties,String contextConfigLocation,Class c) throws PropertiesException {
+    private final static String CLASSPATH="classpath";
 
-        if (null ==properties){
-            properties=new Properties();
+    private final static String CONFIG = "config";
+
+
+    public static Properties loadProperties(String source,Class c) throws PropertiesException, IOException {
+        if (!source.endsWith(PropertiesType.PROPERTIES_SUFFIC)){
+            return null;
         }
 
+        Properties  properties=new Properties();
+
+        BufferedReader br =null;
+        File file = null;
+        FileInputStream fileInputStream = null;
         InputStream inputStream=null;
+        String[] values = source.split("\\:");
 
-        BufferedReader br=null;
         try {
-            inputStream= c.getClassLoader().getResourceAsStream(contextConfigLocation);
-            if (null==inputStream){
-                return properties;
-            }
-             br = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
-            if (contextConfigLocation.endsWith(PropertiesType.PROPERTIES_SUFFIC)) {
-                properties.load(br);
-            }else if (contextConfigLocation.endsWith(PropertiesType.XML_SUFFIC)){
-                properties.loadFromXML(inputStream);
-            }else{
-                log.error("不支持该类型的配置文件");
-                throw new PropertiesException("不支持该类型的配置文件，目前只支持"+ PropertiesType.PROPERTIES_SUFFIC+"、"+ PropertiesType.XML_SUFFIC+"后缀的配置文件");
-            }
-            return properties;
-        } catch (IOException e) {
-            log.warn("配置文件加载异常,请检查路径！");
-            throw new PropertiesException("配置文件加载异常,请检查路径！",e);
-        }finally {
-
-            if (null!=inputStream){
+            if (values.length > 1) {
+                if (CLASSPATH.equals(values[0].toLowerCase())) {
+                    inputStream = c.getClassLoader().getResourceAsStream(values[1]);
+                    br = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
+                    properties.load(br);
+                } else {
+                    file = new File(source);
+                    fileInputStream = new FileInputStream(file);
+                    properties.load(fileInputStream);
+                }
+            } else {
                 try {
-                    br.close();
-                    inputStream.close();
-                } catch (IOException e) {
-                    log.warn("配置文件关闭流异常");
-                    throw new PropertiesException("配置文件关闭流异常",e);
+                    inputStream = c.getClassLoader().getResourceAsStream(values[0]);
+                } catch (Exception e) {
+                    log.warn(e.getMessage());
+                }
+                if (inputStream == null) {
+                    file = new File(System.getProperty("user.dir") + "/" + CONFIG + "/" + source);
+                    fileInputStream = new FileInputStream(file);
+                    properties.load(fileInputStream);
+                } else {
+                    br = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
+                    properties.load(br);
                 }
             }
 
+        }finally{
+            if (br!=null){
+                br.close();
+            }
+            if (inputStream!=null){
+                inputStream.close();
+            }
+            if (fileInputStream!=null){
+                fileInputStream.close();
+            }
+        }
+
+        return properties;
+
+    }
+
+    public static Map loadYaml(String source,Class c) throws IOException {
+        if (!(source.endsWith(PropertiesType.YML_SUFFIC) || source.endsWith(PropertiesType.YAML_SUFFIC))){
+            return null;
+        }
+        //实例化解析器
+        Yaml yaml = new Yaml();
+        BufferedReader br =null;
+        File file = null;
+        FileInputStream fileInputStream = null;
+        InputStream inputStream=null;
+        String[] values = source.split("\\:");
+
+        try {
+            if (values.length > 1) {
+                if (CLASSPATH.equals(values[0].toLowerCase())) {
+                    inputStream = c.getClassLoader().getResourceAsStream(values[1]);
+                    br = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
+                    return yaml.loadAs(br, Map.class);
+                } else {
+                    file = new File(source);
+                    fileInputStream = new FileInputStream(file);
+                    return yaml.loadAs(fileInputStream, Map.class);
+                }
+            } else {
+                try {
+                    inputStream = c.getClassLoader().getResourceAsStream(values[0]);
+                } catch (Exception e) {
+                    log.warn(e.getMessage());
+                }
+                if (inputStream == null) {
+                    file = new File(System.getProperty("user.dir") + "/" + CONFIG + "/" + source);
+                    fileInputStream = new FileInputStream(file);
+                    return yaml.loadAs(fileInputStream, Map.class);
+                } else {
+                    br = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
+                    return yaml.loadAs(br, Map.class);
+                }
+            }
+
+        }finally{
+            if (br!=null){
+                br.close();
+            }
+            if (inputStream!=null){
+                inputStream.close();
+            }
+            if (fileInputStream!=null){
+                fileInputStream.close();
+            }
         }
 
     }

@@ -6,8 +6,6 @@ import com.macos.framework.core.bean.definition.BeanDefinition;
 import com.macos.framework.core.bean.manage.BeanManager;
 import com.macos.framework.core.handle.base.BaseHandler;
 
-import java.util.Set;
-
 
 /**
  * @Desc 配置类处理器
@@ -17,7 +15,7 @@ import java.util.Set;
 @SuppressWarnings("all")
 public class ConfigurationHandler extends BaseHandler {
 
-    static {
+    public ConfigurationHandler() {
         handleAnnotations = new Class[]{Configuration.class};
     }
 
@@ -32,24 +30,23 @@ public class ConfigurationHandler extends BaseHandler {
      */
     @Override
     public boolean doHandle(Class mainClass, Class handleClass, String[] args) throws Exception {
-        Set<BeanDefinition> classContainer = BeanManager.getBeanDefinitionsByAnnotation(handleAnnotations);
-        for (BeanDefinition beanDefinition : classContainer) {
-            Class currentHandleClass = beanDefinition.getTarget();
-            //执行前置处理
-            if(doBefore(mainClass,currentHandleClass, args)) {
-                //创建并注册当前实例
-                newInstance(beanDefinition, getBeanName(currentHandleClass));
-            }
-            //执行后置处理
-            if (doAfter(mainClass, currentHandleClass, args) && nextHandler!=null){
-                nextHandler.doHandle(mainClass,handleClass,args);
-            }
+
+        if (!needToHandle(handleClass)) {
+            return true;
         }
-        return true;
+        //执行前置处理
+        if (doBefore(mainClass, handleClass, args)) {
+            BeanDefinition beanDefinition = BeanManager.getBeanDefinition(null, handleClass, true);
+            //创建并注册当前实例
+            newInstance(beanDefinition, getBeanName(handleClass));
+        }
+        //执行后置处理
+        return doAfter(mainClass, handleClass, args);
     }
 
     /**
      * 获取bean的名字
+     *
      * @param target
      * @return
      */

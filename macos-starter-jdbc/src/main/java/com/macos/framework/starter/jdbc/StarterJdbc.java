@@ -8,6 +8,7 @@ import com.macos.framework.annotation.MacosXApplicationStarter;
 import com.macos.framework.annotation.MacosXScanner;
 
 import com.macos.framework.core.bean.manage.BeanManager;
+import com.macos.framework.core.env.ApplicationENV;
 import com.macos.framework.druid.DruidFilter;
 import com.macos.framework.druid.DruidServlet;
 import com.macos.framework.jdbc.config.DruidConfig;
@@ -38,32 +39,32 @@ public class StarterJdbc implements DefaultStarter {
     private static final String DEF_STATUS="development";
 
     @Override
-    public void doStart(Properties evn, Class cl) throws Exception {
-        ScannerApi scanner=new ScannerImpl();
-        Set<Class> result=new HashSet<>();
-        if (cl.isAnnotationPresent(MacosXScanner.class)){
-            MacosXScanner dyMacosXScanner =(MacosXScanner)cl.getAnnotation(MacosXScanner.class);
-            String[] scanPaths= dyMacosXScanner.packageNames();
-
-            for (String p:scanPaths){
-                if (StringUtils.isNotEmptyPlus(p)) {
-                     Set<Class> scannerClass = scanner.doScanner(p,Mapper.class);
-                     result.addAll(scannerClass);
-                }
-            }
-        }else if (cl.isAnnotationPresent(MacosXApplication.class)){
-           result.addAll(scanner.doScanner(cl.getPackage().getName(),Mapper.class));
-        }
-        Set<Class> classSet=new HashSet<>();
-        classSet.add(DruidFilter.class);
-        classSet.add(DruidServlet.class);
-
-        String ignorePath=evn.getProperty("server.ignorePath");
-        if (StringUtils.isEmptyPlus(ignorePath)) {
-            evn.setProperty("server.ignorePath", "/druid/*,/download/*");
-        }
-        BeanManager.registerClassBySet(classSet);
-        registerDyJdbcContext(result,evn);
+    public void doStart(ApplicationENV env, Class main , String[] arg) throws Exception {
+//        ScannerApi scanner=new ScannerImpl();
+//        Set<Class> result=new HashSet<>();
+//        if (cl.isAnnotationPresent(MacosXScanner.class)){
+//            MacosXScanner dyMacosXScanner =(MacosXScanner)cl.getAnnotation(MacosXScanner.class);
+//            String[] scanPaths= dyMacosXScanner.packageNames();
+//
+//            for (String p:scanPaths){
+//                if (StringUtils.isNotEmptyPlus(p)) {
+//                     Set<Class> scannerClass = scanner.doScanner(p,Mapper.class);
+//                     result.addAll(scannerClass);
+//                }
+//            }
+//        }else if (cl.isAnnotationPresent(MacosXApplication.class)){
+//           result.addAll(scanner.doScanner(cl.getPackage().getName(),Mapper.class));
+//        }
+//        Set<Class> classSet=new HashSet<>();
+//        classSet.add(DruidFilter.class);
+//        classSet.add(DruidServlet.class);
+//
+//        String ignorePath=evn.getProperty("server.ignorePath");
+//        if (StringUtils.isEmptyPlus(ignorePath)) {
+//            evn.setProperty("server.ignorePath", "/druid/*,/download/*");
+//        }
+//        BeanManager.registerClassBySet(classSet);
+//        registerDyJdbcContext(result,evn);
     }
 
     private void registerDyJdbcContext(Set<Class> result,Properties evn){

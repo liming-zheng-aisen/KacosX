@@ -1,17 +1,16 @@
 package com.macos.framework.mvc.handler.impl;
 
-
 import com.macos.common.util.JsonUtil;
+import com.macos.common.util.ReflectionsUtil;
 import com.macos.common.util.StringUtils;
 import com.macos.common.util.TypeUtil;
 import com.macos.framework.annotation.PathVariable;
 import com.macos.framework.annotation.RequestBody;
 import com.macos.framework.annotation.RequestParameter;
-import com.macos.framework.core.bean.factory.AutowiredFactory;
-import com.macos.framework.core.bean.util.BeanUtil;
-import com.macos.framework.core.bean.factory.ValueFactory;
-import com.macos.framework.core.load.conf.PropertiesFileLoader;
-import com.macos.framework.mvc.handler.HandlerAdapter;
+import com.macos.framework.core.bean.definition.BeanDefinition;
+import com.macos.framework.core.bean.manage.BeanManager;
+import com.macos.framework.core.env.ApplicationENV;
+import com.macos.framework.mvc.handler.adapter.HandlerAdapter;
 import com.macos.framework.mvc.handler.bean.RequestUrlBean;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +21,6 @@ import java.lang.reflect.Type;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 
 /**
@@ -35,7 +33,6 @@ public class HandlerExecution implements HandlerAdapter {
     @Override
     public Object handle(HttpServletRequest request, HttpServletResponse response, RequestUrlBean handler) throws Exception {
 
-        Properties env= PropertiesFileLoader.getEvn();
         Object[] param = null;
         String url = StringUtils.formatUrl(request.getRequestURI());
         String[] urls = url.split("\\/");
@@ -98,9 +95,7 @@ public class HandlerExecution implements HandlerAdapter {
                 index++;
             }
         }
-        Object obj= BeanUtil.createNewBean(handler.getHandler());
-        ValueFactory.doFields(obj,env);
-        AutowiredFactory.doAutowired(obj,env);
+        Object obj= BeanManager.getBeanDefinition(null,handler.getHandler(),true).getBean(null,handler.getHandler());
         Object result=handler.getHandlerMethod().invoke(obj, param);
         return result;
     }

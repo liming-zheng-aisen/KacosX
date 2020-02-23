@@ -1,6 +1,6 @@
 package com.macos.framework.starter;
 
-import java.util.Properties;
+import com.macos.framework.core.env.ApplicationENV;
 
 /**
  * @Desc DyDefaultStarter
@@ -9,6 +9,6 @@ import java.util.Properties;
  */
 public interface DefaultStarter {
 
-   void doStart(Properties evn, Class cl) throws Exception;
+   void doStart(ApplicationENV env, Class main , String[] args) throws Exception;
 
 }

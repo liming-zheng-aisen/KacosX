@@ -74,19 +74,22 @@ public class BeanDefinitionUtil {
      */
     private static void setSuperClass(Class c,List<Class> classList){
 
-        if (c==Object.class){
+        if (c==Object.class || c == null){
             return ;
         }
 
         classList.add(c);
+        try {
+            Class superclass = c.getSuperclass();
 
-        Class superclass = c.getSuperclass();
+            if (superclass==Object.class){
+                return;
+            }
 
-        if (superclass==Object.class){
-            return;
+            setSuperClass(superclass,classList);
+        }catch (Exception e){
+            System.out.println(c);
         }
-
-        setSuperClass(superclass,classList);
     }
 
     /**

@@ -5,7 +5,6 @@ import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.alibaba.nacos.client.utils.JSONUtils;
 import com.macos.common.util.StringUtils;
 import com.macos.common.util.TypeUtil;
-import com.macos.framework.context.manager.ContextManager;
 import com.macos.framework.nacos.balance.DefaultNacosBalanceServiceImpl;
 import com.macos.framework.nacos.balance.NacosBalanceSerivce;
 import com.macos.framework.nacos.rest.constant.MediaTypeConst;
@@ -56,15 +55,16 @@ public class RestClient{
      * @throws NacosException
      */
     private Instance getHeathyInstance( String serviceName, String groupName, List<String>clusterNames) throws Exception {
-        if (StringUtils.isEmptyPlus(serviceName)||StringUtils.isEmptyPlus(groupName)){
-            throw  new Exception("serviceName、groupName不允许为空！");
-        }
-        ContextManager context = ContextManager.BuilderContext.getContextManager();
-        NacosBalanceSerivce namingService=(NacosBalanceSerivce)context.getBean("dyNacosBalanceSerivce", NacosBalanceSerivce.class);
-        if (null == namingService){
-            namingService = new DefaultNacosBalanceServiceImpl();
-        }
-       return namingService.getHealthyInstance(serviceName,groupName,clusterNames);
+//        if (StringUtils.isEmptyPlus(serviceName)||StringUtils.isEmptyPlus(groupName)){
+//            throw  new Exception("serviceName、groupName不允许为空！");
+//        }
+//        ContextManager context = ContextManager.BuilderContext.getContextManager();
+//        NacosBalanceSerivce namingService=(NacosBalanceSerivce)context.getBean("dyNacosBalanceSerivce", NacosBalanceSerivce.class);
+//        if (null == namingService){
+//            namingService = new DefaultNacosBalanceServiceImpl();
+//        }
+//       return namingService.getHealthyInstance(serviceName,groupName,clusterNames);
+        return null;
     }
 
     private String getNacosUrl(Instance instance,String url){
