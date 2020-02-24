@@ -49,6 +49,12 @@ public class ApplicationENV {
         }
         return null;
     }
+    public String getElementValueAsString(String key){
+        if (env.containsKey(key)){
+            return env.get(key).toString();
+        }
+        return null;
+    }
 
     public Object getElementValue(String key,Object defauleValue){
         if (env.containsKey(key)){
@@ -56,6 +62,14 @@ public class ApplicationENV {
         }
         return defauleValue;
     }
+
+    public String getElementValue(String key,String defauleValue){
+        if (env.containsKey(key)){
+            return (String) env.get(key);
+        }
+        return defauleValue;
+    }
+
     private static volatile Set<String> keyCaches = new HashSet<>();
 
     public ApplicationENV updateElementsAndKeyCache(Properties properties){

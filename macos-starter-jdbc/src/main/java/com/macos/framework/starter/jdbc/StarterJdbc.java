@@ -1,12 +1,9 @@
 package com.macos.framework.starter.jdbc;
 
-import com.macos.common.scanner.api.ScannerApi;
-import com.macos.common.scanner.impl.ScannerImpl;
 import com.macos.common.util.StringUtils;
-import com.macos.framework.annotation.MacosXApplication;
 import com.macos.framework.annotation.MacosXApplicationStarter;
-import com.macos.framework.annotation.MacosXScanner;
 
+import com.macos.framework.core.bean.definition.BeanDefinition;
 import com.macos.framework.core.bean.manage.BeanManager;
 import com.macos.framework.core.env.ApplicationENV;
 import com.macos.framework.druid.DruidFilter;
@@ -40,34 +37,19 @@ public class StarterJdbc implements DefaultStarter {
 
     @Override
     public void doStart(ApplicationENV env, Class main , String[] arg) throws Exception {
-//        ScannerApi scanner=new ScannerImpl();
-//        Set<Class> result=new HashSet<>();
-//        if (cl.isAnnotationPresent(MacosXScanner.class)){
-//            MacosXScanner dyMacosXScanner =(MacosXScanner)cl.getAnnotation(MacosXScanner.class);
-//            String[] scanPaths= dyMacosXScanner.packageNames();
-//
-//            for (String p:scanPaths){
-//                if (StringUtils.isNotEmptyPlus(p)) {
-//                     Set<Class> scannerClass = scanner.doScanner(p,Mapper.class);
-//                     result.addAll(scannerClass);
-//                }
-//            }
-//        }else if (cl.isAnnotationPresent(MacosXApplication.class)){
-//           result.addAll(scanner.doScanner(cl.getPackage().getName(),Mapper.class));
-//        }
-//        Set<Class> classSet=new HashSet<>();
-//        classSet.add(DruidFilter.class);
-//        classSet.add(DruidServlet.class);
-//
-//        String ignorePath=evn.getProperty("server.ignorePath");
-//        if (StringUtils.isEmptyPlus(ignorePath)) {
-//            evn.setProperty("server.ignorePath", "/druid/*,/download/*");
-//        }
-//        BeanManager.registerClassBySet(classSet);
-//        registerDyJdbcContext(result,evn);
+        Set<Class> classSet=new HashSet<>();
+        classSet.add(DruidFilter.class);
+        classSet.add(DruidServlet.class);
+        String ignorePath=env.getElementValue("server.ignorePath").toString();
+        if (StringUtils.isEmptyPlus(ignorePath)) {
+            env.addElement("server.ignorePath", "/druid/*,/download/*");
+        }
+        BeanManager.registerClassBySet(classSet);
+        Set<BeanDefinition> beanDefinitionSet = BeanManager.getBeanDefinitionsByAnnotation(Mapper.class);
+        registerDyJdbcContext(beanDefinitionSet,env);
     }
 
-    private void registerDyJdbcContext(Set<Class> result,Properties evn){
+    private void registerDyJdbcContext(Set<BeanDefinition> result,ApplicationENV evn){
 
         DruidConfig druidConfig=new DruidConfig();
 
@@ -77,10 +59,10 @@ public class StarterJdbc implements DefaultStarter {
         Environment environment=new Environment(DEF_STATUS,new JdbcTransactionFactory(),dataSource);
         Configuration configuration=new Configuration(environment);
         //骆驼命名开启
-        configuration.setMapUnderscoreToCamelCase(Boolean.parseBoolean(evn.getProperty("datasource.mapUnderscoreToCamelCase","true")));
+        configuration.setMapUnderscoreToCamelCase(Boolean.parseBoolean(evn.getElementValue("datasource.mapUnderscoreToCamelCase","true").toString()));
 
-        for (Class cl:result){
-            configuration.addMapper(cl);
+        for (BeanDefinition cl:result){
+            configuration.addMapper(cl.getTarget());
         }
 
         SqlSessionFactory sqlSessionFactory= new SqlSessionFactoryBuilder().build(configuration);;
@@ -88,14 +70,11 @@ public class StarterJdbc implements DefaultStarter {
         PageInterceptor pageInterceptor=new PageInterceptor();
 
         Properties properties=new Properties();
-        properties.setProperty("dialect",evn.getProperty("datasource.driver-class-name",druidConfig.getDriverClassName()));
+        properties.setProperty("dialect",evn.getElementValue("datasource.driver-class-name",druidConfig.getDriverClassName()).toString());
         //pageInterceptor.setProperties(properties);
         configuration.addInterceptor(pageInterceptor);
         JdbcContext jdbcContext=  JdbcContext.Builder.getDySpringApplicationContext();
         jdbcContext.setSqlSessionFactory(sqlSessionFactory);
-
-
-
     }
 
 }

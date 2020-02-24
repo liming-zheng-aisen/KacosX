@@ -1,12 +1,12 @@
 package com.macos.framework.jdbc.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.macos.framework.core.env.ApplicationENV;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.Properties;
 
 /**
  * @author Aisen
@@ -46,29 +46,29 @@ public class DruidConfig {
     private String filters="stat,wall,log4j";
 
 
-    public DataSource druidDataSource(Properties evn) {
+    public DataSource druidDataSource(ApplicationENV evn) {
 
         DruidDataSource datasource = new DruidDataSource();
-        datasource.setUrl(evn.getProperty("datasource.url",dbUrl));
-        datasource.setUsername(evn.getProperty("datasource.username",username));
-        datasource.setPassword(evn.getProperty("datasource.password",password));
-        datasource.setDriverClassName(evn.getProperty("datasource.driver-class-name",driverClassName));
-        datasource.setInitialSize(Integer.parseInt(evn.getProperty("datasource.initialSize",initialSize+"")));
-        datasource.setMinIdle(Integer.parseInt(evn.getProperty("datasource.minIdle",minIdle+"")));
-        datasource.setMaxActive(Integer.parseInt(evn.getProperty("datasource.maxActive",maxActive+"")));
-        datasource.setMaxWait(Integer.parseInt(evn.getProperty("datasource.maxWait",maxWait+"")));
-        datasource.setTimeBetweenEvictionRunsMillis(Integer.parseInt(evn.getProperty("datasource.timeBetweenEvictionRunsMillis",timeBetweenEvictionRunsMillis+"")));
-        datasource.setMinEvictableIdleTimeMillis(Integer.parseInt(evn.getProperty("datasource.minEvictableIdleTimeMillis",minEvictableIdleTimeMillis+"")));
-        datasource.setValidationQuery(evn.getProperty("datasource.validationQuery",validationQuery));
-        datasource.setTestWhileIdle(Boolean.parseBoolean(evn.getProperty("datasource.testWhileIdle",testWhileIdle+"")));
-        datasource.setTestOnBorrow(Boolean.parseBoolean(evn.getProperty("datasource.testOnBorrow",testOnBorrow+"")));
-        datasource.setTestOnReturn(Boolean.parseBoolean(evn.getProperty("datasource.testOnReturn",testOnReturn+"")));
+        datasource.setUrl(evn.getElementValue("datasource.url",dbUrl));
+        datasource.setUsername(evn.getElementValue("datasource.username",username));
+        datasource.setPassword(evn.getElementValue("datasource.password",password));
+        datasource.setDriverClassName(evn.getElementValue("datasource.driver-class-name",driverClassName));
+        datasource.setInitialSize(Integer.parseInt(evn.getElementValue("datasource.initialSize",initialSize+"")));
+        datasource.setMinIdle(Integer.parseInt(evn.getElementValue("datasource.minIdle",minIdle+"")));
+        datasource.setMaxActive(Integer.parseInt(evn.getElementValue("datasource.maxActive",maxActive+"")));
+        datasource.setMaxWait(Integer.parseInt(evn.getElementValue("datasource.maxWait",maxWait+"")));
+        datasource.setTimeBetweenEvictionRunsMillis(Integer.parseInt(evn.getElementValue("datasource.timeBetweenEvictionRunsMillis",timeBetweenEvictionRunsMillis+"")));
+        datasource.setMinEvictableIdleTimeMillis(Integer.parseInt(evn.getElementValue("datasource.minEvictableIdleTimeMillis",minEvictableIdleTimeMillis+"")));
+        datasource.setValidationQuery(evn.getElementValue("datasource.validationQuery",validationQuery));
+        datasource.setTestWhileIdle(Boolean.parseBoolean(evn.getElementValue("datasource.testWhileIdle",testWhileIdle+"")));
+        datasource.setTestOnBorrow(Boolean.parseBoolean(evn.getElementValue("datasource.testOnBorrow",testOnBorrow+"")));
+        datasource.setTestOnReturn(Boolean.parseBoolean(evn.getElementValue("datasource.testOnReturn",testOnReturn+"")));
         datasource.setRemoveAbandoned(true);
         datasource.setRemoveAbandonedTimeout(1800);
         datasource.setLogAbandoned(true);
         datasource.setDefaultAutoCommit(true);
         try {
-            datasource.setFilters(evn.getProperty("datasource.filters",filters));
+            datasource.setFilters(evn.getElementValue("datasource.filters",filters));
         } catch (SQLException e) {
             logger.error("Druid configuration initialization filter error", e);
         }

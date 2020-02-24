@@ -1,10 +1,10 @@
 package com.macos.nacos.config.listener;
 
 import com.alibaba.nacos.api.config.listener.Listener;
+import com.macos.framework.core.bean.manage.BeanManager;
+import com.macos.framework.core.env.ApplicationENV;
 import com.macos.framework.core.listener.manager.MacosXListerManager;
-import com.macos.framework.starter.nacos.NacosConfigStarter;
 import com.macos.nacos.config.NacosPropertisMannager;
-import com.macos.nacos.config.util.PropertiesUtil;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -19,6 +19,9 @@ public class NacosListener implements Listener {
 
     private String dataId;
 
+    private static BeanManager beanManager = new BeanManager();
+
+
     @Override
     public Executor getExecutor() {
         return null;
@@ -26,17 +29,18 @@ public class NacosListener implements Listener {
 
     @Override
     public void receiveConfigInfo(String configInfo) {
-//        NacosPropertisMannager nacosPropertisMannager = NacosPropertisMannager.Buider.getMannager();
-//        try {
-//            nacosPropertisMannager.updateInputStream(dataId,configInfo);
-//            Properties nacosPropertis=nacosPropertisMannager.getNacosEvn();
-//            PropertiesUtil.cloneEvn(NacosConfigStarter.defaultEvn,nacosPropertis);
-//            PropertiesFileLoader.getEvn().clear();
-//            PropertiesUtil.cloneEvn(nacosPropertis, PropertiesFileLoader.getEvn());
-//            MacosXListerManager.updateLister(PropertiesFileLoader.getEvn());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        NacosPropertisMannager nacosPropertisMannager = NacosPropertisMannager.Buider.getMannager();
+        try {
+            nacosPropertisMannager.updateInputStream(dataId,configInfo);
+            Properties nacosPropertis=nacosPropertisMannager.getNacosEvn();
+            ApplicationENV env = (ApplicationENV) beanManager.getBean(null,ApplicationENV.class);
+            env.updateElementsAndKeyCache(nacosPropertis);
+            MacosXListerManager.updateLister(env);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String getDataId() {

@@ -50,6 +50,14 @@ public class JdbcContext implements ApplicationContextApi {
         return true;
     }
 
+    @Override
+    public Object registerBean(String beanName, Class object) throws ContextException {
+        if (sqlSessionFactory!=null&&object.getClass().isAnnotationPresent(Mapper.class)) {
+            sqlSessionFactory.getConfiguration().addMapper(object.getClass());
+        }
+        return null;
+    }
+
     public SqlSessionFactory getSqlSessionFactory() {
         return sqlSessionFactory;
     }
@@ -64,10 +72,6 @@ public class JdbcContext implements ApplicationContextApi {
         private final static JdbcContext context=new JdbcContext();
 
         public static JdbcContext getDySpringApplicationContext(){
-//            ContextManager contextManager= ContextManager.BuilderContext.getContextManager();
-//            if (!contextManager.hasContext(context)){
-//               contextManager.registerApplicationContext(context);
-//            }
             return context;
         }
     }

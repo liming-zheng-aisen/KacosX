@@ -2,6 +2,7 @@ package com.macos.framework.nacos.balance;
 
 import com.alibaba.nacos.api.naming.NamingService;
 import com.alibaba.nacos.api.naming.pojo.Instance;
+import com.macos.framework.core.bean.manage.BeanManager;
 
 import java.util.List;
 
@@ -14,10 +15,9 @@ public class DefaultNacosBalanceServiceImpl implements NacosBalanceSerivce {
 
     @Override
     public Instance getHealthyInstance(String serviceName, String groupName, List<String> clusterName) throws Exception{
-//        ContextManager context = ContextManager.BuilderContext.getContextManager();
-//        NamingService namingService = (NamingService)context.getBean("namingService",NamingService.class);
-//        return namingService.selectOneHealthyInstance(serviceName,groupName,clusterName);
-        return null;
+        BeanManager beanManager = new BeanManager();
+        NamingService namingService = (NamingService)beanManager.getBean("namingService",NamingService.class);
+        return namingService.selectOneHealthyInstance(serviceName,groupName,clusterName);
     }
 
 }

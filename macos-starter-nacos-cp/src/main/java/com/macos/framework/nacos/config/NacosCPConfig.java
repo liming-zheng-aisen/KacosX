@@ -7,20 +7,20 @@ import com.macos.framework.annotation.Value;
  * @Author Zheng.LiMing
  * @Date 2019/9/13
  */
-@Component("dyNacosCPConfig")
+@Component("nacosCPConfig")
 public class NacosCPConfig {
 
-    @Value("${dy.nacos.cp.serverAddr}:127.0.0.1:8848")
+    @Value("${nacos.cp.serverAddr:127.0.0.1:8848}")
     private String serverAddr;
-    @Value("${dy.nacos.cp.namespace}:public")
+    @Value("${nacos.cp.namespace:public}")
     private String namespace;
-    @Value("${dy.nacos.cp.group}:DYSPRING_DEFAULT")
+    @Value("${nacos.cp.group:MACOSX_DEFAULT}")
     private String group;
-    @Value("${dy.server.port}:8080")
+    @Value("${nacos.cp.server.port:8080}")
     private Integer port;
-    @Value("${dy.nacos.cp.clusterName}:DBC")
+    @Value("${nacos.cp.clusterName}:DBC")
     private String clusterName;
-    @Value("${dy.nacos.cp.serviceName}:SERVICE_DYBOOT")
+    @Value("${nacos.cp.serviceName:MACOSX_BOOT}")
     private String serviceName;
 
     public String getServerAddr() {
