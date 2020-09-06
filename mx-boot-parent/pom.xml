@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.mx</groupId>
+  <artifactId>mx-boot-parent</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>mx-boot-parent</name>
+  <packaging>pom</packaging>
+  <properties>
+    <servlet-v>4.0.1</servlet-v>
+    <jsp-v>2.3.1</jsp-v>
+    <jstl-v>1.2</jstl-v>
+    <json-lib>2.4</json-lib>
+    <jackson-v>2.9.10</jackson-v>
+    <mysql>8.0.12</mysql>
+    <slf4j>1.7.5</slf4j>
+    <druid>1.0.16</druid>
+    <mybatis>3.5.2</mybatis>
+    <mx>0.0.1-SNAPSHOT</mx>
+    <pagehelper-version>5.1.10</pagehelper-version>
+    <jsqlparser-version>3.0</jsqlparser-version>
+    <jetty>9.4.19.v20190610</jetty>
+    <nacos>1.1.3</nacos>
+    <commons>3.9</commons>
+    <lombok>1.18.4</lombok>
+    <cglib>3.3.0</cglib>
+    <beanutils>1.9.4</beanutils>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- MacosX -->
+      <dependency>
+        <groupId>com.mx</groupId>
+        <artifactId>mx-framework</artifactId>
+        <version>${mx}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mx</groupId>
+        <artifactId>mx-common</artifactId>
+        <version>${mx}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.mx</groupId>
+        <artifactId>mx-core</artifactId>
+        <version>${mx}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.mx</groupId>
+        <artifactId>mx-boot-starter-web</artifactId>
+        <version>${mx}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mx</groupId>
+        <artifactId>mx-boot-starter</artifactId>
+        <version>${mx}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.mx</groupId>
+        <artifactId>mx-aop</artifactId>
+        <version>${mx}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mx</groupId>
+        <artifactId>mx-annotation</artifactId>
+        <version>${mx}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mx</groupId>
+        <artifactId>mx-context</artifactId>
+        <version>${mx}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mx</groupId>
+        <artifactId>mx-mvc</artifactId>
+        <version>${mx}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mx</groupId>
+        <artifactId>mx-bean</artifactId>
+        <version>${mx}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mx</groupId>
+        <artifactId>mx-boot-starter-jdbc</artifactId>
+        <version>${mx}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mx</groupId>
+        <artifactId>mx-console</artifactId>
+        <version>${mx}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.mx</groupId>
+        <artifactId>mx-boot-starter-nacos-config</artifactId>
+        <version>${mx}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.mx</groupId>
+        <artifactId>mx-boot-starter-npc</artifactId>
+        <version>${mx}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.mx</groupId>
+        <artifactId>mx-boot-starter-nacos-cp</artifactId>
+        <version>${mx}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.mx</groupId>
+        <artifactId>mx-boot-starter-router</artifactId>
+        <version>${mx}</version>
+      </dependency>
+
+      <!--Nacos-->
+      <dependency>
+        <groupId>com.alibaba.nacos</groupId>
+        <artifactId>nacos-client</artifactId>
+        <version>${nacos}</version>
+      </dependency>
+      <!-- servlet -->
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>${servlet-v}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.annotation</groupId>
+        <artifactId>javax.annotation-api</artifactId>
+        <version>1.3.2</version>
+        <scope>compile</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-webapp</artifactId>
+        <version>${jetty}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-servlet</artifactId>
+        <version>${jetty}</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-http -->
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-http</artifactId>
+        <version>${jetty}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-io</artifactId>
+        <version>${jetty}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-security</artifactId>
+        <version>${jetty}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-util</artifactId>
+        <version>${jetty}</version>
+      </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-server</artifactId>
+            <version>${jetty}</version>
+        </dependency>
+
+      <dependency>
+        <groupId>org.eclipse.jetty.websocket</groupId>
+        <artifactId>javax-websocket-server-impl</artifactId>
+        <version>${jetty}</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>${jackson-v}</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>${jackson-v}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson-v}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>${druid}</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+      <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>${mybatis}</version>
+      </dependency>
+
+      <!--pagehelper-->
+      <dependency>
+        <groupId>com.github.pagehelper</groupId>
+        <artifactId>pagehelper</artifactId>
+        <version>${pagehelper-version}</version>
+      </dependency>
+
+      <!-- pagehelper的依赖包:jsqlparser -->
+      <dependency>
+        <groupId>com.github.jsqlparser</groupId>
+        <artifactId>jsqlparser</artifactId>
+        <version>${jsqlparser-version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>${slf4j}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons}</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+      <dependency>
+        <groupId>commons-beanutils</groupId>
+        <artifactId>commons-beanutils</artifactId>
+        <version>${beanutils}</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/cglib/cglib -->
+      <dependency>
+        <groupId>cglib</groupId>
+        <artifactId>cglib</artifactId>
+        <version>${cglib}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+  </build>
+</project>

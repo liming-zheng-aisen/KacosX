@@ -1,6 +1,7 @@
 package www.macos.demo.web;
 
-import com.macos.framework.annotation.*;
+import com.mx.framework.annotation.core.Autowired;
+import com.mx.framework.annotation.http.*;
 import www.macos.demo.config.DemoConfig;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Date 2020/2/21
  */
 @RestAPI
-@RequestMapping(value = "/")
+@RequestMapping(value = "/DemoWeb")
 public class DemoWeb {
 
     @Autowired

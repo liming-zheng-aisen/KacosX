@@ -1,7 +1,7 @@
 package www.macos.demo.config;
 
-import com.macos.framework.annotation.Configuration;
-import com.macos.framework.annotation.Value;
+import com.mx.framework.annotation.core.Configuration;
+import com.mx.framework.annotation.core.Value;
 
 /**
  * @Desc demoConfig

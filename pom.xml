@@ -4,40 +4,30 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.macos</groupId>
-    <artifactId>MacosX</artifactId>
+    <groupId>com.mx</groupId>
+    <artifactId>MX-Boot</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-        <module>macos-framework</module>
-        <module>macos-common</module>
-        <module>macos-starter-web</module>
-        <module>macos-starter</module>
-        <module>macos-annotation</module>
-        <module>macos-context</module>
-        <module>macos-mvc</module>
-        <module>macos-bean</module>
-        <module>macos-starter-jdbc</module>
-        <module>macos-println</module>
-        <module>macos-starter-nacos-config</module>
-        <module>macos-starter-nacos-cp</module>
-        <module>macos-starter-npc</module>
-        <module>macos-parent</module>
-        <module>macos-starter-router</module>
-        <module>macos-aop</module>
-        <module>macos-core</module>
+        <module>mx-framework</module>
+        <module>mx-common</module>
+        <module>mx-boot-starter-web</module>
+        <module>mx-boot-starter</module>
+        <module>mx-annotation</module>
+        <module>mx-context</module>
+        <module>mx-mvc</module>
+        <module>mx-bean</module>
+        <module>mx-boot-starter-jdbc</module>
+        <module>mx-console</module>
+        <module>mx-boot-starter-nacos-config</module>
+        <module>mx-boot-starter-nacos-cp</module>
+        <module>mx-boot-starter-npc</module>
+        <module>mx-boot-parent</module>
+        <module>mx-boot-starter-router</module>
+        <module>mx-aop</module>
+        <module>mx-core</module>
         <module>demo</module>
+        <module>mx-boot-pluss</module>
     </modules>
-    <distributionManagement>
-        <repository>
-            <id>MacosX</id>
-            <name>Release Deploy</name>
-            <url>http://duanya.online:9700/repository/maven-releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>MacosX</id>
-            <name>Snapshot Deploy</name>
-            <url>http://duanya.online:9700/repository/maven-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
+
 </project>
