@@ -2,10 +2,8 @@ package www.macos.demo;
 
 import com.mx.console.log.Logger;
 import com.mx.console.log.factory.LoggerFactory;
-import com.mx.console.log.impl.LogLevel;
 import com.mx.framework.annotation.boot.MacosXApplication;
 import com.mx.framework.starter.run.MacosXApplicationRun;
-
 
 /**
  * @Desc Application
@@ -14,9 +12,11 @@ import com.mx.framework.starter.run.MacosXApplicationRun;
  */
 @MacosXApplication
 public class Application {
+
     private final static Logger logger = LoggerFactory.buildLogger(Application.class);
 
     public static void main(String[] args) {
+        logger.info("《《-开始启动Application-》》");
         MacosXApplicationRun.run(Application.class, args);
         logger.success("《《-启动成功-》》");
     }

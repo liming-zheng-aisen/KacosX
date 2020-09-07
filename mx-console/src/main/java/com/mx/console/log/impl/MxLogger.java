@@ -18,7 +18,7 @@ public class MxLogger<E> implements Logger<E> {
 
     private static boolean isOpen = true;
 
-    private String clazz;
+    protected String clazz;
 
     public MxLogger(String clazz) {
         this.clazz = clazz;
@@ -79,7 +79,7 @@ public class MxLogger<E> implements Logger<E> {
         level = changeLevel;
     }
 
-    private String newMsg(String msg, Object... param) {
+    protected String newMsg(String msg, Object... param) {
         if (param.length > 0) {
             for (int i = 0; i < param.length; i++) {
                 String index = "{" + (i + 1) + "}";

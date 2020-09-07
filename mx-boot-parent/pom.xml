@@ -38,6 +38,7 @@
         <artifactId>mx-framework</artifactId>
         <version>${mx}</version>
       </dependency>
+
       <dependency>
         <groupId>com.mx</groupId>
         <artifactId>mx-common</artifactId>
@@ -55,6 +56,7 @@
         <artifactId>mx-boot-starter-web</artifactId>
         <version>${mx}</version>
       </dependency>
+
       <dependency>
         <groupId>com.mx</groupId>
         <artifactId>mx-boot-starter</artifactId>
@@ -66,16 +68,19 @@
         <artifactId>mx-aop</artifactId>
         <version>${mx}</version>
       </dependency>
+
       <dependency>
         <groupId>com.mx</groupId>
         <artifactId>mx-annotation</artifactId>
         <version>${mx}</version>
       </dependency>
+
       <dependency>
         <groupId>com.mx</groupId>
         <artifactId>mx-context</artifactId>
         <version>${mx}</version>
       </dependency>
+
       <dependency>
         <groupId>com.mx</groupId>
         <artifactId>mx-mvc</artifactId>
@@ -127,6 +132,7 @@
         <artifactId>nacos-client</artifactId>
         <version>${nacos}</version>
       </dependency>
+
       <!-- servlet -->
       <dependency>
         <groupId>javax.servlet</groupId>
@@ -248,18 +254,6 @@
         <version>${lombok}</version>
       </dependency>
 
-
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>${slf4j}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-simple</artifactId>
-        <version>${slf4j}</version>
-      </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>

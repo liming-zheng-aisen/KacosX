@@ -20,7 +20,7 @@ public class MacosXApplicationRun {
     private final static Logger log= LoggerFactory.buildLogger(MacosXApplicationRun.class);
 
     /**
-     * 启动
+     * 启动应用
      * @param main
      * @param args
      */

@@ -1,9 +1,10 @@
 package com.mx.framework.core.handle;
 import com.mx.common.util.ScannerUtil;
+import com.mx.console.log.Logger;
+import com.mx.console.log.factory.LoggerFactory;
 import com.mx.framework.annotation.boot.MacosXScanner;
 import com.mx.framework.core.bean.manage.BeanManager;
 import com.mx.framework.core.handle.base.BaseHandler;
-import lombok.extern.slf4j.Slf4j;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,9 +14,10 @@ import java.util.Set;
  * @Author Zheng.LiMing
  * @Date 2020/1/1
  */
-@Slf4j
 @SuppressWarnings("all")
 public class MacosXScannerHandler extends BaseHandler {
+
+    private static final Logger log = LoggerFactory.buildLogger(MacosXScannerHandler.class);
 
     public MacosXScannerHandler(){
         handleAnnotations = new Class[]{MacosXScanner.class};

@@ -1,7 +1,8 @@
 package com.mx.common.util;
 
 
-import lombok.extern.slf4j.Slf4j;
+import com.mx.console.log.Logger;
+import com.mx.console.log.factory.LoggerFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
@@ -17,7 +18,6 @@ import java.util.List;
  * @update_author Aisen
  */
 @SuppressWarnings("rawtypes")
-@Slf4j
 public class ReflectionsUtil {
 
     private static final String SETTER_PREFIX = "set";
@@ -26,6 +26,7 @@ public class ReflectionsUtil {
 
     private static final String CGLIB_CLASS_SEPARATOR = "$$";
 
+    private static final Logger log = LoggerFactory.buildLogger(ReflectionsUtil.class);
 
     /**
      * 根据类全路径，创建一个实例
@@ -97,7 +98,7 @@ public class ReflectionsUtil {
         try {
             result = field.get(obj);
         } catch (IllegalAccessException e) {
-            log.error("不可能抛出的异常{}", e.getMessage());
+            log.error("不可能抛出的异常{1}", e.getMessage());
         }
         return result;
     }
@@ -115,7 +116,7 @@ public class ReflectionsUtil {
         try {
             field.set(obj, value);
         } catch (IllegalAccessException e) {
-            log.error("不可能抛出的异常:{}", e.getMessage());
+            log.error("不可能抛出的异常:{1}", e.getMessage());
         }
     }
 

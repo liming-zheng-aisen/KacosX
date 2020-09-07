@@ -13,7 +13,6 @@ import com.mx.framework.core.env.ApplicationENV;
 import com.mx.framework.core.handle.base.BaseHandler;
 import com.mx.framework.starter.DefaultStarter;
 import com.mx.framework.starter.load.StarterBean;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.Comparator;
 import java.util.HashSet;

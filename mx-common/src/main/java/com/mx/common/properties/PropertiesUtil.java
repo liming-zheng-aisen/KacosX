@@ -1,6 +1,7 @@
 package com.mx.common.properties;
 
-import lombok.extern.slf4j.Slf4j;
+import com.mx.console.log.Logger;
+import com.mx.console.log.factory.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
@@ -12,13 +13,13 @@ import java.util.Properties;
  * @date 2019/8/5
  * @description 加载配置
  */
-@Slf4j
 public class PropertiesUtil {
 
     private final static String CLASSPATH="classpath";
 
     private final static String CONFIG = "config";
 
+    private final static Logger log = LoggerFactory.buildLogger(PropertiesUtil.class);
 
     public static Properties loadProperties(String source,Class c) throws PropertiesException, IOException {
         if (!source.endsWith(PropertiesType.PROPERTIES_SUFFIC)){

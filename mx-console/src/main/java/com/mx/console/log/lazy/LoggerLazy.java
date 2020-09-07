@@ -4,6 +4,7 @@ import com.mx.console.ConsolePrint;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -39,6 +40,9 @@ public class LoggerLazy {
                         case SUCCESS:
                             ConsolePrint.success(formatTitle(logBody),logBody.getMsg());
                             break;
+                        case TRANSACTION:
+
+                            break;
                         default:
                             break;
                     }
@@ -54,4 +58,9 @@ public class LoggerLazy {
     public static void pushLog(LogBody logBody){
         logBodyQueue.add(logBody);
     }
+
+    public static void pushLog(List<LogBody> logBodys){
+        logBodys.forEach(logBody ->  logBodyQueue.add(logBody));
+    }
+
 }

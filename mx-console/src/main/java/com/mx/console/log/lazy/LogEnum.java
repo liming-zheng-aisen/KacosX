@@ -10,5 +10,6 @@ public enum LogEnum {
     WARN,
     DEBUG,
     ERROR,
-    SUCCESS
+    SUCCESS,
+    TRANSACTION
 }

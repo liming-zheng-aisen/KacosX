@@ -1,9 +1,5 @@
 package com.mx.aop.core.even.bean.aop;
 import com.mx.aop.core.even.bean.EvenBeanInfo;
-import lombok.Data;
-import lombok.ToString;
-
-
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
@@ -12,8 +8,6 @@ import java.lang.reflect.Parameter;
  * @Author Zheng.LiMing
  * @Date 2020/1/15
  */
-@Data
-@ToString
 public class AopEven {
 
     private String matching;
@@ -30,4 +24,27 @@ public class AopEven {
         return callback.invoke(bean,evenBean);
     }
 
+    public String getMatching() {
+        return matching;
+    }
+
+    public void setMatching(String matching) {
+        this.matching = matching;
+    }
+
+    public Object getBean() {
+        return bean;
+    }
+
+    public void setBean(Object bean) {
+        this.bean = bean;
+    }
+
+    public Method getCallback() {
+        return callback;
+    }
+
+    public void setCallback(Method callback) {
+        this.callback = callback;
+    }
 }

@@ -4,7 +4,6 @@ import com.mx.aop.factory.ProxyFacotry;
 import com.mx.common.util.StringUtils;
 import com.mx.framework.context.base.ApplicationContextApi;
 import com.mx.framework.context.exception.ContextException;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,7 +14,6 @@ import java.util.Map;
  * @date 2019/8/20
  * @description
  */
-@Slf4j
 public class ApplicationContextImpl implements ApplicationContextApi {
 
     private static Map<String,Object> applicationContext;

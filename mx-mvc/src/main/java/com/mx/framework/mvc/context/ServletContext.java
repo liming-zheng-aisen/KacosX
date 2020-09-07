@@ -4,8 +4,6 @@ import com.mx.aop.factory.ProxyFacotry;
 import com.mx.framework.context.base.ApplicationContextApi;
 import com.mx.framework.context.exception.ContextException;
 import com.mx.framework.mvc.handler.bean.RequestUrlBean;
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +13,6 @@ import java.util.Map;
  * @description mvc上下文
  */
 
-@Slf4j
 public class ServletContext implements ApplicationContextApi {
 
     /**

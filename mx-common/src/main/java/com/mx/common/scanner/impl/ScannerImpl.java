@@ -1,8 +1,8 @@
 package com.mx.common.scanner.impl;
 
 import com.mx.common.scanner.api.ScannerApi;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.mx.console.log.Logger;
+import com.mx.console.log.factory.LoggerFactory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class ScannerImpl implements ScannerApi {
 
-    private static final Logger log = LoggerFactory.getLogger(ScannerImpl.class);
+    private static final Logger log = LoggerFactory.buildLogger(ScannerImpl.class);
 
     @Override
     public Set<Class> doScanner(String packageName) throws Exception {

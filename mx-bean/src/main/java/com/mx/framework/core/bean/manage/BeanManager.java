@@ -6,7 +6,6 @@ import com.mx.framework.context.base.ApplicationContextApi;
 import com.mx.framework.core.bean.definition.BeanDefinition;
 import com.mx.framework.core.bean.factory.api.BeanFactory;
 import com.mx.framework.core.bean.util.BeanDefinitionUtil;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
@@ -15,7 +14,6 @@ import java.util.*;
  * @Author Zheng.LiMing
  * @Date 2019/9/4
  */
-@Slf4j
 public class BeanManager implements BeanFactory {
 
     /**
