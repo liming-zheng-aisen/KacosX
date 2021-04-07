@@ -22,7 +22,7 @@
     <macos>0.0.1-SNAPSHOT</macos>
     <pagehelper-version>5.1.10</pagehelper-version>
     <jsqlparser-version>3.0</jsqlparser-version>
-    <jetty>9.4.19.v20190610</jetty>
+    <jetty>11.0.2</jetty>
     <nacos>1.1.3</nacos>
     <commons>3.9</commons>
     <lombok>1.18.4</lombok>
